@@ -18,7 +18,8 @@ jobs:
       run: cmake -E make_directory ${{runner.workspace}}/build
 
     - name: Install Dependencies
-      run: sudo apt update && sudo apt install build-essential libxrandr-dev -y
+      # https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux
+      run: sudo apt update && sudo apt install build-essential libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev -y
 
     - name: Configure CMake
       shell: bash
