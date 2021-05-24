@@ -19,7 +19,7 @@ jobs:
 
     - name: Install Dependencies
       # https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux
-      run: sudo apt update && sudo apt install build-essential libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev -y
+      run: sudo apt update && sudo apt install build-essential upx-ucl libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev -y
 
     - name: Configure CMake
       shell: bash
@@ -36,6 +36,7 @@ jobs:
       shell: bash
       run: |
         strip --strip-all ${{runner.workspace}}/build/4mb_platformer
+        upx --best ${{runner.workspace}}/build/4mb_platformer
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
