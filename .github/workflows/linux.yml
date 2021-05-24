@@ -18,7 +18,7 @@ jobs:
       run: cmake -E make_directory ${{runner.workspace}}/build
 
     - name: Install Dependencies
-      run: sudo apt update && sudo apt install build-essential -y
+      run: sudo apt update && sudo apt install build-essential libxrandr-dev -y
 
     - name: Configure CMake
       shell: bash
@@ -30,7 +30,7 @@ jobs:
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
 
-    - name: Optimize binary
+    - name: Optimize Binary
       working-directory: ${{runner.workspace}}/build
       shell: bash
       run: |
