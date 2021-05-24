@@ -56,4 +56,4 @@ set(SUPPORT_FILEFORMAT_FLAC OFF)
 set(SUPPORT_STANDARD_FILEIO OFF)
 set(SUPPORT_TRACELOG ON)
 
-include_subdirectory(raylib)
+add_subdirectory(raylib)

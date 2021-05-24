@@ -9,3 +9,7 @@ file(GLOB SUB_SRC "src/*/*.[hc]pp")
 add_executable(4mb_platformer ${MAIN_SRC} ${SUB_SRC})
 
 target_include_directories(4mb_platformer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+
+# Raylib
+include(Raylib.cmake)
+target_link_libraries(4mb_platformer PUBLIC raylib)
