@@ -4,6 +4,7 @@ on: [push]
 
 env:
   BUILD_TYPE: MinSizeRel
+  # macOS 10.15 is required for C++17
   MACOSX_DEPLOYMENT_TARGET: 10.15
 
 jobs:
@@ -36,7 +37,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       shell: bash
       run: |
-        strip --strip-all ${{runner.workspace}}/build/4mb_platformer
+        strip ${{runner.workspace}}/build/4mb_platformer
         upx --best ${{runner.workspace}}/build/4mb_platformer
 
     - name: Upload Artifact
