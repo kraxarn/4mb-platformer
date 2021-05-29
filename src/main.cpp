@@ -31,7 +31,7 @@ auto main(int argc, char **argv) -> int
 		music_menu.update();
 
 		ce::draw::begin();
-		ce::draw::clear(BLACK);
+		ce::draw::clear(0xffffff);
 		{
 			text_play.set_text(fmt::format("{:4.0f}/{:4.0f}",
 				music_menu.played(), music_menu.length()));

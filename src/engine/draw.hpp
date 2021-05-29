@@ -13,6 +13,7 @@ namespace ce
 		static void end();
 
 		static void clear(Color color);
+		static void clear(unsigned int color);
 
 		static void text(const std::string &text, int x, int y, int fontSize, Color color);
 
