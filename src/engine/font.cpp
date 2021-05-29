@@ -6,6 +6,8 @@ ce::font::font(const cmrc::file &file, int font_size)
 		(const unsigned char *) file.cbegin(),
 		(int) file.size(),
 		font_size, font_chars, 0x100);
+
+	SetTextureFilter(r_font.texture, TEXTURE_FILTER_POINT);
 }
 
 ce::font::~font()
