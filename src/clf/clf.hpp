@@ -1,49 +1,48 @@
 #pragma once
 
-#include "enum/leveltype.hpp"
 #include "vec2.hpp"
 
 #include <string>
-#include <vector>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 /**
- * CLF level data
+ * Level file
  */
 class clf
 {
 public:
-	clf() = default;
+	/** Load level file from path */
+	auto load(const std::filesystem::path &path) -> bool;
 
-	/** CLF version number */
-	int version = 3;
+	auto background() const -> std::string;
 
-	/** Level title */
-	std::string name;
+	auto is_boss() const -> bool;
 
-	/** Filename of music file */
-	std::string music;
+	auto map_size() const -> vec2;
 
-	/** Filename of main tileset (1-49) */
-	std::string main_tileset;
+	auto tile_size() const -> int;
 
-	/** Filename of item tileset (50+) */
-	std::string item_tileset;
+	auto main_tileset() const -> std::string;
 
-	/** Size in px of tiles */
-	int tile_size = 64;
+	auto item_tileset() const -> std::string;
 
-	/** Filename of background image */
-	std::string background;
+	auto map() const -> std::array<std::array<unsigned char, 25>, 75>;
 
-	/** Type of level */
-	e::level_type level_type = e::level_type::normal;
+private:
+	struct clf_v2_data
+	{
+		int version = 2;
+		char background[16] = {0};
+		bool is_boss = false;
+		int map_size[2] = {0};
+		int tile_size = 0;
+		char main_tileset[16] = {0};
+		char item_tileset[16] = {0};
+		int map[75][25] = {0};
+	};
 
-	/** Size of level map */
-	vec2 map_size = vec2(75, 25);
-
-	/** Map data */
-	std::vector<std::vector<unsigned char>> map;
-
-	/** String interpretation of level type */
-	[[nodiscard]] auto level_type_string() const -> std::string;
+	struct clf_v2_data data;
 };
+
