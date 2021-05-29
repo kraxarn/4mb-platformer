@@ -3,8 +3,8 @@
 ce::music::music(const cmrc::file &file)
 {
 	r_music = LoadMusicStreamFromMemory(".xm",
-		(unsigned char *) file.cbegin(),
-		(int) (file.size()));
+		(unsigned char *) file.begin(),
+		(int) file.size());
 	r_music.looping = true;
 }
 
