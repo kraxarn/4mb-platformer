@@ -1,6 +1,5 @@
 #include "raylib.h"
 
-#include "engine/level.hpp"
 #include "engine/window.hpp"
 #include "engine/audio.hpp"
 #include "engine/assets.hpp"
@@ -23,6 +22,8 @@ auto main(int argc, char **argv) -> int
 	auto music_menu = assets.music("music/menu.xm");
 	music_menu.play();
 
+	auto font_debug = assets.font("font/debug.ttf", 20);
+
 	ce::text text_play("0/0", 16, 16, 24, RAYWHITE);
 
 	while (!ce::window::should_close())
@@ -34,7 +35,7 @@ auto main(int argc, char **argv) -> int
 		{
 			text_play.set_text(fmt::format("{:4.0f}/{:4.0f}",
 				music_menu.played(), music_menu.length()));
-			text_play.draw();
+			font_debug.draw_text(text_play);
 		}
 		ce::draw::end();
 	}
