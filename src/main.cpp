@@ -4,6 +4,7 @@
 #include "clf/clf.hpp"
 
 #include <sstream>
+#include <vector>
 
 auto load_levels() -> std::vector<clf>
 {
