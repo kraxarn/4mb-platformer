@@ -20,19 +20,21 @@ auto main(int argc, char **argv) -> int
 	auto music_menu = assets.music("music/menu.xm");
 	music_menu.play();
 
+	ce::text text_play("0/0", 16, 16, 24, RAYWHITE);
+
 	while (!ce::window::should_close())
 	{
 		music_menu.update();
 
-		BeginDrawing();
-		ClearBackground(BLACK);
+		ce::draw::begin();
+		ce::draw::clear(BLACK);
 		{
 			auto *playback = TextFormat("%.0f/%.0f",
 				music_menu.played(), music_menu.length());
 
 			DrawText(playback, 16, 16, 24, RAYWHITE);
 		}
-		EndDrawing();
+		ce::draw::end();
 	}
 
 	return 0;
