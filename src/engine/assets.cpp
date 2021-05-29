@@ -5,14 +5,14 @@ ce::assets::assets()
 {
 }
 
-auto ce::assets::level(const std::string &path) -> clf
+auto ce::assets::level(const std::string &path) -> ce::level
 {
-	return clf(fs.open(path));
+	return ce::level(fs.open(path));
 }
 
-auto ce::assets::all_levels() -> std::vector<clf>
+auto ce::assets::all_levels() -> std::vector<ce::level>
 {
-	std::vector<clf> levels;
+	std::vector<ce::level> levels;
 	for (const auto &file : fs.iterate_directory("level"))
 	{
 		std::stringstream path;

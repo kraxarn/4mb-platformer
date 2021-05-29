@@ -1,6 +1,6 @@
-#include "clf/clf.hpp"
+#include "engine/level.hpp"
 
-clf::clf(const cmrc::file &file)
+ce::level::level(const cmrc::file &file)
 {
 	if (file.size() != sizeof(struct clf_v2_data))
 	{
@@ -8,7 +8,7 @@ clf::clf(const cmrc::file &file)
 			<< " and " << sizeof(struct clf_v2_data) << ")" << std::endl;
 		return;
 	}
-	data = *((struct clf_v2_data*)file.cbegin());
+	data = *((struct clf_v2_data *) file.cbegin());
 
 	if (data.version != 2)
 	{
@@ -18,37 +18,37 @@ clf::clf(const cmrc::file &file)
 	}
 }
 
-auto clf::background() const -> std::string
+auto ce::level::background() const -> std::string
 {
 	return std::string(data.background);
 }
 
-auto clf::is_boss() const -> bool
+auto ce::level::is_boss() const -> bool
 {
 	return data.is_boss;
 }
 
-auto clf::map_size() const -> vec2
+auto ce::level::map_size() const -> vec2
 {
 	return vec2(data.map_size[0], data.map_size[1]);
 }
 
-auto clf::tile_size() const -> int
+auto ce::level::tile_size() const -> int
 {
 	return data.tile_size;
 }
 
-auto clf::main_tileset() const -> std::string
+auto ce::level::main_tileset() const -> std::string
 {
 	return std::string(data.main_tileset);
 }
 
-auto clf::item_tileset() const -> std::string
+auto ce::level::item_tileset() const -> std::string
 {
 	return std::string(data.item_tileset);
 }
 
-auto clf::map() const -> std::array<std::array<unsigned char, 25>, 75>
+auto ce::level::map() const -> std::array<std::array<unsigned char, 25>, 75>
 {
 	std::array<std::array<unsigned char, 25>, 75> map = {0};
 
