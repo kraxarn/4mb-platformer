@@ -20,3 +20,14 @@ void ce::font::draw_text(const ce::text &text) const
 		static_cast<float>(text.get_font_size()),
 		0.F, text.get_color());
 }
+
+auto ce::font::font_size() const -> int
+{
+	return r_font.baseSize;
+}
+
+auto ce::font::text_size(const ce::text &text) const -> Vector2
+{
+	return MeasureTextEx(r_font, text.get_text().c_str(),
+		static_cast<float>(text.get_font_size()), 0.F);
+}

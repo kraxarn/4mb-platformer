@@ -13,6 +13,9 @@ namespace ce
 		~font();
 
 		void draw_text(const ce::text &text) const;
+		auto text_size(const ce::text &text) const -> Vector2;
+
+		auto font_size() const -> int;
 
 	private:
 		Font r_font = {};
