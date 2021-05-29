@@ -1,3 +1,6 @@
 [submodule "raylib"]
 	path = thirdparty/raylib
 	url = https://github.com/raysan5/raylib.git
+[submodule "thirdparty/cmrc"]
+	path = thirdparty/cmrc
+	url = https://github.com/vector-of-bool/cmrc.git
