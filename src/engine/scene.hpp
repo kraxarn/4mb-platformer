@@ -1,15 +1,17 @@
 #pragma once
 
+#include "engine/assets.hpp"
+
 namespace ce
 {
 	class scene
 	{
 	public:
-		virtual scene() = default;
-		virtual ~scene() = delete;
+		explicit scene(const ce::assets &assets);
 
-		virtual void create() = 0;
 		virtual void render() = 0;
-		virtual void destroy() = 0;
+
+	protected:
+		const ce::assets &assets;
 	};
 }
