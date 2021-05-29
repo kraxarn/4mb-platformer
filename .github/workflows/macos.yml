@@ -4,9 +4,7 @@ on: [push]
 
 env:
   BUILD_TYPE: MinSizeRel
-  # macOS 10.15 is required for C++17
-  # macOS 10.9 is required by raylib
-  MACOSX_DEPLOYMENT_TARGET: 10.15
+  MACOSX_DEPLOYMENT_TARGET: 10.9
 
 jobs:
   build:
