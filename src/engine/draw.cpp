@@ -18,9 +18,9 @@ void ce::draw::clear(Color color)
 void ce::draw::clear(unsigned int color)
 {
 	clear(Color{
-		static_cast<unsigned char>((color & 0xff0000) >> 0b10000),
-		static_cast<unsigned char>((color & 0x00ff00) >> 0b01000),
-		static_cast<unsigned char>(color & 0x0000ff),
+		static_cast<unsigned char>(color >> 0b10000),
+		static_cast<unsigned char>(color >> 0b01000),
+		static_cast<unsigned char>(color),
 	});
 }
 
