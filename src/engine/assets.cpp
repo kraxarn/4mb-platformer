@@ -5,12 +5,12 @@ ce::assets::assets()
 {
 }
 
-auto ce::assets::level(const std::string &path) -> ce::level
+auto ce::assets::level(const std::string &path) const -> ce::level
 {
 	return ce::level(fs.open(path));
 }
 
-auto ce::assets::all_levels() -> std::vector<ce::level>
+auto ce::assets::all_levels() const -> std::vector<ce::level>
 {
 	std::vector<ce::level> levels;
 	for (const auto &file : fs.iterate_directory("level"))
@@ -22,12 +22,12 @@ auto ce::assets::all_levels() -> std::vector<ce::level>
 	return levels;
 }
 
-auto ce::assets::music(const std::string &path) -> ce::music
+auto ce::assets::music(const std::string &path) const -> ce::music
 {
 	return ce::music(fs.open(path));
 }
 
-auto ce::assets::font(const std::string &path, int font_size) -> ce::font
+auto ce::assets::font(const std::string &path, int font_size) const -> ce::font
 {
 	return ce::font(fs.open(path), font_size);
 }

@@ -14,12 +14,12 @@ namespace ce
 	public:
 		assets();
 
-		auto level(const std::string &path) -> ce::level;
-		auto all_levels() -> std::vector<ce::level>;
+		auto level(const std::string &path) const -> ce::level;
+		auto all_levels() const -> std::vector<ce::level>;
 
-		auto music(const std::string &path) -> ce::music;
+		auto music(const std::string &path) const -> ce::music;
 
-		auto font(const std::string &path, int font_size) -> ce::font;
+		auto font(const std::string &path, int font_size) const -> ce::font;
 
 	private:
 		cmrc::embedded_filesystem fs;
