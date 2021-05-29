@@ -14,7 +14,17 @@ namespace ce
 
 		void draw();
 
+		auto get_text() const -> const std::string &;
 		void set_text(const std::string &text);
+
+		auto get_x() const -> int;
+		auto get_y() const -> int;
+
+		auto position() const -> Vector2;
+
+		auto get_font_size() const -> int;
+
+		auto get_color() const -> Color;
 
 	private:
 		std::string str;
