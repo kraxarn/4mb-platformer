@@ -20,17 +20,12 @@ auto main(int argc, char **argv) -> int
 	auto levels = assets.all_levels();
 	std::cout << "Loaded " << levels.size() << " levels" << std::endl;
 
-	auto music_menu = assets.music("music/menu.xm");
-	music_menu.play();
-
 	auto font_debug = assets.font("font/debug.ttf", 20);
 
 	ce::text text_play("0/0", 16, 16, 24, color::text);
 
 	while (!ce::window::should_close())
 	{
-		music_menu.update();
-
 		ce::draw::begin();
 		ce::draw::clear(color::background);
 		{
