@@ -1,44 +1,40 @@
 #include "raylib.h"
 
-#include "res.hpp"
 #include "clf/clf.hpp"
+#include "engine/window.hpp"
+#include "engine/audio.hpp"
+#include "engine/assets.hpp"
 
 #include <sstream>
 #include <vector>
 
-auto load_levels() -> std::vector<clf>
-{
-	std::vector<clf> levels;
-
-	const auto fs = cmrc::res::get_filesystem();
-	for (const auto &file : fs.iterate_directory("level"))
-	{
-		std::stringstream path;
-		path << "level/" << file.filename();
-		levels.emplace_back(fs.open(path.str()));
-	}
-
-	return levels;
-}
-
 auto main(int argc, char **argv) -> int
 {
-	InitWindow(1280, 720, "4mb-platformer");
-	SetTargetFPS(60);
+	ce::window window(1280, 720, "4mb-platformer");
+	ce::audio audio;
 
-	auto levels = load_levels();
+	// Load levels
+	ce::assets assets;
+	auto levels = assets.all_levels();
 	std::cout << "Loaded " << levels.size() << " levels" << std::endl;
 
-	while (!WindowShouldClose())
+	auto music_menu = assets.music("music/menu.xm");
+	music_menu.play();
+
+	while (!ce::window::should_close())
 	{
+		music_menu.update();
+
 		BeginDrawing();
 		ClearBackground(BLACK);
 		{
-			DrawText(":3", 190, 200, 20, RAYWHITE);
+			auto *playback = TextFormat("%.0f/%.0f",
+				music_menu.played(), music_menu.length());
+
+			DrawText(playback, 16, 16, 24, RAYWHITE);
 		}
 		EndDrawing();
 	}
 
-	CloseWindow();
 	return 0;
 }
