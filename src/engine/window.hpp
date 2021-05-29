@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include <string>
+#include <iostream>
 
 namespace ce
 {
@@ -15,5 +16,14 @@ namespace ce
 		~window();
 
 		static auto should_close() -> bool;
+
+		void begin() const;
+		void end() const;
+
+	private:
+		static constexpr int render_width = 1280;
+		static constexpr int render_height = 720;
+
+		Camera2D camera = {0};
 	};
 }

@@ -22,10 +22,12 @@ auto main(int argc, char **argv) -> int
 
 	while (!ce::window::should_close())
 	{
-		ce::draw::begin();
+		window.begin();
 		ce::draw::clear(color::background);
-		menu.render();
-		ce::draw::end();
+		{
+			menu.render();
+		}
+		window.end();
 	}
 
 	return 0;
