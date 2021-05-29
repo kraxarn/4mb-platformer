@@ -4,7 +4,6 @@
 #include "res.hpp"
 
 #include <string>
-#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <array>
