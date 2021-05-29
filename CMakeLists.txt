@@ -17,3 +17,7 @@ target_link_libraries(4mb_platformer PRIVATE raylib)
 # CMakeRC
 include(resources.cmake)
 target_link_libraries(4mb_platformer PRIVATE res)
+
+# fmt
+add_subdirectory(thirdparty/fmt)
+target_link_libraries(4mb_platformer PRIVATE fmt)
