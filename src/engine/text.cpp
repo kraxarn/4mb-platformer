@@ -25,9 +25,19 @@ auto ce::text::get_x() const -> int
 	return x;
 }
 
+void ce::text::set_x(int value)
+{
+	x = value;
+}
+
 auto ce::text::get_y() const -> int
 {
 	return y;
+}
+
+void ce::text::set_y(int value)
+{
+	y = value;
 }
 
 auto ce::text::position() const -> Vector2

@@ -18,7 +18,10 @@ namespace ce
 		void set_text(const std::string &text);
 
 		auto get_x() const -> int;
+		void set_x(int value);
+
 		auto get_y() const -> int;
+		void set_y(int value);
 
 		auto position() const -> Vector2;
 
