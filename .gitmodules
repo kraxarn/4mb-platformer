@@ -4,3 +4,6 @@
 [submodule "thirdparty/cmrc"]
 	path = thirdparty/cmrc
 	url = https://github.com/vector-of-bool/cmrc.git
+[submodule "thirdparty/fmt"]
+	path = thirdparty/fmt
+	url = https://github.com/fmtlib/fmt.git
