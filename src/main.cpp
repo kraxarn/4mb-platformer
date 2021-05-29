@@ -10,7 +10,7 @@
 
 auto main(int argc, char **argv) -> int
 {
-	ce::window window(426, 240, "4MB Platformer");
+	ce::window window(1280, 720, "4MB Platformer");
 	ce::audio audio;
 
 	// Load levels
