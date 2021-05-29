@@ -26,3 +26,8 @@ auto ce::assets::music(const std::string &path) -> ce::music
 {
 	return ce::music(fs.open(path));
 }
+
+auto ce::assets::font(const std::string &path, int font_size) -> ce::font
+{
+	return ce::font(fs.open(path), font_size);
+}
