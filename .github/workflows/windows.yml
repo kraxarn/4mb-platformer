@@ -17,10 +17,6 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}\build
 
-#    - name: Install Dependencies
-#      # https://github.com/raysan5/raylib/wiki/Working-on-Windows
-#      run: vcpkg install ...
-
     - name: Configure CMake
       shell: bash
       working-directory: ${{runner.workspace}}\build
