@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: 4mb_platformer
-        path: ${{runner.workspace}}/build/4mb_platformer.exe
+        path: ${{runner.workspace}}\build\$BUILD_TYPE\4mb_platformer.exe
