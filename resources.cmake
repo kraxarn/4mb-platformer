@@ -18,4 +18,8 @@ cmrc_add_resource_library(res
 	assets/music/level2.xm
 	assets/music/menu.xm
 	assets/music/boss.xm
-	assets/music/credits.xm)
+	assets/music/credits.xm
+	# Fonts
+	assets/font/debug.ttf
+	assets/font/menu.ttf
+	assets/font/submenu.ttf)
