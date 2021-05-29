@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vec2.hpp"
+#include "res.hpp"
 
 #include <string>
 #include <filesystem>
@@ -13,8 +14,7 @@
 class clf
 {
 public:
-	/** Load level file from path */
-	auto load(const std::filesystem::path &path) -> bool;
+	explicit clf(const cmrc::file &file);
 
 	auto background() const -> std::string;
 

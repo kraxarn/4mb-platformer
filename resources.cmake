@@ -1,0 +1,15 @@
+include(thirdparty/cmrc/CMakeRC.cmake)
+
+# Levels
+cmrc_add_resource_library(res
+	WHENCE assets
+	assets/level/1-1.clf
+	assets/level/1-2.clf
+	assets/level/1-3.clf
+	assets/level/1-4.clf
+	assets/level/1-B.clf
+	assets/level/2-1.clf
+	assets/level/2-2.clf
+	assets/level/2-3.clf
+	assets/level/2-4.clf
+	assets/level/2-B.clf)

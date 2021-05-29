@@ -1,32 +1,21 @@
 #include "clf/clf.hpp"
 
-auto clf::load(const std::filesystem::path &path) -> bool
+clf::clf(const cmrc::file &file)
 {
-	std::ifstream file(path, std::ios::out | std::ios::binary);
-	if (!file)
+	if (file.size() != sizeof(struct clf_v2_data))
 	{
-		std::cerr << "Failed to open: " << path.string() << std::endl;
-		return false;
-	}
-
-	if (std::filesystem::file_size(path) != sizeof(struct clf_v2_data))
-	{
-		std::cerr << "Level data size mismatch (" << file.tellg()
+		std::cerr << "Level data size mismatch (" << file.size()
 			<< " and " << sizeof(struct clf_v2_data) << ")" << std::endl;
-		return false;
+		return;
 	}
-
-	file.read((char *) &data, sizeof(data));
-	file.close();
+	data = *((struct clf_v2_data*)file.cbegin());
 
 	if (data.version != 2)
 	{
 		std::cerr << "Expected version 2, but found " << data.version
 			<< ", loading may fail" << std::endl;
-		return false;
+		return;
 	}
-
-	return true;
 }
 
 auto clf::background() const -> std::string
