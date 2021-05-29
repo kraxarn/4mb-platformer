@@ -64,4 +64,4 @@ else ()
 	set(SUPPORT_TRACELOG OFF)
 endif ()
 
-add_subdirectory(raylib)
+add_subdirectory(thirdparty/raylib)
