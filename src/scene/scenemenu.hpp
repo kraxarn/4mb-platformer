@@ -15,5 +15,10 @@ private:
 	ce::font font_menu;
 	ce::font font_debug;
 
-	ce::text text_menu;
+	static constexpr short text_count = 4;
+	static constexpr short text_spacing = 48;
+
+	std::vector<ce::text> texts;
+
+	auto texts_height() -> int;
 };
