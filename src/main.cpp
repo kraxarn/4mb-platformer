@@ -5,6 +5,7 @@
 #include "fmt/format.h"
 #include "colors.hpp"
 #include "scene/scenemenu.hpp"
+#include "enum/scenes.hpp"
 
 #include <sstream>
 
@@ -18,14 +19,16 @@ auto main(int argc, char **argv) -> int
 	auto levels = assets.all_levels();
 	std::cout << "Loaded " << levels.size() << " levels" << std::endl;
 
-	scene_menu menu(assets);
+	std::map<scene, std::shared_ptr<ce::scene>> scenes{
+		{scene::menu, std::make_shared<scene_menu>(assets)},
+	};
 
 	while (!ce::window::should_close())
 	{
 		window.begin();
 		ce::draw::clear(color::background);
 		{
-			menu.render();
+			scenes.at(scene::menu)->render();
 		}
 		window.end();
 	}
