@@ -17,6 +17,9 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}\build
 
+    - name: Install Dependencies
+      run: choco install upx
+
     - name: Configure CMake
       shell: bash
       working-directory: ${{runner.workspace}}\build
@@ -26,6 +29,11 @@ jobs:
       working-directory: ${{runner.workspace}}\build
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
+
+    - name: Optimize Binary
+      working-directory: ${{runner.workspace}}\build
+      shell: bash
+      run: upx --best ${{runner.workspace}}\build\MinSizeRel\4mb_platformer.exe
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
