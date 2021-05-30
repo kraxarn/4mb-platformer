@@ -33,7 +33,7 @@ jobs:
     - name: Optimize Binary
       working-directory: ${{runner.workspace}}\build
       shell: bash
-      run: upx --best ${{runner.workspace}}\build\MinSizeRel\4mb_platformer.exe
+      run: upx --best ${{runner.workspace}}/build/MinSizeRel/4mb_platformer.exe
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
