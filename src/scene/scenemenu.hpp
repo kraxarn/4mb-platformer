@@ -22,6 +22,8 @@ private:
 	static constexpr short text_count = 4;
 	static constexpr short text_spacing = 48;
 
+	ce::music music;
+
 	ce::font fnt_debug;
 	ce::text txt_debug;
 
