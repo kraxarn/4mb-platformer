@@ -5,6 +5,14 @@ ce::assets::assets()
 {
 }
 
+auto ce::assets::open(const std::string &folder,
+	const std::string &filename) const -> cmrc::file
+{
+	std::stringstream stream;
+	stream << folder << "/" << filename;
+	return fs.open(stream.str());
+}
+
 auto ce::assets::level(const std::string &path) const -> ce::level
 {
 	return ce::level(fs.open(path));
@@ -30,4 +38,9 @@ auto ce::assets::music(const std::string &path) const -> ce::music
 auto ce::assets::font(const std::string &path, int font_size) const -> ce::font
 {
 	return ce::font(fs.open(path), font_size);
+}
+
+auto ce::assets::image(const std::string &path) const -> ce::image
+{
+	return ce::image(open("image", path));
 }
