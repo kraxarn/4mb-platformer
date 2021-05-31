@@ -114,18 +114,3 @@ void scene_menu::set_current(int value)
 		+ static_cast<int>(fnt_menu.text_size(text).y / 2)
 		- static_cast<int>(tex_arrow.get_height() / 2));
 }
-
-auto scene_menu::arrow_dir_string() -> std::string
-{
-	switch (arrow_dir)
-	{
-		case direction::left:
-			return std::string("left");
-
-		case direction::right:
-			return std::string("right");
-
-		default:
-			return "???";
-	}
-}

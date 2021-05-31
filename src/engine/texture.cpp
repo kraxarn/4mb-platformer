@@ -39,11 +39,6 @@ void ce::texture::move(float x_offset, float y_offset)
 	y += y_offset;
 }
 
-auto ce::texture::get_width() const -> int
-{
-	return r_texture.width;
-}
-
 auto ce::texture::get_height() const -> int
 {
 	return r_texture.height;

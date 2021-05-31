@@ -38,5 +38,4 @@ private:
 
 	void set_current(int value);
 
-	auto arrow_dir_string() -> std::string;
 };

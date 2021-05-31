@@ -22,7 +22,6 @@ namespace ce
 
 		void move(float x_offset, float y_offset);
 
-		auto get_width() const -> int;
 		auto get_height() const -> int;
 
 	private:
