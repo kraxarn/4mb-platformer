@@ -35,3 +35,8 @@ void ce::window::end() const
 	//EndMode2D();
 	EndDrawing();
 }
+
+void ce::window::close()
+{
+	CloseWindow();
+}

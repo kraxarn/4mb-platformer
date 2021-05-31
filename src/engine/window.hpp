@@ -20,6 +20,8 @@ namespace ce
 		void begin() const;
 		void end() const;
 
+		static void close();
+
 	private:
 		static constexpr int render_width = 1280;
 		static constexpr int render_height = 720;

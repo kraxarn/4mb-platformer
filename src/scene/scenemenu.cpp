@@ -57,6 +57,16 @@ void scene_menu::render()
 	{
 		set_current(current + 1);
 	}
+	else if (input.is_pressed(ce::key::enter))
+	{
+		switch (current)
+		{
+			// Exit game
+			case 3:
+				ce::window::close();
+				exit(0);
+		}
+	}
 
 	// Update arrow position
 	auto arrow_offset = std::abs(static_cast<float>(tex_arrow.get_x()) - 82.F);

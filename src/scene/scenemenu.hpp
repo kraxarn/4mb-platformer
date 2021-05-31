@@ -6,6 +6,7 @@
 #include "engine/texture.hpp"
 #include "engine/clock.hpp"
 #include "engine/input.hpp"
+#include "engine/window.hpp"
 #include "colors.hpp"
 #include "enum/direction.hpp"
 #include "fmt/format.h"
