@@ -27,7 +27,7 @@ private:
 
 	ce::texture tex_arrow;
 	direction arrow_dir;
-	size_t current = 0;
+	int current = 0;
 
 	ce::font fnt_menu;
 	std::vector<ce::text> texts;
@@ -36,5 +36,5 @@ private:
 
 	auto texts_height() -> int;
 
-	void set_current(size_t value);
+	void set_current(int value);
 };

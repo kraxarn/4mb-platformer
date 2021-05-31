@@ -46,21 +46,12 @@ void scene_menu::render()
 	// Check input
 	if (input.is_pressed(ce::key::up))
 	{
-		current--;
-		if (current < 0)
-		{
-			current = texts.size() - 1;
-		}
+		set_current(current - 1);
 	}
 	else if (input.is_pressed(ce::key::down))
 	{
-		current++;
-		if (current >= texts.size())
-		{
-			current = 0;
-		}
+		set_current(current + 1);
 	}
-	set_current(current);
 
 	// Update arrow position
 	auto arrow_offset = std::abs(static_cast<float>(tex_arrow.get_x()) - 82.F);
@@ -105,11 +96,19 @@ auto scene_menu::texts_height() -> int
 	return end - start;
 }
 
-void scene_menu::set_current(size_t value)
+void scene_menu::set_current(int value)
 {
 	current = value;
-	const auto &text = texts.at(value);
+	if (current < 0)
+	{
+		current = static_cast<int>(texts.size() - 1);
+	}
+	else if (current >= texts.size())
+	{
+		current = 0;
+	}
 
+	const auto &text = texts.at(current);
 	tex_arrow.set_y(text.get_y()
 		+ static_cast<int>(fnt_menu.text_size(text).y / 2)
 		- static_cast<int>(tex_arrow.get_height() / 2));
