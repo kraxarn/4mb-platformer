@@ -109,7 +109,7 @@ void scene_menu::set_current(int value)
 	}
 
 	const auto &text = texts.at(current);
-	tex_arrow.set_y(text.get_y()
-		+ static_cast<int>(fnt_menu.text_size(text).y / 2)
-		- static_cast<int>(tex_arrow.get_height() / 2));
+	tex_arrow.set_y(static_cast<float>(text.get_y())
+		+ (fnt_menu.text_size(text).y / 2.F)
+		- (static_cast<float>(tex_arrow.get_height()) / 2.F));
 }
