@@ -105,7 +105,7 @@ auto scene_menu::texts_height() -> int
 	return end - start;
 }
 
-void scene_menu::set_current(int value)
+void scene_menu::set_current(size_t value)
 {
 	current = value;
 	const auto &text = texts.at(value);
