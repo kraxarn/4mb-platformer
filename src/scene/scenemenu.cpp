@@ -2,6 +2,7 @@
 
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
+	music(assets.music("music/menu.xm")),
 	fnt_menu(assets.font("font/menu.ttf", 52)),
 	fnt_debug(assets.font("font/debug.ttf", 22)),
 	tex_arrow(assets.image("arrow.png")),
@@ -33,10 +34,14 @@ scene_menu::scene_menu(const ce::assets &assets)
 	tex_arrow.set_x(76);
 	set_current(0);
 	arrow_dir = direction::right;
+
+	music.play();
 }
 
 void scene_menu::render()
 {
+	music.update();
+
 	// Draw menu alternatives
 	for (const auto &text : texts)
 	{
