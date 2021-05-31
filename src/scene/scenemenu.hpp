@@ -4,6 +4,8 @@
 #include "engine/text.hpp"
 #include "engine/font.hpp"
 #include "engine/texture.hpp"
+#include "engine/clock.hpp"
+#include "engine/input.hpp"
 #include "colors.hpp"
 #include "enum/direction.hpp"
 
@@ -16,17 +18,20 @@ public:
 	void render() override;
 
 private:
-	ce::font fnt_menu;
-
-	ce::texture tex_arrow;
-	direction arrow_dir = direction::left;
-
 	static constexpr short text_count = 4;
 	static constexpr short text_spacing = 48;
 
+	ce::font fnt_debug;
+	ce::text txt_debug;
+
+	ce::texture tex_arrow;
+	direction arrow_dir = direction::left;
 	int current = 0;
 
+	ce::font fnt_menu;
 	std::vector<ce::text> texts;
+
+	ce::input input;
 
 	auto texts_height() -> int;
 	void set_current(int value);

@@ -3,7 +3,9 @@
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
 	fnt_menu(assets.font("font/menu.ttf", 52)),
-	tex_arrow(assets.image("arrow.png"))
+	fnt_debug(assets.font("font/debug.ttf", 22)),
+	tex_arrow(assets.image("arrow.png")),
+	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE)
 {
 	std::array<std::string, text_count> labels = {
 		"New game",
@@ -61,6 +63,11 @@ void scene_menu::render()
 
 	// Draw arrow
 	tex_arrow.draw();
+
+	// Debug stuff
+	txt_debug.set_text(fmt::format("Current:\t{}\nFPS:\t{}\nFrameTime:\t{:.0}\n",
+		current, ce::clock::fps(), ce::clock::frame_time() * 1000.F));
+	fnt_debug.draw_text(txt_debug);
 }
 
 auto scene_menu::texts_height() -> int
