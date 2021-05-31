@@ -7,30 +7,33 @@ ce::texture::texture(const ce::image &image)
 
 void ce::texture::draw()
 {
-	DrawTexture(r_texture, x, y, WHITE);
+	DrawTexture(r_texture,
+		static_cast<int>(x),
+		static_cast<int>(y),
+		WHITE);
 }
 
-void ce::texture::set_x(int value)
+void ce::texture::set_x(float value)
 {
 	x = value;
 }
 
-auto ce::texture::get_x() const -> int
+auto ce::texture::get_x() const -> float
 {
 	return x;
 }
 
-void ce::texture::set_y(int value)
+void ce::texture::set_y(float value)
 {
 	y = value;
 }
 
-auto ce::texture::get_y() const -> int
+auto ce::texture::get_y() const -> float
 {
 	return y;
 }
 
-void ce::texture::move(int x_offset, int y_offset)
+void ce::texture::move(float x_offset, float y_offset)
 {
 	x += x_offset;
 	y += y_offset;

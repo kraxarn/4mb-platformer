@@ -3,6 +3,8 @@
 #include "raylib.h"
 #include "engine/image.hpp"
 
+#include <cmath>
+
 namespace ce
 {
 	class texture
@@ -12,13 +14,13 @@ namespace ce
 
 		void draw();
 
-		void set_x(int value);
-		auto get_x() const -> int;
+		void set_x(float value);
+		auto get_x() const -> float;
 
-		void set_y(int value);
-		auto get_y() const -> int;
+		void set_y(float value);
+		auto get_y() const -> float;
 
-		void move(int x_offset, int y_offset);
+		void move(float x_offset, float y_offset);
 
 		auto get_width() const -> int;
 		auto get_height() const -> int;
@@ -26,7 +28,7 @@ namespace ce
 	private:
 		Texture2D r_texture;
 
-		int x = 0;
-		int y = 0;
+		float x = 0;
+		float y = 0;
 	};
 }
