@@ -27,12 +27,8 @@ scene_menu::scene_menu(const ce::assets &assets)
 		texts.at(i).set_y(center + (i * text_spacing));
 	}
 
-	// Load arrow
+	// Arrow position
 	tex_arrow.set_x(76);
-	const auto &front = texts.front();
-	tex_arrow.set_y(front.get_y()
-		+ (fnt_menu.text_size(front).y / 2)
-		- (tex_arrow.get_height() / 2));
 }
 
 void scene_menu::render()
