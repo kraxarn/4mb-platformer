@@ -31,6 +31,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 
 	// Arrow position
 	tex_arrow.set_x(76);
+	set_current(0);
 }
 
 void scene_menu::render()
@@ -41,22 +42,46 @@ void scene_menu::render()
 		fnt_menu.draw_text(text);
 	}
 
+	// Check input
+	if (input.is_pressed(ce::key::up))
+	{
+		current--;
+		if (current < 0)
+		{
+			current = texts.size() - 1;
+		}
+	}
+	else if (input.is_pressed(ce::key::down))
+	{
+		current++;
+		if (current >= texts.size())
+		{
+			current = 0;
+		}
+	}
+	set_current(current);
+
 	// Update arrow position
-	auto arrow_offset = std::abs(static_cast<float>(tex_arrow.get_x()) - 82.F);
+	auto arrow_offset = static_cast<float>(tex_arrow.get_x()) - 82;
+	if (arrow_offset < 0)
+	{
+		arrow_offset = -arrow_offset;
+	}
+
 	if (arrow_dir == direction::left)
 	{
-		tex_arrow.move(static_cast<int>(-0.5F - (arrow_offset / 10.F)), 0);
+		tex_arrow.move(static_cast<int>(-0.5 - (arrow_offset / 10.0)), 0);
 	}
 	else
 	{
-		tex_arrow.move(0.5F + (arrow_offset / 10.F), 0);
+		tex_arrow.move(static_cast<int>(0.5 + (arrow_offset / 10.0)), 0);
 	}
 
 	if (tex_arrow.get_x() <= 64)
 	{
 		arrow_dir = direction::right;
 	}
-	else
+	else if (tex_arrow.get_x() >= 82)
 	{
 		arrow_dir = direction::left;
 	}

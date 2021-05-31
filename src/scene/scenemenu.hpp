@@ -8,6 +8,7 @@
 #include "engine/input.hpp"
 #include "colors.hpp"
 #include "enum/direction.hpp"
+#include "fmt/format.h"
 
 #include <cmath>
 
