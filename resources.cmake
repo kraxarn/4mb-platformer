@@ -22,4 +22,6 @@ cmrc_add_resource_library(res
 	# Fonts
 	assets/font/debug.ttf
 	assets/font/menu.ttf
-	assets/font/submenu.ttf)
+	assets/font/submenu.ttf
+	# Images
+	assets/image/arrow.png)
