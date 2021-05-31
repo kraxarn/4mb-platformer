@@ -32,6 +32,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 	// Arrow position
 	tex_arrow.set_x(76);
 	set_current(0);
+	arrow_dir = direction::right;
 }
 
 void scene_menu::render()
@@ -62,19 +63,15 @@ void scene_menu::render()
 	set_current(current);
 
 	// Update arrow position
-	auto arrow_offset = static_cast<float>(tex_arrow.get_x()) - 82;
-	if (arrow_offset < 0)
-	{
-		arrow_offset = -arrow_offset;
-	}
+	auto arrow_offset = std::abs(static_cast<float>(tex_arrow.get_x()) - 82.F);
 
 	if (arrow_dir == direction::left)
 	{
-		tex_arrow.move(static_cast<int>(-0.5 - (arrow_offset / 10.0)), 0);
+		tex_arrow.move(-0.5F - (arrow_offset / 10.F), 0);
 	}
 	else
 	{
-		tex_arrow.move(static_cast<int>(0.5 + (arrow_offset / 10.0)), 0);
+		tex_arrow.move(0.5F + (arrow_offset / 10.F), 0);
 	}
 
 	if (tex_arrow.get_x() <= 64)
@@ -90,8 +87,11 @@ void scene_menu::render()
 	tex_arrow.draw();
 
 	// Debug stuff
-	txt_debug.set_text(fmt::format("Current:\t{}\nFPS:\t{}\nFrameTime:\t{:.0}\n",
-		current, ce::clock::fps(), ce::clock::frame_time() * 1000.F));
+	txt_debug.set_text(fmt::format("Current:\t{}\n"
+								   "FPS:\t{}\n"
+								   "FrameTime:\t{:.0}\n",
+		current, ce::clock::fps(), ce::clock::frame_time() * 1000.F,
+		tex_arrow.get_x(), tex_arrow.get_y(), arrow_offset));
 	fnt_debug.draw_text(txt_debug);
 }
 
@@ -113,4 +113,19 @@ void scene_menu::set_current(int value)
 	tex_arrow.set_y(text.get_y()
 		+ static_cast<int>(fnt_menu.text_size(text).y / 2)
 		- static_cast<int>(tex_arrow.get_height() / 2));
+}
+
+auto scene_menu::arrow_dir_string() -> std::string
+{
+	switch (arrow_dir)
+	{
+		case direction::left:
+			return std::string("left");
+
+		case direction::right:
+			return std::string("right");
+
+		default:
+			return "???";
+	}
 }

@@ -26,7 +26,7 @@ private:
 	ce::text txt_debug;
 
 	ce::texture tex_arrow;
-	direction arrow_dir = direction::left;
+	direction arrow_dir;
 	int current = 0;
 
 	ce::font fnt_menu;
@@ -35,5 +35,8 @@ private:
 	ce::input input;
 
 	auto texts_height() -> int;
+
 	void set_current(int value);
+
+	auto arrow_dir_string() -> std::string;
 };
