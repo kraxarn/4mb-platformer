@@ -9,10 +9,17 @@ auto state::get() -> std::shared_ptr<ce::scene>
 
 void state::set(scene scene, const ce::assets &assets)
 {
+	ce::scene *new_scene = nullptr;
+
 	switch (scene)
 	{
 		case scene::menu:
-			current = std::make_shared<scene_menu>(assets);
+			new_scene = new scene_menu(assets);
 			break;
+	}
+
+	if (new_scene != nullptr)
+	{
+		current.reset(new_scene);
 	}
 }
