@@ -2,9 +2,9 @@
 
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
-	music(assets.music("music/menu.xm")),
-	fnt_menu(assets.font("font/menu.ttf", 52)),
-	fnt_debug(assets.font("font/debug.ttf", 22)),
+	music(assets.music("menu.xm")),
+	fnt_menu(assets.font("menu.ttf", 52)),
+	fnt_debug(assets.font("debug.ttf", 22)),
 	tex_arrow(assets.image("arrow.png")),
 	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE)
 {
