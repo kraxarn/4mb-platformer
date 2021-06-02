@@ -13,6 +13,22 @@ void ce::texture::draw()
 		WHITE);
 }
 
+void ce::texture::draw_rect(int w, int h, int x_pos, int y_pos) const
+{
+	Rectangle rect{
+		static_cast<float>(x_pos),
+		static_cast<float>(y_pos),
+		static_cast<float>(w),
+		static_cast<float>(h),
+	};
+
+	Vector2 pos{
+		x, y
+	};
+
+	DrawTextureRec(r_texture, rect, pos, WHITE);
+}
+
 void ce::texture::set_x(float value)
 {
 	x = value;

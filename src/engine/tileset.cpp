@@ -22,3 +22,13 @@ auto ce::tileset::at(int i) const -> ce::image
 	};
 	return ce::image(ImageFromImage(image, rect));
 }
+
+void ce::tileset::draw(int i) const
+{
+	texture.draw_rect(size, size, size * i, 0);
+}
+
+auto ce::tileset::get_size() const -> int
+{
+	return size;
+}

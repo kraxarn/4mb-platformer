@@ -12,7 +12,10 @@ namespace ce
 	public:
 		explicit texture(const ce::image &image);
 
+		/** Draw entire texture */
 		void draw();
+		/** Draw part of texture */
+		void draw_rect(int width, int height, int x, int y) const;
 
 		void set_x(float value);
 		auto get_x() const -> float;

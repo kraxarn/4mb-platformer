@@ -16,6 +16,10 @@ namespace ce
 
 		auto at(int index) const -> ce::image;
 
+		void draw(int index) const;
+
+		auto get_size() const -> int;
+
 	private:
 		/** Total size for each tile */
 		int size = 0;
