@@ -24,4 +24,6 @@ cmrc_add_resource_library(res
 	assets/font/menu.ttf
 	assets/font/submenu.ttf
 	# Images
-	assets/image/arrow.png)
+	assets/image/arrow.png
+	# Tileset
+	assets/tileset/player.png)
