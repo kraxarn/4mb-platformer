@@ -43,7 +43,7 @@ auto ce::assets::image(const std::string &path) const -> ce::image
 	return ce::image(open("image", path));
 }
 
-auto ce::assets::tileset(const std::string &path) -> ce::tileset
+auto ce::assets::tileset(const std::string &path) const -> ce::tileset
 {
 	return ce::tileset(open("tileset", path));
 }

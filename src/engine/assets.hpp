@@ -25,7 +25,7 @@ namespace ce
 
 		auto image(const std::string &path) const -> ce::image;
 
-		auto tileset(const std::string &path) -> ce::tileset;
+		auto tileset(const std::string &path) const -> ce::tileset;
 
 	private:
 		cmrc::embedded_filesystem fs;
