@@ -9,5 +9,7 @@ namespace ce
 	{
 	public:
 		explicit image(const cmrc::file &file);
+
+		explicit image(const Image &img);
 	};
 }

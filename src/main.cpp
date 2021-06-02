@@ -12,6 +12,7 @@ auto main(int argc, char **argv) -> int
 	ce::audio audio;
 
 	ce::assets assets;
+	ce::window::set_icon(assets.tileset("player.png").at(1));
 	state::set(scene::menu, assets);
 
 	while (!ce::window::should_close())

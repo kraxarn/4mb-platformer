@@ -1,6 +1,7 @@
 #pragma once
 
 #include "raylib.h"
+#include "engine/image.hpp"
 
 #include <string>
 #include <iostream>
@@ -21,6 +22,7 @@ namespace ce
 		void end() const;
 
 		static void close();
+		static void set_icon(const ce::image &image);
 
 	private:
 		static constexpr int render_width = 1280;

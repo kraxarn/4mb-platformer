@@ -6,3 +6,8 @@ ce::image::image(const cmrc::file &file)
 	static_cast<int>(file.size())))
 {
 }
+
+ce::image::image(const Image &img)
+	: Image(img)
+{
+}

@@ -40,3 +40,8 @@ void ce::window::close()
 {
 	CloseWindow();
 }
+
+void ce::window::set_icon(const ce::image &image)
+{
+	SetWindowIcon(image);
+}
