@@ -17,8 +17,15 @@ namespace ce
 		auto at(int index) const -> ce::image;
 
 		void draw(int index) const;
+		void draw(int index, float rotation, float scale) const;
 
 		auto get_size() const -> int;
+
+		void set_pos(float x, float y);
+		auto x() const -> float;
+		auto y() const -> float;
+
+		void move(float x, float y);
 
 	private:
 		/** Total size for each tile */

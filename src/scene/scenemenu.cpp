@@ -6,7 +6,8 @@ scene_menu::scene_menu(const ce::assets &assets)
 	fnt_menu(assets.font("menu.ttf", 52)),
 	fnt_debug(assets.font("debug.ttf", 22)),
 	tex_arrow(assets.image("arrow.png")),
-	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE)
+	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
+	spr_demo(assets.tileset("player.png"))
 {
 	std::array<std::string, text_count> labels = {
 		"New game",
@@ -35,12 +36,26 @@ scene_menu::scene_menu(const ce::assets &assets)
 	set_current(0);
 	arrow_dir = direction::right;
 
+	// Menu sprite
+	spr_demo.set_pos(static_cast<float>(GetScreenWidth()) * 0.7F,
+		static_cast<float>(GetScreenHeight()) * 0.6F);
+	spr_demo.set_scale(3.F);
+
 	music.play();
 }
 
 void scene_menu::render()
 {
 	music.update();
+
+	// Sprite demo
+	spr_demo.move(-1.F, 0);
+	if (spr_demo.x() < -100)
+	{
+		spr_demo.set_pos(static_cast<float>(GetScreenWidth()) * 1.F,
+			static_cast<float>(GetScreenHeight()) * 0.6F);
+	}
+	spr_demo.draw();
 
 	// Draw menu alternatives
 	for (const auto &text : texts)

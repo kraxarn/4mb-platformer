@@ -13,7 +13,7 @@ void ce::texture::draw()
 		WHITE);
 }
 
-void ce::texture::draw_rect(int w, int h, int x_pos, int y_pos) const
+void ce::texture::draw(int w, int h, int x_pos, int y_pos) const
 {
 	Rectangle rect{
 		static_cast<float>(x_pos),
@@ -27,6 +27,30 @@ void ce::texture::draw_rect(int w, int h, int x_pos, int y_pos) const
 	};
 
 	DrawTextureRec(r_texture, rect, pos, WHITE);
+}
+
+void ce::texture::draw(int w, int h, int x_pos, int y_pos, float r, float s) const
+{
+	auto wf = static_cast<float>(w);
+	auto hf = static_cast<float>(h);
+
+	Rectangle rect{
+		static_cast<float>(x_pos),
+		static_cast<float>(y_pos),
+		wf, hf,
+	};
+
+	Rectangle dest{
+		x, y,
+		wf * s, hf * s,
+	};
+
+	Vector2 orig{
+		wf / 2.F,
+		hf / 2.F,
+	};
+
+	DrawTextureTiled(r_texture, rect, dest, orig, r, s, WHITE);
 }
 
 void ce::texture::set_x(float value)

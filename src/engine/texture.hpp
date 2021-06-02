@@ -15,7 +15,10 @@ namespace ce
 		/** Draw entire texture */
 		void draw();
 		/** Draw part of texture */
-		void draw_rect(int width, int height, int x, int y) const;
+		void draw(int width, int height, int x, int y) const;
+		/** Draw part of texture with rotation and scale */
+		void draw(int width, int height, int x, int y,
+			float rotation, float scale) const;
 
 		void set_x(float value);
 		auto get_x() const -> float;
