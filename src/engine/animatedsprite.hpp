@@ -1,24 +1,19 @@
 #pragma once
 
 #include "engine/tileset.hpp"
+#include "engine/movable.hpp"
 
 namespace ce
 {
 	/**
 	 * Animated sprite
 	 */
-	class sprite
+	class animated_sprite: public movable
 	{
 	public:
-		explicit sprite(const ce::tileset &tileset);
+		explicit animated_sprite(const ce::tileset &tileset);
 
 		void draw();
-
-		void set_pos(float x, float y);
-		void move(float x, float y);
-
-		auto x() const -> float;
-		auto y() const -> float;
 
 		void set_scale(float scale);
 
