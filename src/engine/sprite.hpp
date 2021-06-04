@@ -11,7 +11,15 @@ namespace ce
 	class sprite: public movable
 	{
 	public:
+		/**
+		 * New sprite from texture
+		 */
 		explicit sprite(const ce::texture &texture);
+
+		/**
+		 * New sprite from image
+		 */
+		explicit sprite(const ce::image &image);
 
 		void draw();
 
