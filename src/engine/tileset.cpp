@@ -23,38 +23,17 @@ auto ce::tileset::at(int i) const -> ce::image
 	return ce::image(ImageFromImage(image, rect));
 }
 
-void ce::tileset::draw(int i) const
+void ce::tileset::draw(float x, float y, int i) const
 {
-	texture.draw(size, size, size * i, 0);
+	texture.draw(x, y, size, size * i);
 }
 
-void ce::tileset::draw(int i, float rotation, float scale) const
+void ce::tileset::draw(float x, float y, int i, float rotation, float scale) const
 {
-	texture.draw(size, size, size * i, 0, rotation, scale);
+	texture.draw(x, y, size, size * i, rotation, scale);
 }
 
 auto ce::tileset::get_size() const -> int
 {
 	return size;
-}
-
-void ce::tileset::set_pos(float x, float y)
-{
-	texture.set_x(x);
-	texture.set_y(y);
-}
-
-void ce::tileset::move(float x, float y)
-{
-	texture.move(x, y);
-}
-
-auto ce::tileset::x() const -> float
-{
-	return texture.get_x();
-}
-
-auto ce::tileset::y() const -> float
-{
-	return texture.get_y();
 }
