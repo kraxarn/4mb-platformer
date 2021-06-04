@@ -5,7 +5,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 	music(assets.music("menu.xm")),
 	fnt_menu(assets.font("menu.ttf", 52)),
 	fnt_debug(assets.font("debug.ttf", 22)),
-	tex_arrow(assets.image("arrow.png")),
+	spr_arrow(assets.image("arrow.png")),
 	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
 	spr_demo(assets.tileset("player.png"))
 {
@@ -32,13 +32,13 @@ scene_menu::scene_menu(const ce::assets &assets)
 	}
 
 	// Arrow position
-	tex_arrow.set_x(76);
+	spr_arrow.set_x(76);
 	set_current(0);
 	arrow_dir = direction::right;
 
 	// Menu sprite
-	spr_demo.set_pos(static_cast<float>(GetScreenWidth()) * 0.7F,
-		static_cast<float>(GetScreenHeight()) * 0.6F);
+	spr_demo.set_x(static_cast<float>(GetScreenWidth()) * 0.7F);
+	spr_demo.set_y(static_cast<float>(GetScreenHeight()) * 0.6F);
 	spr_demo.set_scale(3.F);
 
 	music.play();
@@ -50,10 +50,10 @@ void scene_menu::render()
 
 	// Sprite demo
 	spr_demo.move(-1.F, 0);
-	if (spr_demo.x() < -100)
+	if (spr_demo.get_x() < -100)
 	{
-		spr_demo.set_pos(static_cast<float>(GetScreenWidth()) * 1.F,
-			static_cast<float>(GetScreenHeight()) * 0.6F);
+		spr_demo.set_x(static_cast<float>(GetScreenWidth()) * 1.F);
+		spr_demo.set_y(static_cast<float>(GetScreenHeight()) * 0.6F);
 	}
 	spr_demo.draw();
 
@@ -84,35 +84,35 @@ void scene_menu::render()
 	}
 
 	// Update arrow position
-	auto arrow_offset = std::abs(static_cast<float>(tex_arrow.get_x()) - 82.F);
+	auto arrow_offset = std::abs(static_cast<float>(spr_arrow.get_x()) - 82.F);
 
 	if (arrow_dir == direction::left)
 	{
-		tex_arrow.move(-0.5F - (arrow_offset / 10.F), 0);
+		spr_arrow.move(-0.5F - (arrow_offset / 10.F), 0);
 	}
 	else
 	{
-		tex_arrow.move(0.5F + (arrow_offset / 10.F), 0);
+		spr_arrow.move(0.5F + (arrow_offset / 10.F), 0);
 	}
 
-	if (tex_arrow.get_x() <= 64)
+	if (spr_arrow.get_x() <= 64)
 	{
 		arrow_dir = direction::right;
 	}
-	else if (tex_arrow.get_x() >= 82)
+	else if (spr_arrow.get_x() >= 82)
 	{
 		arrow_dir = direction::left;
 	}
 
 	// Draw arrow
-	tex_arrow.draw();
+	spr_arrow.draw();
 
 	// Debug stuff
 	txt_debug.set_text(fmt::format("Current:\t{}\n"
 								   "FPS:\t{}\n"
 								   "FrameTime:\t{:.0}\n",
 		current, ce::clock::fps(), ce::clock::frame_time() * 1000.F,
-		tex_arrow.get_x(), tex_arrow.get_y(), arrow_offset));
+		spr_arrow.get_x(), spr_arrow.get_y(), arrow_offset));
 	fnt_debug.draw_text(txt_debug);
 }
 
@@ -139,7 +139,7 @@ void scene_menu::set_current(int value)
 	}
 
 	const auto &text = texts.at(current);
-	tex_arrow.set_y(static_cast<float>(text.get_y())
+	spr_arrow.set_y(static_cast<float>(text.get_y())
 		+ (fnt_menu.text_size(text).y / 2.F)
-		- (static_cast<float>(tex_arrow.get_height()) / 2.F));
+		- (static_cast<float>(spr_arrow.height()) / 2.F));
 }

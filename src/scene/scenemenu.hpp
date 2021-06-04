@@ -7,6 +7,7 @@
 #include "engine/clock.hpp"
 #include "engine/input.hpp"
 #include "engine/window.hpp"
+#include "engine/animatedsprite.hpp"
 #include "engine/sprite.hpp"
 #include "colors.hpp"
 #include "enum/direction.hpp"
@@ -29,11 +30,11 @@ private:
 	ce::font fnt_debug;
 	ce::text txt_debug;
 
-	ce::texture tex_arrow;
+	ce::sprite spr_arrow;
 	direction arrow_dir;
 	int current = 0;
 
-	ce::sprite spr_demo;
+	ce::animated_sprite spr_demo;
 
 	ce::font fnt_menu;
 	std::vector<ce::text> texts;
