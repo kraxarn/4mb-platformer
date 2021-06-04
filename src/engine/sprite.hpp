@@ -23,6 +23,9 @@ namespace ce
 
 		void draw();
 
+		auto width() const -> int;
+		auto height() const -> int;
+
 	private:
 		ce::texture texture;
 	};
