@@ -22,6 +22,11 @@ void ce::animated_sprite::draw()
 	tileset.draw(get_x(), get_y(), frame, rotation, scale);
 }
 
+auto ce::animated_sprite::get_scale() const -> float
+{
+	return scale;
+}
+
 void ce::animated_sprite::set_scale(float value)
 {
 	scale = value;
@@ -30,4 +35,14 @@ void ce::animated_sprite::set_scale(float value)
 void ce::animated_sprite::rotate(float value)
 {
 	rotation += value;
+}
+
+auto ce::animated_sprite::width() const -> int
+{
+	return tileset.get_size();
+}
+
+auto ce::animated_sprite::height() const -> int
+{
+	return tileset.get_size();
 }

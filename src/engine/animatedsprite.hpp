@@ -15,9 +15,13 @@ namespace ce
 
 		void draw();
 
+		auto get_scale() const -> float;
 		void set_scale(float scale);
 
 		void rotate(float value);
+
+		auto width() const -> int;
+		auto height() const -> int;
 
 	private:
 		/** Ticks between switching frame */

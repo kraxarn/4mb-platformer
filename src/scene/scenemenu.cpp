@@ -37,8 +37,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 	arrow_dir = direction::right;
 
 	// Menu sprite
-	spr_demo.set_x(static_cast<float>(GetScreenWidth()) * 0.7F);
-	spr_demo.set_y(static_cast<float>(GetScreenHeight()) * 0.6F);
+	reset_demo_position();
 	spr_demo.set_scale(3.F);
 
 	music.play();
@@ -49,11 +48,10 @@ void scene_menu::render()
 	music.update();
 
 	// Sprite demo
-	spr_demo.move(-1.F, 0);
-	if (spr_demo.get_x() < -100)
+	spr_demo.move(-1.75F, 0);
+	if (spr_demo.get_x() < -static_cast<float>(spr_demo.width()) * spr_demo.get_scale())
 	{
-		spr_demo.set_x(static_cast<float>(GetScreenWidth()) * 1.F);
-		spr_demo.set_y(static_cast<float>(GetScreenHeight()) * 0.6F);
+		reset_demo_position();
 	}
 	spr_demo.draw();
 
@@ -144,4 +142,17 @@ void scene_menu::set_current(int value)
 	spr_arrow.set_y(static_cast<float>(text.get_y())
 		+ (fnt_menu.text_size(text).y / 2.F)
 		- (static_cast<float>(spr_arrow.height()) / 2.F));
+}
+
+void scene_menu::reset_demo_position()
+{
+	auto screen_width = static_cast<float>(GetScreenWidth());
+	auto sprite_width = static_cast<float>(spr_demo.width()) * spr_demo.get_scale();
+
+	auto height = static_cast<float>(GetScreenHeight());
+	auto min = static_cast<int>(height * 0.05F);
+	auto max = static_cast<int>(height * 0.95F);
+
+	spr_demo.set_x(screen_width + sprite_width);
+	spr_demo.set_y(static_cast<float>(GetRandomValue(min, max)));
 }

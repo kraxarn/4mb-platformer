@@ -44,4 +44,5 @@ private:
 	auto texts_height() -> int;
 
 	void set_current(int value);
+	void reset_demo_position();
 };
