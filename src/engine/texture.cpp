@@ -5,7 +5,7 @@ ce::texture::texture(const ce::image &image)
 {
 }
 
-void ce::texture::draw()
+void ce::texture::draw(float x, float y)
 {
 	DrawTexture(r_texture,
 		static_cast<int>(x),
@@ -13,13 +13,13 @@ void ce::texture::draw()
 		WHITE);
 }
 
-void ce::texture::draw(int w, int h, int x_pos, int y_pos) const
+void ce::texture::draw(float x, float y, int size, int offset) const
 {
+	auto size_f = static_cast<float>(size);
+
 	Rectangle rect{
-		static_cast<float>(x_pos),
-		static_cast<float>(y_pos),
-		static_cast<float>(w),
-		static_cast<float>(h),
+		static_cast<float>(offset), 0.F,
+		size_f, size_f,
 	};
 
 	Vector2 pos{
@@ -29,54 +29,28 @@ void ce::texture::draw(int w, int h, int x_pos, int y_pos) const
 	DrawTextureRec(r_texture, rect, pos, WHITE);
 }
 
-void ce::texture::draw(int w, int h, int x_pos, int y_pos, float r, float s) const
+void ce::texture::draw(float x, float y, int size, int offset,
+	float rotation, float scale) const
 {
-	auto wf = static_cast<float>(w);
-	auto hf = static_cast<float>(h);
+	auto size_f = static_cast<float>(size);
 
 	Rectangle rect{
-		static_cast<float>(x_pos),
-		static_cast<float>(y_pos),
-		wf, hf,
+		static_cast<float>(offset), 0.F,
+		size_f, size_f,
 	};
 
 	Rectangle dest{
 		x, y,
-		wf * s, hf * s,
+		size_f * scale,
+		size_f * scale,
 	};
 
 	Vector2 orig{
-		wf / 2.F,
-		hf / 2.F,
+		size_f / 2.F,
+		size_f / 2.F,
 	};
 
-	DrawTextureTiled(r_texture, rect, dest, orig, r, s, WHITE);
-}
-
-void ce::texture::set_x(float value)
-{
-	x = value;
-}
-
-auto ce::texture::get_x() const -> float
-{
-	return x;
-}
-
-void ce::texture::set_y(float value)
-{
-	y = value;
-}
-
-auto ce::texture::get_y() const -> float
-{
-	return y;
-}
-
-void ce::texture::move(float x_offset, float y_offset)
-{
-	x += x_offset;
-	y += y_offset;
+	DrawTextureTiled(r_texture, rect, dest, orig, rotation, scale, WHITE);
 }
 
 auto ce::texture::get_width() const -> int
