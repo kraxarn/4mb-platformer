@@ -108,11 +108,13 @@ void scene_menu::render()
 	spr_arrow.draw();
 
 	// Debug stuff
-	txt_debug.set_text(fmt::format("Current:\t{}\n"
-								   "FPS:\t{}\n"
-								   "FrameTime:\t{:.0}\n",
-		current, ce::clock::fps(), ce::clock::frame_time() * 1000.F,
-		spr_arrow.get_x(), spr_arrow.get_y(), arrow_offset));
+	std::stringstream stream;
+	stream << "Current: " << current << '\n'
+		<< "FPS: " << ce::clock::fps() << '\n'
+		<< "FrameTime: " << std::fixed << std::setprecision(2)
+		<< (ce::clock::frame_time() * 1000.F);
+
+	txt_debug.set_text(stream.str());
 	fnt_debug.draw_text(txt_debug);
 }
 

@@ -11,9 +11,9 @@
 #include "engine/sprite.hpp"
 #include "colors.hpp"
 #include "enum/direction.hpp"
-#include "fmt/format.h"
 
 #include <cmath>
+#include <iomanip>
 
 class scene_menu: public ce::scene
 {
