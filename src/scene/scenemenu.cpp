@@ -106,14 +106,17 @@ void scene_menu::render()
 	spr_arrow.draw();
 
 	// Debug stuff
+#ifndef NDEBUG
 	std::stringstream stream;
-	stream << "Current: " << current << '\n'
+	stream << "Debug Mode" << '\n'
+		<< "Current: " << current << '\n'
 		<< "FPS: " << ce::clock::fps() << '\n'
 		<< "FrameTime: " << std::fixed << std::setprecision(2)
 		<< (ce::clock::frame_time() * 1000.F);
 
 	txt_debug.set_text(stream.str());
 	fnt_debug.draw_text(txt_debug);
+#endif
 }
 
 auto scene_menu::texts_height() -> int
