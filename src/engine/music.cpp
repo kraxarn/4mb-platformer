@@ -10,6 +10,11 @@ ce::music::music(const cmrc::file &file)
 
 ce::music::~music()
 {
+	if (is_playing())
+	{
+		stop();
+	}
+
 	UnloadMusicStream(r_music);
 }
 
