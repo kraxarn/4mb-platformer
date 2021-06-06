@@ -26,4 +26,5 @@ cmrc_add_resource_library(res
 	# Images
 	assets/image/arrow.png
 	# Tileset
-	assets/tileset/player.png)
+	assets/tileset/player.png
+	assets/tileset/grass.png)
