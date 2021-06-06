@@ -13,21 +13,6 @@ auto ce::assets::open(const std::string &folder,
 	return fs.open(stream.str());
 }
 
-auto ce::assets::level(const std::string &path) const -> ce::level
-{
-	return ce::level(open("level", path));
-}
-
-auto ce::assets::all_levels() const -> std::vector<ce::level>
-{
-	std::vector<ce::level> levels;
-	for (const auto &file : fs.iterate_directory("level"))
-	{
-		levels.emplace_back(level(file.filename()));
-	}
-	return levels;
-}
-
 auto ce::assets::music(const std::string &path) const -> ce::music
 {
 	return ce::music(open("music", path));
