@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scene/scenemenu.hpp"
+#include "scene/scenelevel.hpp"
 #include "enum/scenes.hpp"
 #include "engine/assets.hpp"
 

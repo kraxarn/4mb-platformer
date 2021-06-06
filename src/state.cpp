@@ -16,6 +16,10 @@ void state::set(scene scene, const ce::assets &assets)
 		case scene::menu:
 			new_scene = new scene_menu(assets);
 			break;
+
+		case scene::level:
+			new_scene = new scene_level(assets);
+			break;
 	}
 
 	if (new_scene != nullptr)
