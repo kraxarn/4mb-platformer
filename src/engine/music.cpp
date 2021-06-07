@@ -57,7 +57,6 @@ auto ce::music::played() const -> float
 void ce::music::update() const
 {
 	UpdateMusicStream(r_music);
-	SetMusicPitch(r_music, 1.F);
 }
 
 auto ce::music::name() const -> std::string
