@@ -6,7 +6,7 @@
 #include "enum/scenes.hpp"
 #include "state.hpp"
 
-auto main(int argc, char **argv) -> int
+auto main(int /*argc*/, char **/*argv*/) -> int
 {
 	ce::window window(1280, 720, "4MB Platformer");
 	ce::audio audio;
