@@ -28,6 +28,11 @@ private:
 	static constexpr float tile_scale = 3.F;
 	static constexpr float tile_size = tileset_size * tile_scale;
 
+	static constexpr int level_tiles_width = 75;
+	static constexpr int level_tiles_height = 25;
+	static constexpr int level_width = level_tiles_width * tile_size;
+	static constexpr int level_height = level_tiles_height * tile_size;
+
 	ce::animated_sprite spr_player;
 	ce::music music;
 	ce::camera camera;
@@ -38,4 +43,6 @@ private:
 
 	ce::tileset tiles;
 	ce::tileset items;
+
+	void update_camera();
 };

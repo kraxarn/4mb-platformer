@@ -19,26 +19,23 @@ void scene_level::render()
 	music.update();
 
 	//region Input
-
 	constexpr float step = 5.F;
 
-	camera.move(input.is_down(ce::key::left)
+	spr_player.move(input.is_down(ce::key::left)
 			? -step : input.is_down(ce::key::right)
 				? step : 0.F,
 		input.is_down(ce::key::up)
 			? -step : input.is_down(ce::key::down)
 			? step : 0.F);
-
 	//endregion
 
+	update_camera();
+
 	//region Draw entities
-
 	spr_player.draw();
-
 	//endregion
 
 	//region Draw map
-
 	const auto &map = level->map();
 
 	for (auto x = 0; x < map.size(); x++)
@@ -60,7 +57,6 @@ void scene_level::render()
 			}
 		}
 	}
-
 	//endregion
 
 	camera.end();
@@ -115,4 +111,31 @@ auto scene_level::get_spawn(const ce::level &level) -> ce::vector2f
 	}
 
 	return {0.F, 0.F};
+}
+
+void scene_level::update_camera()
+{
+	camera.set_target(spr_player.get_pos());
+
+	const auto &offset = camera.get_offset();
+
+	const auto offset_x_min = offset.x;
+	const auto offset_x_max = level_width - offset.x - tile_size * 0.25F;
+	const auto offset_y_max = level_height - offset.y - tile_size * 0.25F;
+
+	// Horizontal offset
+	if (camera.get_x() < offset_x_min)
+	{
+		camera.set_x(offset_x_min);
+	}
+	else if (camera.get_x() > offset_x_max)
+	{
+		camera.set_x(offset_x_max);
+	}
+
+	// Vertical offset
+	if (camera.get_y() > offset_y_max)
+	{
+		camera.set_y(offset_y_max);
+	}
 }
