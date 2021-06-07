@@ -12,6 +12,31 @@ scene_level::scene_level(const ce::assets &assets)
 void scene_level::render()
 {
 	music.update();
+
+	const auto &map = level->map();
+
+	constexpr float tile_scale = 2.F;
+	constexpr int tile_size = 18 * tile_scale;
+
+	for (auto x = 0; x < map.size(); x++)
+	{
+		for (auto y = 0; y < map.at(y).size(); y++)
+		{
+			const auto &tile = map.at(x).at(y);
+
+			// Empty tile
+			if (tile < 0)
+			{
+				continue;
+			}
+
+			// Level tile
+			if (tile < 50)
+			{
+				tiles.draw(x * tile_size, y * tile_size, tile, 0.F, tile_scale);
+			}
+		}
+	}
 }
 
 void scene_level::load(int index)
@@ -59,6 +84,7 @@ void scene_level::load(int index)
 
 	level.reset(new_level);
 
+	// Load level music
 	if (level->music() != music.name())
 	{
 		music = assets.music(ce::fmt::format("{}.xm", level->music()));
