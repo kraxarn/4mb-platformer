@@ -24,7 +24,9 @@ public:
 	static auto get_spawn(const ce::level &level) -> ce::vector2f;
 
 private:
+	static constexpr float tileset_size = 18;
 	static constexpr float tile_scale = 3.F;
+	static constexpr float tile_size = tileset_size * tile_scale;
 
 	ce::animated_sprite spr_player;
 	ce::music music;

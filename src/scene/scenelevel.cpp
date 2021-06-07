@@ -40,7 +40,6 @@ void scene_level::render()
 	//region Draw map
 
 	const auto &map = level->map();
-	constexpr int tile_size = 18 * tile_scale;
 
 	for (auto x = 0; x < map.size(); x++)
 	{
@@ -86,10 +85,14 @@ void scene_level::load(int index)
 
 	// Load level tiles
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
+
 	// Load level spawn
 	spawn = get_spawn(*level);
 	camera.set_target(spawn);
-	spr_player.set_pos(spawn);
+
+	// Set player position
+	spr_player.set_pos(spawn * tile_size);
+	spr_player.set_y(spr_player.get_y() - tile_size * 0.25F);
 }
 
 auto scene_level::get_spawn(const ce::level &level) -> ce::vector2f
