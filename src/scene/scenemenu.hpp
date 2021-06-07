@@ -11,6 +11,8 @@
 #include "engine/sprite.hpp"
 #include "colors.hpp"
 #include "enum/direction.hpp"
+#include "state.hpp"
+#include "enum/scenes.hpp"
 
 #include <cmath>
 #include <iomanip>

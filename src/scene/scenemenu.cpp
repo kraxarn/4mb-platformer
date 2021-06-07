@@ -72,12 +72,22 @@ void scene_menu::render()
 	}
 	else if (input.is_pressed(ce::key::enter))
 	{
-		switch (current)
+		// Start game
+		if (current == 0)
 		{
-			// Exit game
-			case 3:
-				ce::window::close();
-				exit(0);
+			state::set(::scene::level, assets);
+			auto *scene = dynamic_cast<scene_level *>(state::get().get());
+			if (scene != nullptr)
+			{
+				scene->load(0);
+			}
+		}
+
+		// Exit game
+		if (current == 3)
+		{
+			ce::window::close();
+			exit(0);
 		}
 	}
 
