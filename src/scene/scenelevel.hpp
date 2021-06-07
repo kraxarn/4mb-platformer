@@ -4,6 +4,7 @@
 #include "engine/level.hpp"
 #include "engine/animatedsprite.hpp"
 #include "engine/music.hpp"
+#include "engine/format.hpp"
 #include "level/levels.hpp"
 
 #include <memory>
@@ -22,4 +23,7 @@ private:
 	ce::music music;
 
 	std::unique_ptr<ce::level> level;
+
+	ce::tileset tiles;
+	ce::tileset items;
 };

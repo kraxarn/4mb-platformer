@@ -3,6 +3,8 @@
 scene_level::scene_level(const ce::assets &assets)
 	: spr_player(assets.tileset("player.png")),
 	music(assets.music("level1.xm")),
+	items(assets.tileset("items.png")),
+	tiles(assets.tileset("grass.png")),
 	scene(assets)
 {
 }
@@ -64,4 +66,6 @@ void scene_level::load(int index)
 		music = assets.music(ce::fmt::format("{}.xm", level->music()));
 	}
 	music.play();
+
+	tiles = assets.tileset(ce::fmt::format("{}.png"));
 }
