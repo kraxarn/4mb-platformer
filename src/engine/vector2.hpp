@@ -6,6 +6,12 @@ namespace ce
 	class vector2
 	{
 	public:
+		vector2()
+		{
+			x = static_cast<T>(0);
+			y = static_cast<T>(0);
+		}
+
 		vector2(T x, T y)
 		{
 			this->x = x;
