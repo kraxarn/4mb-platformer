@@ -65,5 +65,27 @@ void scene_level::load(int index)
 	}
 	music.play();
 
+	// Load level tiles
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
+	// Load level spawn
+	spawn = get_spawn(*level);
+}
+
+auto scene_level::get_spawn(const ce::level &level) -> ce::vector2i
+{
+	const auto &map = level.map();
+	constexpr char spawn_index = 50;
+
+	for (auto x = 0; x < map.size(); x++)
+	{
+		for (auto y = 0; y < map.at(y).size(); y++)
+		{
+			if (map.at(x).at(y) == spawn_index)
+			{
+				return {x, y};
+			}
+		}
+	}
+
+	return {0, 0};
 }

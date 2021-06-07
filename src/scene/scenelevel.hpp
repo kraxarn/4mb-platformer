@@ -5,6 +5,7 @@
 #include "engine/animatedsprite.hpp"
 #include "engine/music.hpp"
 #include "engine/format.hpp"
+#include "engine/vector2.hpp"
 #include "level/levels.hpp"
 
 #include <memory>
@@ -18,11 +19,14 @@ public:
 
 	void load(int index);
 
+	static auto get_spawn(const ce::level &level) -> ce::vector2i;
+
 private:
 	ce::animated_sprite spr_player;
 	ce::music music;
 
 	std::unique_ptr<ce::level> level;
+	ce::vector2i spawn;
 
 	ce::tileset tiles;
 	ce::tileset items;
