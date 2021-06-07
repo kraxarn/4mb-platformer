@@ -7,15 +7,39 @@ scene_level::scene_level(const ce::assets &assets)
 	tiles(assets.tileset("grass.png")),
 	scene(assets)
 {
+//	camera.set_offset(ce::vector2f(static_cast<float>(GetScreenHeight()) / 2.F,
+//		static_cast<float>(GetScreenWidth()) / 2.F));
+
+	spr_player.set_scale(tile_scale);
 }
 
 void scene_level::render()
 {
+	camera.begin();
 	music.update();
 
-	const auto &map = level->map();
+	//region Input
 
-	constexpr float tile_scale = 2.F;
+	constexpr float step = 5.F;
+
+	camera.move(input.is_down(ce::key::left)
+			? -step : input.is_down(ce::key::right)
+				? step : 0.F,
+		input.is_down(ce::key::up)
+			? -step : input.is_down(ce::key::down)
+			? step : 0.F);
+
+	//endregion
+
+	//region Draw entities
+
+	spr_player.draw();
+
+	//endregion
+
+	//region Draw map
+
+	const auto &map = level->map();
 	constexpr int tile_size = 18 * tile_scale;
 
 	for (auto x = 0; x < map.size(); x++)
@@ -37,6 +61,10 @@ void scene_level::render()
 			}
 		}
 	}
+
+	//endregion
+
+	camera.end();
 }
 
 void scene_level::load(int index)
@@ -60,9 +88,11 @@ void scene_level::load(int index)
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
 	// Load level spawn
 	spawn = get_spawn(*level);
+	camera.set_target(spawn);
+	spr_player.set_pos(spawn);
 }
 
-auto scene_level::get_spawn(const ce::level &level) -> ce::vector2i
+auto scene_level::get_spawn(const ce::level &level) -> ce::vector2f
 {
 	const auto &map = level.map();
 	constexpr char spawn_index = 50;
@@ -73,10 +103,13 @@ auto scene_level::get_spawn(const ce::level &level) -> ce::vector2i
 		{
 			if (map.at(x).at(y) == spawn_index)
 			{
-				return {x, y};
+				return {
+					static_cast<float>(x),
+					static_cast<float>(y)
+				};
 			}
 		}
 	}
 
-	return {0, 0};
+	return {0.F, 0.F};
 }
