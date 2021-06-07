@@ -67,5 +67,5 @@ void scene_level::load(int index)
 	}
 	music.play();
 
-	tiles = assets.tileset(ce::fmt::format("{}.png"));
+	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
 }
