@@ -6,6 +6,7 @@
 #include "engine/font.hpp"
 #include "engine/image.hpp"
 #include "engine/tileset.hpp"
+#include "engine/format.hpp"
 
 #include <vector>
 

@@ -8,9 +8,7 @@ ce::assets::assets()
 auto ce::assets::open(const std::string &folder,
 	const std::string &filename) const -> cmrc::file
 {
-	std::stringstream stream;
-	stream << folder << "/" << filename;
-	return fs.open(stream.str());
+	return fs.open(ce::fmt::format("{}/{}", folder, filename));
 }
 
 auto ce::assets::music(const std::string &path) const -> ce::music

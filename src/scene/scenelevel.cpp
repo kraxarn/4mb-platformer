@@ -54,9 +54,7 @@ void scene_level::load(int index)
 
 	if (new_level == nullptr)
 	{
-		std::stringstream stream;
-		stream << "Invalid level index: " << index;
-		throw std::runtime_error(stream.str());
+		throw std::runtime_error(ce::fmt::format("Invalid level index: {}", index));
 	}
 
 	level.reset(new_level);
