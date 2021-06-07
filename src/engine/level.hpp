@@ -1,6 +1,5 @@
 #pragma once
 
-#include "vec2.hpp"
 #include "res.hpp"
 
 #include <string>
