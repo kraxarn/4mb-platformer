@@ -42,3 +42,10 @@ auto ce::input::is_pressed(ce::key key) -> bool
 		|| (gamepad_index >= 0
 			&& IsGamepadButtonPressed(gamepad_index, gamepad.at(key)));
 }
+
+auto ce::input::is_down(ce::key key) -> bool
+{
+	return IsKeyDown(keyboard.at(key))
+		|| (gamepad_index >= 0
+			&& IsGamepadButtonDown(gamepad_index, gamepad.at(key)));
+}

@@ -15,6 +15,8 @@ namespace ce
 
 		auto is_pressed(ce::key key) -> bool;
 
+		auto is_down(ce::key key) -> bool;
+
 	private:
 		std::map<ce::key, int> keyboard;
 		std::map<ce::key, int> gamepad;
