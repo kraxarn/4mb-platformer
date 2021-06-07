@@ -44,5 +44,7 @@ private:
 	ce::tileset tiles;
 	ce::tileset items;
 
+	void update_input();
 	void update_camera();
+	void draw_map();
 };

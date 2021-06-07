@@ -18,46 +18,10 @@ void scene_level::render()
 	camera.begin();
 	music.update();
 
-	//region Input
-	constexpr float step = 5.F;
-
-	spr_player.move(input.is_down(ce::key::left)
-			? -step : input.is_down(ce::key::right)
-				? step : 0.F,
-		input.is_down(ce::key::up)
-			? -step : input.is_down(ce::key::down)
-			? step : 0.F);
-	//endregion
-
+	update_input();
 	update_camera();
-
-	//region Draw entities
 	spr_player.draw();
-	//endregion
-
-	//region Draw map
-	const auto &map = level->map();
-
-	for (auto x = 0; x < map.size(); x++)
-	{
-		for (auto y = 0; y < map.at(y).size(); y++)
-		{
-			const auto &tile = map.at(x).at(y);
-
-			// Empty tile
-			if (tile < 0)
-			{
-				continue;
-			}
-
-			// Level tile
-			if (tile < 50)
-			{
-				tiles.draw(x * tile_size, y * tile_size, tile, 0.F, tile_scale);
-			}
-		}
-	}
-	//endregion
+	draw_map();
 
 	camera.end();
 }
@@ -113,6 +77,18 @@ auto scene_level::get_spawn(const ce::level &level) -> ce::vector2f
 	return {0.F, 0.F};
 }
 
+void scene_level::update_input()
+{
+	constexpr float step = 5.F;
+
+	spr_player.move(input.is_down(ce::key::left)
+			? -step : input.is_down(ce::key::right)
+				? step : 0.F,
+		input.is_down(ce::key::up)
+			? -step : input.is_down(ce::key::down)
+			? step : 0.F);
+}
+
 void scene_level::update_camera()
 {
 	camera.set_target(spr_player.get_pos());
@@ -137,5 +113,30 @@ void scene_level::update_camera()
 	if (camera.get_y() > offset_y_max)
 	{
 		camera.set_y(offset_y_max);
+	}
+}
+
+void scene_level::draw_map()
+{
+	const auto &map = level->map();
+
+	for (auto x = 0; x < map.size(); x++)
+	{
+		for (auto y = 0; y < map.at(y).size(); y++)
+		{
+			const auto &tile = map.at(x).at(y);
+
+			// Empty tile
+			if (tile < 0)
+			{
+				continue;
+			}
+
+			// Level tile
+			if (tile < 50)
+			{
+				tiles.draw(x * tile_size, y * tile_size, tile, 0.F, tile_scale);
+			}
+		}
 	}
 }
