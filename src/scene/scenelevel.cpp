@@ -61,9 +61,7 @@ void scene_level::load(int index)
 
 	if (level->music() != music.name())
 	{
-		std::stringstream stream;
-		stream << level->music() << ".xm";
-		music = assets.music(stream.str());
+		music = assets.music(ce::fmt::format("{}.xm", level->music()));
 	}
 	music.play();
 }
