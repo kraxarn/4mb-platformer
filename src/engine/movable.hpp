@@ -1,5 +1,7 @@
 #pragma once
 
+#include "engine/vector2.hpp"
+
 namespace ce
 {
 	/**
@@ -14,6 +16,7 @@ namespace ce
 		auto get_y() const -> float;
 		void set_y(float value);
 
+		void set_pos(const ce::vector2f &pos);
 		void move(float x_offset, float y_offset);
 
 	protected:

@@ -20,6 +20,12 @@ void ce::movable::set_y(float value)
 	y = value;
 }
 
+void ce::movable::set_pos(const ce::vector2f &pos)
+{
+	x = pos.x;
+	y = pos.y;
+}
+
 void ce::movable::move(float x_offset, float y_offset)
 {
 	x += x_offset;
