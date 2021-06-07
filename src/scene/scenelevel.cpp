@@ -2,14 +2,14 @@
 
 scene_level::scene_level(const ce::assets &assets)
 	: spr_player(assets.tileset("player.png")),
+	music(assets.music("level1.xm")),
 	scene(assets)
 {
-
 }
 
 void scene_level::render()
 {
-
+	music.update();
 }
 
 void scene_level::load(int index)
@@ -58,4 +58,12 @@ void scene_level::load(int index)
 	}
 
 	level.reset(new_level);
+
+	if (level->music() != music.name())
+	{
+		std::stringstream stream;
+		stream << level->music() << ".xm";
+		music = assets.music(stream.str());
+	}
+	music.play();
 }
