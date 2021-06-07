@@ -17,13 +17,14 @@ namespace ce
 		void set_y(float value);
 
 		void set_pos(const ce::vector2f &pos);
+		auto get_pos() const -> ce::vector2f;
+
 		void move(float x_offset, float y_offset);
 
 	protected:
 		movable() = default;
 
 	private:
-		float x;
-		float y;
+		ce::vector2f pos;
 	};
 }
