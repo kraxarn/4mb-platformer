@@ -18,10 +18,14 @@ namespace ce
 			this->y = y;
 		}
 
+		auto operator*(T value) const -> vector2<T>
+		{
+			return vector2<T>(x * value, y * value);
+		}
+
 		T x;
 		T y;
 	};
 
-	using vector2i = ce::vector2<int>;
 	using vector2f = ce::vector2<float>;
 }
