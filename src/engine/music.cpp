@@ -1,6 +1,7 @@
 #include "music.hpp"
 
-ce::music::music(const cmrc::file &file)
+ce::music::music(const cmrc::file &file, const std::string &name)
+	: file_name(std::string(name))
 {
 	r_music = LoadMusicStreamFromMemory(".xm",
 		(unsigned char *) file.begin(),
@@ -57,4 +58,9 @@ void ce::music::update() const
 {
 	UpdateMusicStream(r_music);
 	SetMusicPitch(r_music, 1.F);
+}
+
+auto ce::music::name() const -> std::string
+{
+	return file_name.substr(0, file_name.find('.'));
 }

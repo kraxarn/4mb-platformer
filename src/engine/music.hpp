@@ -8,7 +8,7 @@ namespace ce
 	class music
 	{
 	public:
-		explicit music(const cmrc::file &file);
+		explicit music(const cmrc::file &file, const std::string &name);
 		~music();
 
 		void play() const;
@@ -21,7 +21,10 @@ namespace ce
 
 		void update() const;
 
+		auto name() const -> std::string;
+
 	private:
 		Music r_music = {};
+		std::string file_name;
 	};
 }

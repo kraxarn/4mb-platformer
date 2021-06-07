@@ -15,7 +15,7 @@ auto ce::assets::open(const std::string &folder,
 
 auto ce::assets::music(const std::string &path) const -> ce::music
 {
-	return ce::music(open("music", path));
+	return ce::music(open("music", path), path);
 }
 
 auto ce::assets::font(const std::string &path, int font_size) const -> ce::font
