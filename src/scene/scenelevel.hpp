@@ -21,8 +21,6 @@ public:
 
 	void load(int index);
 
-	static auto get_spawn(const ce::level &level) -> ce::vector2f;
-
 private:
 	static constexpr float tileset_size = 18;
 	static constexpr float tile_scale = 3.F;
@@ -43,6 +41,8 @@ private:
 
 	ce::tileset tiles;
 	ce::tileset items;
+
+	static auto get_spawn(const ce::level &level) -> ce::vector2f;
 
 	void update_input();
 	void update_camera();
