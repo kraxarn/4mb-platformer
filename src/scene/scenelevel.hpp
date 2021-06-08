@@ -37,7 +37,6 @@ private:
 	ce::input input;
 
 	std::unique_ptr<ce::level> level;
-	ce::vector2f spawn;
 
 	ce::tileset tiles;
 	ce::tileset items;

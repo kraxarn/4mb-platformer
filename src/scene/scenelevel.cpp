@@ -47,7 +47,7 @@ void scene_level::load(int index)
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
 
 	// Load level spawn
-	spawn = get_spawn(*level);
+	auto spawn = get_spawn(*level);
 	camera.set_target(spawn * tile_size);
 
 	// Set player position
