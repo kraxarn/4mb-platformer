@@ -131,25 +131,20 @@ void scene_level::update_camera()
 
 void scene_level::draw_map()
 {
-	const auto &map = level->map();
-
-	for (auto x = 0; x < map.size(); x++)
+	iterate_map([this](int x, int y, char tile)
 	{
-		for (auto y = 0; y < map.at(y).size(); y++)
+		// Empty tile
+		if (tile < 0)
 		{
-			const auto &tile = map.at(x).at(y);
-
-			// Empty tile
-			if (tile < 0)
-			{
-				continue;
-			}
-
-			// Level tile
-			if (tile < 50)
-			{
-				tiles.draw(x * tile_size, y * tile_size, tile, 0.F, tile_scale);
-			}
+			return false;
 		}
-	}
+
+		// Level tile
+		if (tile < 50)
+		{
+			tiles.draw(x * tile_size, y * tile_size, tile, 0.F, tile_scale);
+		}
+
+		return false;
+	});
 }

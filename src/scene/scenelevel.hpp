@@ -43,7 +43,8 @@ private:
 	ce::tileset tiles;
 	ce::tileset items;
 
-	static auto get_spawn(const ce::level &level) -> ce::vector2f;
+	auto get_spawn() const -> ce::vector2f;
+	void iterate_map(const std::function<bool(int x, int y, char value)> &iter) const;
 
 	void update_input();
 	void update_camera();
