@@ -47,7 +47,7 @@ void scene_level::load(int index)
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
 
 	// Load level spawn
-	auto spawn = get_spawn(*level);
+	auto spawn = get_spawn();
 	camera.set_target(spawn * tile_size);
 
 	// Set player position
@@ -55,26 +55,39 @@ void scene_level::load(int index)
 	spr_player.set_y(spr_player.get_y() - tile_size * 0.25F);
 }
 
-auto scene_level::get_spawn(const ce::level &level) -> ce::vector2f
+auto scene_level::get_spawn() const -> ce::vector2f
 {
-	const auto &map = level.map();
 	constexpr char spawn_index = 50;
+	ce::vector2f vec;
+
+	iterate_map([&vec](int x, int y, char value)
+	{
+		if (value == spawn_index)
+		{
+			vec.x = static_cast<float>(x);
+			vec.y = static_cast<float>(y);
+			return true;
+		}
+		return false;
+	});
+
+	return vec;
+}
+
+void scene_level::iterate_map(const std::function<bool(int, int, char)> &iter) const
+{
+	const auto &map = level->map();
 
 	for (auto x = 0; x < map.size(); x++)
 	{
 		for (auto y = 0; y < map.at(y).size(); y++)
 		{
-			if (map.at(x).at(y) == spawn_index)
+			if (iter(x, y, map.at(x).at(y)))
 			{
-				return {
-					static_cast<float>(x),
-					static_cast<float>(y)
-				};
+				return;
 			}
 		}
 	}
-
-	return {0.F, 0.F};
 }
 
 void scene_level::update_input()
