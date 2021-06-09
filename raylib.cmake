@@ -58,10 +58,6 @@ set(SUPPORT_FILEFORMAT_FLAC OFF)
 
 # utils
 set(SUPPORT_STANDARD_FILEIO OFF)
-if (CMAKE_BUILD_TYPE MATCHES "Debug")
-	set(SUPPORT_TRACELOG ON)
-else ()
-	set(SUPPORT_TRACELOG OFF)
-endif ()
+set(SUPPORT_TRACELOG ON)
 
 add_subdirectory(thirdparty/raylib)
