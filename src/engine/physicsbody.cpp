@@ -11,6 +11,11 @@ ce::physics_body::physics_body(const ce::vector2f &position,
 	id = static_cast<int>(body->id);
 }
 
+ce::physics_body::~physics_body()
+{
+	DestroyPhysicsBody(GetPhysicsBody(id));
+}
+
 void ce::physics_body::set_enabled(bool enabled) const
 {
 	GetPhysicsBody(id)->enabled = enabled;
