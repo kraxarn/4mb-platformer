@@ -59,7 +59,6 @@ void scene_level::load(int index)
 
 auto scene_level::get_spawn() const -> ce::vector2f
 {
-	constexpr char spawn_index = 50;
 	ce::vector2f vec;
 
 	iterate_map([&vec](int x, int y, char value)
@@ -142,9 +141,11 @@ void scene_level::draw_map()
 		}
 
 		// Level tile
-		if (tile < 50)
+		if (tile < spawn_index)
 		{
-			tiles.draw(x * tile_size, y * tile_size, tile, 0.F, tile_scale);
+			tiles.draw(static_cast<float>(x) * tile_size,
+				static_cast<float>(y) * tile_size,
+				tile, 0.F, tile_scale);
 		}
 
 		return false;

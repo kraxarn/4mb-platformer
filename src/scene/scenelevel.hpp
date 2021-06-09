@@ -32,6 +32,8 @@ private:
 	static constexpr int level_width = level_tiles_width * tile_size;
 	static constexpr int level_height = level_tiles_height * tile_size;
 
+	static constexpr char spawn_index = 50;
+
 	ce::animated_sprite spr_player;
 	ce::music music;
 	ce::camera camera;
