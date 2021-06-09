@@ -3,6 +3,10 @@
 // Timing is broken on Windows, so this works for now
 #define PHYSAC_AVOID_TIMMING_SYSTEM
 
+#ifndef NDEBUG
+#define PHYSAC_DEBUG
+#endif
+
 #define PHYSAC_IMPLEMENTATION
 #include "physac.h"
 
