@@ -8,6 +8,7 @@
 #include "engine/vector2.hpp"
 #include "engine/camera.hpp"
 #include "engine/input.hpp"
+#include "engine/physics.hpp"
 #include "level/levelloader.hpp"
 
 #include <memory>
@@ -35,6 +36,7 @@ private:
 	ce::music music;
 	ce::camera camera;
 	ce::input input;
+	ce::physics physics;
 
 	std::unique_ptr<ce::level> level;
 
