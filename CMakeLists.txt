@@ -20,5 +20,6 @@ target_link_libraries(4mb_platformer PRIVATE res)
 
 # Windows requires some extra stuff
 if (WIN32)
+	target_link_options(4mb_platformer PRIVATE -mwindows)
 	target_link_libraries(4mb_platformer PRIVATE winmm gdi32)
 endif ()
