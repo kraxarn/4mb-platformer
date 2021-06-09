@@ -6,11 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 file(GLOB MAIN_SRC "src/*.[hc]pp")
 file(GLOB SUB_SRC "src/*/*.[hc]pp")
 
-if (WIN32)
-	add_executable(4mb_platformer WIN32 ${MAIN_SRC} ${SUB_SRC})
-else ()
-	add_executable(4mb_platformer ${MAIN_SRC} ${SUB_SRC})
-endif ()
+add_executable(4mb_platformer ${MAIN_SRC} ${SUB_SRC})
 
 target_include_directories(4mb_platformer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 

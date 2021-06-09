@@ -27,15 +27,3 @@ auto main(int /*argc*/, char **/*argv*/) -> int
 
 	return 0;
 }
-
-// Windows sometimes like to use WinMain instead, so wrap main around it
-#if defined(_WIN32)
-#include <windows.h>
-
-INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-    PSTR lpCmdLine, INT nCmdShow)
-{
-    return main(0, nullptr);
-}
-
-#endif
