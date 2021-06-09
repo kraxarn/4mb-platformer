@@ -9,6 +9,7 @@
 #include "engine/camera.hpp"
 #include "engine/input.hpp"
 #include "engine/physics.hpp"
+#include "engine/staticbody.hpp"
 #include "level/levelloader.hpp"
 
 #include <memory>

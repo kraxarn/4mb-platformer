@@ -52,6 +52,15 @@ void scene_level::load(int index)
 	auto spawn = get_spawn();
 	camera.set_target(spawn * tile_size);
 
+	// Load collision
+	iterate_map([](int x, int y, char value)
+	{
+		ce::vector2f pos(x, y);
+		ce::vector2f size(tile_size, tile_size);
+		ce::static_body(pos, size);
+		return false;
+	});
+
 	// Set player position
 	spr_player.set_pos(spawn * tile_size);
 	spr_player.set_y(spr_player.get_y() - tile_size * 0.25F);
