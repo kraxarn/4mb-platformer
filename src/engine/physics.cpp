@@ -1,5 +1,8 @@
 #include "engine/physics.hpp"
 
+// Timing is broken on Windows, so this works for now
+#define PHYSAC_AVOID_TIMMING_SYSTEM
+
 #define PHYSAC_IMPLEMENTATION
 #include "physac.h"
 

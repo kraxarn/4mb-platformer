@@ -21,10 +21,3 @@ target_link_libraries(4mb_platformer PRIVATE raylib)
 # CMakeRC
 include(resources.cmake)
 target_link_libraries(4mb_platformer PRIVATE res)
-
-# Windows requires some extra stuff
-if (WIN32)
-	target_link_libraries(4mb_platformer PRIVATE kernel32 user32 gdi32 winmm winspool comdlg32)
-	target_link_libraries(4mb_platformer PRIVATE advapi32 shell32 ole32 oleaut32 uuid odbc32)
-	target_link_libraries(4mb_platformer PRIVATE odbccp32)
-endif ()
