@@ -18,7 +18,7 @@ target_link_libraries(4mb_platformer PRIVATE raylib)
 include(resources.cmake)
 target_link_libraries(4mb_platformer PRIVATE res)
 
-# MSVC requires some extra stuff
-if (MSVC)
-	target_link_libraries(4mb_platformer winmm)
+# Windows requires some extra stuff
+if (WIN32)
+	target_link_libraries(4mb_platformer PRIVATE winmm)
 endif ()
