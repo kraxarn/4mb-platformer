@@ -29,3 +29,8 @@ void ce::physics::update()
 {
 	UpdatePhysics();
 }
+
+void ce::physics::reset()
+{
+	ResetPhysics();
+}

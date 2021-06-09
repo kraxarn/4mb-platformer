@@ -13,5 +13,6 @@ namespace ce
 		auto bodies_count() const -> int;
 
 		void update();
+		void reset();
 	};
 }
