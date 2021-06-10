@@ -47,16 +47,12 @@ void ce::physics::reset()
 	ResetPhysics();
 }
 
-auto ce::physics::add_static_body(const ce::vector2f &position,
-	const ce::vector2f &size) -> ce::static_body &
+void ce::physics::add_static_body(const ce::vector2f &position, const ce::vector2f &size)
 {
-	static_bodies.emplace_back(position, size);
-	return static_bodies.back();
+	static_bodies.push_back(std::make_shared<ce::static_body>(position, size));
 }
 
-auto ce::physics::add_dynamic_body(const ce::vector2f &position,
-	const ce::vector2f &size) -> ce::dynamic_body &
+void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size)
 {
-	dynamic_bodies.emplace_back(position, size);
-	return dynamic_bodies.back();
+	dynamic_bodies.push_back(std::make_shared<ce::dynamic_body>(position, size));
 }
