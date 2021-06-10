@@ -65,11 +65,20 @@ void scene_level::load(int index)
 	camera.set_target(spawn * tile_size);
 
 	// Load collision
-	iterate_map([this](int x, int y, char /*value*/)
+	const auto &map = level->map();
+	iterate_map([this, &map](int x, int y, char value)
 	{
+		// Only include tiles
+		if (value < 0 || value >= spawn_index)
+		{
+			return false;
+		}
+
+		// Add physics body
 		ce::vector2f pos(x, y);
 		ce::vector2f size(tile_size, tile_size);
 		physics.add_static_body(pos, size);
+
 		return false;
 	});
 
