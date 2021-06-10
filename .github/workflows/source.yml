@@ -20,5 +20,5 @@ jobs:
         name: 4mb_platformer
         path: |
           ${{runner.workspace}}/
-          !${{runner.workspace}}/.git/*
-          !${{runner.workspace}}/thirdparty/raylib/examples/*
+          !${{runner.workspace}}/**/.git/*
+          !${{runner.workspace}}/**/examples/*
