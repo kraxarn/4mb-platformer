@@ -69,19 +69,15 @@ void scene_level::load(int index)
 	camera.set_target(spawn * tile_size);
 
 	// Load collision
-	const auto &map = level->map();
-	iterate_map([this, &map](int x, int y, char value)
+	iterate_map([this](int x, int y, char value)
 	{
-		// Only include tiles
-		if (value < 0 || value >= spawn_index)
-		{
-			return false;
-		}
-
 		// Add physics body
-		ce::vector2f pos(x, y);
-		ce::vector2f size(tile_size, tile_size);
-		physics.add_static_body(pos, size);
+		if (can_collide(x, y))
+		{
+			ce::vector2f pos(x, y);
+			ce::vector2f size(tile_size, tile_size);
+			physics.add_static_body(pos * tile_size + tile_size / 4, size);
+		}
 
 		return false;
 	});
@@ -184,4 +180,27 @@ void scene_level::draw_map()
 
 		return false;
 	});
+}
+
+auto scene_level::is_tile(char value) -> bool
+{
+	return value >= 0 && value < spawn_index;
+}
+
+auto scene_level::can_collide(int x, int y) const -> bool
+{
+	const auto &map = level->map();
+	const auto &value = map.at(x).at(y);
+
+	// Only tiles require collision
+	if (!is_tile(value))
+	{
+		return false;
+	}
+
+	// If surrounded, collision isn't required
+	return !(y > 0 && is_tile(map.at(x).at(y - 1))                  // above
+		&& y < map.at(x).size() - 1 && is_tile(map.at(x).at(y + 1)) // below
+		&& x > 0 && is_tile(map.at(x - 1).at(y))                    // left
+		&& x < map.size() - 1 && is_tile(map.at(x + 1).at(y)));     // right
 }

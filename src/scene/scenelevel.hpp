@@ -57,6 +57,11 @@ private:
 	auto get_spawn() const -> ce::vector2f;
 	void iterate_map(const std::function<bool(int x, int y, char value)> &iter) const;
 
+	/** Is level tile */
+	static auto is_tile(char value) -> bool;
+	/** Player can collide with this tile */
+	auto can_collide(int x, int y) const -> bool;
+
 	void update_input();
 	void update_camera();
 	void draw_map();
