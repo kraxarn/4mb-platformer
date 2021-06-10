@@ -53,11 +53,11 @@ void scene_level::load(int index)
 	camera.set_target(spawn * tile_size);
 
 	// Load collision
-	iterate_map([](int x, int y, char value)
+	iterate_map([this](int x, int y, char /*value*/)
 	{
 		ce::vector2f pos(x, y);
 		ce::vector2f size(tile_size, tile_size);
-		ce::static_body(pos, size);
+		physics.add_static_body(pos, size);
 		return false;
 	});
 
