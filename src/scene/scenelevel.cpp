@@ -27,6 +27,10 @@ void scene_level::render()
 	entity_player.draw();
 	draw_map();
 
+#ifndef NDEBUG
+	physics.draw();
+#endif
+
 	camera.end();
 
 #ifndef NDEBUG
