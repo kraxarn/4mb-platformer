@@ -6,7 +6,7 @@ scene_level::scene_level(const ce::assets &assets)
 	fnt_debug(assets.font("debug.ttf", 22)),
 	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
 #endif
-	spr_player(assets.tileset("player.png")),
+	entity_player(assets),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
@@ -14,7 +14,7 @@ scene_level::scene_level(const ce::assets &assets)
 	camera.set_offset(ce::vector2f(static_cast<float>(GetScreenWidth()) / 2.F,
 		static_cast<float>(GetScreenHeight()) / 2.F));
 
-	spr_player.set_scale(tile_scale);
+	entity_player.set_scale(tile_scale);
 }
 
 void scene_level::render()
@@ -74,8 +74,8 @@ void scene_level::load(int index)
 	});
 
 	// Set player position
-	spr_player.set_pos(spawn * tile_size);
-	spr_player.set_y(spr_player.get_y() - tile_size * 0.25F);
+	entity_player.set_pos(spawn * tile_size);
+	entity_player.set_y(entity_player.get_y() - tile_size * 0.25F);
 }
 
 auto scene_level::get_spawn() const -> ce::vector2f
@@ -116,7 +116,7 @@ void scene_level::update_input()
 {
 	constexpr float step = 5.F;
 
-	spr_player.move(input.is_down(ce::key::left)
+	entity_player.move(input.is_down(ce::key::left)
 			? -step : input.is_down(ce::key::right)
 				? step : 0.F,
 		input.is_down(ce::key::up)
@@ -126,7 +126,7 @@ void scene_level::update_input()
 
 void scene_level::update_camera()
 {
-	camera.set_target(spr_player.get_pos());
+	camera.set_target(entity_player.get_pos());
 
 	const auto &offset = camera.get_offset();
 

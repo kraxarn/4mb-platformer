@@ -12,6 +12,7 @@
 #include "engine/staticbody.hpp"
 #include "engine/clock.hpp"
 #include "level/levelloader.hpp"
+#include "entity/player.hpp"
 
 #include <memory>
 
@@ -36,7 +37,6 @@ private:
 
 	static constexpr char spawn_index = 50;
 
-	ce::animated_sprite spr_player;
 	ce::music music;
 	ce::camera camera;
 	ce::input input;
@@ -51,6 +51,8 @@ private:
 
 	ce::tileset tiles;
 	ce::tileset items;
+
+	player entity_player;
 
 	auto get_spawn() const -> ce::vector2f;
 	void iterate_map(const std::function<bool(int x, int y, char value)> &iter) const;
