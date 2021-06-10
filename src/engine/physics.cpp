@@ -56,3 +56,23 @@ void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vecto
 {
 	dynamic_bodies.push_back(std::make_shared<ce::dynamic_body>(position, size));
 }
+
+#ifndef NDEBUG
+
+void ce::physics::draw() const
+{
+	for (auto i = 0; i < bodies_count(); i++)
+	{
+		auto *body = GetPhysicsBody(i);
+
+		auto vertices = GetPhysicsShapeVerticesCount(i);
+		for (int j = 0; j < vertices; j++)
+		{
+			DrawLineV(GetPhysicsShapeVertex(body, j),
+				GetPhysicsShapeVertex(body, j + 1 < vertices ? j + 1 : 0),
+				PINK);
+		}
+	}
+}
+
+#endif

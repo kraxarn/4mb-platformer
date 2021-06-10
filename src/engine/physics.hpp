@@ -20,11 +20,15 @@ namespace ce
 		auto static_bodies_count() const -> std::size_t;
 		auto dynamic_body_count() const -> std::size_t;
 
-		void add_static_body(const ce::vector2f &position,const ce::vector2f &size);
-		void add_dynamic_body(const ce::vector2f &position,const ce::vector2f &size);
+		void add_static_body(const ce::vector2f &position, const ce::vector2f &size);
+		void add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size);
 
 		void update();
 		void reset();
+
+#ifndef NDEBUG
+		void draw() const;
+#endif
 
 	private:
 		std::vector<std::shared_ptr<ce::static_body>> static_bodies;
