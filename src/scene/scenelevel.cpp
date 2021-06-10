@@ -24,7 +24,7 @@ void scene_level::render()
 
 	update_input();
 	update_camera();
-	spr_player.draw();
+	entity_player.draw();
 	draw_map();
 
 	camera.end();
