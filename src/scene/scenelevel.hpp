@@ -37,24 +37,32 @@ private:
 
 	static constexpr char spawn_index = 50;
 
+	// General stuff
 	ce::music music;
-	ce::camera camera;
 	ce::input input;
 	ce::physics physics;
 
+	// Camera
+	ce::camera camera;
+	ce::vector2i camera_update;
+
+	// Debug
 #ifndef NDEBUG
 	ce::font fnt_debug;
 	ce::text txt_debug;
 #endif
 
+	// Level
 	std::unique_ptr<ce::level> level;
-
 	ce::tileset tiles;
 	ce::tileset items;
 
+	// Entities
 	player entity_player;
 
+	/** Find spawn tile in current level */
 	auto get_spawn() const -> ce::vector2f;
+	/** Iterate through current level */
 	void iterate_map(const std::function<bool(int x, int y, char value)> &iter) const;
 
 	/** Is level tile */

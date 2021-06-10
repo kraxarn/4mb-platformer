@@ -34,9 +34,11 @@ void scene_level::render()
 	camera.end();
 
 #ifndef NDEBUG
-	txt_debug.set_text(ce::fmt::format("FPS: {}\nBodies: {} ({} static, {} dynamic)",
+	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
+									   "Bodies: {} ({} static, {} dynamic)\n"
+									   "CameraUpdate: {} {}",
 		ce::clock::fps(), physics.bodies_count(), physics.static_bodies_count(),
-		physics.dynamic_body_count()));
+		physics.dynamic_body_count(), camera_update.x, camera_update.y));
 
 	fnt_debug.draw_text(txt_debug);
 #endif
@@ -157,6 +159,18 @@ void scene_level::update_camera()
 	if (camera.get_y() > offset_y_max)
 	{
 		camera.set_y(offset_y_max);
+	}
+
+	// See if collision needs to be updated
+	auto x = static_cast<int>((camera.get_x() - offset.x) / tile_size);
+	auto y = static_cast<int>((camera.get_y() - offset.y) / tile_size);
+
+	if (x != camera_update.x || y != camera_update.y)
+	{
+		camera_update.x = x;
+		camera_update.y = y;
+
+		// Do magic here
 	}
 }
 
