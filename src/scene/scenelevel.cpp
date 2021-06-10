@@ -3,8 +3,8 @@
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
-	fnt_debug(assets.font("debug.ttf", 22 * 4)),
-	txt_debug("-", 16, 16, fnt_debug.font_size() / 4, WHITE),
+	fnt_debug(assets.font("debug.ttf", 22)),
+	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
 #endif
 	spr_player(assets.tileset("player.png")),
 	music(assets.music("level1.xm")),
