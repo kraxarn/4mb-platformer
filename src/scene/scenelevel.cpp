@@ -1,11 +1,15 @@
 #include "scenelevel.hpp"
 
 scene_level::scene_level(const ce::assets &assets)
-	: spr_player(assets.tileset("player.png")),
+	: scene(assets),
+#ifndef NDEBUG
+	fnt_debug(assets.font("debug.ttf", 22 * 4)),
+	txt_debug("-", 16, 16, fnt_debug.font_size() / 4, WHITE),
+#endif
+	spr_player(assets.tileset("player.png")),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
-	tiles(assets.tileset("grass.png")),
-	scene(assets)
+	tiles(assets.tileset("grass.png"))
 {
 	camera.set_offset(ce::vector2f(static_cast<float>(GetScreenWidth()) / 2.F,
 		static_cast<float>(GetScreenHeight()) / 2.F));
@@ -24,6 +28,14 @@ void scene_level::render()
 	draw_map();
 
 	camera.end();
+
+#ifndef NDEBUG
+	txt_debug.set_text(ce::fmt::format("FPS: {}\nBodies: {} ({} static, {} dynamic)",
+		ce::clock::fps(), physics.bodies_count(), physics.static_bodies_count(),
+		physics.dynamic_body_count()));
+
+	fnt_debug.draw_text(txt_debug);
+#endif
 }
 
 void scene_level::load(int index)

@@ -10,6 +10,7 @@
 #include "engine/input.hpp"
 #include "engine/physics.hpp"
 #include "engine/staticbody.hpp"
+#include "engine/clock.hpp"
 #include "level/levelloader.hpp"
 
 #include <memory>
@@ -40,6 +41,11 @@ private:
 	ce::camera camera;
 	ce::input input;
 	ce::physics physics;
+
+#ifndef NDEBUG
+	ce::font fnt_debug;
+	ce::text txt_debug;
+#endif
 
 	std::unique_ptr<ce::level> level;
 

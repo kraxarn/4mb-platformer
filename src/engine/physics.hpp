@@ -16,6 +16,8 @@ namespace ce
 		~physics();
 
 		auto bodies_count() const -> int;
+		auto static_bodies_count() const -> std::size_t;
+		auto dynamic_body_count() const -> std::size_t;
 
 		auto add_static_body(const ce::vector2f &position,
 			const ce::vector2f &size) -> ce::static_body &;

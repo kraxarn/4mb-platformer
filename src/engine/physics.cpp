@@ -27,6 +27,16 @@ auto ce::physics::bodies_count() const -> int
 	return GetPhysicsBodiesCount();
 }
 
+auto ce::physics::static_bodies_count() const -> std::size_t
+{
+	return static_bodies.size();
+}
+
+auto ce::physics::dynamic_body_count() const -> std::size_t
+{
+	return dynamic_bodies.size();
+}
+
 void ce::physics::update()
 {
 	UpdatePhysics();
