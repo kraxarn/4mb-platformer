@@ -1,0 +1,21 @@
+name: Source Code
+
+# As we're using submodules, this bundles the main source code
+# as well as source code from all submodules
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: 4mb_platformer
+        path: ${{runner.workspace}}
