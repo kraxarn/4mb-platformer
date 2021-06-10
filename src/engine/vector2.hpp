@@ -33,4 +33,5 @@ namespace ce
 	};
 
 	using vector2f = ce::vector2<float>;
+	using vector2i = ce::vector2<int>;
 }
