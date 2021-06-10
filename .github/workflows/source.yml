@@ -13,9 +13,10 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: true
+        path: 4mb_platformer
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: 4mb_platformer
-        path: ${{runner.workspace}}
+        path: ${{runner.workspace}}/4mb_platformer
