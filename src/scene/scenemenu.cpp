@@ -2,11 +2,13 @@
 
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
+#ifndef NDEBUG
+	fnt_debug(assets.font("debug.ttf", 22)),
+	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
+#endif
 	music(assets.music("menu.xm")),
 	fnt_menu(assets.font("menu.ttf", 52)),
-	fnt_debug(assets.font("debug.ttf", 22)),
 	spr_arrow(assets.image("arrow.png")),
-	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
 	spr_demo(assets.tileset("player.png"))
 {
 	std::array<std::string, text_count> labels = {
