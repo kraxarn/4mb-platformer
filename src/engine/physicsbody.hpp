@@ -4,6 +4,7 @@
 #include "physac.h"
 
 #include "engine/vector2.hpp"
+#include "engine/physicsconfig.hpp"
 
 namespace ce
 {

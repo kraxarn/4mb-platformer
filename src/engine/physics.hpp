@@ -4,6 +4,7 @@
 
 #include "engine/staticbody.hpp"
 #include "engine/dynamicbody.hpp"
+#include "engine/physicsconfig.hpp"
 
 #include <vector>
 #include <memory>

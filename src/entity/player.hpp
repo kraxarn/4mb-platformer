@@ -4,6 +4,7 @@
 #include "engine/dynamicbody.hpp"
 #include "engine/animatedsprite.hpp"
 #include "engine/physics.hpp"
+#include "engine/physicsconfig.hpp"
 
 class player
 {
@@ -23,8 +24,8 @@ public:
 	void jump();
 
 private:
-	static constexpr float move_force = 1'000.F;
-	static constexpr float jump_force = 30'000.F;
+	static constexpr float move_force = 0.2F;
+	static constexpr float jump_force = 3.F;
 
 	ce::animated_sprite sprite;
 	std::shared_ptr<ce::dynamic_body> body;
