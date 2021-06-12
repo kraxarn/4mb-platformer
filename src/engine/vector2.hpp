@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raylib.h"
+
 namespace ce
 {
 	template<typename T>
@@ -18,12 +20,27 @@ namespace ce
 			this->y = y;
 		}
 
+		explicit vector2(Vector2 r_vec)
+		{
+			x = r_vec.x;
+			y = r_vec.y;
+		}
+
 		template<typename R>
 		auto to() const -> vector2<R>
 		{
 			return {
 				static_cast<R>(x),
 				static_cast<R>(y)
+			};
+		}
+
+		auto to_r_vec() const -> Vector2
+		{
+			auto v = to<float>();
+			return {
+				v.x,
+				v.y,
 			};
 		}
 
