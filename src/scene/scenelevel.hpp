@@ -12,6 +12,8 @@
 #include "engine/staticbody.hpp"
 #include "engine/clock.hpp"
 #include "engine/map.hpp"
+#include "engine/window.hpp"
+
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
 
@@ -47,6 +49,9 @@ private:
 
 	// Debug
 #ifndef NDEBUG
+	static constexpr int debug_hud_size = 22;
+	static constexpr int debug_hud_offset = 16;
+
 	ce::font fnt_debug;
 	ce::text txt_debug;
 #endif

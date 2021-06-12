@@ -3,16 +3,17 @@
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
-	fnt_debug(assets.font("debug.ttf", 22)),
-	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
+	fnt_debug(assets.font("debug.ttf", debug_hud_size)),
+	txt_debug("", debug_hud_offset, debug_hud_offset,
+		fnt_debug.font_size(), WHITE),
 #endif
 	entity_player(assets),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
 {
-	camera.set_offset(ce::vector2f(static_cast<float>(GetScreenWidth()) / 2.F,
-		static_cast<float>(GetScreenHeight()) / 2.F));
+	constexpr float half = 2.F;
+	camera.set_offset(ce::window::size().to<float>() / half);
 
 	entity_player.set_scale(tile_scale);
 }
@@ -76,17 +77,18 @@ void scene_level::load(int index)
 		// Add physics body
 		if (can_collide(x, y))
 		{
-			ce::vector2f pos(x, y);
+			ce::vector2i pos(x, y);
 			ce::vector2f size(tile_size, tile_size);
-			physics.add_static_body(pos * tile_size + tileset_size, size);
+			physics.add_static_body(pos.to<float>() * tile_size + tileset_size, size);
 		}
 
 		return false;
 	});
 
 	// Set player position
+	constexpr float player_tile_offset = 0.25F;
 	entity_player.set_pos(spawn * tile_size);
-	entity_player.set_y(entity_player.get_y() - tile_size * 0.25F);
+	entity_player.set_y(entity_player.get_y() - tile_size * player_tile_offset);
 }
 
 auto scene_level::get_spawn() const -> ce::vector2f
