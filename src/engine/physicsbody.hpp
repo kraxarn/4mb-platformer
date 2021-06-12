@@ -13,7 +13,7 @@ namespace ce
 		auto get_position() const -> ce::vector2f;
 
 #ifndef NDEBUG
-		void draw(Color color) const;
+		void draw_shape(Color color) const;
 #endif
 
 	protected:
