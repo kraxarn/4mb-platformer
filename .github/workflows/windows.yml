@@ -18,12 +18,12 @@ jobs:
       run: cmake -E make_directory ${{runner.workspace}}\build
 
     - name: Install Dependencies
-      run: choco install upx cmake
+      run: choco install upx
 
     - name: Configure CMake
       shell: bash
       working-directory: ${{runner.workspace}}\build
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_DEMOS=OFF -DINSTALL_DEMOS=OFF
 
     - name: Build
       working-directory: ${{runner.workspace}}\build
