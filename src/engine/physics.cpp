@@ -83,21 +83,16 @@ void ce::physics::delete_outside(const ce::vector2i &offset, const ce::vector2i 
 }
 
 #ifndef NDEBUG
-
 void ce::physics::draw() const
 {
-	for (auto i = 0; i < bodies_count(); i++)
+	for (const auto &body : static_bodies)
 	{
-		auto *body = GetPhysicsBody(i);
+		body->draw(PINK);
+	}
 
-		auto vertices = GetPhysicsShapeVerticesCount(i);
-		for (int j = 0; j < vertices; j++)
-		{
-			DrawLineV(GetPhysicsShapeVertex(body, j),
-				GetPhysicsShapeVertex(body, j + 1 < vertices ? j + 1 : 0),
-				PINK);
-		}
+	for (const auto &body : dynamic_bodies)
+	{
+		body->draw(GREEN);
 	}
 }
-
 #endif

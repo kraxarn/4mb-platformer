@@ -9,6 +9,13 @@ namespace ce
 {
 	class physics_body
 	{
+	public:
+		auto get_position() const -> ce::vector2f;
+
+#ifndef NDEBUG
+		void draw(Color color) const;
+#endif
+
 	protected:
 		/**
 		 * Create a new rectangle body

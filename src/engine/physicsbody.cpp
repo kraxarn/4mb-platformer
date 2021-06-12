@@ -20,3 +20,27 @@ void ce::physics_body::set_enabled(bool enabled) const
 {
 	GetPhysicsBody(id)->enabled = enabled;
 }
+
+auto ce::physics_body::get_position() const -> ce::vector2f
+{
+	const auto *body = GetPhysicsBody(id);
+	return {
+		body->position.x,
+		body->position.y,
+	};
+}
+
+#ifndef NDEBUG
+void ce::physics_body::draw(Color color) const
+{
+	auto *body = GetPhysicsBody(id);
+	auto vertices = GetPhysicsShapeVerticesCount(id);
+
+	for (int j = 0; j < vertices; j++)
+	{
+		DrawLineV(GetPhysicsShapeVertex(body, j),
+			GetPhysicsShapeVertex(body, j + 1 < vertices ? j + 1 : 0),
+			color);
+	}
+}
+#endif
