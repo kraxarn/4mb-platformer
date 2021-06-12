@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstddef>
-#include <functional>
-
 namespace ce
 {
 	template<typename T>
@@ -21,11 +18,6 @@ namespace ce
 			this->y = y;
 		}
 
-		auto operator==(const vector2<T> &vec) const -> bool
-		{
-			return vec.x == x && vec.y == y;
-		}
-
 		auto operator*(T value) const -> vector2<T>
 		{
 			return vector2<T>(x * value, y * value);
@@ -42,16 +34,4 @@ namespace ce
 
 	using vector2f = ce::vector2<float>;
 	using vector2i = ce::vector2<int>;
-}
-
-namespace std
-{
-	template<typename T>
-	struct hash<ce::vector2<T>>
-	{
-		auto operator()(const ce::vector2<T> &key) const -> std::size_t
-		{
-			return std::hash<T>()(key.x) ^ (std::hash<T>()(key.y) << 1);
-		}
-	};
 }
