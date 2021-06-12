@@ -66,8 +66,6 @@ private:
 
 	/** Find spawn tile in current level */
 	auto get_spawn() const -> ce::vector2f;
-	/** Iterate through current level */
-	void iterate_map(const std::function<bool(int x, int y, char value)> &iter) const;
 
 	/** Is level tile */
 	static auto is_tile(char value) -> bool;

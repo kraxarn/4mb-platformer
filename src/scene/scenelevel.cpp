@@ -72,7 +72,7 @@ void scene_level::load(int index)
 	camera.set_target(spawn * tile_size);
 
 	// Load collision
-	iterate_map([this](int x, int y, char /*value*/)
+	ce::iterate_map_all<int, char>(level->map(), [this](int x, int y, char /*value*/)
 	{
 		// Add physics body
 		if (can_collide(x, y))
@@ -81,8 +81,6 @@ void scene_level::load(int index)
 			ce::vector2f size(tile_size, tile_size);
 			physics.add_static_body(pos.to<float>() * tile_size + tileset_size, size);
 		}
-
-		return false;
 	});
 
 	// Set player position
@@ -95,7 +93,7 @@ auto scene_level::get_spawn() const -> ce::vector2f
 {
 	ce::vector2f vec;
 
-	iterate_map([&vec](int x, int y, char value)
+	ce::iterate_map<int, char>(level->map(), [&vec](int x, int y, char value) -> bool
 	{
 		if (value == spawn_index)
 		{
@@ -107,22 +105,6 @@ auto scene_level::get_spawn() const -> ce::vector2f
 	});
 
 	return vec;
-}
-
-void scene_level::iterate_map(const std::function<bool(int, int, char)> &iter) const
-{
-	const auto &map = level->map();
-
-	for (auto x = 0; x < map.size(); x++)
-	{
-		for (auto y = 0; y < map.at(y).size(); y++)
-		{
-			if (iter(x, y, map.at(x).at(y)))
-			{
-				return;
-			}
-		}
-	}
 }
 
 void scene_level::update_input()
@@ -187,12 +169,12 @@ void scene_level::update_camera_position(int x, int y)
 
 void scene_level::draw_map()
 {
-	iterate_map([this](int x, int y, char tile)
+	ce::iterate_map_all<int, char>(level->map(), [this](int x, int y, char tile)
 	{
 		// Empty tile
 		if (tile < 0)
 		{
-			return false;
+			return;
 		}
 
 		// Level tile
@@ -202,8 +184,6 @@ void scene_level::draw_map()
 				static_cast<float>(y) * tile_size,
 				tile, 0.F, tile_scale);
 		}
-
-		return false;
 	});
 }
 
