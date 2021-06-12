@@ -17,32 +17,9 @@ ce::physics::physics()
 
 ce::physics::~physics()
 {
-	ce::iterate_map_all<std::size_t, std::shared_ptr<ce::static_body>>(static_bodies, [this]
-		(std::size_t /*x*/, std::size_t /*y*/, std::shared_ptr<ce::static_body> body)
-	{
-		if (body)
-		{
-			body.reset();
-			num_static--;
-		}
-	});
-
-	ce::iterate_map_all<std::size_t, std::shared_ptr<ce::dynamic_body>>(dynamic_bodies, [this]
-		(std::size_t /*x*/, std::size_t /*y*/, std::shared_ptr<ce::dynamic_body> body)
-	{
-		if (body)
-		{
-			body.reset();
-			num_dynamic--;
-		}
-	});
-
+	static_bodies.clear();
+	dynamic_bodies.clear();
 	ClosePhysics();
-}
-
-void ce::physics::set_scale(float scale)
-{
-	world_scale = scale;
 }
 
 auto ce::physics::bodies_count() const -> int
@@ -52,12 +29,12 @@ auto ce::physics::bodies_count() const -> int
 
 auto ce::physics::static_bodies_count() const -> std::size_t
 {
-	return num_static;
+	return static_bodies.size();
 }
 
 auto ce::physics::dynamic_body_count() const -> std::size_t
 {
-	return num_dynamic;
+	return dynamic_bodies.size();
 }
 
 void ce::physics::update()
@@ -70,20 +47,14 @@ void ce::physics::reset()
 	ResetPhysics();
 }
 
-void ce::physics::add_static_body(const ce::vector2i &position, const ce::vector2f &size)
+void ce::physics::add_static_body(const ce::vector2f &position, const ce::vector2f &size)
 {
-	auto pos = position.to<std::size_t>();
-	static_bodies.at(pos.x).at(pos.y) =
-		std::make_shared<ce::static_body>(position.to<float>() * world_scale, size);
-	num_static++;
+	static_bodies.push_back(std::make_shared<ce::static_body>(position, size));
 }
 
-void ce::physics::add_dynamic_body(const ce::vector2i &position, const ce::vector2f &size)
+void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size)
 {
-	auto pos = position.to<std::size_t>();
-	dynamic_bodies.at(pos.x).at(pos.y) =
-		std::make_shared<ce::dynamic_body>(position.to<float>() * world_scale, size);
-	num_dynamic++;
+	dynamic_bodies.push_back(std::make_shared<ce::dynamic_body>(position, size));
 }
 
 #ifndef NDEBUG
