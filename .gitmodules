@@ -4,3 +4,6 @@
 [submodule "thirdparty/cmrc"]
 	path = thirdparty/cmrc
 	url = https://github.com/vector-of-bool/cmrc.git
+[submodule "thirdparty/Chipmunk2D"]
+	path = thirdparty/Chipmunk2D
+	url = https://github.com/slembcke/Chipmunk2D.git
