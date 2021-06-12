@@ -15,7 +15,7 @@ auto level5::music() const -> std::string
 	return std::string("boss");
 }
 
-auto level5::map() const -> std::array<std::array<char, 25>, 75>
+auto level5::map() const -> ce::map<char>
 {
 	return {{
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,},

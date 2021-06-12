@@ -15,7 +15,7 @@ auto level3::music() const -> std::string
 	return std::string("level1");
 }
 
-auto level3::map() const -> std::array<std::array<char, 25>, 75>
+auto level3::map() const -> ce::map<char>
 {
 	return {{
 		{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,

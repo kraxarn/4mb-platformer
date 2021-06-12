@@ -15,7 +15,7 @@ auto level8::music() const -> std::string
 	return std::string();
 }
 
-auto level8::map() const -> std::array<std::array<char, 25>, 75>
+auto level8::map() const -> ce::map<char>
 {
 	return {{
 		{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 1, 1, 1, 1, 1, 1,

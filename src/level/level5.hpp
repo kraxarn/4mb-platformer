@@ -8,6 +8,6 @@ public:
 	auto name() const -> std::string override;
 	auto tileset() const -> std::string override;
 	auto music() const -> std::string override;
-	auto map() const -> std::array<std::array<char, 25>, 75> override;
+	auto map() const -> ce::map<char> override;
 
 };
