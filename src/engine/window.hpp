@@ -28,9 +28,6 @@ namespace ce
 		static auto size() -> ce::vector2i;
 
 	private:
-		static constexpr int render_width = 1280;
-		static constexpr int render_height = 720;
-
 		Camera2D camera = {0};
 	};
 }
