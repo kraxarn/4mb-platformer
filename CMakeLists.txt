@@ -18,6 +18,6 @@ target_link_libraries(4mb_platformer PRIVATE raylib)
 include(resources.cmake)
 target_link_libraries(4mb_platformer PRIVATE res)
 
-# Chipmunk2D
-include(Chipmunk2D.cmake)
-target_link_libraries(4mb_platformer PRIVATE chipmunk_static)
+# box2d-lite
+include(box2d-lite.cmake)
+target_link_libraries(4mb_platformer PRIVATE box2d-lite)
