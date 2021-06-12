@@ -24,6 +24,9 @@ namespace ce
 		void add_static_body(const ce::vector2f &position, const ce::vector2f &size);
 		void add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size);
 
+		auto get_static_body(const ce::vector2f &position) const
+		-> std::shared_ptr<ce::static_body>;
+
 		void update();
 		void reset();
 
