@@ -4,6 +4,3 @@
 [submodule "thirdparty/cmrc"]
 	path = thirdparty/cmrc
 	url = https://github.com/vector-of-bool/cmrc.git
-[submodule "thirdparty/box2d-lite"]
-	path = thirdparty/box2d-lite
-	url = https://github.com/erincatto/box2d-lite.git
