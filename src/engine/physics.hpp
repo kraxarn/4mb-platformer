@@ -22,7 +22,8 @@ namespace ce
 		auto dynamic_body_count() const -> std::size_t;
 
 		void add_static_body(const ce::vector2f &position, const ce::vector2f &size);
-		void add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size);
+		auto add_dynamic_body(const ce::vector2f &position,
+			const ce::vector2f &size) -> std::shared_ptr<ce::dynamic_body>;
 
 		void update();
 		void reset();

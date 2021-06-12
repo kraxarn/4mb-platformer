@@ -52,9 +52,11 @@ void ce::physics::add_static_body(const ce::vector2f &position, const ce::vector
 	static_bodies.push_back(std::make_shared<ce::static_body>(position, size));
 }
 
-void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size)
+auto ce::physics::add_dynamic_body(const ce::vector2f &position,
+	const ce::vector2f &size) -> std::shared_ptr<ce::dynamic_body>
 {
 	dynamic_bodies.push_back(std::make_shared<ce::dynamic_body>(position, size));
+	return dynamic_bodies.back();
 }
 
 void ce::physics::delete_outside(const ce::vector2i &offset, const ce::vector2i &size)
