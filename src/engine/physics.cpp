@@ -89,12 +89,12 @@ void ce::physics::draw() const
 {
 	for (const auto &body : static_bodies)
 	{
-		body->draw(PINK);
+		body->draw_shape(PINK);
 	}
 
 	for (const auto &body : dynamic_bodies)
 	{
-		body->draw(GREEN);
+		body->draw_shape(GREEN);
 	}
 }
 #endif

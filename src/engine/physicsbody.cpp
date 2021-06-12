@@ -31,7 +31,7 @@ auto ce::physics_body::get_position() const -> ce::vector2f
 }
 
 #ifndef NDEBUG
-void ce::physics_body::draw(Color color) const
+void ce::physics_body::draw_shape(Color color) const
 {
 	auto *body = GetPhysicsBody(id);
 	auto vertices = GetPhysicsShapeVerticesCount(id);
