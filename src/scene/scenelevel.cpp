@@ -162,16 +162,25 @@ void scene_level::update_camera()
 	}
 
 	// See if collision needs to be updated
-	auto x = static_cast<int>((camera.get_x() - offset.x) / tile_size);
-	auto y = static_cast<int>((camera.get_y() - offset.y) / tile_size);
+	update_camera_position(static_cast<int>((camera.get_x() - offset.x) / tile_size),
+		static_cast<int>((camera.get_y() - offset.y) / tile_size));
+}
 
-	if (x != camera_update.x || y != camera_update.y)
+void scene_level::update_camera_position(int x, int y)
+{
+	if (camera_update.x == x)
 	{
-		camera_update.x = x;
-		camera_update.y = y;
-
-		// Do magic here
+		return;
 	}
+
+	// Right, clear left most line
+	if (camera_update.x > x)
+	{
+
+	}
+
+	camera_update.x = x;
+	camera_update.y = y;
 }
 
 void scene_level::draw_map()

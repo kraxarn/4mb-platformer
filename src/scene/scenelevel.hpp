@@ -72,5 +72,6 @@ private:
 
 	void update_input();
 	void update_camera();
+	void update_camera_position(int x, int y);
 	void draw_map();
 };
