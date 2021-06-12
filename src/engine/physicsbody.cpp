@@ -30,6 +30,26 @@ auto ce::physics_body::get_position() const -> ce::vector2f
 	};
 }
 
+void ce::physics_body::set_position(const ce::vector2f &position) const
+{
+	auto *body = GetPhysicsBody(id);
+	body->position.x = position.x;
+	body->position.y = position.y;
+}
+
+void ce::physics_body::add_force(const ce::vector2f &force) const
+{
+	PhysicsAddForce(GetPhysicsBody(id), Vector2{
+		force.x,
+		force.y
+	});
+}
+
+auto ce::physics_body::is_grounded() const -> bool
+{
+	return GetPhysicsBody(id)->isGrounded;
+}
+
 #ifndef NDEBUG
 void ce::physics_body::draw_shape(Color color) const
 {
