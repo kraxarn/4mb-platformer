@@ -13,7 +13,13 @@ auto main(int /*argc*/, char **/*argv*/) -> int
 
 	ce::assets assets;
 	ce::window::set_icon(assets.tileset("player.png").at(1));
+
+#ifdef NDEBUG
 	state::set(scene::menu, assets);
+#else
+	state::set(scene::level, assets);
+	dynamic_cast<scene_level *>(state::get().get())->load(0);
+#endif
 
 	while (!ce::window::should_close())
 	{
