@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 namespace ce
 {
@@ -25,6 +26,8 @@ namespace ce
 
 		void update();
 		void reset();
+
+		void delete_outside(const ce::vector2i &offset, const ce::vector2i &size);
 
 #ifndef NDEBUG
 		void draw() const;

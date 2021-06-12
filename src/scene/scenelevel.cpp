@@ -151,19 +151,14 @@ void scene_level::update_camera()
 
 void scene_level::update_camera_position(int x, int y)
 {
-	if (camera_update.x == x)
+	if (camera_update.x == x && camera_update.y == y)
 	{
 		return;
 	}
-
-	// Right, clear left most line
-	if (camera_update.x > x)
-	{
-
-	}
-
 	camera_update.x = x;
 	camera_update.y = y;
+
+	physics.delete_outside(camera_update, ce::window::size() / tile_size);
 }
 
 void scene_level::draw_map()

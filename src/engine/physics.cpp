@@ -57,6 +57,31 @@ void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vecto
 	dynamic_bodies.push_back(std::make_shared<ce::dynamic_body>(position, size));
 }
 
+void ce::physics::delete_outside(const ce::vector2i &offset, const ce::vector2i &size)
+{
+	for (auto &body : static_bodies)
+	{
+		if (!body)
+		{
+			continue;
+		}
+
+		// For now, we only care about position and not size
+		// as it's in the corners and hopefully not noticeable anyway
+		const auto pos = body->get_position().to<int>();
+
+		if (pos.x < offset.x              // left
+			|| pos.x > offset.x + size.x  // right
+			|| pos.y > offset.y           // top
+			|| pos.y < offset.y + size.y) // bottom
+		{
+//			body.reset();
+//			static_bodies.erase(std::remove(static_bodies.begin(),
+//				static_bodies.end(), body), static_bodies.end());
+		}
+	}
+}
+
 #ifndef NDEBUG
 
 void ce::physics::draw() const
