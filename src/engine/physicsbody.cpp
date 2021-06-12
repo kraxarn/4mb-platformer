@@ -7,6 +7,7 @@ ce::physics_body::physics_body(const ce::vector2f &position,
 		position.x,
 		position.y,
 	}, size.x, size.y, density);
+	body->freezeOrient = true;
 
 	id = static_cast<int>(body->id);
 }

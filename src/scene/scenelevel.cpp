@@ -7,15 +7,13 @@ scene_level::scene_level(const ce::assets &assets)
 	txt_debug("", debug_hud_offset, debug_hud_offset,
 		fnt_debug.font_size(), WHITE),
 #endif
-	entity_player(assets),
+	entity_player(assets, physics, tile_scale),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
-
-	entity_player.set_scale(tile_scale);
 }
 
 void scene_level::render()
@@ -28,6 +26,7 @@ void scene_level::render()
 	entity_player.draw();
 	draw_map();
 
+	physics.update();
 #ifndef NDEBUG
 	physics.draw();
 #endif
@@ -47,7 +46,7 @@ void scene_level::render()
 
 void scene_level::load(int index)
 {
-	physics.reset();
+	//physics.reset();
 
 	auto *new_level = level_loader::get(index);
 	if (new_level == nullptr)
@@ -85,8 +84,9 @@ void scene_level::load(int index)
 
 	// Set player position
 	constexpr float player_tile_offset = 0.25F;
-	entity_player.set_pos(spawn * tile_size);
-	entity_player.set_y(entity_player.get_y() - tile_size * player_tile_offset);
+	ce::vector2f player_position = spawn * tile_size;
+	player_position.y = player_position.y - tile_size * player_tile_offset;
+	entity_player.set_position(player_position);
 }
 
 auto scene_level::get_spawn() const -> ce::vector2f
@@ -108,19 +108,26 @@ auto scene_level::get_spawn() const -> ce::vector2f
 
 void scene_level::update_input()
 {
-	constexpr float step = 5.F;
+	auto x = 0;
+	if (input.is_down(ce::key::left))
+	{
+		x--;
+	}
+	if (input.is_down(ce::key::right))
+	{
+		x++;
+	}
+	entity_player.move(x);
 
-	entity_player.move(input.is_down(ce::key::left)
-			? -step : input.is_down(ce::key::right)
-				? step : 0.F,
-		input.is_down(ce::key::up)
-			? -step : input.is_down(ce::key::down)
-			? step : 0.F);
+	if (input.is_pressed(ce::key::jump))
+	{
+		entity_player.jump();
+	}
 }
 
 void scene_level::update_camera()
 {
-	camera.set_target(entity_player.get_pos());
+	camera.set_target(entity_player.position());
 
 	const auto &offset = camera.get_offset();
 
