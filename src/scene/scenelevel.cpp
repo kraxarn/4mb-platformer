@@ -72,7 +72,7 @@ void scene_level::load(int index)
 	camera.set_target(spawn * tile_size);
 
 	// Load collision
-	ce::iterate_map_all<int, char>(level->map(), [this](int x, int y, char /*value*/)
+	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char /*value*/)
 	{
 		// Add physics body
 		if (can_collide(x, y))
@@ -93,7 +93,7 @@ auto scene_level::get_spawn() const -> ce::vector2f
 {
 	ce::vector2f vec;
 
-	ce::iterate_map<int, char>(level->map(), [&vec](int x, int y, char value) -> bool
+	ce::iterate_map<char>(level->map(), [&vec](auto x, auto y, char value) -> bool
 	{
 		if (value == spawn_index)
 		{
@@ -169,7 +169,7 @@ void scene_level::update_camera_position(int x, int y)
 
 void scene_level::draw_map()
 {
-	ce::iterate_map_all<int, char>(level->map(), [this](int x, int y, char tile)
+	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char tile)
 	{
 		// Empty tile
 		if (tile < 0)

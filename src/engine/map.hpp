@@ -20,13 +20,13 @@ namespace ce
 	/**
 	 * Iterate through parts of map, returning true to stop iterating
 	 */
-	template<typename TPos, typename TMap>
-	void iterate_map(const map<TMap> &map,
-		const std::function<bool(TPos, TPos, TMap)> &iter)
+	template<typename T>
+	void iterate_map(const map<T> &map,
+		const std::function<bool(std::size_t, std::size_t, T)> &iter)
 	{
-		for (TPos x = 0; x < map.size(); x++)
+		for (std::size_t x = 0; x < map.size(); x++)
 		{
-			for (TPos y = 0; y < map.at(y).size(); y++)
+			for (std::size_t y = 0; y < map.at(y).size(); y++)
 			{
 				if (iter(x, y, map.at(x).at(y)))
 				{
@@ -39,13 +39,13 @@ namespace ce
 	/**
 	 * Iterate through entire map
 	 */
-	template<typename TPos, typename TMap>
-	void iterate_map_all(const map<TMap> &map,
-		const std::function<void(TPos, TPos, TMap)> &iter)
+	template<typename T>
+	void iterate_map_all(const map<T> &map,
+		const std::function<void(std::size_t, std::size_t, T)> &iter)
 	{
-		for (TPos x = 0; x < map.size(); x++)
+		for (std::size_t x = 0; x < map.size(); x++)
 		{
-			for (TPos y = 0; y < map.at(y).size(); y++)
+			for (std::size_t y = 0; y < map.at(y).size(); y++)
 			{
 				iter(x, y, map.at(x).at(y));
 			}
