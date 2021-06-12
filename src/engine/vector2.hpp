@@ -18,6 +18,15 @@ namespace ce
 			this->y = y;
 		}
 
+		template<typename R>
+		auto to() const -> vector2<R>
+		{
+			return {
+				static_cast<R>(x),
+				static_cast<R>(y)
+			};
+		}
+
 		auto operator*(T value) const -> vector2<T>
 		{
 			return vector2<T>(x * value, y * value);
