@@ -12,6 +12,8 @@ scene_level::scene_level(const ce::assets &assets)
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
 {
+	physics.set_scale(tile_size + tileset_size);
+
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
 
@@ -79,7 +81,7 @@ void scene_level::load(int index)
 		{
 			ce::vector2i pos(x, y);
 			ce::vector2f size(tile_size, tile_size);
-			physics.add_static_body(pos.to<float>() * tile_size + tileset_size, size);
+			physics.add_static_body(pos, size);
 		}
 	});
 
