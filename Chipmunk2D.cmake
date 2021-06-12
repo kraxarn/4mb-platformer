@@ -1,7 +1,7 @@
-set(BUILD_DEMOS OFF)
-set(INSTALL_DEMOS OFF)
-set(BUILD_SHARED OFF)
-set(BUILD_STATIC ON)
-set(INSTALL_STATIC OFF)
+set(BUILD_DEMOS OFF FORCE)
+set(INSTALL_DEMOS OFF FORCE)
+set(BUILD_SHARED OFF FORCE)
+set(BUILD_STATIC ON FORCE)
+set(INSTALL_STATIC OFF FORCE)
 
-add_subdirectory(thirdparty/Chipmunk2D/src)
+add_subdirectory(thirdparty/Chipmunk2D)
