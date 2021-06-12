@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <memory>
+#include <unordered_map>
 
 namespace ce
 {
@@ -31,7 +32,7 @@ namespace ce
 #endif
 
 	private:
-		std::vector<std::shared_ptr<ce::static_body>> static_bodies;
+		std::unordered_map<ce::vector2f, std::shared_ptr<ce::static_body>> static_bodies;
 		std::vector<std::shared_ptr<ce::dynamic_body>> dynamic_bodies;
 	};
 }

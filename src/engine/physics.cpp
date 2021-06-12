@@ -49,7 +49,7 @@ void ce::physics::reset()
 
 void ce::physics::add_static_body(const ce::vector2f &position, const ce::vector2f &size)
 {
-	static_bodies.push_back(std::make_shared<ce::static_body>(position, size));
+	static_bodies[position] = std::make_shared<ce::static_body>(position, size);
 }
 
 void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vector2f &size)
