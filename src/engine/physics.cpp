@@ -57,14 +57,6 @@ void ce::physics::add_dynamic_body(const ce::vector2f &position, const ce::vecto
 	dynamic_bodies.push_back(std::make_shared<ce::dynamic_body>(position, size));
 }
 
-auto ce::physics::get_static_body(const ce::vector2f &position) const
--> std::shared_ptr<ce::static_body>
-{
-	return static_bodies.find(position) == static_bodies.end()
-		? std::shared_ptr<ce::static_body>()
-		: static_bodies.at(position);
-}
-
 #ifndef NDEBUG
 
 void ce::physics::draw() const
