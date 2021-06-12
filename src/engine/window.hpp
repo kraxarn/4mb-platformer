@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 #include "engine/image.hpp"
+#include "engine/vector2.hpp"
 
 #include <string>
 #include <iostream>
@@ -23,6 +24,8 @@ namespace ce
 
 		static void close();
 		static void set_icon(const ce::image &image);
+
+		static auto size() -> ce::vector2i;
 
 	private:
 		static constexpr int render_width = 1280;

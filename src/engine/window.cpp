@@ -45,3 +45,11 @@ void ce::window::set_icon(const ce::image &image)
 {
 	SetWindowIcon(image);
 }
+
+auto ce::window::size() -> ce::vector2i
+{
+	return {
+		GetScreenWidth(),
+		GetScreenHeight()
+	};
+}
