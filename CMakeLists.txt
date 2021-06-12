@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.20)
-project(4mb_platformer)
+cmake_minimum_required(VERSION 3.5)
+project(4mb_platformer LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB MAIN_SRC "src/*.[hc]pp")
 file(GLOB SUB_SRC "src/*/*.[hc]pp")
