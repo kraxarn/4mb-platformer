@@ -97,8 +97,7 @@ auto scene_level::get_spawn() const -> ce::vector2f
 	{
 		if (value == spawn_index)
 		{
-			vec.x = static_cast<float>(x);
-			vec.y = static_cast<float>(y);
+			vec = ce::vector2<std::size_t>(x, y).to<float>();
 			return true;
 		}
 		return false;
