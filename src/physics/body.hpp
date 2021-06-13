@@ -15,7 +15,7 @@ namespace phys
 		auto get_position() const -> ce::vector2f;
 		void set_position(const ce::vector2f &position);
 
-		void set_velocity(const ce::vector2f &velocity);
+		void set_force(const ce::vector2f &force);
 
 		//endregion
 

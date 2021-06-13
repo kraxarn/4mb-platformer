@@ -25,9 +25,9 @@ void phys::body::set_position(const ce::vector2f &position)
 	cpBodySetPosition(cp_body, position.to_cp_vec());
 }
 
-void phys::body::set_velocity(const ce::vector2f &velocity)
+void phys::body::set_force(const ce::vector2f &force)
 {
-	cpBodySetVelocity(cp_body, velocity.to_cp_vec());
+	cpBodySetForce(cp_body, force.to_cp_vec());
 }
 
 //endregion
