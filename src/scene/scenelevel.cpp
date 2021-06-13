@@ -42,7 +42,7 @@ void scene_level::render()
 
 void scene_level::load(int index)
 {
-	//physics.reset();
+	physics.clear();
 
 	auto *new_level = level_loader::get(index);
 	if (new_level == nullptr)
