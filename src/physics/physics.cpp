@@ -67,11 +67,12 @@ void phys::physics::update(double delta_time) const
 }
 
 auto phys::physics::pre_solve_one_way(cpArbiter *arbiter, cpSpace */*space*/,
-	void */*ignore*/) -> cpBool
+	void */*data*/) -> cpBool
 {
-	CP_ARBITER_GET_SHAPES(arbiter, a, b);
+	cpShape *shape;
+	cpArbiterGetShapes(arbiter, &shape, nullptr);
 
-	auto *body = (phys::one_way_body *) cpShapeGetUserData(a);
+	auto *body = (phys::one_way_body *) cpShapeGetUserData(shape);
 	if (cpvdot(cpArbiterGetNormal(arbiter), body->get_normal().to_cp_vec()) < 0)
 	{
 		return cpArbiterIgnore(arbiter);
