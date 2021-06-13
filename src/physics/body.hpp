@@ -1,7 +1,8 @@
 #pragma once
 
+#include "chipmunk/chipmunk.h"
+
 #include "engine/vector2.hpp"
-#include "physics/physics.hpp"
 #include "physics/collisiontype.hpp"
 
 namespace phys
