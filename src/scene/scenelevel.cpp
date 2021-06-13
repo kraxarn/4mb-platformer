@@ -76,7 +76,7 @@ void scene_level::load(int index)
 		{
 			ce::vector2i pos(x, y);
 			ce::vector2f size(ce::tile_size, ce::tile_size);
-			physics.add_static_body(pos.to<float>(), size);
+			physics.add_static_body(size, pos.to<float>() * ce::tile_size + ce::tileset_size);
 		}
 	});
 
