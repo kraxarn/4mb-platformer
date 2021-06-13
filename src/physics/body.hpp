@@ -11,6 +11,7 @@ namespace phys
 	public:
 		//region Body
 
+		auto get_position() const -> ce::vector2f;
 		void set_position(const ce::vector2f &position);
 
 		void set_velocity(const ce::vector2f &velocity);

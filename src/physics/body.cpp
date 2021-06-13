@@ -15,6 +15,11 @@ phys::body::~body()
 
 //region cpBody
 
+auto phys::body::get_position() const -> ce::vector2f
+{
+	return ce::vector2f(cpBodyGetPosition(cp_body));
+}
+
 void phys::body::set_position(const ce::vector2f &position)
 {
 	cpBodySetPosition(cp_body, position.to_cp_vec());
