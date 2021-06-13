@@ -31,26 +31,9 @@ namespace phys
 
 		//endregion
 
-		/*
-		auto get_position() const -> ce::vector2f;
-		void set_position(const ce::vector2f &position) const;
-
-		void add_force(const ce::vector2f &force) const;
-
-		auto is_grounded() const -> bool;
-
-#ifndef NDEBUG
-		void draw_shape(Color color) const;
-#endif
-		 */
-
 	protected:
 		body(cpBody *body, cpShape *shape);
 		~body();
-
-		/*
-		void set_enabled(bool enabled) const;
-		 */
 
 	private:
 		cpBody *cp_body = nullptr;
