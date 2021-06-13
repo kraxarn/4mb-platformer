@@ -1,22 +1,57 @@
-#include "physicsbody.hpp"
+#include "physics/body.hpp"
 
-ce::physics_body::physics_body(const ce::vector2f &position,
-	const ce::vector2f &size, float density)
+phys::body::body(cpBody *body, cpShape *shape)
+	: cp_body(body),
+	cp_shape(shape)
 {
-	auto *body = CreatePhysicsBodyRectangle(Vector2{
-		position.x,
-		position.y,
-	}, size.x, size.y, density);
-	body->freezeOrient = true;
-
-	id = static_cast<int>(body->id);
+	cpShapeSetUserData(cp_shape, this);
 }
 
-ce::physics_body::~physics_body()
+phys::body::~body()
 {
-	DestroyPhysicsBody(GetPhysicsBody(id));
+	cpBodyFree(cp_body);
+	cpShapeFree(cp_shape);
 }
 
+//region cpBody
+
+void phys::body::set_position(const ce::vector2f &position)
+{
+	cpBodySetPosition(cp_body, position.to_cp_vec());
+}
+
+void phys::body::set_velocity(const ce::vector2f &velocity)
+{
+	cpBodySetVelocity(cp_body, velocity.to_cp_vec());
+}
+
+//endregion
+
+//region cpShape
+
+void phys::body::set_elasticity(float value) const
+{
+	cpShapeSetElasticity(cp_shape, value);
+}
+
+void phys::body::set_friction(float value) const
+{
+	cpShapeSetFriction(cp_shape, value);
+}
+
+void phys::body::set_collision_type(phys::collision_type value) const
+{
+	cpShapeSetCollisionType(cp_shape, static_cast<cpCollisionType>(value));
+}
+
+void phys::body::set_filter(cpShapeFilter filter) const
+{
+	cpShapeSetFilter(cp_shape, filter);
+}
+
+//endregion
+
+/*
 void ce::physics_body::set_enabled(bool enabled) const
 {
 	GetPhysicsBody(id)->enabled = enabled;
@@ -66,3 +101,4 @@ void ce::physics_body::draw_shape(Color color) const
 	}
 }
 #endif
+*/
