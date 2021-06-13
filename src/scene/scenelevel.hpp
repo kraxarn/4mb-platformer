@@ -47,7 +47,6 @@ private:
 
 	// Camera
 	ce::camera camera;
-	ce::vector2i camera_update;
 
 	// Debug
 #ifndef NDEBUG
@@ -75,6 +74,5 @@ private:
 
 	void update_input();
 	void update_camera();
-	void update_camera_position(int x, int y);
 	void draw_map();
 };

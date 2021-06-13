@@ -34,7 +34,7 @@ void scene_level::render()
 									   "Bodies: static={}, dynamic={}\n"
 									   "CameraUpdate: {} {}",
 		ce::clock::fps(), physics.static_bodies_count(),
-		physics.dynamic_body_count(), camera_update.x, camera_update.y));
+		physics.dynamic_body_count()));
 
 	txt_debug.draw();
 #endif
