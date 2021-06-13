@@ -51,10 +51,9 @@ private:
 
 	// Debug
 #ifndef NDEBUG
-	static constexpr int debug_hud_size = 22;
+	static constexpr int debug_hud_size = 20;
 	static constexpr int debug_hud_offset = 16;
 
-	ce::font fnt_debug;
 	ce::text txt_debug;
 #endif
 

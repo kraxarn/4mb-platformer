@@ -3,8 +3,7 @@
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
 #ifndef NDEBUG
-	fnt_debug(assets.font("debug.ttf", 22)),
-	txt_debug("-", 16, 16, fnt_debug.font_size(), WHITE),
+	txt_debug("-", 16, 16, 20, WHITE),
 #endif
 	music(assets.music("menu.xm")),
 	fnt_menu(assets.font("menu.ttf", 52)),
@@ -127,7 +126,7 @@ void scene_menu::render()
 		<< (ce::clock::frame_time() * 1000.F);
 
 	txt_debug.set_text(stream.str());
-	fnt_debug.draw_text(txt_debug);
+	txt_debug.draw();
 #endif
 }
 

@@ -9,7 +9,6 @@ cmrc_add_resource_library(res
 	assets/music/boss.xm
 	assets/music/credits.xm
 	# Fonts
-	assets/font/debug.ttf
 	assets/font/menu.ttf
 	assets/font/submenu.ttf
 	# Images

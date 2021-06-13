@@ -3,9 +3,8 @@
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
-	fnt_debug(assets.font("debug.ttf", debug_hud_size)),
 	txt_debug("", debug_hud_offset, debug_hud_offset,
-		fnt_debug.font_size(), WHITE),
+		debug_hud_size, WHITE),
 #endif
 	entity_player(assets, physics, tile_scale),
 	music(assets.music("level1.xm")),
@@ -37,7 +36,7 @@ void scene_level::render()
 		ce::clock::fps(), physics.static_bodies_count(),
 		physics.dynamic_body_count(), camera_update.x, camera_update.y));
 
-	fnt_debug.draw_text(txt_debug);
+	txt_debug.draw();
 #endif
 }
 

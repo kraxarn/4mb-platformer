@@ -30,7 +30,6 @@ private:
 	ce::music music;
 
 #ifndef NDEBUG
-	ce::font fnt_debug;
 	ce::text txt_debug;
 #endif
 
