@@ -26,6 +26,9 @@ void scene_level::render()
 	draw_map();
 
 	physics.update(ce::clock::frame_time());
+#ifndef NDEBUG
+	physics.debug_draw();
+#endif
 
 	camera.end();
 

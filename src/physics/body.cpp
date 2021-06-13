@@ -55,3 +55,18 @@ void phys::body::set_filter(cpShapeFilter filter) const
 }
 
 //endregion
+
+#ifndef NDEBUG
+void phys::body::debug_draw(Color color)
+{
+	auto vertices = cpPolyShapeGetCount(cp_shape);
+	for (auto v = 0; v < vertices; v++)
+	{
+		ce::vector2f v1(cpPolyShapeGetVert(cp_shape, v));
+		ce::vector2f v2(cpPolyShapeGetVert(cp_shape,
+			v + 1 < vertices ? v + 1 : 0));
+
+		DrawLineV(v1.to_r_vec(), v2.to_r_vec(), color);
+	}
+}
+#endif

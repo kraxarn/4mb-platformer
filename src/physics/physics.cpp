@@ -78,3 +78,18 @@ auto phys::physics::pre_solve_one_way(cpArbiter *arbiter, cpSpace */*space*/,
 	}
 	return cpTrue;
 }
+
+#ifndef NDEBUG
+void phys::physics::debug_draw()
+{
+	for (const auto &body : static_bodies)
+	{
+		body->debug_draw(PINK);
+	}
+
+	for (const auto &body : dynamic_bodies)
+	{
+		body->debug_draw(GREEN);
+	}
+}
+#endif

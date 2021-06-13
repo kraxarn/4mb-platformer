@@ -30,6 +30,10 @@ namespace phys
 		auto add_dynamic_body(const ce::vector2f &size) -> std::shared_ptr<phys::dynamic_body>;
 
 		void update(double delta_time) const;
+
+#ifndef NDEBUG
+		void debug_draw();
+#endif
 	private:
 		cpSpace *cp_space = nullptr;
 		cpCollisionHandler *cp_handler = nullptr;

@@ -31,6 +31,10 @@ namespace phys
 
 		//endregion
 
+#ifndef NDEBUG
+	void debug_draw(Color color);
+#endif
+
 	protected:
 		body(cpBody *body, cpShape *shape);
 		~body();
