@@ -22,3 +22,4 @@ target_link_libraries(4mb_platformer PRIVATE res)
 # Chipmunk2D
 include(Chipmunk2D.cmake)
 target_link_libraries(4mb_platformer PRIVATE chipmunk_static)
+target_include_directories(4mb_platformer PRIVATE "${chipmunk_SOURCE_DIR}/include")
