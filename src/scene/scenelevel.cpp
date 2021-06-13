@@ -6,7 +6,7 @@ scene_level::scene_level(const ce::assets &assets)
 	txt_debug("", debug_hud_offset, debug_hud_offset,
 		debug_hud_size, WHITE),
 #endif
-	entity_player(assets, physics, tile_scale),
+	entity_player(assets, physics, ce::tile_scale),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
@@ -66,7 +66,7 @@ void scene_level::load(int index)
 
 	// Load level spawn
 	auto spawn = get_spawn();
-	camera.set_target(spawn * tile_size);
+	camera.set_target(spawn * ce::tile_size);
 
 	// Load collision
 	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char /*value*/)
@@ -75,15 +75,15 @@ void scene_level::load(int index)
 		if (can_collide(x, y))
 		{
 			ce::vector2i pos(x, y);
-			ce::vector2f size(tile_size, tile_size);
-			physics.add_static_body(pos.to<float>() * tile_size + tileset_size, size);
+			ce::vector2f size(ce::tile_size, ce::tile_size);
+			physics.add_static_body(pos.to<float>(), size);
 		}
 	});
 
 	// Set player position
 	constexpr float player_tile_offset = 0.25F;
-	ce::vector2f player_position = spawn * tile_size;
-	player_position.y = player_position.y - tile_size * player_tile_offset;
+	ce::vector2f player_position = spawn * ce::tile_size;
+	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
 	entity_player.set_position(player_position);
 }
 
@@ -130,8 +130,8 @@ void scene_level::update_camera()
 	const auto &offset = camera.get_offset();
 
 	const auto offset_x_min = offset.x;
-	const auto offset_x_max = level_width - offset.x - tile_size * 0.25F;
-	const auto offset_y_max = level_height - offset.y - tile_size * 0.25F;
+	const auto offset_x_max = level_width - offset.x - ce::tile_size * 0.25F;
+	const auto offset_y_max = level_height - offset.y - ce::tile_size * 0.25F;
 
 	// Horizontal offset
 	if (camera.get_x() < offset_x_min)
@@ -163,9 +163,9 @@ void scene_level::draw_map()
 		// Level tile
 		if (tile < spawn_index)
 		{
-			tiles.draw(static_cast<float>(x) * tile_size,
-				static_cast<float>(y) * tile_size,
-				tile, 0.F, tile_scale);
+			tiles.draw(static_cast<float>(x) * ce::tile_size,
+				static_cast<float>(y) * ce::tile_size,
+				tile, 0.F, ce::tile_scale);
 		}
 	});
 }
