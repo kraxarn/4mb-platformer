@@ -1,15 +1,14 @@
 #pragma once
 
 #include "engine/assets.hpp"
-#include "engine/dynamicbody.hpp"
 #include "engine/animatedsprite.hpp"
-#include "engine/physics.hpp"
-#include "engine/physicsconfig.hpp"
+#include "physics/dynamicbody.hpp"
+#include "physics/physics.hpp"
 
 class player
 {
 public:
-	explicit player(const ce::assets &assets, ce::physics &physics, float scale);
+	explicit player(const ce::assets &assets, phys::physics &physics, float scale);
 
 	void set_position(const ce::vector2f &position);
 
@@ -28,5 +27,5 @@ private:
 	static constexpr float jump_force = 3.F;
 
 	ce::animated_sprite sprite;
-	std::shared_ptr<ce::dynamic_body> body;
+	std::shared_ptr<phys::dynamic_body> body;
 };
