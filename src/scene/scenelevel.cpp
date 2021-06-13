@@ -26,18 +26,15 @@ void scene_level::render()
 	entity_player.draw();
 	draw_map();
 
-	physics.update();
-#ifndef NDEBUG
-	physics.draw();
-#endif
+	physics.update(ce::clock::frame_time());
 
 	camera.end();
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
-									   "Bodies: {} ({} static, {} dynamic)\n"
+									   "Bodies: static={}, dynamic={}\n"
 									   "CameraUpdate: {} {}",
-		ce::clock::fps(), physics.bodies_count(), physics.static_bodies_count(),
+		ce::clock::fps(), physics.static_bodies_count(),
 		physics.dynamic_body_count(), camera_update.x, camera_update.y));
 
 	fnt_debug.draw_text(txt_debug);
@@ -150,22 +147,6 @@ void scene_level::update_camera()
 	{
 		camera.set_y(offset_y_max);
 	}
-
-	// See if collision needs to be updated
-	update_camera_position(static_cast<int>((camera.get_x() - offset.x) / tile_size),
-		static_cast<int>((camera.get_y() - offset.y) / tile_size));
-}
-
-void scene_level::update_camera_position(int x, int y)
-{
-	if (camera_update.x == x && camera_update.y == y)
-	{
-		return;
-	}
-	camera_update.x = x;
-	camera_update.y = y;
-
-	physics.delete_outside(camera_update, ce::window::size() / tile_size);
 }
 
 void scene_level::draw_map()

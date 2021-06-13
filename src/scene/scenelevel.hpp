@@ -8,14 +8,14 @@
 #include "engine/vector2.hpp"
 #include "engine/camera.hpp"
 #include "engine/input.hpp"
-#include "engine/physics.hpp"
-#include "engine/staticbody.hpp"
 #include "engine/clock.hpp"
 #include "engine/map.hpp"
 #include "engine/window.hpp"
 
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
+#include "physics/physics.hpp"
+#include "physics/staticbody.hpp"
 
 #include <memory>
 
@@ -38,10 +38,12 @@ private:
 
 	static constexpr char spawn_index = 50;
 
-	// General stuff
+	// General engine stuff
 	ce::music music;
 	ce::input input;
-	ce::physics physics;
+
+	// Physics
+	phys::physics physics;
 
 	// Camera
 	ce::camera camera;
