@@ -20,12 +20,12 @@ void ce::movable::set_y(float value)
 	pos.y = value;
 }
 
-void ce::movable::set_pos(const ce::vector2f &new_pos)
+void ce::movable::set_position(const ce::vector2f &new_pos)
 {
 	pos = new_pos;
 }
 
-auto ce::movable::get_pos() const -> ce::vector2f
+auto ce::movable::get_position() const -> ce::vector2f
 {
 	return pos;
 }

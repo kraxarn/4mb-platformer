@@ -14,18 +14,18 @@ player::player(const ce::assets &assets, phys::physics &physics, float scale)
 void player::set_position(const ce::vector2f &position)
 {
 	body->set_position(position);
-	sprite.set_pos(position);
+	sprite.set_position(position);
 }
 
 void player::draw()
 {
-	sprite.set_pos(body->get_position() - static_cast<float>(sprite.width()));
+	sprite.set_position(body->get_position() - static_cast<float>(sprite.width()));
 	sprite.draw();
 }
 
 auto player::position() const -> ce::vector2f
 {
-	return sprite.get_pos();
+	return sprite.get_position();
 }
 
 void player::move(int x)
