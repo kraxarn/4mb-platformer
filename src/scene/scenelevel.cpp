@@ -121,6 +121,17 @@ void scene_level::update_input()
 	{
 		entity_player.jump();
 	}
+
+#ifndef NDEBUG
+	if (input.is_down(ce::key::up))
+	{
+		camera.zoom(0.02F);
+	}
+	else if (input.is_down(ce::key::down))
+	{
+		camera.zoom(-0.02F);
+	}
+#endif
 }
 
 void scene_level::update_camera()
