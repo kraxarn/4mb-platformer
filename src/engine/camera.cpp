@@ -57,3 +57,8 @@ void ce::camera::set_y(float y)
 {
 	r_camera.target.y = y;
 }
+
+void ce::camera::zoom(float amount)
+{
+	r_camera.zoom += amount;
+}

@@ -27,6 +27,8 @@ namespace ce
 		auto get_y() const -> float;
 		void set_x(float x);
 
+		void zoom(float amount);
+
 	private:
 		Camera2D r_camera = {0};
 	};
