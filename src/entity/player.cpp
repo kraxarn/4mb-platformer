@@ -40,10 +40,10 @@ void player::move(int x)
 		force = move_force;
 	}
 
-	body->set_velocity(ce::vector2f(force, 0.F));
+	body->set_force(ce::vector2f(force, 0.F));
 }
 
 void player::jump()
 {
-	body->set_velocity(ce::vector2f(0.F, -jump_force));
+	body->set_force(ce::vector2f(0.F, -jump_force));
 }
