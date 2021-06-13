@@ -38,11 +38,12 @@ void phys::physics::add_static_body(const ce::vector2f &size, const ce::vector2f
 {
 	auto *body = cpBodyNewStatic();
 	cpSpaceAddBody(cp_space, body);
+	cpBodySetPosition(body, position.to_cp_vec());
 
 	auto *shape = cpBoxShapeNew(body, size.x, size.y, 0.F);
 	cpSpaceAddShape(cp_space, shape);
 
-	static_bodies.push_back(std::make_shared<phys::static_body>(body, shape, position));
+	static_bodies.push_back(std::make_shared<phys::static_body>(body, shape));
 }
 
 auto phys::physics::add_dynamic_body(const ce::vector2f &size)

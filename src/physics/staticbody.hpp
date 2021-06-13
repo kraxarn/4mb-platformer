@@ -10,6 +10,6 @@ namespace phys
 	class static_body: public phys::body
 	{
 	public:
-		static_body(cpBody *body, cpShape *shape, const ce::vector2f &position);
+		static_body(cpBody *body, cpShape *shape);
 	};
 }
