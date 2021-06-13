@@ -1,7 +1,6 @@
 #pragma once
 
 #include "physics/body.hpp"
-#include "engine/vector2.hpp"
 
 namespace phys
 {
