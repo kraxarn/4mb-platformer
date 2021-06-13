@@ -29,12 +29,8 @@ public:
 	void load(int index);
 
 private:
-	static constexpr float tileset_size = 18;
-	static constexpr float tile_scale = 3.F;
-	static constexpr float tile_size = tileset_size * tile_scale;
-
-	static constexpr int level_width = ce::level_tiles_width * tile_size;
-	static constexpr int level_height = ce::level_tiles_height * tile_size;
+	static constexpr int level_width = ce::level_tiles_width * ce::tile_size;
+	static constexpr int level_height = ce::level_tiles_height * ce::tile_size;
 
 	static constexpr char spawn_index = 50;
 

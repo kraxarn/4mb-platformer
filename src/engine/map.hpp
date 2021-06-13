@@ -11,6 +11,15 @@ namespace ce
 	/** Maximum number of tiles vertically */
 	static constexpr int level_tiles_height = 25;
 
+	/** Size of each tile in image asset */
+	static constexpr float tileset_size = 18;
+
+	/** How much to scale each tile before displaying */
+	static constexpr float tile_scale = 3.F;
+
+	/** Total tile size with scaling applied */
+	static constexpr float tile_size = tileset_size * tile_scale;
+
 	/**
 	 * Level map data
 	 */
