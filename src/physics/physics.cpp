@@ -20,8 +20,13 @@ phys::physics::~physics()
 
 void phys::physics::clear()
 {
-	static_bodies.clear();
+	clear_static();
 	dynamic_bodies.clear();
+}
+
+void phys::physics::clear_static()
+{
+	static_bodies.clear();
 }
 
 auto phys::physics::static_bodies_count() const -> std::size_t

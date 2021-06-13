@@ -23,6 +23,9 @@ namespace phys
 		/** Clear all static and dynamic bodies in space */
 		void clear();
 
+		/** Clear all static bodies */
+		void clear_static();
+
 		auto static_bodies_count() const -> std::size_t;
 		auto dynamic_body_count() const -> std::size_t;
 
