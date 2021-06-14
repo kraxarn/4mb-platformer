@@ -15,6 +15,7 @@ namespace phys
 		auto get_position() const -> ce::vector2f;
 		void set_position(const ce::vector2f &position);
 
+		auto get_force() const -> ce::vector2f;
 		void set_force(const ce::vector2f &force);
 
 		//endregion
@@ -30,7 +31,7 @@ namespace phys
 		//endregion
 
 #ifndef NDEBUG
-	void debug_draw(Color color);
+		void debug_draw(Color color);
 #endif
 
 	protected:

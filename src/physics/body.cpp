@@ -25,6 +25,11 @@ void phys::body::set_position(const ce::vector2f &position)
 	cpBodySetPosition(cp_body, position.to_cp_vec());
 }
 
+auto phys::body::get_force() const -> ce::vector2f
+{
+	return ce::vector2f(cpBodyGetForce(cp_body));
+}
+
 void phys::body::set_force(const ce::vector2f &force)
 {
 	cpBodySetForce(cp_body, force.to_cp_vec());
