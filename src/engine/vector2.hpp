@@ -70,6 +70,11 @@ namespace ce
 			return vector2<T>(x / value, y / value);
 		}
 
+		auto operator+(const vector2<T> &value) const -> vector2<T>
+		{
+			return vector2<T>(x + value.x, y + value.y);
+		}
+
 		auto operator+(T value) const -> vector2<T>
 		{
 			return vector2<T>(x + value, y + value);
