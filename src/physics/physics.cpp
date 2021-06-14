@@ -56,7 +56,7 @@ auto phys::physics::add_dynamic_body(const ce::vector2f &size)
 {
 	constexpr float body_mass = 10.F;
 
-	auto *body = cpBodyNew(body_mass, INFINITY);
+	auto *body = cpBodyNew(body_mass, FLT_MAX);
 	cpSpaceAddBody(cp_space, body);
 
 	auto *shape = cpBoxShapeNew(body, size.x, size.y, 12.F);
