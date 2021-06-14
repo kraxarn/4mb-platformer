@@ -2,6 +2,7 @@
 
 #include "engine/assets.hpp"
 #include "engine/animatedsprite.hpp"
+#include "engine/map.hpp"
 #include "physics/dynamicbody.hpp"
 #include "physics/physics.hpp"
 
@@ -25,6 +26,8 @@ public:
 private:
 	static constexpr float move_force = 0.2F;
 	static constexpr float jump_force = 3.F;
+
+	static constexpr int body_offset = static_cast<int>(ce::tile_size * 0.25F);
 
 	ce::animated_sprite sprite;
 	std::shared_ptr<phys::dynamic_body> body;

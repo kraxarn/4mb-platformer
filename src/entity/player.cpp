@@ -7,7 +7,8 @@ player::player(const ce::assets &assets, phys::physics &physics, float scale)
 	sprite.set_scale(scale);
 
 	// Physics
-	ce::vector2f size = ce::vector2i(sprite.width(), sprite.height()).to<float>() * scale;
+	ce::vector2f size = ce::vector2i(sprite.width() - body_offset * 2,
+		sprite.height()).to<float>() * scale - body_offset * 2;
 	body = physics.add_dynamic_body(size);
 }
 
