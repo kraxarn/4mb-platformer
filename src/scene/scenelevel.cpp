@@ -34,9 +34,10 @@ void scene_level::render()
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
-									   "Bodies: static={}, dynamic={}\n",
+									   "Bodies: static={}, dynamic={}\n"
+									   "Player: {}",
 		ce::clock::fps(), physics.static_bodies_count(),
-		physics.dynamic_body_count()));
+		physics.dynamic_body_count(), entity_player.force()));
 
 	txt_debug.draw();
 #endif

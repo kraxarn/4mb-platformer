@@ -15,6 +15,7 @@ public:
 
 	void draw();
 	auto position() const -> ce::vector2f;
+	auto force() const -> ce::vector2f;
 
 	/**
 	 * Move in direction

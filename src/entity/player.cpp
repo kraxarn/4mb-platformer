@@ -29,6 +29,11 @@ auto player::position() const -> ce::vector2f
 	return sprite.get_position();
 }
 
+auto player::force() const -> ce::vector2f
+{
+	return body->get_force();
+}
+
 void player::move(int x)
 {
 	auto force = 0.F;
