@@ -25,8 +25,6 @@ namespace phys
 
 		void set_friction(float value) const;
 
-		void set_collision_type(phys::collision_type value) const;
-
 		void set_filter(cpShapeFilter filter) const;
 
 		//endregion

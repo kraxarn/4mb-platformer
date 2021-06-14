@@ -44,11 +44,6 @@ void phys::body::set_friction(float value) const
 	cpShapeSetFriction(cp_shape, value);
 }
 
-void phys::body::set_collision_type(phys::collision_type value) const
-{
-	cpShapeSetCollisionType(cp_shape, static_cast<cpCollisionType>(value));
-}
-
 void phys::body::set_filter(cpShapeFilter filter) const
 {
 	cpShapeSetFilter(cp_shape, filter);
