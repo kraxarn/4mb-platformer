@@ -7,20 +7,18 @@ player::player(const ce::assets &assets, phys::physics &physics, float scale)
 	sprite.set_scale(scale);
 
 	// Physics
-	ce::vector2f size = ce::vector2i(sprite.width() - body_offset * 2,
-		sprite.height()).to<float>() * scale - body_offset * 2;
-	body = physics.add_dynamic_body(size);
+	ce::vector2i size(sprite.width(), sprite.height());
+	body = physics.add_dynamic_body(size.to<float>() * scale / phys::scale);
 }
 
 void player::set_position(const ce::vector2f &position)
 {
 	body->set_position(position);
-	sprite.set_position(position);
 }
 
 void player::draw()
 {
-	sprite.set_position(body->get_position() - static_cast<float>(sprite.width()));
+	sprite.set_position(body->get_position() * phys::scale);
 	sprite.draw();
 }
 

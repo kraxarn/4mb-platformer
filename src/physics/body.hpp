@@ -4,6 +4,7 @@
 
 #include "engine/vector2.hpp"
 #include "physics/collisiontype.hpp"
+#include "physics/config.hpp"
 
 namespace phys
 {

@@ -2,7 +2,10 @@
 
 namespace phys
 {
-	constexpr int iterations = 10;
+	constexpr int iterations = 100;
 
-	constexpr float gravity = -100.F;
+	// TODO: Increase scale
+	constexpr float scale = 1.F;
+
+	constexpr float gravity = 900.F;
 }

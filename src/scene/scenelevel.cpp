@@ -77,7 +77,8 @@ void scene_level::load(int index)
 		{
 			ce::vector2i pos(x, y);
 			ce::vector2f size(ce::tile_size, ce::tile_size);
-			physics.add_static_body(size, pos.to<float>() * ce::tile_size + ce::tileset_size);
+			physics.add_static_body(size / phys::scale,
+				(pos.to<float>() * ce::tile_size + ce::tileset_size) / phys::scale);
 		}
 	});
 
@@ -85,7 +86,7 @@ void scene_level::load(int index)
 	constexpr float player_tile_offset = 0.25F;
 	ce::vector2f player_position = spawn * ce::tile_size;
 	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
-	entity_player.set_position(player_position);
+	entity_player.set_position(player_position / phys::scale);
 }
 
 auto scene_level::get_spawn() const -> ce::vector2f

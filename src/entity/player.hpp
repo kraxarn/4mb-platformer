@@ -5,6 +5,7 @@
 #include "engine/map.hpp"
 #include "physics/dynamicbody.hpp"
 #include "physics/physics.hpp"
+#include "physics/config.hpp"
 
 class player
 {
@@ -25,8 +26,8 @@ public:
 	void jump();
 
 private:
-	static constexpr float move_force = 0.2F;
-	static constexpr float jump_force = 3.F;
+	static constexpr float move_force = 50000.F;
+	static constexpr float jump_force = 300.F;
 
 	static constexpr int body_offset = static_cast<int>(ce::tile_size * 0.25F);
 
