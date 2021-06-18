@@ -13,9 +13,9 @@ namespace ce
 	public:
 		input();
 
-		auto is_pressed(ce::key key) -> bool;
+		auto is_pressed(ce::key key) const -> bool;
 
-		auto is_down(ce::key key) -> bool;
+		auto is_down(ce::key key) const -> bool;
 
 	private:
 		std::map<ce::key, int> keyboard;

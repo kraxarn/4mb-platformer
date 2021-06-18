@@ -28,24 +28,24 @@ ce::input::input()
 	}
 }
 
-auto ce::input::get_gamepad_name() -> std::string
-{
-	const char *name = nullptr;
-	return IsGamepadName(0, name)
-		? std::string(name)
-		: std::string();
-}
-
-auto ce::input::is_pressed(ce::key key) -> bool
+auto ce::input::is_pressed(ce::key key) const -> bool
 {
 	return IsKeyPressed(keyboard.at(key))
 		|| (gamepad_index >= 0
 			&& IsGamepadButtonPressed(gamepad_index, gamepad.at(key)));
 }
 
-auto ce::input::is_down(ce::key key) -> bool
+auto ce::input::is_down(ce::key key) const -> bool
 {
 	return IsKeyDown(keyboard.at(key))
 		|| (gamepad_index >= 0
 			&& IsGamepadButtonDown(gamepad_index, gamepad.at(key)));
+}
+
+auto ce::input::get_gamepad_name() -> std::string
+{
+	const char *name = nullptr;
+	return IsGamepadName(0, name)
+		? std::string(name)
+		: std::string();
 }
