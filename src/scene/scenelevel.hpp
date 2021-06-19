@@ -12,6 +12,7 @@
 #include "engine/map.hpp"
 #include "engine/window.hpp"
 
+#include "physics/tiles.hpp"
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
 
@@ -29,8 +30,6 @@ public:
 private:
 	static constexpr int level_width = ce::level_tiles_width * ce::tile_size;
 	static constexpr int level_height = ce::level_tiles_height * ce::tile_size;
-
-	static constexpr char spawn_index = 50;
 
 	// General engine stuff
 	ce::music music;

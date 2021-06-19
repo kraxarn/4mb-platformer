@@ -80,7 +80,7 @@ auto scene_level::get_spawn() const -> ce::vector2f
 
 	ce::iterate_map<char>(level->map(), [&vec](auto x, auto y, char value) -> bool
 	{
-		if (value == spawn_index)
+		if (value == static_cast<char>(tile::spawn))
 		{
 			vec = ce::vector2<std::size_t>(x, y).to<float>();
 			return true;
@@ -123,7 +123,7 @@ void scene_level::draw_map()
 	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char tile)
 	{
 		// Empty tile
-		if (tile < 0 || tile >= spawn_index)
+		if (tile < 0 || tile >= static_cast<char>(tile::spawn))
 		{
 			return;
 		}
