@@ -82,6 +82,15 @@ void player::update_collision(const ce::level &level)
 	{
 		velocity.y = 0.F;
 	}
+
+#ifndef NDEBUG
+	debug_draw(Rectangle{
+		static_cast<float>(target.x) * ce::tile_size,
+		static_cast<float>(target.y) * ce::tile_size,
+		ce::tile_size,
+		ce::tile_size,
+	}, BLUE);
+#endif
 }
 
 auto player::get_velocity() const -> const ce::vector2f &

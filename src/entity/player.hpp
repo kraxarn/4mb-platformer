@@ -39,4 +39,8 @@ private:
 	ce::vector2f velocity;
 
 	void update_collision(const ce::level &level);
+
+#ifndef NDEBUG
+	static void debug_draw(const Rectangle &rect, const Color &color);
+#endif
 };
