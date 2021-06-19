@@ -122,11 +122,15 @@ auto player::rect() const -> Rectangle
 #ifndef NDEBUG
 void player::debug_draw() const
 {
-	const auto sprite_rect = rect();
-	DrawRectangleLines(static_cast<int>(sprite_rect.x),
-		static_cast<int>(sprite_rect.y),
-		static_cast<int>(sprite_rect.width),
-		static_cast<int>(sprite_rect.height),
-		GREEN);
+	debug_draw(rect(), GREEN);
+}
+
+void player::debug_draw(const Rectangle &rect, const Color &color)
+{
+	DrawRectangleLines(static_cast<int>(rect.x),
+		static_cast<int>(rect.y),
+		static_cast<int>(rect.width),
+		static_cast<int>(rect.height),
+		color);
 }
 #endif
