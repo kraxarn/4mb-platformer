@@ -33,9 +33,11 @@ void scene_level::render()
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
 									   "Position: {}\n"
-									   "Velocity: {}",
+									   "Velocity: {}\n"
+									   "Is grounded: {}",
 		ce::clock::fps(), entity_player.get_position(),
-		entity_player.get_velocity()));
+		entity_player.get_velocity(),
+		entity_player.is_grounded() ? "yes" : "no"));
 
 	txt_debug.draw();
 #endif
