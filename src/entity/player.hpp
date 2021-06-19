@@ -3,34 +3,28 @@
 #include "engine/assets.hpp"
 #include "engine/animatedsprite.hpp"
 #include "engine/map.hpp"
-#include "physics/dynamicbody.hpp"
-#include "physics/physics.hpp"
-#include "physics/config.hpp"
+#include "engine/rect.hpp"
+#include "engine/movable.hpp"
+#include "engine/input.hpp"
 
-class player
+class player: public ce::animated_sprite
 {
 public:
-	explicit player(const ce::assets &assets, phys::physics &physics, float scale);
+	player(const ce::assets &assets, float scale);
 
-	void set_position(const ce::vector2f &position);
+	void update(const ce::input &input, const ce::level &level);
 
-	void draw();
-	auto position() const -> ce::vector2f;
-	auto force() const -> ce::vector2f;
+	auto get_velocity() const -> const ce::vector2f &;
 
-	/**
-	 * Move in direction
-	 * @param x <0 for left, 0> for right
-	 */
-	void move(int x);
-	void jump();
+	auto rect() const -> Rectangle;
+
+#ifndef NDEBUG
+	void debug_draw() const;
+#endif
 
 private:
-	static constexpr float move_force = 50000.F;
-	static constexpr float jump_force = 300.F;
+	static constexpr float move_force = 1.F;
+	static constexpr float jump_force = 1.F;
 
-	static constexpr int body_offset = static_cast<int>(ce::tile_size * 0.25F);
-
-	ce::animated_sprite sprite;
-	std::shared_ptr<phys::dynamic_body> body;
+	ce::vector2f velocity;
 };

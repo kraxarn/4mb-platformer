@@ -1,53 +1,52 @@
 #include "player.hpp"
 
-player::player(const ce::assets &assets, phys::physics &physics, float scale)
-	: sprite(ce::animated_sprite(assets.tileset("player.png")))
+player::player(const ce::assets &assets, float scale)
+	: ce::animated_sprite(assets.tileset("player.png"))
 {
 	// Sprite
-	sprite.set_scale(scale);
-
-	// Physics
-	ce::vector2i size(sprite.width(), sprite.height());
-	body = physics.add_dynamic_body(size.to<float>() * scale / phys::scale);
+	set_scale(scale);
 }
 
-void player::set_position(const ce::vector2f &position)
+void player::update(const ce::input &input, const ce::level &level)
 {
-	body->set_position(position);
-}
-
-void player::draw()
-{
-	sprite.set_position(body->get_position() * phys::scale);
-	sprite.draw();
-}
-
-auto player::position() const -> ce::vector2f
-{
-	return sprite.get_position();
-}
-
-auto player::force() const -> ce::vector2f
-{
-	return body->get_force();
-}
-
-void player::move(int x)
-{
-	auto force = 0.F;
-	if (x < 0)
+	// Right
+	if (input.is_down(ce::key::right))
 	{
-		force = -move_force;
-	}
-	else if (x > 0)
-	{
-		force = move_force;
+		velocity.x += move_force;
 	}
 
-	body->set_force(ce::vector2f(force, 0.F));
+	// Left
+	if (input.is_down(ce::key::left))
+	{
+		velocity.x -= move_force;
+	}
+
+	// Jump
+	if (input.is_pressed(ce::key::jump))
+	{
+		velocity.y += jump_force;
+	}
+
+	// Update position
+	set_position(get_position() + velocity);
+
+	// Draw sprite
+	draw();
 }
 
-void player::jump()
+auto player::get_velocity() const -> const ce::vector2f &
 {
-	body->set_force(ce::vector2f(0.F, -jump_force));
+	return velocity;
 }
+
+auto player::rect() const -> Rectangle
+{
+	return ce::rect::get(*this);
+}
+
+#ifndef NDEBUG
+void player::debug_draw() const
+{
+	DrawRectangleRec(rect(), GREEN);
+}
+#endif
