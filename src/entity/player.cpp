@@ -109,17 +109,11 @@ auto player::is_grounded() const -> bool
 
 auto player::rect() const -> Rectangle
 {
-	// Sprite position is based off the center of the sprite
-	// Rectangle position is based off the top-left corner
-
-	const auto w = static_cast<float>(width());
-	const auto h = static_cast<float>(height());
-
 	return Rectangle{
-		get_x() - (w / 2.F),
-		get_y() - (h / 2.F),
-		w * get_scale(),
-		h * get_scale(),
+		get_x(),
+		get_y(),
+		static_cast<float>(width()) * get_scale(),
+		static_cast<float>(height()) * get_scale(),
 	};
 }
 
