@@ -68,7 +68,7 @@ void scene_level::load(int index)
 	camera.set_target(spawn * ce::tile_size);
 
 	// Set player position
-	constexpr float player_tile_offset = 0.25F;
+	constexpr float player_tile_offset = 0.5F;
 	ce::vector2f player_position = spawn * ce::tile_size;
 	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
 	entity_player.set_position(player_position);
