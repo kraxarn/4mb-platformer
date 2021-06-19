@@ -18,7 +18,7 @@ void player::update(const ce::input &input, const ce::level &level)
 			velocity.x = speed_limit;
 		}
 	}
-	else if (velocity.x > 0)
+	else if (velocity.x > 0 && is_grounded())
 	{
 		velocity.x += move_deceleration;
 		if (velocity.x < 0)
@@ -36,7 +36,7 @@ void player::update(const ce::input &input, const ce::level &level)
 			velocity.x = -speed_limit;
 		}
 	}
-	else if (velocity.x < 0)
+	else if (velocity.x < 0 && is_grounded())
 	{
 		velocity.x -= move_deceleration;
 		if (velocity.x > 0)
