@@ -46,8 +46,7 @@ void ce::texture::draw(float x, float y, int size, int offset,
 	};
 
 	Vector2 orig{
-		size_f / 2.F,
-		size_f / 2.F,
+		0, 0,
 	};
 
 	DrawTextureTiled(r_texture, rect, dest, orig, rotation, scale, WHITE);
