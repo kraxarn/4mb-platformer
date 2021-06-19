@@ -3,7 +3,6 @@
 #include "engine/assets.hpp"
 #include "engine/animatedsprite.hpp"
 #include "engine/map.hpp"
-#include "engine/rect.hpp"
 #include "engine/movable.hpp"
 #include "engine/input.hpp"
 
