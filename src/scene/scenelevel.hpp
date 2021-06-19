@@ -38,9 +38,6 @@ private:
 	ce::music music;
 	ce::input input;
 
-	// Physics
-	phys::physics physics;
-
 	// Camera
 	ce::camera camera;
 
@@ -68,7 +65,6 @@ private:
 	/** Player can collide with this tile */
 	auto can_collide(int x, int y) const -> bool;
 
-	void update_input();
 	void update_camera();
 	void draw_map();
 };

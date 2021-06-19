@@ -6,7 +6,7 @@ scene_level::scene_level(const ce::assets &assets)
 	txt_debug("", debug_hud_offset, debug_hud_offset,
 		debug_hud_size, WHITE),
 #endif
-	entity_player(assets, physics, ce::tile_scale),
+	entity_player(assets, ce::tile_scale),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
@@ -20,24 +20,22 @@ void scene_level::render()
 	camera.begin();
 	music.update();
 
-	update_input();
 	update_camera();
-	entity_player.draw();
+	entity_player.update(input, *level);
 	draw_map();
 
-	physics.update(ce::clock::frame_time());
 #ifndef NDEBUG
-	physics.debug_draw();
+	entity_player.debug_draw();
 #endif
 
 	camera.end();
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
-									   "Bodies: static={}, dynamic={}\n"
-									   "Player: {}",
-		ce::clock::fps(), physics.static_bodies_count(),
-		physics.dynamic_body_count(), entity_player.force()));
+									   "Position: {}\n"
+									   "Velocity: {}",
+		ce::clock::fps(), entity_player.get_position(),
+		entity_player.get_velocity()));
 
 	txt_debug.draw();
 #endif
@@ -45,8 +43,6 @@ void scene_level::render()
 
 void scene_level::load(int index)
 {
-	physics.clear_static();
-
 	auto *new_level = level_loader::get(index);
 	if (new_level == nullptr)
 	{
@@ -69,24 +65,11 @@ void scene_level::load(int index)
 	auto spawn = get_spawn();
 	camera.set_target(spawn * ce::tile_size);
 
-	// Load collision
-	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char /*value*/)
-	{
-		// Add physics body
-		if (can_collide(x, y))
-		{
-			ce::vector2i pos(x, y);
-			ce::vector2f size(ce::tile_size, ce::tile_size);
-			physics.add_static_body(size / phys::scale,
-				(pos.to<float>() * ce::tile_size + ce::tileset_size) / phys::scale);
-		}
-	});
-
 	// Set player position
 	constexpr float player_tile_offset = 0.25F;
 	ce::vector2f player_position = spawn * ce::tile_size;
 	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
-	entity_player.set_position(player_position / phys::scale);
+	entity_player.set_position(player_position);
 }
 
 auto scene_level::get_spawn() const -> ce::vector2f
@@ -106,28 +89,9 @@ auto scene_level::get_spawn() const -> ce::vector2f
 	return vec;
 }
 
-void scene_level::update_input()
-{
-	auto x = 0;
-	if (input.is_down(ce::key::left))
-	{
-		x--;
-	}
-	if (input.is_down(ce::key::right))
-	{
-		x++;
-	}
-	entity_player.move(x);
-
-	if (input.is_pressed(ce::key::jump))
-	{
-		entity_player.jump();
-	}
-}
-
 void scene_level::update_camera()
 {
-	camera.set_target(entity_player.position());
+	camera.set_target(entity_player.get_position());
 
 	const auto &offset = camera.get_offset();
 
