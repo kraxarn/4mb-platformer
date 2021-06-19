@@ -122,8 +122,7 @@ void scene_level::draw_map()
 {
 	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char tile)
 	{
-		// Empty tile
-		if (tile < 0 || tile >= static_cast<char>(tile::spawn))
+		if (!phys::collision::is_tile(tile))
 		{
 			return;
 		}
@@ -140,27 +139,4 @@ void scene_level::draw_map()
 			GREEN);
 #endif
 	});
-}
-
-auto scene_level::is_tile(char value) -> bool
-{
-	return value >= 0 && value < spawn_index;
-}
-
-auto scene_level::can_collide(int x, int y) const -> bool
-{
-	const auto &map = level->map();
-	const auto &value = map.at(x).at(y);
-
-	// Only tiles require collision
-	if (!is_tile(value))
-	{
-		return false;
-	}
-
-	// If surrounded, collision isn't required
-	return !(y > 0 && is_tile(map.at(x).at(y - 1))                  // above
-		&& y < map.at(x).size() - 1 && is_tile(map.at(x).at(y + 1)) // below
-		&& x > 0 && is_tile(map.at(x - 1).at(y))                    // left
-		&& x < map.size() - 1 && is_tile(map.at(x + 1).at(y)));     // right
 }

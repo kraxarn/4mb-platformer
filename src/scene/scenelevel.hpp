@@ -13,6 +13,7 @@
 #include "engine/window.hpp"
 
 #include "physics/tiles.hpp"
+#include "physics/collision.hpp"
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
 
@@ -56,11 +57,6 @@ private:
 
 	/** Find spawn tile in current level */
 	auto get_spawn() const -> ce::vector2f;
-
-	/** Is level tile */
-	static auto is_tile(char value) -> bool;
-	/** Player can collide with this tile */
-	auto can_collide(int x, int y) const -> bool;
 
 	void update_camera();
 	void draw_map();
