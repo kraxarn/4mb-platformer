@@ -1,8 +1,7 @@
 #include "animatedsprite.hpp"
 
 ce::animated_sprite::animated_sprite(const ce::tileset &tileset)
-	: tileset(tileset),
-	movable()
+	: tileset(tileset)
 {
 }
 
