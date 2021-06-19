@@ -93,7 +93,7 @@ void player::update_collision(const ce::level &level)
 		static_cast<float>(target.y) * ce::tile_size,
 		ce::tile_size,
 		ce::tile_size,
-	}, BLUE);
+	}, RED);
 #endif
 }
 
