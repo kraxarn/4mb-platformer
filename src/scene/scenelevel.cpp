@@ -123,18 +123,22 @@ void scene_level::draw_map()
 	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char tile)
 	{
 		// Empty tile
-		if (tile < 0)
+		if (tile < 0 || tile >= spawn_index)
 		{
 			return;
 		}
 
-		// Level tile
-		if (tile < spawn_index)
-		{
-			tiles.draw(static_cast<float>(x) * ce::tile_size,
-				static_cast<float>(y) * ce::tile_size,
-				tile, 0.F, ce::tile_scale);
-		}
+		tiles.draw(static_cast<float>(x) * ce::tile_size,
+			static_cast<float>(y) * ce::tile_size,
+			tile, 0.F, ce::tile_scale);
+
+#ifndef NDEBUG
+		DrawRectangleLines(x * ce::tile_size,
+			y * ce::tile_size,
+			ce::tile_size,
+			ce::tile_size,
+			GREEN);
+#endif
 	});
 }
 
