@@ -1,7 +1,6 @@
 #pragma once
 
 #include "raylib.h"
-#include "chipmunk/chipmunk.h"
 
 namespace ce
 {
@@ -27,12 +26,6 @@ namespace ce
 			y = r_vec.y;
 		}
 
-		explicit vector2(cpVect cp_vec)
-		{
-			x = cp_vec.x;
-			y = cp_vec.y;
-		}
-
 		template<typename R>
 		auto to() const -> vector2<R>
 		{
@@ -48,15 +41,6 @@ namespace ce
 			return {
 				v.x,
 				v.y,
-			};
-		}
-
-		auto to_cp_vec() const -> cpVect
-		{
-			auto v = to<cpFloat>();
-			return {
-				v.x,
-				v.y
 			};
 		}
 

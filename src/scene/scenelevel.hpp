@@ -14,8 +14,6 @@
 
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
-#include "physics/physics.hpp"
-#include "physics/staticbody.hpp"
 
 #include <memory>
 
