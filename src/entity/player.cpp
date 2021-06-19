@@ -12,19 +12,47 @@ void player::update(const ce::input &input, const ce::level &level)
 	// Right
 	if (input.is_down(ce::key::right))
 	{
-		velocity.x += move_force;
+		velocity.x += move_acceleration;
+		if (velocity.x > speed_limit)
+		{
+			velocity.x = speed_limit;
+		}
+	}
+	else if (velocity.x > 0)
+	{
+		velocity.x += move_deceleration;
+		if (velocity.x < 0)
+		{
+			velocity.x = 0;
+		}
 	}
 
 	// Left
 	if (input.is_down(ce::key::left))
 	{
-		velocity.x -= move_force;
+		velocity.x -= move_acceleration;
+		if (velocity.x < -speed_limit)
+		{
+			velocity.x = -speed_limit;
+		}
+	}
+	else if (velocity.x < 0)
+	{
+		velocity.x -= move_deceleration;
+		if (velocity.x > 0)
+		{
+			velocity.x = 0;
+		}
 	}
 
 	// Jump
 	if (input.is_pressed(ce::key::jump))
 	{
-		velocity.y += jump_force;
+		velocity.y -= jump_acceleration;
+	}
+	else
+	{
+		velocity.y -= jump_deceleration;
 	}
 
 	// Update position
@@ -41,12 +69,28 @@ auto player::get_velocity() const -> const ce::vector2f &
 
 auto player::rect() const -> Rectangle
 {
-	return ce::rect::get(*this);
+	// Sprite position is based off the center of the sprite
+	// Rectangle position is based off the top-left corner
+
+	const auto w = static_cast<float>(width());
+	const auto h = static_cast<float>(height());
+
+	return Rectangle{
+		get_x() - (w / 2.F),
+		get_y() - (h / 2.F),
+		w * get_scale(),
+		h * get_scale(),
+	};
 }
 
 #ifndef NDEBUG
 void player::debug_draw() const
 {
-	DrawRectangleRec(rect(), GREEN);
+	const auto sprite_rect = rect();
+	DrawRectangleLines(static_cast<int>(sprite_rect.x),
+		static_cast<int>(sprite_rect.y),
+		static_cast<int>(sprite_rect.width),
+		static_cast<int>(sprite_rect.height),
+		GREEN);
 }
 #endif
