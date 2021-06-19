@@ -11,13 +11,19 @@ class player: public ce::animated_sprite
 public:
 	player(const ce::assets &assets, float scale);
 
+	/** Update input, position, collision, and finally draw sprite */
 	void update(const ce::input &input, const ce::level &level);
 
+	/** Get current player speed */
 	auto get_velocity() const -> const ce::vector2f &;
+	/** Is player on the ground */
+	auto is_grounded() const -> bool;
 
+	/** Get collision rectangle */
 	auto rect() const -> Rectangle;
 
 #ifndef NDEBUG
+	/** Draw collision shape for debugging */
 	void debug_draw() const;
 #endif
 

@@ -46,7 +46,7 @@ void player::update(const ce::input &input, const ce::level &level)
 	}
 
 	// Jump
-	if (input.is_pressed(ce::key::jump))
+	if (input.is_pressed(ce::key::jump) && is_grounded())
 	{
 		velocity.y -= jump_acceleration;
 	}
@@ -65,6 +65,11 @@ void player::update(const ce::input &input, const ce::level &level)
 auto player::get_velocity() const -> const ce::vector2f &
 {
 	return velocity;
+}
+
+auto player::is_grounded() const -> bool
+{
+	return velocity.y == 0;
 }
 
 auto player::rect() const -> Rectangle
