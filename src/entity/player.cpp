@@ -67,9 +67,13 @@ void player::update_collision(const ce::level &level)
 {
 	const auto &map = level.map();
 
-	auto new_position = get_position() + velocity;
-	auto target = (new_position / ce::tile_size).to<int>();
-	auto current = (get_position() / ce::tile_size).to<int>();
+	auto current_pos = get_position();
+	current_pos.y += static_cast<float>(height()) * ce::tile_scale;
+
+	auto target_pos = current_pos + velocity;
+
+	auto target = (target_pos / ce::tile_size).to<int>();
+	auto current = (current_pos / ce::tile_size).to<int>();
 
 	auto new_tile_x = map.at(target.x).at(current.y);
 	auto new_tile_y = map.at(current.x).at(target.y);
