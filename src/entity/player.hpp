@@ -29,7 +29,7 @@ public:
 
 private:
 	static constexpr float move_acceleration = 1.F;
-	static constexpr float move_deceleration = -1.F;
+	static constexpr float move_deceleration = -1.1F;
 
 	static constexpr float jump_acceleration = 1.F;
 	static constexpr float jump_deceleration = -0.F;
