@@ -37,4 +37,6 @@ private:
 	static constexpr float speed_limit = 10.F;
 
 	ce::vector2f velocity;
+
+	void update_collision(const ce::level &level);
 };

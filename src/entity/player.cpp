@@ -56,10 +56,32 @@ void player::update(const ce::input &input, const ce::level &level)
 	}
 
 	// Update position
+	update_collision(level);
 	set_position(get_position() + velocity);
 
 	// Draw sprite
 	draw();
+}
+
+void player::update_collision(const ce::level &level)
+{
+	const auto &map = level.map();
+
+	auto new_position = get_position() + velocity;
+	auto target = (new_position / ce::tile_size).to<int>();
+	auto current = (get_position() / ce::tile_size).to<int>();
+
+	auto new_tile_x = map.at(target.x).at(current.y);
+	auto new_tile_y = map.at(current.x).at(target.y);
+
+	if (new_tile_x >= 0)
+	{
+		velocity.x = 0.F;
+	}
+	if (new_tile_y >= 0)
+	{
+		velocity.y = 0.F;
+	}
 }
 
 auto player::get_velocity() const -> const ce::vector2f &
