@@ -48,11 +48,11 @@ void player::update(const ce::input &input, const ce::level &level)
 	// Jump
 	if (input.is_pressed(ce::key::jump) && is_grounded())
 	{
-		velocity.y = jump_acceleration;
+		velocity.y = jump_force;
 	}
 	else
 	{
-		velocity.y -= jump_deceleration;
+		velocity.y -= gravity;
 	}
 
 	// Update position

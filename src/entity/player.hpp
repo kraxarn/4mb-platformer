@@ -31,10 +31,8 @@ private:
 	static constexpr float move_acceleration = 1.F;
 	static constexpr float move_deceleration = -1.1F;
 
-	/** Force applied directly */
-	static constexpr float jump_acceleration = 1.F;
-	/** Some might call this "gravity" */
-	static constexpr float jump_deceleration = -0.F;
+	static constexpr float jump_force = 1.F;
+	static constexpr float gravity = -0.F;
 
 	static constexpr float speed_limit = 10.F;
 
