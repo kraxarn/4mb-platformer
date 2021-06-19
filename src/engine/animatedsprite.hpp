@@ -8,10 +8,10 @@ namespace ce
 	/**
 	 * Animated sprite
 	 */
-	class animated_sprite: public movable
+	class animated_sprite: public ::ce::movable
 	{
 	public:
-		explicit animated_sprite(const ce::tileset &tileset);
+		explicit animated_sprite(const ::ce::tileset &tileset);
 
 		void draw();
 
@@ -37,6 +37,6 @@ namespace ce
 
 		float rotation = 0.F;
 
-		ce::tileset tileset;
+		::ce::tileset tileset;
 	};
 }
