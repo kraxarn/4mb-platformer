@@ -101,6 +101,15 @@ void player::update_collision(const ce::level &level)
 		ce::tile_size,
 		ce::tile_size,
 	}, RED);
+
+	DrawText(std::to_string(new_tile_x).c_str(),
+		target.x * static_cast<int>(ce::tile_size) + 6,
+		current.y * static_cast<int>(ce::tile_size) + 6,
+		12.F, RED);
+
+	auto target_vec = target_pos.to<int>();
+	DrawCircle(target_vec.x, target_vec.y,
+		3.F, RED);
 #endif
 }
 
