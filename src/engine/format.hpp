@@ -46,6 +46,12 @@ namespace ce
 			return collect(fmt, std::string(arg));
 		}
 
+		template<typename Format>
+		static auto collect(const Format &fmt, bool arg) -> std::string
+		{
+			return collect(fmt, arg ? "true" : "false");
+		}
+
 		template<typename Format, typename VT>
 		static auto collect(const Format &fmt, const ce::vector2<VT> &arg) -> std::string
 		{
