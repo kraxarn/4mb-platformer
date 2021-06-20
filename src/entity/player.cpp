@@ -55,12 +55,19 @@ void player::update(const ce::input &input, const ce::level &level)
 		velocity.y -= gravity;
 	}
 
+#ifndef NDEBUG
+	// update_collision draws some stuff in debug
+	draw();
+#endif
+
 	// Update position
 	update_collision(level);
 	set_position(get_position() + velocity);
 
+#ifdef NDEBUG
 	// Draw sprite
 	draw();
+#endif
 }
 
 void player::update_collision(const ce::level &level)
