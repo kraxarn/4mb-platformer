@@ -85,7 +85,8 @@ void player::update_collision(const ce::level &level)
 	auto target = (target_pos / ce::tile_size).to<int>();
 	auto current = (current_pos / ce::tile_size).to<int>();
 
-	auto new_tile_x = map.at(target.x).at(current.y);
+	// TODO: -1 is very temporary due to poor target tile calculation
+	auto new_tile_x = map.at(target.x).at(current.y - 1);
 	auto new_tile_y = map.at(current.x).at(target.y);
 
 	if (phys::collision::is_tile(new_tile_x))
