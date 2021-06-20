@@ -52,7 +52,7 @@ void player::update(const ce::input &input, const ce::level &level)
 	}
 	else
 	{
-		velocity.y -= gravity;
+		velocity.y += gravity;
 	}
 
 #ifndef NDEBUG
