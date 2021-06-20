@@ -6,6 +6,8 @@
 #include "engine/movable.hpp"
 #include "engine/input.hpp"
 
+#include "physics/collision.hpp"
+
 class player: public ce::animated_sprite
 {
 public:

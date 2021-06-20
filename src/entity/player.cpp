@@ -85,11 +85,11 @@ void player::update_collision(const ce::level &level)
 	auto new_tile_x = map.at(target.x).at(current.y);
 	auto new_tile_y = map.at(current.x).at(target.y);
 
-	if (new_tile_x >= 0)
+	if (phys::collision::is_tile(new_tile_x))
 	{
 		velocity.x = 0.F;
 	}
-	if (new_tile_y >= 0)
+	if (phys::collision::is_tile(new_tile_y))
 	{
 		velocity.y = 0.F;
 	}
