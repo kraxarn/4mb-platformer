@@ -55,7 +55,7 @@ namespace ce
 		template<typename Format, typename VT>
 		static auto collect(const Format &fmt, const ce::vector2<VT> &arg) -> std::string
 		{
-			return collect(fmt, format("{} {}", arg.x, arg.y));
+			return collect(fmt, format("X={} Y={}", arg.x, arg.y));
 		}
 	};
 }
