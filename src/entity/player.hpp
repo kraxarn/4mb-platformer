@@ -27,6 +27,8 @@ public:
 #ifndef NDEBUG
 	/** Draw collision shape for debugging */
 	void debug_draw() const;
+
+	auto get_collides() const -> const ce::vector2<bool> &;
 #endif
 
 private:
@@ -43,6 +45,8 @@ private:
 	void update_collision(const ce::level &level);
 
 #ifndef NDEBUG
+	ce::vector2<bool> collides;
+
 	static void debug_draw(const Rectangle &rect, const Color &color);
 #endif
 };

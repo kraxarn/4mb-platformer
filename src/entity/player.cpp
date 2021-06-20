@@ -98,6 +98,9 @@ void player::update_collision(const ce::level &level)
 	}
 
 #ifndef NDEBUG
+	collides.x = phys::collision::is_tile(new_tile_x);
+	collides.y = phys::collision::is_tile(new_tile_y);
+
 	debug_draw(Rectangle{
 		static_cast<float>(target.x) * ce::tile_size,
 		static_cast<float>(target.y) * ce::tile_size,
@@ -149,5 +152,10 @@ void player::debug_draw(const Rectangle &rect, const Color &color)
 		static_cast<int>(rect.width),
 		static_cast<int>(rect.height),
 		color);
+}
+
+auto player::get_collides() const -> const ce::vector2<bool> &
+{
+	return collides;
 }
 #endif
