@@ -1,7 +1,8 @@
 #include "entity/player.hpp"
 
 entity::player::player(const ce::assets &assets, float scale)
-	: ce::animated_sprite(assets.tileset("player.png"))
+	: ce::animated_sprite(assets.tileset("player.png")),
+	snd_jump(assets.sound("jump.wav"))
 {
 	// Sprite
 	set_scale(scale);
@@ -48,6 +49,7 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 	// Jump
 	if (input.is_pressed(ce::key::jump) && is_grounded())
 	{
+		snd_jump.play();
 		velocity.y = jump_force;
 	}
 	else

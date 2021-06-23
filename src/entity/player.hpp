@@ -44,6 +44,8 @@ namespace entity
 
 		ce::vector2f velocity;
 
+		asset::sound snd_jump;
+
 		void update_collision(const ce::level &level);
 
 #ifndef NDEBUG
