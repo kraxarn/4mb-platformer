@@ -26,10 +26,6 @@ namespace entity
 		/** Get collision rectangle */
 		auto rect() const -> Rectangle;
 
-#ifndef NDEBUG
-		auto get_collides() const -> const ce::vector2<bool> &;
-#endif
-
 	private:
 		static constexpr float move_acceleration = 1.F;
 		static constexpr float move_deceleration = -0.4F;
@@ -46,8 +42,6 @@ namespace entity
 		void update_collision(const ce::level &level);
 
 #ifndef NDEBUG
-		ce::vector2<bool> collides;
-
 		static void debug_draw(const Rectangle &rect, const Color &color);
 #endif
 	};

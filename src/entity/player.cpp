@@ -110,9 +110,4 @@ void entity::player::debug_draw(const Rectangle &rect, const Color &color)
 		static_cast<int>(rect.height),
 		color);
 }
-
-auto entity::player::get_collides() const -> const ce::vector2<bool> &
-{
-	return collides;
-}
 #endif

@@ -30,12 +30,10 @@ void scene_level::render()
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
 									   "Position: {}\n"
 									   "Velocity: {}\n"
-									   "Grounded: {}\n"
-									   "Colliding: {}",
+									   "Grounded: {}\n",
 		ce::clock::fps(), entity_player.get_position(),
 		entity_player.get_velocity(),
-		entity_player.is_grounded(),
-		entity_player.get_collides()));
+		entity_player.is_grounded()));
 
 	txt_debug.draw();
 #endif
