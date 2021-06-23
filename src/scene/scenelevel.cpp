@@ -24,10 +24,6 @@ void scene_level::render()
 	entity_player.update(input, *level);
 	draw_map();
 
-#ifndef NDEBUG
-	entity_player.debug_draw();
-#endif
-
 	camera.end();
 
 #ifndef NDEBUG

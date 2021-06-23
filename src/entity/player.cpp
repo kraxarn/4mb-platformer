@@ -102,11 +102,6 @@ auto entity::player::rect() const -> Rectangle
 }
 
 #ifndef NDEBUG
-void entity::player::debug_draw() const
-{
-	debug_draw(rect(), GREEN);
-}
-
 void entity::player::debug_draw(const Rectangle &rect, const Color &color)
 {
 	DrawRectangleLines(static_cast<int>(rect.x),

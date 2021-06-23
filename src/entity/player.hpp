@@ -27,9 +27,6 @@ namespace entity
 		auto rect() const -> Rectangle;
 
 #ifndef NDEBUG
-		/** Draw collision shape for debugging */
-		void debug_draw() const;
-
 		auto get_collides() const -> const ce::vector2<bool> &;
 #endif
 
