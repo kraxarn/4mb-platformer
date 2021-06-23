@@ -1,9 +1,14 @@
 #include "physics/collision.hpp"
 
-auto phys::collision::is_tile(char value) -> bool
+auto phys::collision::get_tile_type(char value) -> tile_type
 {
-	return value > static_cast<char>(tile::none)
-		&& value < static_cast<char>(tile::spawn);
+	return value == static_cast<char>(tile::none)
+		? tile_type::empty
+		: value < static_cast<char>(tile::spawn)
+			? tile_type::tile
+			: value <= static_cast<char>(tile::spike) // Last valid tile
+				? tile_type::item
+				: tile_type::invalid;
 }
 
 auto phys::collision::will_collide(const Rectangle &player_rect,

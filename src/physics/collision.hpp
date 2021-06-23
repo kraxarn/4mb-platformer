@@ -3,16 +3,15 @@
 #include "engine/level.hpp"
 #include "engine/vector2.hpp"
 #include "physics/tiles.hpp"
+#include "enum/tiletype.hpp"
 
 namespace phys
 {
 	class collision
 	{
 	public:
-		/**
-		 * Is level tile
-		 */
-		static auto is_tile(char value) -> bool;
+		/** Get type of tile */
+		static auto get_tile_type(char value) -> tile_type;
 
 		/**
 		 * Player is going to collide,
