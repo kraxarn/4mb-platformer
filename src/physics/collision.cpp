@@ -64,6 +64,11 @@ auto phys::collision::will_collide(const ce::level &level,
 	{
 		for (y = tile.y - 1; y < tile.y + 1; y++)
 		{
+			if (!is_tile(map.at(x).at(y)))
+			{
+				continue;
+			}
+
 			target.x = static_cast<float>(x) * ce::tile_size;
 			target.y = static_cast<float>(y) * ce::tile_size;
 
