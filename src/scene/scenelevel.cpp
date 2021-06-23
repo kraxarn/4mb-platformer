@@ -6,8 +6,8 @@ scene_level::scene_level(const ce::assets &assets)
 	txt_debug("", debug_hud_offset, debug_hud_offset,
 		debug_hud_size, WHITE),
 #endif
-	entity_player(assets, ce::tile_scale),
 	entity_hud(assets),
+	entity_player(assets, entity_hud, ce::tile_scale),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))

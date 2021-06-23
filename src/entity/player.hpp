@@ -9,13 +9,14 @@
 #include "physics/collision.hpp"
 #include "physics/tiles.hpp"
 #include "enum/direction.hpp"
+#include "entity/hud.hpp"
 
 namespace entity
 {
 	class player: public ce::animated_sprite
 	{
 	public:
-		player(const ce::assets &assets, float scale);
+		player(const ce::assets &assets, entity::hud &hud, float scale);
 
 		/** Update input, position, collision, and finally draw sprite */
 		void update(const ce::input &input, const ce::level &level);
@@ -36,6 +37,8 @@ namespace entity
 		static constexpr float gravity = 0.4F;
 
 		static constexpr float speed_limit = 8.F;
+
+		entity::hud &hud;
 
 		ce::vector2f velocity;
 		direction dir;
