@@ -33,12 +33,12 @@ public:
 
 private:
 	static constexpr float move_acceleration = 1.F;
-	static constexpr float move_deceleration = -1.1F;
+	static constexpr float move_deceleration = -0.4F;
 
-	static constexpr float jump_force = -1.F;
-	static constexpr float gravity = 0.1F;
+	static constexpr float jump_force = -10.F;
+	static constexpr float gravity = 0.4F;
 
-	static constexpr float speed_limit = 10.F;
+	static constexpr float speed_limit = 8.F;
 
 	ce::vector2f velocity;
 
