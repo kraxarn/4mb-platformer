@@ -44,9 +44,15 @@ auto phys::collision::will_collide(const ce::level &level,
 
 	for (x = tile.x - 1; x < tile.x + 1; x++)
 	{
+		if (x < 0 || x >= map.size())
+		{
+			continue;
+		}
+
 		for (y = tile.y - 1; y < tile.y + 1; y++)
 		{
-			if (!is_tile(map.at(x).at(y)))
+			if (y < 0 || y >= map.at(x).size()
+				|| !is_tile(map.at(x).at(y)))
 			{
 				continue;
 			}
