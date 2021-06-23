@@ -5,6 +5,7 @@
 #include "asset/font.hpp"
 #include "asset/image.hpp"
 #include "asset/tileset.hpp"
+#include "asset/sound.hpp"
 #include "engine/level.hpp"
 #include "engine/format.hpp"
 
@@ -18,6 +19,8 @@ namespace ce
 		assets();
 
 		auto music(const std::string &path) const -> asset::music;
+
+		auto sound(const std::string &path) const -> asset::sound;
 
 		auto font(const std::string &path, int font_size) const -> asset::font;
 

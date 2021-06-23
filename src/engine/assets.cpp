@@ -16,6 +16,11 @@ auto ce::assets::music(const std::string &path) const -> asset::music
 	return asset::music(open("music", path), path);
 }
 
+auto ce::assets::sound(const std::string &path) const -> asset::sound
+{
+	return asset::sound(open("sound", path));
+}
+
 auto ce::assets::font(const std::string &path, int font_size) const -> asset::font
 {
 	return asset::font(open("font", path), font_size);
