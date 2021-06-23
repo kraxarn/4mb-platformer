@@ -72,52 +72,10 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 
 void entity::player::update_collision(const ce::level &level)
 {
-	const auto &map = level.map();
-	const auto w = static_cast<float>(width()) * ce::tile_scale;
-	const auto h = static_cast<float>(height()) * ce::tile_scale;
-
-	auto current_pos = get_position();
-	current_pos.y += h;
-
-	auto target_pos = current_pos;
-	target_pos.x += w * (velocity.x > 0.F ? 1.F : velocity.x < 0.F ? 0.F : 0.5F);
-	target_pos.y += velocity.y < 0.F ? h * -1.F : 0.F;
-
-	auto target = (target_pos / ce::tile_size).to<int>();
-	auto current = (current_pos / ce::tile_size).to<int>();
-
-	// TODO: -1 is very temporary due to poor target tile calculation
-	auto new_tile_x = map.at(target.x).at(current.y - 1);
-	auto new_tile_y = map.at(current.x).at(target.y);
-
-	if (phys::collision::is_tile(new_tile_x))
-	{
-		velocity.x = 0.F;
-	}
-	if (phys::collision::is_tile(new_tile_y))
-	{
-		velocity.y = 0.F;
-	}
+	auto colliding = phys::collision::will_collide(rect(), level, velocity);
 
 #ifndef NDEBUG
-	collides.x = phys::collision::is_tile(new_tile_x);
-	collides.y = phys::collision::is_tile(new_tile_y);
-
-	debug_draw(Rectangle{
-		static_cast<float>(target.x) * ce::tile_size,
-		static_cast<float>(target.y) * ce::tile_size,
-		ce::tile_size,
-		ce::tile_size,
-	}, RED);
-
-	DrawText(std::to_string(new_tile_x).c_str(),
-		target.x * static_cast<int>(ce::tile_size) + 6,
-		current.y * static_cast<int>(ce::tile_size) + 6,
-		14.F, RED);
-
-	auto target_vec = target_pos.to<int>();
-	DrawCircle(target_vec.x, target_vec.y,
-		3.F, RED);
+	debug_draw(rect(), colliding ? GREEN : RED);
 #endif
 }
 
