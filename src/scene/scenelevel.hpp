@@ -16,6 +16,7 @@
 #include "physics/collision.hpp"
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
+#include "entity/hud.hpp"
 
 #include <memory>
 
@@ -54,6 +55,7 @@ private:
 
 	// Entities
 	entity::player entity_player;
+	entity::hud entity_hud;
 
 	/** Find spawn tile in current level */
 	auto get_spawn() const -> ce::vector2f;

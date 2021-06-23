@@ -7,6 +7,7 @@ scene_level::scene_level(const ce::assets &assets)
 		debug_hud_size, WHITE),
 #endif
 	entity_player(assets, ce::tile_scale),
+	entity_hud(assets),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png"))
@@ -25,6 +26,8 @@ void scene_level::render()
 	draw_map();
 
 	camera.end();
+
+	entity_hud.draw();
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
