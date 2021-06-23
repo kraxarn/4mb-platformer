@@ -14,9 +14,6 @@ namespace phys
 		 */
 		static auto is_tile(char value) -> bool;
 
-		/** Player can collide with this tile */
-		static auto can_collide(const ce::level &level, int x, int y) -> bool;
-
 		/**
 		 * Player is going to collide,
 		 * @note Velocity is modified so player doesn't collide
