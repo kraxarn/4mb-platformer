@@ -27,7 +27,7 @@ void scene_level::render()
 
 	camera.end();
 
-	entity_hud.draw();
+	entity_hud.draw(*level);
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
