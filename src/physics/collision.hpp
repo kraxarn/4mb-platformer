@@ -17,8 +17,8 @@ namespace phys
 		 * Player is going to collide,
 		 * @note Velocity is modified so player doesn't collide
 		 * */
-		static auto update(const Rectangle &player_rect,
-			const ce::level &level, ce::vector2f &velocity) -> tile_type;
+		static auto update(const Rectangle &player_rect, ce::level &level,
+			ce::vector2f &velocity, entity::hud &hud) -> tile_type;
 
 	private:
 		collision() = default;

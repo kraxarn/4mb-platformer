@@ -12,7 +12,7 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 }
 
 auto phys::collision::update(const Rectangle &player_rect,
-	const ce::level &level, ce::vector2f &velocity) -> tile_type
+	ce::level &level, ce::vector2f &velocity, entity::hud &hud) -> tile_type
 {
 	auto collides = tile_type::empty;
 	const auto &map = level.map();

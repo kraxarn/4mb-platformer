@@ -19,7 +19,7 @@ namespace entity
 		player(const ce::assets &assets, entity::hud &hud, float scale);
 
 		/** Update input, position, collision, and finally draw sprite */
-		void update(const ce::input &input, const ce::level &level);
+		void update(const ce::input &input, ce::level &level);
 
 		/** Get current player speed */
 		auto get_velocity() const -> const ce::vector2f &;
@@ -45,7 +45,7 @@ namespace entity
 
 		asset::sound snd_jump;
 
-		void update_collision(const ce::level &level);
+		void update_collision(ce::level &level);
 		auto get_dir() const -> direction;
 
 #ifndef NDEBUG

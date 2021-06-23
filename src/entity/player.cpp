@@ -12,7 +12,7 @@ entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
 	dir = direction::left;
 }
 
-void entity::player::update(const ce::input &input, const ce::level &level)
+void entity::player::update(const ce::input &input, ce::level &level)
 {
 	// Right
 	if (input.is_down(ce::key::right))
@@ -96,7 +96,7 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 #endif
 }
 
-void entity::player::update_collision(const ce::level &level)
+void entity::player::update_collision(ce::level &level)
 {
 	auto colliding = phys::collision::update(rect(), level, velocity);
 
