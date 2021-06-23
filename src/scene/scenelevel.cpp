@@ -136,12 +136,15 @@ void scene_level::draw_map()
 			tiles.draw(x_pos, y_pos,
 				tile, 0.F, ce::tile_scale);
 		}
-
-		if (tile_type == tile_type::item)
+		else if (tile_type == tile_type::item)
 		{
-			items.draw(x_pos, y_pos,
-				tile % static_cast<int>(tile::spawn),
-				0.F, ce::tile_scale);
+			if (tile != static_cast<char>(tile::exit)
+				|| entity_hud.get_gem_count() == level->get_total_gem_count())
+			{
+				items.draw(x_pos, y_pos,
+					tile % static_cast<int>(tile::spawn),
+					0.F, ce::tile_scale);
+			}
 		}
 
 #ifndef NDEBUG
