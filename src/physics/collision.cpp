@@ -11,7 +11,7 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 				: tile_type::invalid;
 }
 
-auto phys::collision::will_collide(const Rectangle &player_rect,
+auto phys::collision::update(const Rectangle &player_rect,
 	const ce::level &level, ce::vector2f &velocity) -> tile_type
 {
 	auto collides = tile_type::empty;
