@@ -18,6 +18,13 @@ namespace entity
 
 		auto get_gem_count() const -> int;
 
+		/** Increment coins by one */
+		void add_coin();
+		/** Increment gems by one */
+		void add_gem();
+		/** Reset elements for level switch */
+		void reset();
+
 	private:
 		/** Font size for all HUD elements */
 		static constexpr int font_size = 30;
@@ -44,6 +51,9 @@ namespace entity
 		asset::tileset ts_hud;
 		ce::vector2f pos_gems;
 		ce::vector2f pos_coins;
+
+		asset::sound snd_coin;
+		asset::sound snd_gem;
 
 		void update(ce::level &level);
 	};

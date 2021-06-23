@@ -4,7 +4,9 @@ entity::hud::hud(const ce::assets &assets)
 	: fnt_hud(assets.font("submenu.ttf", font_size)),
 	txt_gems("0/0", 0, 0, font_size, color::text),
 	txt_coins("0", 0, 0, font_size, color::text),
-	ts_hud(assets.tileset("items.png"))
+	ts_hud(assets.tileset("items.png")),
+	snd_coin(assets.sound("coin.wav")),
+	snd_gem(assets.sound("gem.wav"))
 {
 	/*
 	 * /-----------------------tr
@@ -69,4 +71,21 @@ void entity::hud::update(ce::level &level)
 auto entity::hud::get_gem_count() const -> int
 {
 	return gems;
+}
+
+void entity::hud::add_coin()
+{
+	snd_coin.play();
+	coins++;
+}
+
+void entity::hud::add_gem()
+{
+	snd_gem.play();
+	gems++;
+}
+
+void entity::hud::reset()
+{
+	gems = 0;
 }
