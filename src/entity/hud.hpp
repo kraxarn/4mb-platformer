@@ -25,9 +25,6 @@ namespace entity
 		/** Spacing between each element */
 		static constexpr int spacing = 6;
 
-		/** Width to reserve for text */
-		static constexpr int text_width = font_size;
-
 		/** Scale of all images in HUD */
 		static constexpr float scale = 2.F;
 

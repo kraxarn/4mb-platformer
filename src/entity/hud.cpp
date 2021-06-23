@@ -19,7 +19,8 @@ entity::hud::hud(const ce::assets &assets)
 	};
 
 	auto hud_height = static_cast<float>(ts_hud.get_size());
-	auto font_offset = (hud_height - fnt_hud.text_size(txt_gems).y) / 4.F;
+	auto font_offset = (ts_hud.get_size()
+		- ce::vector2i(fnt_hud.text_size(txt_gems)).y) / 4;
 
 	pos_gems.x = top_right.x - offset - hud_height * scale;
 	pos_gems.y = offset;
@@ -28,11 +29,11 @@ entity::hud::hud(const ce::assets &assets)
 	pos_coins.y = pos_gems.y + hud_height * scale + spacing;
 
 	// Coin
-	txt_gems.set_x(pos_gems.x - text_width * 2);
-	txt_gems.set_y(pos_gems.y - font_offset);
+	txt_gems.set_x(pos_gems.to<int>().x);
+	txt_gems.set_y(pos_gems.to<int>().y - font_offset);
 	// gem
-	txt_coins.set_x(pos_coins.x - text_width);
-	txt_coins.set_y(pos_coins.y - font_offset);
+	txt_coins.set_x(pos_coins.to<int>().x);
+	txt_coins.set_y(pos_coins.to<int>().y - font_offset);
 }
 
 void entity::hud::draw()
@@ -40,8 +41,10 @@ void entity::hud::draw()
 	update();
 
 	// Text positions
-	txt_gems.set_x(pos_gems.x - fnt_hud.text_size(txt_gems).x);
-	txt_coins.set_x(pos_coins.x - fnt_hud.text_size(txt_coins).x);
+	txt_gems.set_x(pos_gems.to<int>().x
+		- ce::vector2i(fnt_hud.text_size(txt_gems)).x);
+	txt_coins.set_x(pos_coins.to<int>().x
+		- ce::vector2i(fnt_hud.text_size(txt_coins)).x);
 
 	// Text
 	fnt_hud.draw_text(txt_gems);
