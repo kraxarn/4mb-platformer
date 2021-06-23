@@ -43,6 +43,7 @@ auto phys::collision::will_collide(const ce::level &level,
 	const ce::vector2i &tile, const Rectangle &rect) -> bool
 {
 	const auto &map = level.map();
+	tile_type tile_type;
 	int x;
 	int y;
 
@@ -59,8 +60,13 @@ auto phys::collision::will_collide(const ce::level &level,
 
 		for (y = tile.y - offset; y < tile.y + offset; y++)
 		{
-			if (y < 0 || y >= map.at(x).size()
-				|| get_tile_type(map.at(x).at(y)) != tile_type::tile)
+			if (y < 0 || y >= map.at(x).size())
+			{
+				continue;
+			}
+
+			tile_type = get_tile_type(map.at(x).at(y));
+			if (tile_type != tile_type::tile)
 			{
 				continue;
 			}
