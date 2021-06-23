@@ -23,3 +23,56 @@ auto phys::collision::can_collide(const ce::level &level, int x, int y) -> bool
 		&& x > 0 && is_tile(map.at(x - 1).at(y))                    // left
 		&& x < map.size() - 1 && is_tile(map.at(x + 1).at(y)));     // right
 }
+
+auto phys::collision::will_collide(const Rectangle &player_rect,
+	const ce::level &level, ce::vector2f &velocity) -> bool
+{
+	const auto &map = level.map();
+	auto rect = player_rect;
+	ce::vector2f player_position(rect.x, rect.y);
+	auto player_tile = (player_position / ce::tile_size).to<int>();
+
+	rect.x += velocity.x;
+	if (will_collide(level, player_tile, rect))
+	{
+		velocity.x = 0.F;
+		return true;
+	}
+
+	rect.y += velocity.y;
+	if (will_collide(level, player_tile, rect))
+	{
+		velocity.y = 0.F;
+		return true;
+	}
+
+	return false;
+}
+
+auto phys::collision::will_collide(const ce::level &level,
+	const ce::vector2i &tile, const Rectangle &rect) -> bool
+{
+	const auto &map = level.map();
+	int x;
+	int y;
+
+	Rectangle target{};
+	target.width = ce::tile_size;
+	target.height = ce::tile_size;
+
+	for (x = tile.x - 1; x < tile.x + 1; x++)
+	{
+		for (y = tile.y - 1; y < tile.y + 1; y++)
+		{
+			target.x = static_cast<float>(x) * ce::tile_size;
+			target.y = static_cast<float>(y) * ce::tile_size;
+
+			if (CheckCollisionRecs(rect, target))
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
