@@ -6,6 +6,9 @@ entity::player::player(const ce::assets &assets, float scale)
 {
 	// Sprite
 	set_scale(scale);
+
+	// By default, the sprite is facing left
+	dir = direction::left;
 }
 
 void entity::player::update(const ce::input &input, const ce::level &level)
@@ -57,6 +60,14 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 		velocity.y += gravity;
 	}
 
+	// Flip image if needed
+	const auto new_dir = get_dir();
+	if (dir != new_dir)
+	{
+		dir = new_dir;
+		flip();
+	}
+
 #ifndef NDEBUG
 	// update_collision draws some stuff in debug
 	draw();
@@ -99,6 +110,15 @@ auto entity::player::rect() const -> Rectangle
 		static_cast<float>(width()) * get_scale(),
 		static_cast<float>(height()) * get_scale(),
 	};
+}
+
+auto entity::player::get_dir() const -> direction
+{
+	return velocity.x < 0
+		? direction::left
+		: velocity.x > 0
+			? direction::right
+			: dir;
 }
 
 #ifndef NDEBUG

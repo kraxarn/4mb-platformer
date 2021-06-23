@@ -36,6 +36,11 @@ void ce::animated_sprite::rotate(float value)
 	rotation += value;
 }
 
+void ce::animated_sprite::flip()
+{
+	tileset.flip_horizontal();
+}
+
 auto ce::animated_sprite::width() const -> int
 {
 	return tileset.get_size();

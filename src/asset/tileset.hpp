@@ -16,6 +16,8 @@ namespace asset
 
 		void draw(float x, float y, int index, float rotation, float scale) const;
 
+		void flip_horizontal();
+
 		auto get_size() const -> int;
 
 	private:

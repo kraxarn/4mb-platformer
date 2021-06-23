@@ -23,6 +23,12 @@ void asset::tileset::draw(float x, float y, int i, float rotation, float scale) 
 	texture.draw(x, y, size, size * i, rotation, scale);
 }
 
+void asset::tileset::flip_horizontal()
+{
+	ImageFlipHorizontal(&image);
+	texture = ce::texture(image);
+}
+
 auto asset::tileset::get_size() const -> int
 {
 	return size;

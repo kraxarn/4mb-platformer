@@ -8,6 +8,7 @@
 
 #include "physics/collision.hpp"
 #include "physics/tiles.hpp"
+#include "enum/direction.hpp"
 
 namespace entity
 {
@@ -37,10 +38,12 @@ namespace entity
 		static constexpr float speed_limit = 8.F;
 
 		ce::vector2f velocity;
+		direction dir;
 
 		asset::sound snd_jump;
 
 		void update_collision(const ce::level &level);
+		auto get_dir() const -> direction;
 
 #ifndef NDEBUG
 		static void debug_draw(const Rectangle &rect, const Color &color);

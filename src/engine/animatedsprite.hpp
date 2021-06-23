@@ -20,6 +20,8 @@ namespace ce
 
 		void rotate(float value);
 
+		void flip();
+
 		auto width() const -> int;
 		auto height() const -> int;
 		auto size() const -> ce::vector2i;
