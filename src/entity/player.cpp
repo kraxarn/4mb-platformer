@@ -1,13 +1,13 @@
-#include "player.hpp"
+#include "entity/player.hpp"
 
-player::player(const ce::assets &assets, float scale)
+entity::player::player(const ce::assets &assets, float scale)
 	: ce::animated_sprite(assets.tileset("player.png"))
 {
 	// Sprite
 	set_scale(scale);
 }
 
-void player::update(const ce::input &input, const ce::level &level)
+void entity::player::update(const ce::input &input, const ce::level &level)
 {
 	// Right
 	if (input.is_down(ce::key::right))
@@ -70,7 +70,7 @@ void player::update(const ce::input &input, const ce::level &level)
 #endif
 }
 
-void player::update_collision(const ce::level &level)
+void entity::player::update_collision(const ce::level &level)
 {
 	const auto &map = level.map();
 	const auto w = static_cast<float>(width()) * ce::tile_scale;
@@ -121,17 +121,17 @@ void player::update_collision(const ce::level &level)
 #endif
 }
 
-auto player::get_velocity() const -> const ce::vector2f &
+auto entity::player::get_velocity() const -> const ce::vector2f &
 {
 	return velocity;
 }
 
-auto player::is_grounded() const -> bool
+auto entity::player::is_grounded() const -> bool
 {
 	return velocity.y == 0;
 }
 
-auto player::rect() const -> Rectangle
+auto entity::player::rect() const -> Rectangle
 {
 	return Rectangle{
 		get_x(),
@@ -142,12 +142,12 @@ auto player::rect() const -> Rectangle
 }
 
 #ifndef NDEBUG
-void player::debug_draw() const
+void entity::player::debug_draw() const
 {
 	debug_draw(rect(), GREEN);
 }
 
-void player::debug_draw(const Rectangle &rect, const Color &color)
+void entity::player::debug_draw(const Rectangle &rect, const Color &color)
 {
 	DrawRectangleLines(static_cast<int>(rect.x),
 		static_cast<int>(rect.y),
@@ -156,7 +156,7 @@ void player::debug_draw(const Rectangle &rect, const Color &color)
 		color);
 }
 
-auto player::get_collides() const -> const ce::vector2<bool> &
+auto entity::player::get_collides() const -> const ce::vector2<bool> &
 {
 	return collides;
 }
