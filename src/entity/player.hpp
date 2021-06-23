@@ -7,6 +7,7 @@
 #include "engine/input.hpp"
 
 #include "physics/collision.hpp"
+#include "physics/tiles.hpp"
 
 namespace entity
 {

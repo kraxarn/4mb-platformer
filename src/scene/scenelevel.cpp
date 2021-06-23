@@ -118,14 +118,28 @@ void scene_level::draw_map()
 {
 	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char tile)
 	{
-		if (!phys::collision::is_tile(tile))
+		auto tile_type = phys::collision::get_tile_type(tile);
+
+		if (tile_type == tile_type::empty)
 		{
 			return;
 		}
 
-		tiles.draw(static_cast<float>(x) * ce::tile_size,
-			static_cast<float>(y) * ce::tile_size,
-			tile, 0.F, ce::tile_scale);
+		auto x_pos = static_cast<float>(x) * ce::tile_size;
+		auto y_pos = static_cast<float>(y) * ce::tile_size;
+
+		if (tile_type == tile_type::tile)
+		{
+			tiles.draw(x_pos, y_pos,
+				tile, 0.F, ce::tile_scale);
+		}
+
+		if (tile_type == tile_type::item)
+		{
+			items.draw(x_pos, y_pos,
+				tile % static_cast<int>(tile::spawn),
+				0.F, ce::tile_scale);
+		}
 
 #ifndef NDEBUG
 		DrawRectangleLines(x * ce::tile_size,
