@@ -9,26 +9,29 @@ auto phys::collision::is_tile(char value) -> bool
 auto phys::collision::will_collide(const Rectangle &player_rect,
 	const ce::level &level, ce::vector2f &velocity) -> bool
 {
+	auto collides = false;
 	const auto &map = level.map();
 	auto rect = player_rect;
 	ce::vector2f player_position(rect.x, rect.y);
 	auto player_tile = (player_position / ce::tile_size).to<int>();
 
-	rect.x += velocity.x;
-	if (will_collide(level, player_tile, rect))
+	auto rect_x = rect;
+	rect_x.x += velocity.x;
+	if (will_collide(level, player_tile, rect_x))
 	{
 		velocity.x = 0.F;
-		return true;
+		collides = true;
 	}
 
-	rect.y += velocity.y;
-	if (will_collide(level, player_tile, rect))
+	auto rect_y = rect;
+	rect_y.y += velocity.y;
+	if (will_collide(level, player_tile, rect_y))
 	{
 		velocity.y = 0.F;
-		return true;
+		collides = true;
 	}
 
-	return false;
+	return collides;
 }
 
 auto phys::collision::will_collide(const ce::level &level,
