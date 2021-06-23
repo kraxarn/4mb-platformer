@@ -22,6 +22,7 @@ namespace ce
 
 		auto width() const -> int;
 		auto height() const -> int;
+		auto size() const -> ce::vector2i;
 
 	private:
 		/** Ticks between switching frame */
