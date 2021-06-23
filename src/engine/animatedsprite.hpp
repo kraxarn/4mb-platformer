@@ -26,6 +26,11 @@ namespace ce
 		auto height() const -> int;
 		auto size() const -> ce::vector2i;
 
+		void set_frame(int index);
+
+		void pause();
+		void resume();
+
 	private:
 		/** Ticks between switching frame */
 		int time = 10;
@@ -39,6 +44,9 @@ namespace ce
 		float scale = 1.F;
 
 		float rotation = 0.F;
+
+		/** Animation is running */
+		bool running = true;
 
 		asset::tileset tileset;
 	};

@@ -7,14 +7,17 @@ ce::animated_sprite::animated_sprite(const asset::tileset &tileset)
 
 void ce::animated_sprite::draw()
 {
-	current++;
-	if (current >= time)
+	if (running)
 	{
-		current = 0;
-		frame++;
-		if (frame >= tileset.get_size())
+		current++;
+		if (current >= time)
 		{
-			frame = 0;
+			current = 0;
+			frame++;
+			if (frame >= tileset.get_size())
+			{
+				frame = 0;
+			}
 		}
 	}
 
@@ -57,4 +60,19 @@ auto ce::animated_sprite::size() const -> ce::vector2i
 		width(),
 		height(),
 	};
+}
+
+void ce::animated_sprite::set_frame(int index)
+{
+	frame = index;
+}
+
+void ce::animated_sprite::pause()
+{
+	running = false;
+}
+
+void ce::animated_sprite::resume()
+{
+	running = true;
 }

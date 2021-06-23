@@ -53,6 +53,8 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 	if (input.is_pressed(ce::key::jump) && is_grounded())
 	{
 		snd_jump.play();
+		ce::animated_sprite::pause();
+		set_frame(1);
 		velocity.y = jump_force;
 	}
 	else
@@ -76,6 +78,16 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 	// Update position
 	update_collision(level);
 	set_position(get_position() + velocity);
+
+	if (velocity.x == 0)
+	{
+		ce::animated_sprite::pause();
+		set_frame(0);
+	}
+	else if (is_grounded())
+	{
+		ce::animated_sprite::resume();
+	}
 
 #ifdef NDEBUG
 	// Draw sprite
