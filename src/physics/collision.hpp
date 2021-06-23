@@ -4,6 +4,7 @@
 #include "engine/vector2.hpp"
 #include "physics/tiles.hpp"
 #include "enum/tiletype.hpp"
+#include "entity/hud.hpp"
 
 namespace phys
 {
@@ -31,6 +32,6 @@ namespace phys
 			const ce::vector2i &tile, const Rectangle &rect) -> bool;
 
 		static auto will_collide_item(ce::level &level,
-			const ce::vector2i &tile) -> bool;
+			const ce::vector2i &tile, entity::hud &hud) -> bool;
 	};
 }

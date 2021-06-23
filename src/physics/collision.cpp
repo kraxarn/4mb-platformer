@@ -36,6 +36,7 @@ auto phys::collision::update(const Rectangle &player_rect,
 		collides = tile_type::tile;
 	}
 
+	will_collide_item(level, player_tile, hud);
 	return collides;
 }
 
@@ -85,9 +86,10 @@ auto phys::collision::will_collide(const ce::level &level,
 }
 
 auto phys::collision::will_collide_item(ce::level &level,
-	const ce::vector2i &tile) -> bool
+	const ce::vector2i &tile, entity::hud &hud) -> bool
 {
-	auto target = level.map().at(tile.x).at(tile.y);
+	const auto &map = level.map();
+	const auto &target = map.at(tile.x).at(tile.y);
 	if (get_tile_type(target) != tile_type::item)
 	{
 		return false;
@@ -101,11 +103,13 @@ auto phys::collision::will_collide_item(ce::level &level,
 	}
 	else if (item == tile::coin)
 	{
-		// TODO: Increment coin counter
+		level.set_tile(tile.x, tile.y, -1);
+		hud.add_coin();
 	}
 	else if (item == tile::gem)
 	{
-		// TODO: Increment gem counter
+		level.set_tile(tile.x, tile.y, -1);
+		hud.add_gem();
 	}
 	else if (item == tile::water)
 	{
