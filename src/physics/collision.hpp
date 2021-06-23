@@ -24,7 +24,7 @@ namespace phys
 		collision() = default;
 
 		/** How many more tiles to check around the player */
-		static constexpr int offset = 32;
+		static constexpr int offset = 4;
 
 		/** Check if tile in rect collide in level */
 		static auto will_collide(const ce::level &level,
