@@ -53,7 +53,7 @@ private:
 	ce::tileset items;
 
 	// Entities
-	player entity_player;
+	entity::player entity_player;
 
 	/** Find spawn tile in current level */
 	auto get_spawn() const -> ce::vector2f;
