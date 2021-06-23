@@ -71,6 +71,9 @@ void scene_level::load(int index)
 	ce::vector2f player_position = spawn * ce::tile_size;
 	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
 	entity_player.set_position(player_position);
+
+	// Reset HUD
+	entity_hud.reset();
 }
 
 auto scene_level::get_spawn() const -> ce::vector2f
