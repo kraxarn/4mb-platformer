@@ -60,7 +60,7 @@ auto phys::collision::will_collide(const ce::level &level,
 		for (y = tile.y - offset; y < tile.y + offset; y++)
 		{
 			if (y < 0 || y >= map.at(x).size()
-				|| !is_tile(map.at(x).at(y)))
+				|| get_tile_type(map.at(x).at(y)) != tile_type::tile)
 			{
 				continue;
 			}
