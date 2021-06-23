@@ -67,7 +67,7 @@ void entity::player::update(const ce::input &input, const ce::level &level)
 	if (dir != new_dir)
 	{
 		dir = new_dir;
-		flip();
+		ce::animated_sprite::flip();
 	}
 
 #ifndef NDEBUG
