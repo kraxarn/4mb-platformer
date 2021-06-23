@@ -25,5 +25,4 @@ cmrc_add_resource_library(res
 	assets/tileset/grass.png
 	assets/tileset/dirt.png
 	assets/tileset/enemy.png
-	assets/tileset/hud.png
 	assets/tileset/items.png)
