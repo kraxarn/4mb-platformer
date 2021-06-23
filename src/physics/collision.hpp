@@ -18,7 +18,7 @@ namespace phys
 		 * @note Velocity is modified so player doesn't collide
 		 * */
 		static auto will_collide(const Rectangle &player_rect,
-			const ce::level &level, ce::vector2f &velocity) -> bool;
+			const ce::level &level, ce::vector2f &velocity) -> tile_type;
 
 	private:
 		collision() = default;

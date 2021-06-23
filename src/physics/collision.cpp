@@ -12,9 +12,9 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 }
 
 auto phys::collision::will_collide(const Rectangle &player_rect,
-	const ce::level &level, ce::vector2f &velocity) -> bool
+	const ce::level &level, ce::vector2f &velocity) -> tile_type
 {
-	auto collides = false;
+	auto collides = tile_type::empty;
 	const auto &map = level.map();
 	auto rect = player_rect;
 	ce::vector2f player_position(rect.x, rect.y);
@@ -25,7 +25,7 @@ auto phys::collision::will_collide(const Rectangle &player_rect,
 	if (will_collide(level, player_tile, rect_x))
 	{
 		velocity.x = 0.F;
-		collides = true;
+		collides = tile_type::tile;
 	}
 
 	auto rect_y = rect;
@@ -33,7 +33,7 @@ auto phys::collision::will_collide(const Rectangle &player_rect,
 	if (will_collide(level, player_tile, rect_y))
 	{
 		velocity.y = 0.F;
-		collides = true;
+		collides = tile_type::tile;
 	}
 
 	return collides;

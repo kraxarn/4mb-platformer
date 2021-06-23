@@ -77,7 +77,7 @@ void entity::player::update_collision(const ce::level &level)
 	auto colliding = phys::collision::will_collide(rect(), level, velocity);
 
 #ifndef NDEBUG
-	debug_draw(rect(), colliding ? GREEN : RED);
+	debug_draw(rect(), colliding == tile_type::tile ? GREEN : RED);
 #endif
 }
 
