@@ -5,12 +5,6 @@ asset::tileset::tileset(const cmrc::file &file)
 	texture(image)
 {
 	size = texture.get_height();
-	count = texture.get_width() / size;
-}
-
-void asset::tileset::set_index(int value)
-{
-	index = value;
 }
 
 auto asset::tileset::at(int i) const -> asset::image
@@ -22,11 +16,6 @@ auto asset::tileset::at(int i) const -> asset::image
 	};
 
 	return asset::image(ImageFromImage(image, rect));
-}
-
-void asset::tileset::draw(float x, float y, int i) const
-{
-	texture.draw(x, y, size, size * i);
 }
 
 void asset::tileset::draw(float x, float y, int i, float rotation, float scale) const
