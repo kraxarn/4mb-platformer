@@ -1,8 +1,8 @@
 #pragma once
 
+#include "asset/font.hpp"
 #include "engine/scene.hpp"
 #include "engine/text.hpp"
-#include "engine/font.hpp"
 #include "engine/texture.hpp"
 #include "engine/clock.hpp"
 #include "engine/input.hpp"
@@ -27,7 +27,7 @@ private:
 	static constexpr short text_count = 4;
 	static constexpr short text_spacing = 48;
 
-	ce::music music;
+	asset::music music;
 
 #ifndef NDEBUG
 	ce::text txt_debug;
@@ -39,7 +39,7 @@ private:
 
 	ce::animated_sprite spr_demo;
 
-	ce::font fnt_menu;
+	asset::font fnt_menu;
 	std::vector<ce::text> texts;
 
 	ce::input input;

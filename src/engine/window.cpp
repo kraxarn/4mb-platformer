@@ -4,9 +4,6 @@ ce::window::window(int width, int height, const std::string &title, int fps)
 {
 	InitWindow(width, height, title.c_str());
 	SetTargetFPS(fps);
-
-//	camera.zoom = static_cast<float>(height) / render_height;
-//	std::cout << "Using " << camera.zoom << "x scale" << std::endl;
 }
 
 ce::window::window(int width, int height, const std::string &title)
@@ -27,12 +24,10 @@ auto ce::window::should_close() -> bool
 void ce::window::begin() const
 {
 	BeginDrawing();
-	//BeginMode2D(camera);
 }
 
 void ce::window::end() const
 {
-	//EndMode2D();
 	EndDrawing();
 }
 
@@ -41,7 +36,7 @@ void ce::window::close()
 	CloseWindow();
 }
 
-void ce::window::set_icon(const ce::image &image)
+void ce::window::set_icon(const asset::image &image)
 {
 	SetWindowIcon(image);
 }

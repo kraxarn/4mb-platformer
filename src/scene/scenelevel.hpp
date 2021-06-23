@@ -1,9 +1,9 @@
 #pragma once
 
+#include "asset/music.hpp"
 #include "engine/scene.hpp"
 #include "engine/level.hpp"
 #include "engine/animatedsprite.hpp"
-#include "engine/music.hpp"
 #include "engine/format.hpp"
 #include "engine/vector2.hpp"
 #include "engine/camera.hpp"
@@ -33,7 +33,7 @@ private:
 	static constexpr int level_height = ce::level_tiles_height * ce::tile_size;
 
 	// General engine stuff
-	ce::music music;
+	asset::music music;
 	ce::input input;
 
 	// Camera
@@ -49,8 +49,8 @@ private:
 
 	// Level
 	std::unique_ptr<ce::level> level;
-	ce::tileset tiles;
-	ce::tileset items;
+	asset::tileset tiles;
+	asset::tileset items;
 
 	// Entities
 	entity::player entity_player;

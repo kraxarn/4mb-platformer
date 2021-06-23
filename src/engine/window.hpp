@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib.h"
-#include "engine/image.hpp"
+#include "asset/image.hpp"
 #include "engine/vector2.hpp"
 
 #include <string>
@@ -23,7 +23,7 @@ namespace ce
 		void end() const;
 
 		static void close();
-		static void set_icon(const ce::image &image);
+		static void set_icon(const asset::image &image);
 
 		static auto size() -> ce::vector2i;
 

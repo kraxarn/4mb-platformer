@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include "res.hpp"
 
-namespace ce
+namespace asset
 {
 	class music
 	{

@@ -1,6 +1,6 @@
 #include "animatedsprite.hpp"
 
-ce::animated_sprite::animated_sprite(const ce::tileset &tileset)
+ce::animated_sprite::animated_sprite(const asset::tileset &tileset)
 	: tileset(tileset)
 {
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine/tileset.hpp"
+#include "asset/tileset.hpp"
 #include "engine/movable.hpp"
 
 namespace ce
@@ -8,10 +8,10 @@ namespace ce
 	/**
 	 * Animated sprite
 	 */
-	class animated_sprite: public ::ce::movable
+	class animated_sprite: public ce::movable
 	{
 	public:
-		explicit animated_sprite(const ::ce::tileset &tileset);
+		explicit animated_sprite(const asset::tileset &tileset);
 
 		void draw();
 
@@ -38,6 +38,6 @@ namespace ce
 
 		float rotation = 0.F;
 
-		::ce::tileset tileset;
+		asset::tileset tileset;
 	};
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib.h"
-#include "engine/image.hpp"
+#include "asset/image.hpp"
 
 #include <cmath>
 
@@ -10,7 +10,7 @@ namespace ce
 	class texture
 	{
 	public:
-		explicit texture(const ce::image &image);
+		explicit texture(const asset::image &image);
 
 		/**
 		 * Draw entire texture at position

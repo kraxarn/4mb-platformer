@@ -19,7 +19,7 @@ namespace ce
 		/**
 		 * New sprite from image
 		 */
-		explicit sprite(const ce::image &image);
+		explicit sprite(const asset::image &image);
 
 		void draw();
 

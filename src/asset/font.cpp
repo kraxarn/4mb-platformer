@@ -1,6 +1,6 @@
-#include "font.hpp"
+#include "asset/font.hpp"
 
-ce::font::font(const cmrc::file &file, int font_size)
+asset::font::font(const cmrc::file &file, int font_size)
 {
 	r_font = LoadFontFromMemory(".ttf",
 		(const unsigned char *) file.cbegin(),
@@ -10,25 +10,25 @@ ce::font::font(const cmrc::file &file, int font_size)
 	SetTextureFilter(r_font.texture, TEXTURE_FILTER_POINT);
 }
 
-ce::font::~font()
+asset::font::~font()
 {
 	UnloadFont(r_font);
 	RL_FREE(font_chars);
 }
 
-void ce::font::draw_text(const ce::text &text) const
+void asset::font::draw_text(const ce::text &text) const
 {
 	DrawTextEx(r_font, text.get_text().c_str(), text.position(),
 		static_cast<float>(text.get_font_size()),
 		0.F, text.get_color());
 }
 
-auto ce::font::font_size() const -> int
+auto asset::font::font_size() const -> int
 {
 	return r_font.baseSize;
 }
 
-auto ce::font::text_size(const ce::text &text) const -> Vector2
+auto asset::font::text_size(const ce::text &text) const -> Vector2
 {
 	return MeasureTextEx(r_font, text.get_text().c_str(),
 		static_cast<float>(text.get_font_size()), 0.F);

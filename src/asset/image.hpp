@@ -3,7 +3,7 @@
 #include "res.hpp"
 #include "raylib.h"
 
-namespace ce
+namespace asset
 {
 	class image: public Image
 	{

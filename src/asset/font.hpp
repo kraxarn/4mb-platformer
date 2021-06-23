@@ -4,7 +4,7 @@
 #include "res.hpp"
 #include "engine/text.hpp"
 
-namespace ce
+namespace asset
 {
 	class font
 	{

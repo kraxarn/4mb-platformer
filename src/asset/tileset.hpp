@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace ce
+namespace asset
 {
 	class tileset
 	{
@@ -14,7 +14,7 @@ namespace ce
 
 		void set_index(int index);
 
-		auto at(int index) const -> ce::image;
+		auto at(int index) const -> asset::image;
 
 		void draw(float x, float y, int index) const;
 		void draw(float x, float y, int index, float rotation, float scale) const;
@@ -31,7 +31,7 @@ namespace ce
 		/** Number of tiles */
 		int count = 0;
 
-		ce::image image;
+		asset::image image;
 		ce::texture texture;
 	};
 }

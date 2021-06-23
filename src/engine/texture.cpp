@@ -1,6 +1,6 @@
 #include "texture.hpp"
 
-ce::texture::texture(const ce::image &image)
+ce::texture::texture(const asset::image &image)
 	: r_texture(LoadTextureFromImage(image))
 {
 }

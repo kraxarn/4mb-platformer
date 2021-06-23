@@ -11,22 +11,22 @@ auto ce::assets::open(const std::string &folder,
 	return fs.open(ce::fmt::format("{}/{}", folder, filename));
 }
 
-auto ce::assets::music(const std::string &path) const -> ce::music
+auto ce::assets::music(const std::string &path) const -> asset::music
 {
-	return ce::music(open("music", path), path);
+	return asset::music(open("music", path), path);
 }
 
-auto ce::assets::font(const std::string &path, int font_size) const -> ce::font
+auto ce::assets::font(const std::string &path, int font_size) const -> asset::font
 {
-	return ce::font(open("font", path), font_size);
+	return asset::font(open("font", path), font_size);
 }
 
-auto ce::assets::image(const std::string &path) const -> ce::image
+auto ce::assets::image(const std::string &path) const -> asset::image
 {
-	return ce::image(open("image", path));
+	return asset::image(open("image", path));
 }
 
-auto ce::assets::tileset(const std::string &path) const -> ce::tileset
+auto ce::assets::tileset(const std::string &path) const -> asset::tileset
 {
-	return ce::tileset(open("tileset", path));
+	return asset::tileset(open("tileset", path));
 }
