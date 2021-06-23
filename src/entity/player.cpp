@@ -81,6 +81,7 @@ void player::update_collision(const ce::level &level)
 
 	auto target_pos = current_pos;
 	target_pos.x += w * (velocity.x > 0.F ? 1.F : velocity.x < 0.F ? 0.F : 0.5F);
+	target_pos.y += velocity.y < 0.F ? h * -1.F : 0.F;
 
 	auto target = (target_pos / ce::tile_size).to<int>();
 	auto current = (current_pos / ce::tile_size).to<int>();
