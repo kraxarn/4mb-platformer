@@ -83,3 +83,39 @@ auto phys::collision::will_collide(const ce::level &level,
 
 	return false;
 }
+
+auto phys::collision::will_collide_item(ce::level &level,
+	const ce::vector2i &tile) -> bool
+{
+	auto target = level.map().at(tile.x).at(tile.y);
+	if (get_tile_type(target) != tile_type::item)
+	{
+		return false;
+	}
+
+	auto item = static_cast<::tile>(target);
+
+	if (item == tile::exit)
+	{
+		// TODO: Go to next level if all gems collected
+	}
+	else if (item == tile::coin)
+	{
+		// TODO: Increment coin counter
+	}
+	else if (item == tile::gem)
+	{
+		// TODO: Increment gem counter
+	}
+	else if (item == tile::water)
+	{
+		// TODO: Slow down player
+	}
+	else if (item == tile::lava
+		|| item == tile::spike)
+	{
+		// TODO: Kill player
+	}
+
+	return true;
+}
