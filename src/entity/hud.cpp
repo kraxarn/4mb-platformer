@@ -36,9 +36,9 @@ entity::hud::hud(const ce::assets &assets)
 	txt_coins.set_y(pos_coins.to<int>().y - font_offset);
 }
 
-void entity::hud::draw()
+void entity::hud::draw(ce::level &level)
 {
-	update();
+	update(level);
 
 	// Text positions
 	txt_gems.set_x(pos_gems.to<int>().x
@@ -60,8 +60,13 @@ void entity::hud::draw()
 		0.F, scale);
 }
 
-void entity::hud::update()
+void entity::hud::update(ce::level &level)
 {
-	txt_gems.set_text(ce::fmt::format("{}/{}", gems, total_gems));
+	txt_gems.set_text(ce::fmt::format("{}/{}", gems, level.get_total_gem_count()));
 	txt_coins.set_text(std::to_string(coins));
+}
+
+auto entity::hud::get_gem_count() const -> int
+{
+	return gems;
 }

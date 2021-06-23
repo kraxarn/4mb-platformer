@@ -3,6 +3,7 @@
 #include "engine/assets.hpp"
 #include "engine/window.hpp"
 #include "engine/format.hpp"
+#include "engine/level.hpp"
 #include "colors.hpp"
 #include "physics/tiles.hpp"
 
@@ -13,7 +14,9 @@ namespace entity
 	public:
 		explicit hud(const ce::assets &assets);
 
-		void draw();
+		void draw(ce::level &level);
+
+		auto get_gem_count() const -> int;
 
 	private:
 		/** Font size for all HUD elements */
@@ -34,9 +37,6 @@ namespace entity
 		/** Gems collected for current level */
 		int gems = 0;
 
-		/** Total gems in current level */
-		int total_gems = 0;
-
 		asset::font fnt_hud;
 		ce::text txt_gems;
 		ce::text txt_coins;
@@ -45,6 +45,6 @@ namespace entity
 		ce::vector2f pos_gems;
 		ce::vector2f pos_coins;
 
-		void update();
+		void update(ce::level &level);
 	};
 }
