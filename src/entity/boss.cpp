@@ -20,6 +20,10 @@ void entity::boss::update()
 		eq(dir, direction::up) ? -move_speed : move_speed);
 
 	draw();
+
+#ifndef NDEBUG
+	debug_draw(BLUE);
+#endif
 }
 
 auto entity::boss::get_player_dirs() const -> direction
