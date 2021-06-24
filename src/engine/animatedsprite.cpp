@@ -76,3 +76,13 @@ void ce::animated_sprite::resume()
 {
 	running = true;
 }
+
+auto ce::animated_sprite::get_dir() const -> direction
+{
+	return dir;
+}
+
+void ce::animated_sprite::set_dir(direction value)
+{
+	dir = value;
+}

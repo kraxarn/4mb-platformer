@@ -2,6 +2,7 @@
 
 #include "asset/tileset.hpp"
 #include "engine/movable.hpp"
+#include "enum/direction.hpp"
 
 namespace ce
 {
@@ -31,6 +32,9 @@ namespace ce
 		void pause();
 		void resume();
 
+		auto get_dir() const -> direction;
+		void set_dir(direction value);
+
 	private:
 		/** Ticks between switching frame */
 		int time = 10;
@@ -49,5 +53,7 @@ namespace ce
 		bool running = true;
 
 		asset::tileset tileset;
+
+		direction dir = direction::left;
 	};
 }

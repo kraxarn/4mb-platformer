@@ -10,7 +10,7 @@ entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
 	set_scale(scale);
 
 	// By default, the sprite is facing left
-	dir = direction::left;
+	set_dir(direction::left);
 }
 
 void entity::player::update(const ce::input &input, ce::level &level)
@@ -65,10 +65,10 @@ void entity::player::update(const ce::input &input, ce::level &level)
 	}
 
 	// Flip image if needed
-	const auto new_dir = get_dir();
-	if (dir != new_dir)
+	const auto new_dir = get_player_dir();
+	if (get_dir() != new_dir)
 	{
-		dir = new_dir;
+		set_dir(new_dir);
 		ce::animated_sprite::flip();
 	}
 
@@ -141,13 +141,13 @@ auto entity::player::rect() const -> Rectangle
 	};
 }
 
-auto entity::player::get_dir() const -> direction
+auto entity::player::get_player_dir() const -> direction
 {
 	return velocity.x < 0
 		? direction::left
 		: velocity.x > 0
 			? direction::right
-			: dir;
+			: get_dir();
 }
 
 #ifndef NDEBUG

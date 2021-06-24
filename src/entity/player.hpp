@@ -44,13 +44,12 @@ namespace entity
 		entity::hud &hud;
 
 		ce::vector2f velocity;
-		direction dir;
 
 		asset::sound snd_jump;
 		asset::sound snd_fall;
 
 		void update_collision(ce::level &level);
-		auto get_dir() const -> direction;
+		auto get_player_dir() const -> direction;
 
 #ifndef NDEBUG
 		static void debug_draw(const Rectangle &rect, const Color &color);
