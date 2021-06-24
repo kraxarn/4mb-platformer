@@ -1,5 +1,8 @@
 #include "physics/collision.hpp"
 
+#include "scene/scenelevel.hpp"
+#include "state.hpp"
+
 auto phys::collision::get_tile_type(char value) -> tile_type
 {
 	return value == static_cast<char>(tile::none)
@@ -98,7 +101,13 @@ auto phys::collision::collect_item(ce::level &level,
 
 	if (item == tile::exit)
 	{
-		// TODO: Go to next level if all gems collected
+		// TODO: Go to next level only if all gems collected
+		auto *scene = dynamic_cast<scene_level *>(state::get().get());
+		if (scene == nullptr)
+		{
+			throw std::runtime_error("Reached exit without being in a level");
+		}
+		scene->next_level();
 	}
 	else if (item == tile::coin)
 	{

@@ -10,7 +10,8 @@ scene_level::scene_level(const ce::assets &assets)
 	entity_player(assets, entity_hud, ce::tile_scale),
 	music(assets.music("level1.xm")),
 	items(assets.tileset("items.png")),
-	tiles(assets.tileset("grass.png"))
+	tiles(assets.tileset("grass.png")),
+	snd_complete(assets.sound("complete.wav"))
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
@@ -54,6 +55,7 @@ void scene_level::load(int index)
 	}
 
 	level.reset(new_level);
+	current_level_index = index;
 
 	// Load level music
 	if (level->music() != music.name())
@@ -72,6 +74,20 @@ void scene_level::load(int index)
 
 	// Reset HUD
 	entity_hud.reset();
+}
+
+void scene_level::next_level()
+{
+	auto index = current_level_index + 1;
+
+	if (!level_loader::is_valid(index))
+	{
+		// TODO: Go to credits screen
+		throw std::runtime_error("Invalid level index");
+	}
+
+	snd_complete.play();
+	load(index);
 }
 
 void scene_level::update_camera()

@@ -27,7 +27,11 @@ public:
 
 	void render() override;
 
+	/** Load specific level */
 	void load(int index);
+
+	/** Go to next level */
+	void next_level();
 
 private:
 	static constexpr int level_width = ce::level_tiles_width * ce::tile_size;
@@ -56,6 +60,10 @@ private:
 	// Entities
 	entity::player entity_player;
 	entity::hud entity_hud;
+
+	// Level switching
+	int current_level_index = -1;
+	asset::sound snd_complete;
 
 	void update_camera();
 	void draw_map();
