@@ -17,7 +17,7 @@ namespace entity
 		void set_paused(bool value);
 
 	private:
-		static constexpr int title_size = 24;
+		static constexpr int title_size = 42;
 
 		bool paused = false;
 
