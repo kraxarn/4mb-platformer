@@ -33,11 +33,13 @@ namespace ce
 
 		/**
 		 * Get player spawn point
+		 * @return Level tile index
 		 */
 		auto get_spawn() const -> ce::vector2i;
 
 		/**
 		 * Get safe spawn point for player
+		 * @return Level absolute position
 		 */
 		auto get_safe_spawn() const -> ce::vector2f;
 
