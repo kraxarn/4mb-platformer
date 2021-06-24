@@ -3,6 +3,7 @@
 entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
 	: ce::animated_sprite(assets.tileset("player.png")),
 	snd_jump(assets.sound("jump.wav")),
+	snd_fall(assets.sound("fall.wav")),
 	hud(hud)
 {
 	// Sprite
@@ -96,6 +97,10 @@ void entity::player::update(const ce::input &input, ce::level &level)
 	// Player died or fell out of the stage
 	if (get_y() > kill_limit)
 	{
+		if (!hud.is_dead())
+		{
+			snd_fall.play();
+		}
 		velocity = ce::vector2f();
 		set_position(level.get_safe_spawn());
 		hud.respawn();
