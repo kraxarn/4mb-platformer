@@ -33,6 +33,14 @@ namespace ce
 		void pause();
 		void resume();
 
+		/** Raylib style collision rectangle */
+		auto rect() const -> Rectangle;
+
+#ifndef NDEBUG
+	protected:
+		void debug_draw(const Color &color) const;
+#endif
+
 	private:
 		/** Ticks between switching frame */
 		int time = 10;

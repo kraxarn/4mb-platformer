@@ -26,9 +26,6 @@ namespace entity
 		/** Is player on the ground */
 		auto is_grounded() const -> bool;
 
-		/** Get collision rectangle */
-		auto rect() const -> Rectangle;
-
 	private:
 		static constexpr float move_acceleration = 1.F;
 		static constexpr float move_deceleration = -0.4F;
@@ -50,9 +47,5 @@ namespace entity
 
 		void update_collision(ce::level &level);
 		auto get_player_dir() const -> direction;
-
-#ifndef NDEBUG
-		static void debug_draw(const Rectangle &rect, const Color &color);
-#endif
 	};
 }

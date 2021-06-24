@@ -113,7 +113,7 @@ void entity::player::update_collision(ce::level &level)
 	auto colliding = phys::collision::update(rect(), level, velocity, hud);
 
 #ifndef NDEBUG
-	debug_draw(rect(), colliding == tile_type::tile ? GREEN : RED);
+	debug_draw(colliding == tile_type::tile ? GREEN : RED);
 #endif
 }
 
@@ -127,16 +127,6 @@ auto entity::player::is_grounded() const -> bool
 	return velocity.y == 0;
 }
 
-auto entity::player::rect() const -> Rectangle
-{
-	return Rectangle{
-		get_x(),
-		get_y(),
-		static_cast<float>(width()) * get_scale(),
-		static_cast<float>(height()) * get_scale(),
-	};
-}
-
 auto entity::player::get_player_dir() const -> direction
 {
 	return velocity.x < 0
@@ -145,14 +135,3 @@ auto entity::player::get_player_dir() const -> direction
 			? direction::right
 			: get_dir();
 }
-
-#ifndef NDEBUG
-void entity::player::debug_draw(const Rectangle &rect, const Color &color)
-{
-	DrawRectangleLines(static_cast<int>(rect.x),
-		static_cast<int>(rect.y),
-		static_cast<int>(rect.width),
-		static_cast<int>(rect.height),
-		color);
-}
-#endif

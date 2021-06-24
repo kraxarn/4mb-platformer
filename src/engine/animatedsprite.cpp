@@ -84,3 +84,25 @@ auto ce::animated_sprite::get_dir() const -> direction
 {
 	return dir;
 }
+
+auto ce::animated_sprite::rect() const -> Rectangle
+{
+	return Rectangle{
+		get_x(),
+		get_y(),
+		static_cast<float>(width()) * get_scale(),
+		static_cast<float>(height()) * get_scale(),
+	};
+}
+
+#ifndef NDEBUG
+void ce::animated_sprite::debug_draw(const Color &color) const
+{
+	auto r = rect();
+	DrawRectangleLines(static_cast<int>(r.x),
+		static_cast<int>(r.y),
+		static_cast<int>(r.width),
+		static_cast<int>(r.height),
+		color);
+}
+#endif
