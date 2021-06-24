@@ -24,12 +24,14 @@ void entity::boss::update()
 
 	// Movement
 	auto dist = get_player_dist();
+	auto speed = get_speed();
+
 	auto x = dist.x < static_cast<float>(width())
 		? 0.F : eq(dir, direction::left)
-			? -move_speed : move_speed;
+			? -speed : speed;
 	auto y = lock_y || dist.y < static_cast<float>(height())
 		? 0.F : eq(dir, direction::up)
-			? -move_speed : move_speed;
+			? -speed : speed;
 	move(x, y);
 
 	// Draw sprite
@@ -89,4 +91,11 @@ auto entity::boss::get_random_pos() const -> ce::vector2f
 				* (GetRandomValue(0, 1) == 0 ? -1.F : 1.F),
 		get_y(),
 	};
+}
+
+auto entity::boss::get_speed() const -> float
+{
+	auto diff = max_speed - min_speed;
+	auto step = diff / static_cast<float>(initial_health);
+	return max_speed - static_cast<float>(health) * step;
 }

@@ -26,7 +26,9 @@ namespace entity
 		static auto is_final(const ce::level *level) -> bool;
 
 	private:
-		static constexpr float move_speed = 1.F;
+		static constexpr float min_speed = 1.F;
+		static constexpr float max_speed = 8.F;
+
 		static constexpr int initial_health = 5;
 
 		/** Minimum distance to move after getting hit */
@@ -51,6 +53,8 @@ namespace entity
 
 		/** Get random pos some place away from player */
 		auto get_random_pos() const -> ce::vector2f;
+
+		auto get_speed() const -> float;
 
 		static auto eq(const direction &dir1, const direction &dir2) -> bool;
 	};
