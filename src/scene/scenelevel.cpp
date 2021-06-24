@@ -37,10 +37,12 @@ void scene_level::render()
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
 									   "Position: {}\n"
 									   "Velocity: {}\n"
-									   "Grounded: {}\n",
+									   "Grounded: {}\n"
+									   "Camera: X={} Y={}",
 		ce::clock::fps(), entity_player.get_position(),
 		entity_player.get_velocity(),
-		entity_player.is_grounded()));
+		entity_player.is_grounded(),
+		camera.get_x(), camera.get_y()));
 
 	txt_debug.draw();
 #endif
