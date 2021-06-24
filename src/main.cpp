@@ -8,7 +8,7 @@
 
 auto main(int /*argc*/, char **/*argv*/) -> int
 {
-	ce::window window(1280, 720, "4MB Platformer");
+	ce::window window(1280, 720, "Tixel - 4MB Platformer");
 	ce::audio audio;
 
 	ce::assets assets;
