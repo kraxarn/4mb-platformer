@@ -52,7 +52,7 @@ void entity::player::update(const ce::input &input, ce::level &level)
 	}
 
 	// Jump
-	if (input.is_pressed(ce::key::jump) && is_grounded())
+	if (input.is_down(ce::key::jump) && is_grounded())
 	{
 		snd_jump.play();
 		ce::animated_sprite::pause();
