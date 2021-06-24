@@ -28,3 +28,8 @@ auto level_loader::get(int index) -> ce::level *
 			return nullptr;
 	}
 }
+
+auto level_loader::is_valid(int index) -> bool
+{
+	return index >= 0 && index <= 9;
+}
