@@ -14,7 +14,8 @@ scene_level::scene_level(const ce::assets &assets)
 	music(assets.music_ptr("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png")),
-	snd_complete(assets.sound("complete.wav"))
+	snd_complete(assets.sound("complete.wav")),
+	entity_pause(assets)
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
@@ -31,17 +32,23 @@ void scene_level::render()
 		{
 			update_camera();
 		}
-		entity_player.update(input, *level);
+		entity_player.update(input, *level, entity_pause.get_paused());
 
 		// Update boss
 		if (entity_boss)
 		{
-			entity_boss->update();
+			entity_boss->update(entity_pause.get_paused());
 		}
 		update_entities();
 
 		// Update map
 		draw_map();
+
+		// Update pause
+		if (input.is_pressed(ce::key::pause))
+		{
+			entity_pause.set_paused(!entity_pause.get_paused());
+		}
 	}
 	camera.end();
 
@@ -52,11 +59,13 @@ void scene_level::render()
 									   "Position: {}\n"
 									   "Velocity: {}\n"
 									   "Grounded: {}\n"
-									   "Camera: X={} Y={}",
+									   "Camera: X={} Y={}\n"
+									   "Paused: {}",
 		ce::clock::fps(), entity_player.get_position(),
 		entity_player.get_velocity(),
 		entity_player.is_grounded(),
-		camera.get_x(), camera.get_y()));
+		camera.get_x(), camera.get_y(),
+		entity_pause.get_paused()));
 
 	txt_debug.draw();
 #endif
@@ -132,6 +141,12 @@ void scene_level::load_entities()
 
 void scene_level::update_entities()
 {
+	entity_pause.update();
+	if (entity_pause.get_paused())
+	{
+		return;
+	}
+
 	if (entity_boss
 		&& !entity_hud.is_dead()
 		&& CheckCollisionRecs(entity_player.rect(), entity_boss->rect()))

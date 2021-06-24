@@ -18,6 +18,7 @@
 #include "entity/player.hpp"
 #include "entity/hud.hpp"
 #include "entity/boss.hpp"
+#include "entity/pause.hpp"
 
 #include <memory>
 
@@ -61,6 +62,7 @@ private:
 	// Entities
 	entity::player entity_player;
 	entity::hud entity_hud;
+	entity::pause entity_pause;
 	std::unique_ptr<entity::boss> entity_boss;
 
 	// Level switching

@@ -12,7 +12,7 @@ namespace entity
 	public:
 		boss(const ce::assets &assets, const ce::movable &player, float scale);
 
-		void update();
+		void update(bool is_paused);
 
 		/**
 		 * Damage boss

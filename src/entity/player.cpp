@@ -10,7 +10,8 @@ entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
 	set_scale(scale);
 }
 
-void entity::player::update(const ce::input &input, ce::level &level)
+void entity::player::update(const ce::input &input,
+	ce::level &level, bool is_paused)
 {
 	// Right
 	if (input.is_down(ce::key::right))
@@ -74,20 +75,23 @@ void entity::player::update(const ce::input &input, ce::level &level)
 #endif
 
 	// Update position
-	if (!hud.is_dead())
+	if (!is_paused)
 	{
-		update_collision(level);
-	}
-	set_position(get_position() + velocity);
+		if (!hud.is_dead())
+		{
+			update_collision(level);
+		}
+		set_position(get_position() + velocity);
 
-	if (velocity.x == 0)
-	{
-		ce::animated_sprite::pause();
-		set_frame(0);
-	}
-	else if (is_grounded())
-	{
-		ce::animated_sprite::resume();
+		if (velocity.x == 0)
+		{
+			ce::animated_sprite::pause();
+			set_frame(0);
+		}
+		else if (is_grounded())
+		{
+			ce::animated_sprite::resume();
+		}
 	}
 
 	// Player died or fell out of the stage

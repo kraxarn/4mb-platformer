@@ -8,31 +8,34 @@ entity::boss::boss(const ce::assets &assets, const ce::movable &player, float sc
 	set_scale(scale);
 }
 
-void entity::boss::update()
+void entity::boss::update(bool is_paused)
 {
 	if (health <= 0)
 	{
 		return;
 	}
 
-	// Movement
-	auto dir = get_player_dirs();
-	auto dist = get_player_dist();
-	auto speed = get_speed();
-
-	auto x = dist.x < static_cast<float>(width())
-		? 0.F : eq(dir, direction::left)
-			? -speed : speed;
-	auto y = lock_y || dist.y < static_cast<float>(height())
-		? 0.F : eq(dir, direction::up)
-			? -speed : speed;
-	move(x, y);
-
-	// Flip if needed
-	if (x < 0 && get_dir() == direction::right
-		|| x > 0 && get_dir() == direction::left)
+	if (!is_paused)
 	{
-		flip();
+		// Movement
+		auto dir = get_player_dirs();
+		auto dist = get_player_dist();
+		auto speed = get_speed();
+
+		auto x = dist.x < static_cast<float>(width())
+			? 0.F : eq(dir, direction::left)
+				? -speed : speed;
+		auto y = lock_y || dist.y < static_cast<float>(height())
+			? 0.F : eq(dir, direction::up)
+				? -speed : speed;
+		move(x, y);
+
+		// Flip if needed
+		if (x < 0 && get_dir() == direction::right
+			|| x > 0 && get_dir() == direction::left)
+		{
+			flip();
+		}
 	}
 
 	// Draw sprite

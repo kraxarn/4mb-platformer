@@ -10,6 +10,7 @@
 #include "physics/tiles.hpp"
 #include "enum/direction.hpp"
 #include "entity/hud.hpp"
+#include "entity/pause.hpp"
 
 namespace entity
 {
@@ -19,7 +20,8 @@ namespace entity
 		player(const ce::assets &assets, entity::hud &hud, float scale);
 
 		/** Update input, position, collision, and finally draw sprite */
-		void update(const ce::input &input, ce::level &level);
+		void update(const ce::input &input, ce::level &level,
+			bool is_paused);
 
 		/** Get current player speed */
 		auto get_velocity() const -> const ce::vector2f &;
