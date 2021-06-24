@@ -153,6 +153,11 @@ void scene_level::update_entities()
 			if (entity_boss->hurt())
 			{
 				state::set(::scene::credits, assets);
+				auto *credits = dynamic_cast<scene_credits *>(state::get().get());
+				if (credits != nullptr)
+				{
+					credits->set_collected_coins(entity_hud.get_coin_count());
+				}
 				return;
 			}
 		}

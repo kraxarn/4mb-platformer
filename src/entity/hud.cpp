@@ -81,6 +81,11 @@ auto entity::hud::get_gem_count() const -> int
 	return state.get_gems();
 }
 
+auto entity::hud::get_coin_count() const -> int
+{
+	return state.get_coins();
+}
+
 void entity::hud::add_coin()
 {
 	snd_coin.play();

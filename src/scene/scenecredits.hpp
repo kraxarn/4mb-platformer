@@ -5,6 +5,8 @@
 #include "engine/vector2.hpp"
 #include "engine/window.hpp"
 #include "colors.hpp"
+#include "level/levelloader.hpp"
+#include "engine/map.hpp"
 
 class scene_credits: public ce::scene
 {
@@ -12,6 +14,8 @@ public:
 	explicit scene_credits(const ce::assets &assets);
 
 	void render() override;
+
+	void set_collected_coins(int value);
 
 private:
 	static constexpr int size_title = 64;
@@ -21,4 +25,9 @@ private:
 
 	asset::font fnt_title;
 	ce::text txt_title;
+
+	asset::font fnt_subtitle;
+	ce::text txt_subtitle;
+
+	static auto get_total_coins() -> int;
 };

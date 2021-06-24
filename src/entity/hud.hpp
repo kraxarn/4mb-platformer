@@ -18,6 +18,7 @@ namespace entity
 		void draw(ce::level &level);
 
 		auto get_gem_count() const -> int;
+		auto get_coin_count() const -> int;
 
 		/** Increment coins by one */
 		void add_coin();
