@@ -98,5 +98,9 @@ auto entity::boss::get_speed() const -> float
 {
 	auto diff = max_speed - min_speed;
 	auto step = diff / static_cast<float>(initial_health);
-	return max_speed - static_cast<float>(health) * step;
+	auto speed = max_speed - static_cast<float>(health) * step;
+
+	return player.get_y() + ce::tile_size < get_y()
+		? -speed / 2.F
+		: speed;
 }
