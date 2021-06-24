@@ -50,7 +50,10 @@ void entity::hud::draw(ce::level &level)
 		- ce::vector2i(fnt_hud.text_size(txt_coins)).x);
 
 	// Text
-	fnt_hud.draw_text(txt_gems);
+	if (level.get_total_gem_count() > 0)
+	{
+		fnt_hud.draw_text(txt_gems);
+	}
 	fnt_hud.draw_text(txt_coins);
 
 	// Coin
@@ -58,9 +61,12 @@ void entity::hud::draw(ce::level &level)
 		static_cast<int>(tile::coin) % static_cast<int>(tile::spawn),
 		0.F, scale);
 	// Gem
-	ts_hud.draw(pos_gems.x, pos_gems.y,
-		static_cast<int>(tile::gem) % static_cast<int>(tile::spawn),
-		0.F, scale);
+	if (level.get_total_gem_count() > 0)
+	{
+		ts_hud.draw(pos_gems.x, pos_gems.y,
+			static_cast<int>(tile::gem) % static_cast<int>(tile::spawn),
+			0.F, scale);
+	}
 }
 
 void entity::hud::update(ce::level &level)
