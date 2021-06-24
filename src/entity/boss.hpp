@@ -30,9 +30,9 @@ namespace entity
 		static constexpr int initial_health = 5;
 
 		/** Minimum distance to move after getting hit */
-		static constexpr int min_random_move = 200;
+		static constexpr int min_random_move = 400;
 		/** Maximum distance to move after getting hit */
-		static constexpr int max_random_move = 400;
+		static constexpr int max_random_move = 600;
 
 		const ce::movable &player;
 
