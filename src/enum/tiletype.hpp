@@ -6,6 +6,7 @@ enum class tile_type
 	empty,
 	// 0-49
 	tile,
+	one_way,
 	// 50-99
 	item,
 	// ???

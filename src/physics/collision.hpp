@@ -29,7 +29,8 @@ namespace phys
 
 		/** Check if tile in rect collide in level */
 		static auto will_collide(ce::level &level, entity::hud &hud,
-			const ce::vector2i &tile, const Rectangle &rect) -> bool;
+			const ce::vector2i &tile, const Rectangle &rect,
+			const ce::vector2f &velocity) -> bool;
 
 		static auto collect_item(ce::level &level,
 			entity::hud &hud, int x, int y) -> bool;

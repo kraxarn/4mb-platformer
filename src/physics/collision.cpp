@@ -8,7 +8,7 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 	return value == static_cast<char>(tile::none)
 		? tile_type::empty
 		: value < static_cast<char>(tile::spawn)
-			? tile_type::tile
+			? value < 4 ? tile_type::tile : tile_type::one_way // 0-3=tile, 4-7=one way
 			: value <= static_cast<char>(tile::spike) // Last valid tile
 				? tile_type::item
 				: tile_type::invalid;
@@ -25,7 +25,7 @@ auto phys::collision::update(const Rectangle &player_rect,
 
 	auto rect_x = rect;
 	rect_x.x += velocity.x;
-	if (will_collide(level, hud, player_tile, rect_x))
+	if (will_collide(level, hud, player_tile, rect_x, velocity))
 	{
 		velocity.x = 0.F;
 		collides = tile_type::tile;
@@ -33,7 +33,7 @@ auto phys::collision::update(const Rectangle &player_rect,
 
 	auto rect_y = rect;
 	rect_y.y += velocity.y;
-	if (will_collide(level, hud, player_tile, rect_y))
+	if (will_collide(level, hud, player_tile, rect_y, velocity))
 	{
 		velocity.y = 0.F;
 		collides = tile_type::tile;
@@ -43,7 +43,8 @@ auto phys::collision::update(const Rectangle &player_rect,
 }
 
 auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
-	const ce::vector2i &tile, const Rectangle &rect) -> bool
+	const ce::vector2i &tile, const Rectangle &rect,
+	const ce::vector2f &velocity) -> bool
 {
 	const auto &map = level.map();
 	tile_type tile_type;
@@ -80,6 +81,15 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 			if (tile_type == tile_type::tile)
 			{
 				return true;
+			}
+
+			if (tile_type == tile_type::one_way)
+			{
+				if (velocity.y > 0
+					&& rect.y + rect.height * 0.75F < target.y)
+				{
+					return true;
+				}
 			}
 
 			if (tile_type == tile_type::item)

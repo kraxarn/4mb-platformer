@@ -131,7 +131,8 @@ void scene_level::draw_map()
 		auto x_pos = static_cast<float>(x) * ce::tile_size;
 		auto y_pos = static_cast<float>(y) * ce::tile_size;
 
-		if (tile_type == tile_type::tile)
+		if (tile_type == tile_type::tile
+			|| tile_type == tile_type::one_way)
 		{
 			tiles.draw(x_pos, y_pos,
 				tile, 0.F, ce::tile_scale);
