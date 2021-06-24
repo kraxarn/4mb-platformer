@@ -40,3 +40,8 @@ auto ce::assets::tileset(const std::string &path) const -> asset::tileset
 {
 	return asset::tileset(open("tileset", path));
 }
+
+auto ce::assets::shader(const std::string &path) const -> asset::shader
+{
+	return asset::shader(open("shader", path));
+}
