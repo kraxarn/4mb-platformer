@@ -53,6 +53,7 @@ void scene_level::render()
 	camera.end();
 
 	entity_hud.draw(*level);
+	entity_pause.update();
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
@@ -140,7 +141,6 @@ void scene_level::load_entities()
 
 void scene_level::update_entities()
 {
-	entity_pause.update();
 	if (entity_pause.get_paused())
 	{
 		return;
