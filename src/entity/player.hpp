@@ -36,7 +36,7 @@ namespace entity
 		static constexpr float jump_force = -10.F;
 		static constexpr float gravity = 0.4F;
 
-		static constexpr float speed_limit = 8.F;
+		static constexpr float speed_limit = 7.5F;
 
 		/** Y position to kill the player at */
 		static constexpr float kill_limit = 2'000.F;
