@@ -163,10 +163,10 @@ auto level8::name() const -> std::string
 
 auto level8::tileset() const -> std::string
 {
-	return std::string();
+	return std::string("dirt");
 }
 
 auto level8::music() const -> std::string
 {
-	return std::string();
+	return std::string("level2");
 }
