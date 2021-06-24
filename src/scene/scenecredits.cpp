@@ -26,6 +26,12 @@ void scene_credits::render()
 	txt_subtitle.set_x(ce::window::size().x / 2 - subtitle_size.x / 2);
 	txt_subtitle.set_y(ce::window::size().y / 2 + subtitle_size.y);
 	fnt_subtitle.draw_text(txt_subtitle);
+
+	// Go back to menu on enter
+	if (input.is_pressed(ce::key::enter))
+	{
+		state::set(::scene::menu, assets);
+	}
 }
 
 auto scene_credits::get_total_coins() -> int

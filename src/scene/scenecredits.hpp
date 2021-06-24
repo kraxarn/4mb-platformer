@@ -4,9 +4,12 @@
 #include "engine/assets.hpp"
 #include "engine/vector2.hpp"
 #include "engine/window.hpp"
+#include "engine/map.hpp"
+#include "engine/input.hpp"
+
 #include "colors.hpp"
 #include "level/levelloader.hpp"
-#include "engine/map.hpp"
+#include "state.hpp"
 
 class scene_credits: public ce::scene
 {
@@ -28,6 +31,8 @@ private:
 
 	asset::font fnt_subtitle;
 	ce::text txt_subtitle;
+
+	ce::input input;
 
 	static auto get_total_coins() -> int;
 };
