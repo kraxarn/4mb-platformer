@@ -4,6 +4,7 @@ ce::window::window(int width, int height, const std::string &title, int fps)
 {
 	InitWindow(width, height, title.c_str());
 	SetTargetFPS(fps);
+	SetExitKey(KEY_Q);
 }
 
 ce::window::window(int width, int height, const std::string &title)
