@@ -101,13 +101,15 @@ auto phys::collision::collect_item(ce::level &level,
 
 	if (item == tile::exit)
 	{
-		// TODO: Go to next level only if all gems collected
-		auto *scene = dynamic_cast<scene_level *>(state::get().get());
-		if (scene == nullptr)
+		if (hud.get_gem_count() == level.get_total_gem_count())
 		{
-			throw std::runtime_error("Reached exit without being in a level");
+			auto *scene = dynamic_cast<scene_level *>(state::get().get());
+			if (scene == nullptr)
+			{
+				throw std::runtime_error("Reached exit without being in a level");
+			}
+			scene->next_level();
 		}
-		scene->next_level();
 	}
 	else if (item == tile::coin)
 	{
