@@ -11,9 +11,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 	spr_demo(assets.tileset("player.png"))
 {
 	std::array<std::string, text_count> labels = {
-		"New game",
-		"Load game",
-		"Options",
+		"Start game",
 		"Exit game",
 	};
 
@@ -73,7 +71,7 @@ void scene_menu::render()
 	}
 	else if (input.is_pressed(ce::key::enter))
 	{
-		// Start game
+		// Start game :)
 		if (current == 0)
 		{
 			state::set(::scene::level, assets);
@@ -84,8 +82,8 @@ void scene_menu::render()
 			}
 		}
 
-		// Exit game
-		if (current == 3)
+		// Exit game :(
+		if (current == 1)
 		{
 			ce::window::close();
 			exit(0);
