@@ -16,11 +16,18 @@ void entity::boss::update()
 		flip();
 	}
 
-	move(eq(dir, direction::left) ? -move_speed : move_speed,
-		eq(dir, direction::up) ? -move_speed : move_speed);
+	// Movement
+	auto dist = get_player_dist();
+	auto x = dist.x < static_cast<float>(width())
+		? 0.F : eq(dir, direction::left)
+			? -move_speed : move_speed;
+	auto y = dist.y < static_cast<float>(height())
+		? 0.F : eq(dir, direction::up)
+			? -move_speed : move_speed;
+	move(x, y);
 
+	// Draw sprite
 	draw();
-
 #ifndef NDEBUG
 	debug_draw(BLUE);
 #endif
@@ -38,4 +45,12 @@ auto entity::boss::eq(const direction &dir1, const direction &dir2) -> bool
 {
 	return (static_cast<unsigned short>(dir1) & static_cast<unsigned short>(dir2))
 		!= static_cast<unsigned short>(direction::none);
+}
+
+auto entity::boss::get_player_dist() const -> ce::vector2f
+{
+	return {
+		std::abs(get_x() - player.get_x()),
+		std::abs(get_y() + player.get_y()),
+	};
 }

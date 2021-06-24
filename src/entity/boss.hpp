@@ -21,6 +21,9 @@ namespace entity
 		/** Get in what directions player is */
 		auto get_player_dirs() const -> direction;
 
+		/** Get distance to player, always positive */
+		auto get_player_dist() const -> ce::vector2f;
+
 		static auto eq(const direction &dir1, const direction &dir2) -> bool;
 	};
 }
