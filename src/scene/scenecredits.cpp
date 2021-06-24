@@ -41,7 +41,7 @@ auto scene_credits::get_total_coins() -> int
 		}
 
 		ce::iterate_map_all<char>(level_loader::get(index++)->map(),
-			[&coins](int x, int y, char value)
+			[&coins](int /*x*/, int /*y*/, char value)
 			{
 				if (value == static_cast<char>(tile::coin))
 				{
