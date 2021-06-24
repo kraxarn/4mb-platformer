@@ -120,6 +120,7 @@ void scene_level::load_entities()
 			entity_boss = std::make_unique<entity::boss>(assets, entity_player,
 				entity_player.get_scale());
 			entity_boss->set_position(ce::vector2f(x, y) * ce::tile_size);
+			entity_boss->set_lock_y(entity::boss::is_final(level.get()));
 			return true;
 		}
 		return false;

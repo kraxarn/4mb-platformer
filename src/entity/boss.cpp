@@ -21,7 +21,7 @@ void entity::boss::update()
 	auto x = dist.x < static_cast<float>(width())
 		? 0.F : eq(dir, direction::left)
 			? -move_speed : move_speed;
-	auto y = dist.y < static_cast<float>(height())
+	auto y = lock_y || dist.y < static_cast<float>(height())
 		? 0.F : eq(dir, direction::up)
 			? -move_speed : move_speed;
 	move(x, y);
@@ -53,4 +53,14 @@ auto entity::boss::get_player_dist() const -> ce::vector2f
 		std::abs(get_x() - player.get_x()),
 		std::abs(get_y() + player.get_y()),
 	};
+}
+
+auto entity::boss::is_final(const ce::level *level) -> bool
+{
+	return dynamic_cast<const level10 *>(level) != nullptr;
+}
+
+void entity::boss::set_lock_y(bool value)
+{
+	lock_y = value;
 }
