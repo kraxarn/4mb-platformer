@@ -6,7 +6,8 @@ entity::hud::hud(const ce::assets &assets)
 	txt_coins("0", 0, 0, font_size, color::text),
 	ts_hud(assets.tileset("items.png")),
 	snd_coin(assets.sound("coin.wav")),
-	snd_gem(assets.sound("gem.wav"))
+	snd_gem(assets.sound("gem.wav")),
+	snd_fall(assets.sound("fall.wav"))
 {
 	/*
 	 * /-----------------------tr
@@ -89,4 +90,20 @@ void entity::hud::add_gem()
 void entity::hud::reset()
 {
 	state.set_gems(0);
+}
+
+void entity::hud::kill()
+{
+	snd_fall.play();
+	state.set_dead(true);
+}
+
+void entity::hud::respawn()
+{
+	state.set_dead(false);
+}
+
+auto entity::hud::is_dead() const -> bool
+{
+	return state.get_dead();
 }

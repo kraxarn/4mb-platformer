@@ -26,6 +26,13 @@ namespace entity
 		/** Reset elements for level switch */
 		void reset();
 
+		/** Kill player :( */
+		void kill();
+		/** Player respawned :) */
+		void respawn();
+		/** Player is dead */
+		auto is_dead() const -> bool;
+
 	private:
 		/** Font size for all HUD elements */
 		static constexpr int font_size = 30;
@@ -51,6 +58,7 @@ namespace entity
 
 		asset::sound snd_coin;
 		asset::sound snd_gem;
+		asset::sound snd_fall;
 
 		void update(ce::level &level);
 	};

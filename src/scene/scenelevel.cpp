@@ -21,7 +21,10 @@ void scene_level::render()
 	camera.begin();
 	music.update();
 
-	update_camera();
+	if (!entity_hud.is_dead())
+	{
+		update_camera();
+	}
 	entity_player.update(input, *level);
 	draw_map();
 

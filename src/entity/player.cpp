@@ -77,7 +77,10 @@ void entity::player::update(const ce::input &input, ce::level &level)
 #endif
 
 	// Update position
-	update_collision(level);
+	if (!hud.is_dead())
+	{
+		update_collision(level);
+	}
 	set_position(get_position() + velocity);
 
 	if (velocity.x == 0)

@@ -117,7 +117,7 @@ auto phys::collision::collect_item(ce::level &level,
 	else if (item == tile::lava
 		|| item == tile::spike)
 	{
-		// TODO: Kill player
+		hud.kill();
 	}
 
 	return true;
