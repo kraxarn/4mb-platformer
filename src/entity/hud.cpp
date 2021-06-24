@@ -64,28 +64,29 @@ void entity::hud::draw(ce::level &level)
 
 void entity::hud::update(ce::level &level)
 {
-	txt_gems.set_text(ce::fmt::format("{}/{}", gems, level.get_total_gem_count()));
-	txt_coins.set_text(std::to_string(coins));
+	txt_gems.set_text(ce::fmt::format("{}/{}",
+		state.get_gems(), level.get_total_gem_count()));
+	txt_coins.set_text(std::to_string(state.get_coins()));
 }
 
 auto entity::hud::get_gem_count() const -> int
 {
-	return gems;
+	return state.get_gems();
 }
 
 void entity::hud::add_coin()
 {
 	snd_coin.play();
-	coins++;
+	state.add_coins(1);
 }
 
 void entity::hud::add_gem()
 {
 	snd_gem.play();
-	gems++;
+	state.add_gems(1);
 }
 
 void entity::hud::reset()
 {
-	gems = 0;
+	state.set_gems(0);
 }

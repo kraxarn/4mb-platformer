@@ -6,6 +6,7 @@
 #include "engine/level.hpp"
 #include "colors.hpp"
 #include "physics/tiles.hpp"
+#include "entity/state.hpp"
 
 namespace entity
 {
@@ -38,11 +39,7 @@ namespace entity
 		/** Scale of all images in HUD */
 		static constexpr float scale = 2.F;
 
-		/** Coins total */
-		int coins = 0;
-
-		/** Gems collected for current level */
-		int gems = 0;
+		entity::state state;
 
 		asset::font fnt_hud;
 		ce::text txt_gems;
