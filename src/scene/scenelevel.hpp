@@ -70,4 +70,5 @@ private:
 	void update_camera();
 	void draw_map();
 	void load_entities();
+	void update_entities();
 };

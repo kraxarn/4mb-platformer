@@ -23,17 +23,21 @@ void scene_level::render()
 
 	camera.begin();
 	{
+		// Update player
 		if (!entity_hud.is_dead())
 		{
 			update_camera();
 		}
 		entity_player.update(input, *level);
 
+		// Update boss
 		if (entity_boss)
 		{
 			entity_boss->update();
 		}
+		update_entities();
 
+		// Update map
 		draw_map();
 	}
 	camera.end();
@@ -120,6 +124,21 @@ void scene_level::load_entities()
 		}
 		return false;
 	});
+}
+
+void scene_level::update_entities()
+{
+	if (entity_boss
+		&& !entity_hud.is_dead()
+		&& CheckCollisionRecs(entity_player.rect(), entity_boss->rect()))
+	{
+		// For some reason we kill the player from the HUD instead of from the player itself
+		entity_hud.kill();
+
+		// Easiest way to reset boss
+		entity_boss.reset();
+		load_entities();
+	}
 }
 
 void scene_level::update_camera()
