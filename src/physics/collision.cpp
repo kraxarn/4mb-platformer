@@ -22,7 +22,7 @@ auto phys::collision::update(const Rectangle &player_rect,
 
 	auto rect_x = rect;
 	rect_x.x += velocity.x;
-	if (will_collide(level, player_tile, rect_x))
+	if (will_collide(level, hud, player_tile, rect_x))
 	{
 		velocity.x = 0.F;
 		collides = tile_type::tile;
@@ -30,17 +30,16 @@ auto phys::collision::update(const Rectangle &player_rect,
 
 	auto rect_y = rect;
 	rect_y.y += velocity.y;
-	if (will_collide(level, player_tile, rect_y))
+	if (will_collide(level, hud, player_tile, rect_y))
 	{
 		velocity.y = 0.F;
 		collides = tile_type::tile;
 	}
 
-	will_collide_item(level, player_tile, hud);
 	return collides;
 }
 
-auto phys::collision::will_collide(const ce::level &level,
+auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 	const ce::vector2i &tile, const Rectangle &rect) -> bool
 {
 	const auto &map = level.map();
@@ -67,17 +66,22 @@ auto phys::collision::will_collide(const ce::level &level,
 			}
 
 			tile_type = get_tile_type(map.at(x).at(y));
-			if (tile_type != tile_type::tile)
+			target.x = static_cast<float>(x) * ce::tile_size;
+			target.y = static_cast<float>(y) * ce::tile_size;
+
+			if (!CheckCollisionRecs(rect, target))
 			{
 				continue;
 			}
 
-			target.x = static_cast<float>(x) * ce::tile_size;
-			target.y = static_cast<float>(y) * ce::tile_size;
-
-			if (CheckCollisionRecs(rect, target))
+			if (tile_type == tile_type::tile)
 			{
 				return true;
+			}
+
+			if (tile_type == tile_type::item)
+			{
+				collect_item(level, hud, x, y);
 			}
 		}
 	}
@@ -85,16 +89,11 @@ auto phys::collision::will_collide(const ce::level &level,
 	return false;
 }
 
-auto phys::collision::will_collide_item(ce::level &level,
-	const ce::vector2i &tile, entity::hud &hud) -> bool
+auto phys::collision::collect_item(ce::level &level,
+	entity::hud &hud, int x, int y) -> bool
 {
 	const auto &map = level.map();
-	const auto &target = map.at(tile.x).at(tile.y);
-	if (get_tile_type(target) != tile_type::item)
-	{
-		return false;
-	}
-
+	const auto &target = map.at(x).at(y);
 	auto item = static_cast<::tile>(target);
 
 	if (item == tile::exit)
@@ -103,12 +102,12 @@ auto phys::collision::will_collide_item(ce::level &level,
 	}
 	else if (item == tile::coin)
 	{
-		level.set_tile(tile.x, tile.y, -1);
+		level.set_tile(x, y, -1);
 		hud.add_coin();
 	}
 	else if (item == tile::gem)
 	{
-		level.set_tile(tile.x, tile.y, -1);
+		level.set_tile(x, y, -1);
 		hud.add_gem();
 	}
 	else if (item == tile::water)

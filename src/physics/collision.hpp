@@ -28,10 +28,10 @@ namespace phys
 		static constexpr int offset = 4;
 
 		/** Check if tile in rect collide in level */
-		static auto will_collide(const ce::level &level,
+		static auto will_collide(ce::level &level, entity::hud &hud,
 			const ce::vector2i &tile, const Rectangle &rect) -> bool;
 
-		static auto will_collide_item(ce::level &level,
-			const ce::vector2i &tile, entity::hud &hud) -> bool;
+		static auto collect_item(ce::level &level,
+			entity::hud &hud, int x, int y) -> bool;
 	};
 }
