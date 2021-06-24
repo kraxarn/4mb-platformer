@@ -30,6 +30,6 @@ void entity::pause::update()
 
 	auto text_size = ce::vector2i(fnt_title.text_size(txt_title));
 	txt_title.set_x(window_size.x / 2 - text_size.x / 2);
-	txt_title.set_y(window_size.y / 2 - text_size.y);
+	txt_title.set_y(window_size.y / 2 - text_size.y / 2);
 	fnt_title.draw_text(txt_title);
 }
