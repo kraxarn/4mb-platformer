@@ -8,9 +8,6 @@ entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
 {
 	// Sprite
 	set_scale(scale);
-
-	// By default, the sprite is facing left
-	set_dir(direction::left);
 }
 
 void entity::player::update(const ce::input &input, ce::level &level)
@@ -68,7 +65,6 @@ void entity::player::update(const ce::input &input, ce::level &level)
 	const auto new_dir = get_player_dir();
 	if (get_dir() != new_dir)
 	{
-		set_dir(new_dir);
 		ce::animated_sprite::flip();
 	}
 

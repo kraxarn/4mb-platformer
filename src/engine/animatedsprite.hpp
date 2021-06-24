@@ -22,6 +22,7 @@ namespace ce
 		void rotate(float value);
 
 		void flip();
+		auto get_dir() const -> direction;
 
 		auto width() const -> int;
 		auto height() const -> int;
@@ -31,9 +32,6 @@ namespace ce
 
 		void pause();
 		void resume();
-
-		auto get_dir() const -> direction;
-		void set_dir(direction value);
 
 	private:
 		/** Ticks between switching frame */
