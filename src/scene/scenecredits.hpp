@@ -1,0 +1,24 @@
+#pragma once
+
+#include "engine/scene.hpp"
+#include "engine/assets.hpp"
+#include "engine/vector2.hpp"
+#include "engine/window.hpp"
+#include "colors.hpp"
+
+class scene_credits: public ce::scene
+{
+public:
+	explicit scene_credits(const ce::assets &assets);
+
+	void render() override;
+
+private:
+	static constexpr int size_title = 64;
+	static constexpr float spacing = 16;
+
+	asset::music music;
+
+	asset::font fnt_title;
+	ce::text txt_title;
+};

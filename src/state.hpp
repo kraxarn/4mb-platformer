@@ -2,6 +2,7 @@
 
 #include "scene/scenemenu.hpp"
 #include "scene/scenelevel.hpp"
+#include "scene/scenecredits.hpp"
 #include "enum/scenes.hpp"
 #include "engine/assets.hpp"
 

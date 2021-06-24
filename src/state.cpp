@@ -20,6 +20,10 @@ void state::set(scene scene, const ce::assets &assets)
 		case scene::level:
 			new_scene = new scene_level(assets);
 			break;
+
+		case scene::credits:
+			new_scene = new scene_credits(assets);
+			break;
 	}
 
 	if (new_scene != nullptr)

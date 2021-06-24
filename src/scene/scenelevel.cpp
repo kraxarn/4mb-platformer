@@ -1,5 +1,8 @@
 #include "scenelevel.hpp"
 
+#include "state.hpp"
+#include "enum/scenes.hpp"
+
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
@@ -149,7 +152,8 @@ void scene_level::update_entities()
 		{
 			if (entity_boss->hurt())
 			{
-				// TODO: Go to credits
+				state::set(::scene::credits, assets);
+				return;
 			}
 		}
 	}
