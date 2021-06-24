@@ -23,8 +23,13 @@ void entity::pause::update()
 		return;
 	}
 
+	const auto window_size = ce::window::size();
+	DrawRectangle(0, 0, window_size.x, window_size.y, {
+		0x0, 0x0, 0x0, 0x7f,
+	});
+
 	auto text_size = ce::vector2i(fnt_title.text_size(txt_title));
-	txt_title.set_x(ce::window::size().x / 2 - text_size.x / 2);
-	txt_title.set_y(ce::window::size().y / 2 - text_size.y);
+	txt_title.set_x(window_size.x / 2 - text_size.x / 2);
+	txt_title.set_y(window_size.y / 2 - text_size.y);
 	fnt_title.draw_text(txt_title);
 }
