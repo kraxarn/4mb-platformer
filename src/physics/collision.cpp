@@ -119,7 +119,9 @@ auto phys::collision::collect_item(ce::level &level,
 
 	if (item == tile::exit)
 	{
+#ifdef NDEBUG
 		if (hud.get_gem_count() == level.get_total_gem_count())
+#endif
 		{
 			auto *scene = dynamic_cast<scene_level *>(state::get().get());
 			if (scene == nullptr)
