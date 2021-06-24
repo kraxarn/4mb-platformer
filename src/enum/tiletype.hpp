@@ -9,6 +9,7 @@ enum class tile_type
 	one_way,
 	// 50-99
 	item,
+	entity,
 	// ???
 	invalid,
 };

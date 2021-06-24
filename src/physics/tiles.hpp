@@ -10,4 +10,5 @@ enum class tile: char
 	water = 54,
 	lava = 55,
 	spike = 56,
+	boss = 57,
 };

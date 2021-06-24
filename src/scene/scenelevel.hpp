@@ -17,6 +17,7 @@
 #include "level/levelloader.hpp"
 #include "entity/player.hpp"
 #include "entity/hud.hpp"
+#include "entity/boss.hpp"
 
 #include <memory>
 
@@ -60,6 +61,7 @@ private:
 	// Entities
 	entity::player entity_player;
 	entity::hud entity_hud;
+	std::unique_ptr<entity::boss> entity_boss;
 
 	// Level switching
 	int current_level_index = -1;
@@ -67,4 +69,5 @@ private:
 
 	void update_camera();
 	void draw_map();
+	void load_entities();
 };

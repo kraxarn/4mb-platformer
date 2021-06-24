@@ -11,7 +11,9 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 			? value < 4 ? tile_type::tile : tile_type::one_way // 0-3=tile, 4-7=one way
 			: value <= static_cast<char>(tile::spike) // Last valid tile
 				? tile_type::item
-				: tile_type::invalid;
+				: value == static_cast<char>(tile::boss)
+					? tile_type::entity
+					: tile_type::invalid;
 }
 
 auto phys::collision::update(const Rectangle &player_rect,

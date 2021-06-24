@@ -19,16 +19,23 @@ scene_level::scene_level(const ce::assets &assets)
 
 void scene_level::render()
 {
-	camera.begin();
 	music->update();
 
-	if (!entity_hud.is_dead())
+	camera.begin();
 	{
-		update_camera();
-	}
-	entity_player.update(input, *level);
-	draw_map();
+		if (!entity_hud.is_dead())
+		{
+			update_camera();
+		}
+		entity_player.update(input, *level);
 
+		if (entity_boss)
+		{
+			entity_boss->update();
+		}
+
+		draw_map();
+	}
 	camera.end();
 
 	entity_hud.draw(*level);
@@ -56,8 +63,14 @@ void scene_level::load(int index)
 		throw std::runtime_error(ce::fmt::format("Invalid level index: {}", index));
 	}
 
+	// Boss entity needs to be reloaded
+	entity_boss.reset();
+
 	level.reset(new_level);
 	current_level_index = index;
+
+	// Load boss if any
+	load_entities();
 
 	// Load level music
 	if (level->music() != music->name())
@@ -90,6 +103,23 @@ void scene_level::next_level()
 
 	snd_complete.play();
 	load(index);
+}
+
+void scene_level::load_entities()
+{
+	ce::iterate_map<char>(level->map(), [this](float x, float y, char value) -> bool
+	{
+		// Currently, there's only one possible entity
+		if (phys::collision::get_tile_type(value) == tile_type::entity
+			&& value == static_cast<char>(tile::boss))
+		{
+			entity_boss = std::make_unique<entity::boss>(assets, entity_player,
+				entity_player.get_scale());
+			entity_boss->set_position(ce::vector2f(x, y) * ce::tile_size);
+			return true;
+		}
+		return false;
+	});
 }
 
 void scene_level::update_camera()
