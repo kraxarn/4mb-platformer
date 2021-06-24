@@ -118,3 +118,13 @@ auto entity::hud::is_dead() const -> bool
 {
 	return state.get_dead();
 }
+
+auto entity::hud::get_player_speed_modifier() const -> float
+{
+	return player_speed_modifier;
+}
+
+void entity::hud::set_player_speed_modifier(float value)
+{
+	player_speed_modifier = value;
+}

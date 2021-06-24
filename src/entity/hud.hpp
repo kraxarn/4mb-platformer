@@ -34,6 +34,9 @@ namespace entity
 		/** Player is dead */
 		auto is_dead() const -> bool;
 
+		auto get_player_speed_modifier() const -> float;
+		void set_player_speed_modifier(float value);
+
 	private:
 		/** Font size for all HUD elements */
 		static constexpr int font_size = 30;
@@ -60,6 +63,8 @@ namespace entity
 		asset::sound snd_coin;
 		asset::sound snd_gem;
 		asset::sound snd_fall;
+
+		float player_speed_modifier = 1.F;
 
 		void update(ce::level &level);
 	};

@@ -15,13 +15,15 @@ void entity::player::update(const ce::input &input,
 {
 	if (!is_paused)
 	{
+		auto speed_limit_x = speed_limit * hud.get_player_speed_modifier();
+
 		// Right
 		if (input.is_down(ce::key::right))
 		{
 			velocity.x += move_acceleration;
-			if (velocity.x > speed_limit)
+			if (velocity.x > speed_limit_x)
 			{
-				velocity.x = speed_limit;
+				velocity.x = speed_limit_x;
 			}
 		}
 		else if (velocity.x > 0 && is_grounded())
@@ -37,9 +39,9 @@ void entity::player::update(const ce::input &input,
 		if (input.is_down(ce::key::left))
 		{
 			velocity.x -= move_acceleration;
-			if (velocity.x < -speed_limit)
+			if (velocity.x < -speed_limit_x)
 			{
-				velocity.x = -speed_limit;
+				velocity.x = -speed_limit_x;
 			}
 		}
 		else if (velocity.x < 0 && is_grounded())

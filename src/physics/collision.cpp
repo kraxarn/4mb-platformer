@@ -25,6 +25,9 @@ auto phys::collision::update(const Rectangle &player_rect,
 	ce::vector2f player_position(rect.x, rect.y);
 	auto player_tile = (player_position / ce::tile_size).to<int>();
 
+	// Reset speed modifier
+	hud.set_player_speed_modifier(1.F);
+
 	auto rect_x = rect;
 	rect_x.x += velocity.x;
 	if (will_collide(level, hud, player_tile, rect_x, velocity))
@@ -145,7 +148,7 @@ auto phys::collision::collect_item(ce::level &level,
 	}
 	else if (item == tile::water)
 	{
-		// TODO: Slow down player
+		hud.set_player_speed_modifier(0.5F);
 	}
 	else if (item == tile::lava
 		|| item == tile::spike)
