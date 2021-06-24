@@ -14,3 +14,4 @@ cmake -DCMAKE_BUILD_TYPE=Release .
 cmake --build .
 ./4mb_platformer
 ```
+It's important to compile in Release or MinSizeRel mode to not enable debug mode.
