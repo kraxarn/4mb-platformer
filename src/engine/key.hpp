@@ -11,5 +11,7 @@ namespace ce
 
 		enter,
 		jump,
+
+		pause,
 	};
 }

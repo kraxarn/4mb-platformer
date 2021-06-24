@@ -9,6 +9,7 @@ ce::input::input()
 		{ce::key::down, KEY_DOWN},
 		{ce::key::enter, KEY_ENTER},
 		{ce::key::jump, KEY_UP},
+		{ce::key::pause, KEY_ESCAPE},
 	};
 
 	if (IsGamepadAvailable(0))
@@ -24,6 +25,7 @@ ce::input::input()
 			{ce::key::down, GAMEPAD_BUTTON_LEFT_FACE_DOWN},
 			{ce::key::enter, GAMEPAD_BUTTON_RIGHT_FACE_DOWN},
 			{ce::key::jump, GAMEPAD_BUTTON_RIGHT_FACE_DOWN},
+			{ce::key::pause, GAMEPAD_BUTTON_MIDDLE_RIGHT},
 		};
 	}
 }
