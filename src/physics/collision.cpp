@@ -80,7 +80,15 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 
 			if (tile_type == tile_type::tile)
 			{
-				return true;
+				constexpr float tile_size = ce::tile_size * 0.9F;
+				auto tile_rect = rect;
+				tile_rect.y += tile_rect.height - tile_size;
+				tile_rect.height = tile_size;
+
+				if (CheckCollisionRecs(tile_rect, target))
+				{
+					return true;
+				}
 			}
 
 			if (tile_type == tile_type::one_way)
