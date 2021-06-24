@@ -67,7 +67,7 @@ void scene_level::load(int index)
 
 	// Load level spawn
 	auto spawn = level->get_spawn();
-	camera.set_target(spawn * ce::tile_size);
+	camera.set_target(spawn.to<float>() * ce::tile_size);
 	entity_player.set_position(level->get_safe_spawn());
 
 	// Reset HUD

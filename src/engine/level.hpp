@@ -34,7 +34,7 @@ namespace ce
 		/**
 		 * Get player spawn point
 		 */
-		auto get_spawn() const -> ce::vector2f;
+		auto get_spawn() const -> ce::vector2i;
 
 		/**
 		 * Get safe spawn point for player
