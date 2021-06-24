@@ -1,3 +1,3 @@
-# Tixel: A **ti**ny pi**xel** platformer
+# Tixel
 
-A game for the [4MB Jam](https://itch.io/jam/4mb).
+A **ti**ny pi**xel** platformer made for the [4MB Jam](https://itch.io/jam/4mb).
