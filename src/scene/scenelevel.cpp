@@ -113,8 +113,7 @@ void scene_level::next_level()
 
 	if (!level_loader::is_valid(index))
 	{
-		// TODO: Go to credits screen
-		throw std::runtime_error("Invalid level index");
+		index = 0;
 	}
 
 	snd_complete.play();
