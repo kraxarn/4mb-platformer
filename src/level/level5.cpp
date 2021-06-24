@@ -149,7 +149,7 @@ auto level5::name() const -> std::string
 
 auto level5::tileset() const -> std::string
 {
-	return std::string("Grass");
+	return std::string("grass");
 }
 
 auto level5::music() const -> std::string
