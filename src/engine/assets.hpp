@@ -19,6 +19,8 @@ namespace ce
 		assets();
 
 		auto music(const std::string &path) const -> asset::music;
+		/** @note Don't use unless required */
+		auto music_ptr(const std::string &path) const -> asset::music *;
 
 		auto sound(const std::string &path) const -> asset::sound;
 

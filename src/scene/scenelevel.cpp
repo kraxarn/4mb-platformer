@@ -8,7 +8,7 @@ scene_level::scene_level(const ce::assets &assets)
 #endif
 	entity_hud(assets),
 	entity_player(assets, entity_hud, ce::tile_scale),
-	music(assets.music("level1.xm")),
+	music(assets.music_ptr("level1.xm")),
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png")),
 	snd_complete(assets.sound("complete.wav"))
@@ -20,7 +20,7 @@ scene_level::scene_level(const ce::assets &assets)
 void scene_level::render()
 {
 	camera.begin();
-	music.update();
+	music->update();
 
 	if (!entity_hud.is_dead())
 	{
@@ -58,11 +58,11 @@ void scene_level::load(int index)
 	current_level_index = index;
 
 	// Load level music
-	if (level->music() != music.name())
+	if (level->music() != music->name())
 	{
-		music = assets.music(ce::fmt::format("{}.xm", level->music()));
+		music.reset(assets.music_ptr(ce::fmt::format("{}.xm", level->music())));
 	}
-	music.play();
+	music->play();
 
 	// Load level tiles
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));

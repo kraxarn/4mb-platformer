@@ -38,7 +38,7 @@ private:
 	static constexpr int level_height = ce::level_tiles_height * ce::tile_size;
 
 	// General engine stuff
-	asset::music music;
+	std::unique_ptr<asset::music> music;
 	ce::input input;
 
 	// Camera

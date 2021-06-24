@@ -16,6 +16,11 @@ auto ce::assets::music(const std::string &path) const -> asset::music
 	return asset::music(open("music", path), path);
 }
 
+auto ce::assets::music_ptr(const std::string &path) const -> asset::music *
+{
+	return new asset::music(open("music", path), path);
+}
+
 auto ce::assets::sound(const std::string &path) const -> asset::sound
 {
 	return asset::sound(open("sound", path));
