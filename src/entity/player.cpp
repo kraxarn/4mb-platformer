@@ -13,53 +13,56 @@ entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
 void entity::player::update(const ce::input &input,
 	ce::level &level, bool is_paused)
 {
-	// Right
-	if (input.is_down(ce::key::right))
+	if (!is_paused)
 	{
-		velocity.x += move_acceleration;
-		if (velocity.x > speed_limit)
+		// Right
+		if (input.is_down(ce::key::right))
 		{
-			velocity.x = speed_limit;
+			velocity.x += move_acceleration;
+			if (velocity.x > speed_limit)
+			{
+				velocity.x = speed_limit;
+			}
 		}
-	}
-	else if (velocity.x > 0 && is_grounded())
-	{
-		velocity.x += move_deceleration;
-		if (velocity.x < 0)
+		else if (velocity.x > 0 && is_grounded())
 		{
-			velocity.x = 0;
+			velocity.x += move_deceleration;
+			if (velocity.x < 0)
+			{
+				velocity.x = 0;
+			}
 		}
-	}
 
-	// Left
-	if (input.is_down(ce::key::left))
-	{
-		velocity.x -= move_acceleration;
-		if (velocity.x < -speed_limit)
+		// Left
+		if (input.is_down(ce::key::left))
 		{
-			velocity.x = -speed_limit;
+			velocity.x -= move_acceleration;
+			if (velocity.x < -speed_limit)
+			{
+				velocity.x = -speed_limit;
+			}
 		}
-	}
-	else if (velocity.x < 0 && is_grounded())
-	{
-		velocity.x -= move_deceleration;
-		if (velocity.x > 0)
+		else if (velocity.x < 0 && is_grounded())
 		{
-			velocity.x = 0;
+			velocity.x -= move_deceleration;
+			if (velocity.x > 0)
+			{
+				velocity.x = 0;
+			}
 		}
-	}
 
-	// Jump
-	if (input.is_down(ce::key::jump) && is_grounded())
-	{
-		snd_jump.play();
-		ce::animated_sprite::pause();
-		set_frame(1);
-		velocity.y = jump_force;
-	}
-	else
-	{
-		velocity.y += gravity;
+		// Jump
+		if (input.is_down(ce::key::jump) && is_grounded())
+		{
+			snd_jump.play();
+			ce::animated_sprite::pause();
+			set_frame(1);
+			velocity.y = jump_force;
+		}
+		else
+		{
+			velocity.y += gravity;
+		}
 	}
 
 	// Flip image if needed
