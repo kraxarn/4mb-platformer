@@ -20,7 +20,6 @@
 #include "entity/boss.hpp"
 #include "entity/pause.hpp"
 #include "entity/leveltitle.hpp"
-#include "entity/transition.hpp"
 
 #include <memory>
 
@@ -66,7 +65,6 @@ private:
 	entity::hud entity_hud;
 	entity::pause entity_pause;
 	entity::level_title entity_level_title;
-	entity::transition entity_transition;
 	std::unique_ptr<entity::boss> entity_boss;
 
 	// Level switching

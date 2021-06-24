@@ -51,8 +51,6 @@ void scene_level::render()
 			entity_pause.set_paused(!entity_pause.get_paused());
 		}
 	}
-
-	entity_transition.update();
 	camera.end();
 
 	entity_hud.draw(*level);
@@ -113,9 +111,6 @@ void scene_level::load(int index)
 
 	// Show title
 	entity_level_title.set_level(*level);
-
-	// Transition
-	entity_transition.shrink(spawn.to<float>() * ce::tile_size - level->get_safe_spawn(), {});
 }
 
 void scene_level::next_level()
