@@ -66,34 +66,12 @@ void scene_level::load(int index)
 	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
 
 	// Load level spawn
-	auto spawn = get_spawn();
+	auto spawn = level->get_spawn();
 	camera.set_target(spawn * ce::tile_size);
-
-	// Set player position
-	constexpr float player_tile_offset = 0.5F;
-	ce::vector2f player_position = spawn * ce::tile_size;
-	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
-	entity_player.set_position(player_position);
+	entity_player.set_position(level->get_safe_spawn());
 
 	// Reset HUD
 	entity_hud.reset();
-}
-
-auto scene_level::get_spawn() const -> ce::vector2f
-{
-	ce::vector2f vec;
-
-	ce::iterate_map<char>(level->map(), [&vec](auto x, auto y, char value) -> bool
-	{
-		if (value == static_cast<char>(tile::spawn))
-		{
-			vec = ce::vector2<std::size_t>(x, y).to<float>();
-			return true;
-		}
-		return false;
-	});
-
-	return vec;
 }
 
 void scene_level::update_camera()

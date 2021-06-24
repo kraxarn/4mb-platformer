@@ -57,9 +57,6 @@ private:
 	entity::player entity_player;
 	entity::hud entity_hud;
 
-	/** Find spawn tile in current level */
-	auto get_spawn() const -> ce::vector2f;
-
 	void update_camera();
 	void draw_map();
 };

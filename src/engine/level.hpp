@@ -3,6 +3,7 @@
 #include "res.hpp"
 #include "engine/map.hpp"
 #include "physics/tiles.hpp"
+#include "engine/vector2.hpp"
 
 #include <string>
 #include <fstream>
@@ -29,6 +30,16 @@ namespace ce
 		 * Set tile in level
 		 */
 		void set_tile(int x, int y, char value);
+
+		/**
+		 * Get player spawn point
+		 */
+		auto get_spawn() const -> ce::vector2f;
+
+		/**
+		 * Get safe spawn point for player
+		 */
+		auto get_safe_spawn() const -> ce::vector2f;
 
 	protected:
 		level(ce::map<char> map_data);

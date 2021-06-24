@@ -38,6 +38,9 @@ namespace entity
 
 		static constexpr float speed_limit = 8.F;
 
+		/** Y position to kill the player at */
+		static constexpr float kill_limit = 2'000.F;
+
 		entity::hud &hud;
 
 		ce::vector2f velocity;

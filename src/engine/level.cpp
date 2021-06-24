@@ -31,3 +31,28 @@ void ce::level::set_tile(int x, int y, char value)
 {
 	map_data.at(x).at(y) = value;
 }
+
+auto ce::level::get_spawn() const -> ce::vector2f
+{
+	ce::vector2f vec;
+
+	ce::iterate_map<char>(map(), [&vec](auto x, auto y, char value) -> bool
+	{
+		if (value == static_cast<char>(tile::spawn))
+		{
+			vec = ce::vector2<std::size_t>(x, y).to<float>();
+			return true;
+		}
+		return false;
+	});
+
+	return vec;
+}
+
+auto ce::level::get_safe_spawn() const -> ce::vector2f
+{
+	constexpr float player_tile_offset = 0.5F;
+	ce::vector2f player_position = get_spawn() * ce::tile_size;
+	player_position.y = player_position.y - ce::tile_size * player_tile_offset;
+	return player_position;
+}

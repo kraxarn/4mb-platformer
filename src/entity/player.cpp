@@ -93,6 +93,14 @@ void entity::player::update(const ce::input &input, ce::level &level)
 		ce::animated_sprite::resume();
 	}
 
+	// Player died or fell out of the stage
+	if (get_y() > kill_limit)
+	{
+		velocity = ce::vector2f();
+		set_position(level.get_safe_spawn());
+		hud.respawn();
+	}
+
 #ifdef NDEBUG
 	// Draw sprite
 	draw();
