@@ -15,7 +15,8 @@ scene_level::scene_level(const ce::assets &assets)
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png")),
 	snd_complete(assets.sound("complete.wav")),
-	entity_pause(assets)
+	entity_pause(assets),
+	frag_grayscale(assets.shader("grayscale.frag"))
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
@@ -24,6 +25,11 @@ scene_level::scene_level(const ce::assets &assets)
 void scene_level::render()
 {
 	music->update();
+
+	if (entity_pause.get_paused())
+	{
+		frag_grayscale.begin();
+	}
 
 	camera.begin();
 	{
@@ -53,6 +59,11 @@ void scene_level::render()
 	camera.end();
 
 	entity_hud.draw(*level);
+
+	if (entity_pause.get_paused())
+	{
+		frag_grayscale.end();
+	}
 
 #ifndef NDEBUG
 	txt_debug.set_text(ce::fmt::format("FPS: {}\n"

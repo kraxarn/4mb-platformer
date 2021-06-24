@@ -9,3 +9,13 @@ asset::shader::~shader()
 {
 	UnloadShader(r_shader);
 }
+
+void asset::shader::begin()
+{
+	BeginShaderMode(r_shader);
+}
+
+void asset::shader::end()
+{
+	EndShaderMode();
+}

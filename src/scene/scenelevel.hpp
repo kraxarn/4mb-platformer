@@ -69,6 +69,9 @@ private:
 	int current_level_index = -1;
 	asset::sound snd_complete;
 
+	// Shaders
+	asset::shader frag_grayscale;
+
 	void update_camera();
 	void draw_map();
 	void load_entities();
