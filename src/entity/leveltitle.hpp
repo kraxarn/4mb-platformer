@@ -16,7 +16,7 @@ namespace entity
 
 	private:
 		static constexpr int font_size = 42;
-		static constexpr int timer_start = 60 * 3;
+		static constexpr int timer_start = 60 * 2;
 
 		int speed = 0.F;
 		int timer = timer_start;
