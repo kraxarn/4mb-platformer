@@ -15,14 +15,8 @@ void entity::boss::update()
 		return;
 	}
 
-	// Flip if needed
-	auto dir = get_player_dirs();
-	if (!eq(dir, get_dir()))
-	{
-		flip();
-	}
-
 	// Movement
+	auto dir = get_player_dirs();
 	auto dist = get_player_dist();
 	auto speed = get_speed();
 
@@ -33,6 +27,13 @@ void entity::boss::update()
 		? 0.F : eq(dir, direction::up)
 			? -speed : speed;
 	move(x, y);
+
+	// Flip if needed
+	if (x < 0 && get_dir() == direction::right
+		|| x > 0 && get_dir() == direction::left)
+	{
+		flip();
+	}
 
 	// Draw sprite
 	draw();
