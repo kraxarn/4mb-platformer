@@ -14,6 +14,12 @@ namespace entity
 
 		void update();
 
+		/**
+		 * Damage boss
+		 * @return Boss died
+		 */
+		auto hurt() -> bool;
+
 		void set_lock_y(bool value);
 
 		/** Is final boss */
@@ -22,8 +28,17 @@ namespace entity
 	private:
 		static constexpr float move_speed = 1.F;
 
+		/** Minimum distance to move after getting hit */
+		static constexpr int min_random_move = 200;
+		/** Maximum distance to move after getting hit */
+		static constexpr int max_random_move = 400;
+
 		const ce::movable &player;
 
+		asset::sound snd_boss;
+
+		/** Remaining hit points */
+		int health = 5;
 		/** Is locked in the Y-axis */
 		bool lock_y = false;
 
@@ -32,6 +47,9 @@ namespace entity
 
 		/** Get distance to player, always positive */
 		auto get_player_dist() const -> ce::vector2f;
+
+		/** Get random pos some place away from player */
+		auto get_random_pos() const -> ce::vector2f;
 
 		static auto eq(const direction &dir1, const direction &dir2) -> bool;
 	};

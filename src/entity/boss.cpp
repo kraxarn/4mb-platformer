@@ -2,13 +2,19 @@
 
 entity::boss::boss(const ce::assets &assets, const ce::movable &player, float scale)
 	: ce::animated_sprite(assets.tileset("enemy.png")),
-	player(player)
+	player(player),
+	snd_boss(assets.sound("boss.wav"))
 {
 	set_scale(scale);
 }
 
 void entity::boss::update()
 {
+	if (health <= 0)
+	{
+		return;
+	}
+
 	// Flip if needed
 	auto dir = get_player_dirs();
 	if (!eq(dir, get_dir()))
@@ -63,4 +69,24 @@ auto entity::boss::is_final(const ce::level *level) -> bool
 void entity::boss::set_lock_y(bool value)
 {
 	lock_y = value;
+}
+
+auto entity::boss::hurt() -> bool
+{
+	snd_boss.play();
+	health--;
+
+	auto is_dead = health <= 0;
+	set_position(is_dead ? ce::vector2f() : get_random_pos());
+	return is_dead;
+}
+
+auto entity::boss::get_random_pos() const -> ce::vector2f
+{
+	return {
+		player.get_x()
+			+ static_cast<float>(GetRandomValue(min_random_move, max_random_move))
+				* (GetRandomValue(0, 1) == 0 ? -1.F : 1.F),
+		get_y(),
+	};
 }

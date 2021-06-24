@@ -133,12 +133,25 @@ void scene_level::update_entities()
 		&& !entity_hud.is_dead()
 		&& CheckCollisionRecs(entity_player.rect(), entity_boss->rect()))
 	{
-		// For some reason we kill the player from the HUD instead of from the player itself
-		entity_hud.kill();
+		// Normal boss: Player always dies when touching
+		// Final boss: Boss takes damage if hit from above, otherwise, kill player
+		auto is_final = entity::boss::is_final(level.get());
 
-		// Easiest way to reset boss
-		entity_boss.reset();
-		load_entities();
+		if (!is_final
+			|| entity_player.get_velocity().y <= 0)
+		{
+			entity_hud.kill();
+			// Easiest way to reset boss
+			entity_boss.reset();
+			load_entities();
+		}
+		else
+		{
+			if (entity_boss->hurt())
+			{
+				// TODO: Go to credits
+			}
+		}
 	}
 }
 
