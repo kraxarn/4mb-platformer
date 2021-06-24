@@ -9,18 +9,29 @@ entity::boss::boss(const ce::assets &assets, const ce::movable &player, float sc
 
 void entity::boss::update()
 {
-	auto new_dir = get_player_dir();
-	if (get_dir() != new_dir)
+	// Flip if needed
+	auto dir = get_player_dirs();
+	if (!eq(dir, get_dir()))
 	{
 		flip();
 	}
 
+	move(eq(dir, direction::left) ? -move_speed : move_speed,
+		eq(dir, direction::up) ? -move_speed : move_speed);
+
 	draw();
 }
 
-auto entity::boss::get_player_dir() const -> direction
+auto entity::boss::get_player_dirs() const -> direction
 {
-	return player.get_x() > get_x()
-		? direction::right
-		: direction::left;
+	return static_cast<direction>(static_cast<unsigned short>(player.get_x() > get_x()
+		? direction::right : direction::left)
+		| static_cast<unsigned char>(player.get_y() > get_y()
+			? direction::down : direction::up));
+}
+
+auto entity::boss::eq(const direction &dir1, const direction &dir2) -> bool
+{
+	return (static_cast<unsigned short>(dir1) & static_cast<unsigned short>(dir2))
+		!= static_cast<unsigned short>(direction::none);
 }
