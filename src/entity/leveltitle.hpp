@@ -18,7 +18,7 @@ namespace entity
 		static constexpr int font_size = 42;
 		static constexpr int timer_start = 60 * 2;
 
-		int speed = 0.F;
+		int speed = 0;
 		int timer = timer_start;
 		ce::vector2i text_size;
 
