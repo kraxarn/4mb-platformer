@@ -27,6 +27,7 @@ namespace entity
 
 	private:
 		static constexpr float move_speed = 1.F;
+		static constexpr int initial_health = 5;
 
 		/** Minimum distance to move after getting hit */
 		static constexpr int min_random_move = 200;
@@ -38,7 +39,7 @@ namespace entity
 		asset::sound snd_boss;
 
 		/** Remaining hit points */
-		int health = 5;
+		int health = initial_health;
 		/** Is locked in the Y-axis */
 		bool lock_y = false;
 
