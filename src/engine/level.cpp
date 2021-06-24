@@ -5,7 +5,7 @@ ce::level::level(ce::map<char> map_data)
 {
 }
 
-auto ce::level::map() const -> ce::map<char>
+auto ce::level::map() const -> const ce::map<char> &
 {
 	return map_data;
 }

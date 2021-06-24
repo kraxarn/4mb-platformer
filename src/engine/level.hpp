@@ -17,7 +17,7 @@ namespace ce
 		virtual auto name() const -> std::string = 0;
 		virtual auto tileset() const -> std::string = 0;
 		virtual auto music() const -> std::string = 0;
-		auto map() const -> ce::map<char>;
+		auto map() const -> const ce::map<char> &;
 
 		/**
 		 * Get total amount of gems in level
