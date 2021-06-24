@@ -100,6 +100,7 @@ void scene_level::update_camera()
 
 	const auto offset_x_min = offset.x;
 	const auto offset_x_max = level_width - offset.x - ce::tile_size * 0.25F;
+	const auto offset_y_min = offset.y;
 	const auto offset_y_max = level_height - offset.y - ce::tile_size * 0.25F;
 
 	// Horizontal offset
@@ -116,6 +117,10 @@ void scene_level::update_camera()
 	if (camera.get_y() > offset_y_max)
 	{
 		camera.set_y(offset_y_max);
+	}
+	if (camera.get_y() < offset_y_min)
+	{
+		camera.set_y(offset_y_min);
 	}
 }
 
