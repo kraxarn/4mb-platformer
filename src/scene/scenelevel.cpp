@@ -15,7 +15,8 @@ scene_level::scene_level(const ce::assets &assets)
 	items(assets.tileset("items.png")),
 	tiles(assets.tileset("grass.png")),
 	snd_complete(assets.sound("complete.wav")),
-	entity_pause(assets)
+	entity_pause(assets),
+	entity_level_title(assets)
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
@@ -53,6 +54,7 @@ void scene_level::render()
 	camera.end();
 
 	entity_hud.draw(*level);
+	entity_level_title.update();
 	entity_pause.update();
 
 #ifndef NDEBUG
@@ -106,6 +108,9 @@ void scene_level::load(int index)
 
 	// Reset HUD
 	entity_hud.reset();
+
+	// Show title
+	entity_level_title.set_level(*level);
 }
 
 void scene_level::next_level()
