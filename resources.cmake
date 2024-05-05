@@ -25,4 +25,15 @@ cmrc_add_resource_library(res
 	assets/tileset/grass.png
 	assets/tileset/dirt.png
 	assets/tileset/enemy.png
-	assets/tileset/items.png)
+	assets/tileset/items.png
+	# Levels
+	assets/level/level0.clf
+	assets/level/level1.clf
+	assets/level/level2.clf
+	assets/level/level3.clf
+	assets/level/level4.clf
+	assets/level/level5.clf
+	assets/level/level6.clf
+	assets/level/level7.clf
+	assets/level/level8.clf
+	assets/level/level9.clf)

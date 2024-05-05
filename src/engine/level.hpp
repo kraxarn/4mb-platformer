@@ -15,10 +15,13 @@ namespace ce
 	class level
 	{
 	public:
+		virtual ~level() = default;
+
 		virtual auto name() const -> std::string = 0;
 		virtual auto tileset() const -> std::string = 0;
 		virtual auto music() const -> std::string = 0;
-		auto map() const -> const ce::map<char> &;
+		virtual auto map() const -> const ce::map<char> & = 0;
+		virtual auto type() const -> std::string = 0;
 
 		/**
 		 * Get total amount of gems in level
@@ -29,7 +32,7 @@ namespace ce
 		/**
 		 * Set tile in level
 		 */
-		void set_tile(int x, int y, char value);
+		virtual void set_tile(int x, int y, char value) = 0;
 
 		/**
 		 * Get player spawn point
@@ -43,12 +46,7 @@ namespace ce
 		 */
 		auto get_safe_spawn() const -> ce::vector2f;
 
-	protected:
-		level(ce::map<char> map_data);
-
 	private:
 		int gem_count = -1;
-		ce::map<char> map_data;
-		bool loaded = false;
 	};
 }

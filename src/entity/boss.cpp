@@ -69,7 +69,7 @@ auto entity::boss::get_player_dist() const -> ce::vector2f
 
 auto entity::boss::is_final(const ce::level *level) -> bool
 {
-	return dynamic_cast<const level10 *>(level) != nullptr;
+	return level->type() == "final_boss";
 }
 
 void entity::boss::set_lock_y(bool value)

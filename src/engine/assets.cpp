@@ -40,3 +40,8 @@ auto ce::assets::tileset(const std::string &path) const -> asset::tileset
 {
 	return asset::tileset(open("tileset", path));
 }
+
+auto ce::assets::level(const std::string &path) const -> asset::level
+{
+	return asset::level(open("level", path));
+}

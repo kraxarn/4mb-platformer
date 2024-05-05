@@ -1,7 +1,7 @@
 #pragma once
 
+#include "engine/assets.hpp"
 #include "engine/level.hpp"
-#include "level/levels.hpp"
 
 class level_loader
 {
@@ -10,7 +10,7 @@ public:
 	 * Load level
 	 * @note Returns raw pointer
 	 */
-	static auto get(int index) -> ce::level *;
+	static auto get(const ce::assets &assets, int index) -> ce::level *;
 
 	/**
 	 * Is valid level index

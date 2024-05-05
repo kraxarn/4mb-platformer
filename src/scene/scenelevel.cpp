@@ -76,7 +76,7 @@ void scene_level::render()
 
 void scene_level::load(int index)
 {
-	auto *new_level = level_loader::get(index);
+	auto *new_level = level_loader::get(assets, index);
 	if (new_level == nullptr)
 	{
 		throw std::runtime_error(ce::fmt::format("Invalid level index: {}", index));

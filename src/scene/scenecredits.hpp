@@ -34,5 +34,5 @@ private:
 
 	ce::input input;
 
-	static auto get_total_coins() -> int;
+	auto get_total_coins() -> int;
 };

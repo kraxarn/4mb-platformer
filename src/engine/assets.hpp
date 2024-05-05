@@ -6,6 +6,7 @@
 #include "asset/image.hpp"
 #include "asset/tileset.hpp"
 #include "asset/sound.hpp"
+#include "asset/level.hpp"
 #include "engine/level.hpp"
 #include "engine/format.hpp"
 
@@ -29,6 +30,8 @@ namespace ce
 		auto image(const std::string &path) const -> asset::image;
 
 		auto tileset(const std::string &path) const -> asset::tileset;
+
+		auto level(const std::string &path) const -> asset::level;
 
 	private:
 		cmrc::embedded_filesystem fs;
