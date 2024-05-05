@@ -7,6 +7,7 @@ ce::text::text(std::string text, int x, int y, int font_size, Color color)
 
 void ce::text::draw()
 {
+	SetTextLineSpacing(static_cast<int>(static_cast<float>(font_size) * 1.5F));
 	DrawText(str.c_str(), x, y, font_size, color);
 }
 
