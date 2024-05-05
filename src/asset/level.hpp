@@ -1,7 +1,6 @@
 #pragma once
 #include <cmrc/cmrc.hpp>
 
-#include "json.hpp"
 #include "engine/level.hpp"
 
 namespace asset
