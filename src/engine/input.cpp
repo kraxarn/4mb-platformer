@@ -46,8 +46,5 @@ auto ce::input::is_down(ce::key key) const -> bool
 
 auto ce::input::get_gamepad_name() -> std::string
 {
-	const char *name = nullptr;
-	return IsGamepadName(0, name)
-		? std::string(name)
-		: std::string();
+	return {GetGamepadName(0)};
 }

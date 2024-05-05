@@ -27,7 +27,7 @@ void asset::music::play() const
 
 auto asset::music::is_playing() const -> bool
 {
-	return IsMusicPlaying(r_music);
+	return IsMusicStreamPlaying(r_music);
 }
 
 void asset::music::stop() const

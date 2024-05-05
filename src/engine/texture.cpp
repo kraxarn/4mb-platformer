@@ -49,7 +49,7 @@ void ce::texture::draw(float x, float y, int size, int offset,
 		0, 0,
 	};
 
-	DrawTextureTiled(r_texture, rect, dest, orig, rotation, scale, WHITE);
+	DrawTexturePro(r_texture, rect, dest, orig, rotation, WHITE);
 }
 
 auto ce::texture::get_width() const -> int
