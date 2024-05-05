@@ -36,7 +36,7 @@ jobs:
       run: upx --best 4mb_platformer.exe
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: 4mb_platformer
         path: ${{runner.workspace}}\build\MinSizeRel\4mb_platformer.exe
