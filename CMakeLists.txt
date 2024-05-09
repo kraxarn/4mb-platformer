@@ -11,9 +11,13 @@ add_executable(4mb_platformer ${MAIN_SRC} ${SUB_SRC})
 
 target_include_directories(4mb_platformer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
+include(chirp.cmake)
+target_link_libraries(${PROJECT_NAME} PRIVATE chirp)
+
 # Raylib
-include(raylib.cmake)
-target_link_libraries(4mb_platformer PRIVATE raylib)
+# (built together with chirp, but we still need the headers for now)
+target_include_directories(${PROJECT_NAME} PRIVATE
+	"${raylib_SOURCE_DIR}")
 
 # CMakeRC
 include(resources.cmake)
