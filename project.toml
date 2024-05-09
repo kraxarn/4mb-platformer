@@ -1,0 +1,57 @@
+[project]
+name = "tixel"
+author = "kraxarn"
+version = "v2.0.0-alpha.1"
+package = "com.kraxarn.tixel"
+
+[project.icons]
+macos = ""
+linux = ""
+windows = ""
+android = ""
+
+[project.window]
+title = "Tixel - 4MB Platformer"
+size = [1280, 720]
+icon = ""
+
+[assets.music]
+level1 = "assets/music/level1.xm"
+level2 = "assets/music/level2.xm"
+menu = "assets/music/menu.xm"
+boss = "assets/music/boss.xm"
+credits = "assets/music/credits.xm"
+
+[assets.sounds]
+boss = "assets/sound/boss.wav"
+coin = "assets/sound/coin.wav"
+complete = "assets/sound/complete.wav"
+fall = "assets/sound/fall.wav"
+gem = "assets/sound/gem.wav"
+jump = "assets/sound/jump.wav"
+
+[assets.fonts]
+menu = "assets/font/menu.ttf"
+submenu = "assets/font/submenu.ttf"
+
+[assets.images]
+arrow = "assets/image/arrow.png"
+
+[assets.tilesets]
+player = "assets/tileset/player.png"
+grass = "assets/tileset/grass.png"
+dirt = "assets/tileset/dirt.png"
+enemy = "assets/tileset/enemy.png"
+items = "assets/tileset/items.png"
+
+[assets.levels]
+level0 = "assets/level/level0.clf"
+level1 = "assets/level/level1.clf"
+level2 = "assets/level/level2.clf"
+level3 = "assets/level/level3.clf"
+level4 = "assets/level/level4.clf"
+level5 = "assets/level/level5.clf"
+level6 = "assets/level/level6.clf"
+level7 = "assets/level/level7.clf"
+level8 = "assets/level/level8.clf"
+level9 = "assets/level/level9.clf"
