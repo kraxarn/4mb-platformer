@@ -18,7 +18,3 @@ target_link_libraries(${PROJECT_NAME} PRIVATE chirp)
 # (built together with chirp, but we still need the headers for now)
 target_include_directories(${PROJECT_NAME} PRIVATE
 	"${raylib_SOURCE_DIR}")
-
-# CMakeRC
-include(resources.cmake)
-target_link_libraries(4mb_platformer PRIVATE res)
