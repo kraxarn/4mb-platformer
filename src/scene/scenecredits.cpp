@@ -2,11 +2,11 @@
 
 scene_credits::scene_credits(const ce::assets &assets)
 	: ce::scene(assets),
-	fnt_title(assets.font("menu.ttf", size_title)),
-	fnt_subtitle(assets.font("submenu.ttf", size_title / 2)),
+	fnt_title(assets.font("menu", size_title)),
+	fnt_subtitle(assets.font("submenu", size_title / 2)),
 	txt_title("Thanks for playing!", 0, 0, size_title, color::text),
 	txt_subtitle("", 0, 0, size_title / 2, color::text),
-	music(assets.music("credits.xm"))
+	music(assets.music("credits"))
 {
 	music.play();
 }

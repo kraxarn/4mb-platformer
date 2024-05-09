@@ -1,23 +1,20 @@
 #pragma once
 
-#include "res.hpp"
-#include "asset/music.hpp"
 #include "asset/font.hpp"
 #include "asset/image.hpp"
-#include "asset/tileset.hpp"
-#include "asset/sound.hpp"
 #include "asset/level.hpp"
-#include "engine/level.hpp"
-#include "engine/format.hpp"
+#include "asset/music.hpp"
+#include "asset/sound.hpp"
+#include "asset/tileset.hpp"
 
-#include <vector>
+#include "chirp/assets.hpp"
 
 namespace ce
 {
 	class assets
 	{
 	public:
-		assets();
+		explicit assets(const chirp::assets &data);
 
 		auto music(const std::string &path) const -> asset::music;
 		/** @note Don't use unless required */
@@ -34,10 +31,10 @@ namespace ce
 		auto level(const std::string &path) const -> asset::level;
 
 	private:
-		cmrc::embedded_filesystem fs;
+		const chirp::assets &data;
 
 		/** {folder}/{filename} */
 		auto open(const std::string &folder,
-			const std::string &filename) const -> cmrc::file;
+			const std::string &filename) const -> const std::vector<unsigned char> &;
 	};
 }

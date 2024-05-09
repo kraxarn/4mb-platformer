@@ -1,10 +1,9 @@
 #include "asset/sound.hpp"
 
-asset::sound::sound(const cmrc::file &file)
+asset::sound::sound(const std::vector<unsigned char> &data)
 {
 	r_wave = LoadWaveFromMemory(".wav",
-		(unsigned char *) file.begin(),
-		static_cast<int>(file.size()));
+		data.data(), static_cast<int>(data.size()));
 
 	r_sound = LoadSoundFromWave(r_wave);
 }

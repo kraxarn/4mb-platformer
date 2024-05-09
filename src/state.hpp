@@ -1,12 +1,9 @@
 #pragma once
 
-#include "scene/scenemenu.hpp"
-#include "scene/scenelevel.hpp"
-#include "scene/scenecredits.hpp"
-#include "enum/scenes.hpp"
 #include "engine/assets.hpp"
-
-#include <memory>
+#include "enum/scenes.hpp"
+#include "scene/scenelevel.hpp"
+#include "scene/scenemenu.hpp"
 
 class state
 {

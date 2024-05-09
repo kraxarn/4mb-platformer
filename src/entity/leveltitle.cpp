@@ -1,7 +1,7 @@
 #include "leveltitle.hpp"
 
 entity::level_title::level_title(const ce::assets &assets)
-	: font(assets.font("menu.ttf", font_size)),
+	: font(assets.font("menu", font_size)),
 	text("Level 1", 0, 0, font_size, color::text)
 {
 }

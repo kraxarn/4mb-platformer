@@ -1,14 +1,15 @@
 #pragma once
 
 #include "raylib.h"
-#include "res.hpp"
+
+#include <vector>
 
 namespace asset
 {
 	class music
 	{
 	public:
-		explicit music(const cmrc::file &file, const std::string &name);
+		explicit music(const std::vector<unsigned char> &data, const std::string &name);
 		~music();
 
 		void play() const;

@@ -1,15 +1,16 @@
 #pragma once
 
 #include "raylib.h"
-#include "res.hpp"
 #include "engine/text.hpp"
+
+#include <vector>
 
 namespace asset
 {
 	class font
 	{
 	public:
-		font(const cmrc::file &file, int font_size);
+		font(const std::vector<unsigned char> &data, int font_size);
 		~font();
 
 		void draw_text(const ce::text &text) const;

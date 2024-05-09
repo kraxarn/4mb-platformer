@@ -1,9 +1,9 @@
 #include "boss.hpp"
 
 entity::boss::boss(const ce::assets &assets, const ce::movable &player, float scale)
-	: ce::animated_sprite(assets.tileset("enemy.png")),
+	: ce::animated_sprite(assets.tileset("enemy")),
 	player(player),
-	snd_boss(assets.sound("boss.wav"))
+	snd_boss(assets.sound("boss"))
 {
 	set_scale(scale);
 }

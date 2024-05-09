@@ -1,14 +1,15 @@
 #pragma once
-#include <cmrc/cmrc.hpp>
 
 #include "engine/level.hpp"
+
+#include <vector>
 
 namespace asset
 {
 	class level: public ce::level
 	{
 	public:
-		explicit level(const cmrc::file &file);
+		explicit level(const std::vector<unsigned char> &data);
 
 		auto name() const -> std::string override;
 		auto tileset() const -> std::string override;
@@ -24,7 +25,7 @@ namespace asset
 		std::string level_type;
 		ce::map<char> map_data;
 
-		void parse(const cmrc::file &file);
+		void parse(const std::vector<unsigned char> &level_data);
 		static auto parse_tile(const std::string &line, size_t start, size_t end) -> char;
 	};
 }

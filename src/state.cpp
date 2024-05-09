@@ -1,5 +1,7 @@
 #include "state.hpp"
 
+#include "scene/scenecredits.hpp"
+
 std::shared_ptr<ce::scene> state::current = std::shared_ptr<ce::scene>();
 
 auto state::get() -> std::shared_ptr<ce::scene>

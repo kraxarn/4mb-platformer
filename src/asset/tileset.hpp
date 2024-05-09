@@ -1,6 +1,5 @@
 #pragma once
 
-#include "res.hpp"
 #include "engine/texture.hpp"
 
 #include <vector>
@@ -10,7 +9,7 @@ namespace asset
 	class tileset
 	{
 	public:
-		explicit tileset(const cmrc::file &file);
+		explicit tileset(const std::vector<unsigned char> &data);
 
 		auto at(int index) const -> asset::image;
 

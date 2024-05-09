@@ -1,14 +1,14 @@
 #include "assets.hpp"
 
-ce::assets::assets()
-	: fs(cmrc::res::get_filesystem())
+ce::assets::assets(const chirp::assets &data)
+	: data(data)
 {
 }
 
 auto ce::assets::open(const std::string &folder,
-	const std::string &filename) const -> cmrc::file
+	const std::string &filename) const -> const std::vector<unsigned char> &
 {
-	return fs.open(ce::fmt::format("{}/{}", folder, filename));
+	return data.load(folder, filename);
 }
 
 auto ce::assets::music(const std::string &path) const -> asset::music
@@ -23,25 +23,25 @@ auto ce::assets::music_ptr(const std::string &path) const -> asset::music *
 
 auto ce::assets::sound(const std::string &path) const -> asset::sound
 {
-	return asset::sound(open("sound", path));
+	return asset::sound(open("sounds", path));
 }
 
 auto ce::assets::font(const std::string &path, int font_size) const -> asset::font
 {
-	return asset::font(open("font", path), font_size);
+	return asset::font(open("fonts", path), font_size);
 }
 
 auto ce::assets::image(const std::string &path) const -> asset::image
 {
-	return asset::image(open("image", path));
+	return asset::image(open("images", path));
 }
 
 auto ce::assets::tileset(const std::string &path) const -> asset::tileset
 {
-	return asset::tileset(open("tileset", path));
+	return asset::tileset(open("tilesets", path));
 }
 
 auto ce::assets::level(const std::string &path) const -> asset::level
 {
-	return asset::level(open("level", path));
+	return asset::level(open("levels", path));
 }

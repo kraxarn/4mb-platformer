@@ -1,10 +1,9 @@
 #include "asset/font.hpp"
 
-asset::font::font(const cmrc::file &file, int font_size)
+asset::font::font(const std::vector<unsigned char> &data, const int font_size)
 {
 	r_font = LoadFontFromMemory(".ttf",
-		(const unsigned char *) file.cbegin(),
-		(int) file.size(),
+		data.data(), static_cast<int>(data.size()),
 		font_size, font_chars, 0x100);
 
 	SetTextureFilter(r_font.texture, TEXTURE_FILTER_POINT);

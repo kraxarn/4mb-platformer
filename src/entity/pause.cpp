@@ -1,7 +1,7 @@
 #include "pause.hpp"
 
 entity::pause::pause(const ce::assets &assets)
-	: fnt_title(assets.font("menu.ttf", title_size)),
+	: fnt_title(assets.font("menu", title_size)),
 	txt_title("Paused", 0, 0, title_size, color::text)
 {
 }

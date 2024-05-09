@@ -7,10 +7,10 @@ scene_menu::scene_menu(const ce::assets &assets)
 #ifndef NDEBUG
 	txt_debug("-", 16, 16, 20, WHITE),
 #endif
-	music(assets.music("menu.xm")),
-	fnt_menu(assets.font("menu.ttf", 52)),
-	spr_arrow(assets.image("arrow.png")),
-	spr_demo(assets.tileset("player.png"))
+	music(assets.music("menu")),
+	fnt_menu(assets.font("menu", 52)),
+	spr_arrow(assets.image("arrow")),
+	spr_demo(assets.tileset("player"))
 {
 	std::array<std::string, text_count> labels = {
 		"Start game",

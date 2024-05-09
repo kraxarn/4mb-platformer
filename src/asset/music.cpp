@@ -1,11 +1,10 @@
 #include "asset/music.hpp"
 
-asset::music::music(const cmrc::file &file, const std::string &name)
+asset::music::music(const std::vector<unsigned char> &data, const std::string &name)
 	: file_name(std::string(name))
 {
 	r_music = LoadMusicStreamFromMemory(".xm",
-		(unsigned char *) file.begin(),
-		static_cast<int>(file.size()));
+		data.data(), static_cast<int>(data.size()));
 
 	r_music.looping = true;
 }

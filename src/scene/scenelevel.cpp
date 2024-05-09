@@ -2,6 +2,7 @@
 
 #include "state.hpp"
 #include "enum/scenes.hpp"
+#include "scene/scenecredits.hpp"
 
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
@@ -11,10 +12,10 @@ scene_level::scene_level(const ce::assets &assets)
 #endif
 	entity_hud(assets),
 	entity_player(assets, entity_hud, ce::tile_scale),
-	music(assets.music_ptr("level1.xm")),
-	items(assets.tileset("items.png")),
-	tiles(assets.tileset("grass.png")),
-	snd_complete(assets.sound("complete.wav")),
+	music(assets.music_ptr("level1")),
+	items(assets.tileset("items")),
+	tiles(assets.tileset("grass")),
+	snd_complete(assets.sound("complete")),
 	entity_pause(assets),
 	entity_level_title(assets)
 {
@@ -94,12 +95,12 @@ void scene_level::load(int index)
 	// Load level music
 	if (level->music() != music->name())
 	{
-		music.reset(assets.music_ptr(ce::fmt::format("{}.xm", level->music())));
+		music.reset(assets.music_ptr(level->music()));
 	}
 	music->play();
 
 	// Load level tiles
-	tiles = assets.tileset(ce::fmt::format("{}.png", level->tileset()));
+	tiles = assets.tileset(level->tileset());
 
 	// Load level spawn
 	auto spawn = level->get_spawn();

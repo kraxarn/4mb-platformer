@@ -1,7 +1,7 @@
 #include "asset/tileset.hpp"
 
-asset::tileset::tileset(const cmrc::file &file)
-	: image(file),
+asset::tileset::tileset(const std::vector<unsigned char> &data)
+	: image(data),
 	texture(image)
 {
 	size = texture.get_height();

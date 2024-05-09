@@ -1,6 +1,5 @@
 #pragma once
 
-#include "res.hpp"
 #include "engine/map.hpp"
 #include "physics/tiles.hpp"
 #include "engine/vector2.hpp"

@@ -2,11 +2,11 @@
 
 #include <sstream>
 
-asset::level::level(const cmrc::file &file)
+asset::level::level(const std::vector<unsigned char> &data)
 	: ce::level(),
 	map_data({})
 {
-	parse(file);
+	parse(data);
 }
 
 auto asset::level::name() const -> std::string
@@ -39,9 +39,9 @@ void asset::level::set_tile(const int x, const int y, const char value)
 	map_data.at(x).at(y) = value;
 }
 
-void asset::level::parse(const cmrc::file &file)
+void asset::level::parse(const std::vector<unsigned char> &level_data)
 {
-	std::string data(file.cbegin(), file.cend());
+	std::string data(level_data.cbegin(), level_data.cend());
 	std::istringstream stream(data);
 	std::string line;
 

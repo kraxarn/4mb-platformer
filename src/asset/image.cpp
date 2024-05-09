@@ -1,9 +1,8 @@
 #include "image.hpp"
 
-asset::image::image(const cmrc::file &file)
+asset::image::image(const std::vector<unsigned char> &data)
 	: Image(LoadImageFromMemory(".png",
-	(const unsigned char *) file.cbegin(),
-	static_cast<int>(file.size())))
+		data.data(), static_cast<int>(data.size())))
 {
 }
 

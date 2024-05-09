@@ -1,9 +1,9 @@
 #include "entity/player.hpp"
 
 entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
-	: ce::animated_sprite(assets.tileset("player.png")),
-	snd_jump(assets.sound("jump.wav")),
-	snd_fall(assets.sound("fall.wav")),
+	: ce::animated_sprite(assets.tileset("player")),
+	snd_jump(assets.sound("jump")),
+	snd_fall(assets.sound("fall")),
 	hud(hud)
 {
 	// Sprite

@@ -6,13 +6,16 @@
 #include "enum/scenes.hpp"
 #include "state.hpp"
 
+#include "chirp/assets.hpp"
+
 auto main(int /*argc*/, char **/*argv*/) -> int
 {
 	ce::window window(1280, 720, "Tixel - 4MB Platformer");
 	ce::audio audio;
 
-	ce::assets assets;
-	ce::window::set_icon(assets.tileset("player.png").at(1));
+	const chirp::assets chirp_assets;
+	ce::assets assets(chirp_assets);
+	ce::window::set_icon(assets.tileset("player").at(1));
 
 #ifdef NDEBUG
 	state::set(scene::menu, assets);
