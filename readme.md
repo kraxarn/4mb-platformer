@@ -25,7 +25,7 @@ Binaries are provided for Linux, macOS and Windows (all x86_64), if you want to 
 for some reason, it's pretty easy:
 
 ```shell
-git clone --recursive https://github.com/kraxarn/4mb-platformer.git
+git clone https://github.com/kraxarn/4mb-platformer.git
 cd 4mb-platformer
 cmake -DCMAKE_BUILD_TYPE=Release .
 cmake --build .
