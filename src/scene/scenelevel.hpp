@@ -1,27 +1,16 @@
 #pragma once
 
-#include "asset/music.hpp"
-#include "engine/scene.hpp"
-#include "engine/level.hpp"
-#include "engine/animatedsprite.hpp"
-#include "engine/format.hpp"
-#include "engine/vector2.hpp"
 #include "engine/camera.hpp"
 #include "engine/input.hpp"
-#include "engine/clock.hpp"
+#include "engine/level.hpp"
 #include "engine/map.hpp"
-#include "engine/window.hpp"
+#include "engine/scene.hpp"
 
-#include "physics/tiles.hpp"
-#include "physics/collision.hpp"
-#include "level/levelloader.hpp"
-#include "entity/player.hpp"
-#include "entity/hud.hpp"
 #include "entity/boss.hpp"
-#include "entity/pause.hpp"
+#include "entity/hud.hpp"
 #include "entity/leveltitle.hpp"
-
-#include <memory>
+#include "entity/pause.hpp"
+#include "entity/player.hpp"
 
 class scene_level: public ce::scene
 {
@@ -41,7 +30,7 @@ private:
 	static constexpr int level_height = ce::level_tiles_height * ce::tile_size;
 
 	// General engine stuff
-	std::unique_ptr<asset::music> music;
+	std::unique_ptr<chirp::music> music;
 	ce::input input;
 
 	// Camera

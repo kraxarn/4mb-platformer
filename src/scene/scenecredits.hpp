@@ -24,7 +24,7 @@ private:
 	static constexpr int size_title = 64;
 	static constexpr float spacing = 16;
 
-	asset::music music;
+	chirp::music music;
 
 	asset::font fnt_title;
 	ce::text txt_title;

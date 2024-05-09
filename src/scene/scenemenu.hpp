@@ -27,7 +27,7 @@ private:
 	static constexpr short text_count = 2;
 	static constexpr short text_spacing = 48;
 
-	asset::music music;
+	chirp::music music;
 
 #ifndef NDEBUG
 	ce::text txt_debug;

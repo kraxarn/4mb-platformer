@@ -11,14 +11,14 @@ auto ce::assets::open(const std::string &folder,
 	return data.load(folder, filename);
 }
 
-auto ce::assets::music(const std::string &path) const -> asset::music
+auto ce::assets::music(const std::string &path) const -> chirp::music
 {
-	return asset::music(open("music", path), path);
+	return chirp::music(open("music", path), path);
 }
 
-auto ce::assets::music_ptr(const std::string &path) const -> asset::music *
+auto ce::assets::music_ptr(const std::string &path) const -> chirp::music *
 {
-	return new asset::music(open("music", path), path);
+	return new chirp::music(open("music", path), path);
 }
 
 auto ce::assets::sound(const std::string &path) const -> asset::sound

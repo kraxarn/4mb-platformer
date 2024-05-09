@@ -3,11 +3,11 @@
 #include "asset/font.hpp"
 #include "asset/image.hpp"
 #include "asset/level.hpp"
-#include "asset/music.hpp"
 #include "asset/sound.hpp"
 #include "asset/tileset.hpp"
 
 #include "chirp/assets.hpp"
+#include "chirp/music.hpp"
 
 namespace ce
 {
@@ -16,9 +16,10 @@ namespace ce
 	public:
 		explicit assets(const chirp::assets &data);
 
-		auto music(const std::string &path) const -> asset::music;
+		auto music(const std::string &path) const -> chirp::music;
+
 		/** @note Don't use unless required */
-		auto music_ptr(const std::string &path) const -> asset::music *;
+		auto music_ptr(const std::string &path) const -> chirp::music *;
 
 		auto sound(const std::string &path) const -> asset::sound;
 
