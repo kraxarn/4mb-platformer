@@ -1,13 +1,13 @@
 #pragma once
 
-#include "asset/image.hpp"
 #include "asset/level.hpp"
 #include "asset/sound.hpp"
 #include "asset/tileset.hpp"
 
-#include "chirp/assets.hpp"
-#include "chirp/font.hpp"
-#include "chirp/music.hpp"
+#include <chirp/assets.hpp>
+#include <chirp/font.hpp>
+#include <chirp/image.hpp>
+#include <chirp/music.hpp>
 
 namespace ce
 {
@@ -25,7 +25,7 @@ namespace ce
 
 		auto font(const std::string &path, int font_size) const -> chirp::font;
 
-		auto image(const std::string &path) const -> asset::image;
+		auto image(const std::string &path) const -> chirp::image;
 
 		auto tileset(const std::string &path) const -> asset::tileset;
 

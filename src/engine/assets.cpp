@@ -31,9 +31,9 @@ auto ce::assets::font(const std::string &path, const int font_size) const -> chi
 	return chirp::font(open("fonts", path), font_size);
 }
 
-auto ce::assets::image(const std::string &path) const -> asset::image
+auto ce::assets::image(const std::string &path) const -> chirp::image
 {
-	return asset::image(open("images", path));
+	return chirp::image(open("images", path));
 }
 
 auto ce::assets::tileset(const std::string &path) const -> asset::tileset

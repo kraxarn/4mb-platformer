@@ -37,9 +37,9 @@ void ce::window::close()
 	CloseWindow();
 }
 
-void ce::window::set_icon(const asset::image &image)
+void ce::window::set_icon(const chirp::image &image)
 {
-	SetWindowIcon(image);
+	SetWindowIcon(*image.data());
 }
 
 auto ce::window::size() -> chirp::vector2i

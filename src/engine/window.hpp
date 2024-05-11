@@ -1,8 +1,8 @@
 #pragma once
 
 #include "raylib.h"
-#include "asset/image.hpp"
 
+#include <chirp/image.hpp>
 #include <chirp/vector2.hpp>
 
 #include <iostream>
@@ -24,7 +24,7 @@ namespace ce
 		void end() const;
 
 		static void close();
-		static void set_icon(const asset::image &image);
+		static void set_icon(const chirp::image &image);
 
 		static auto size() -> chirp::vector2i;
 

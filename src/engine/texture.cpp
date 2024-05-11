@@ -1,7 +1,7 @@
 #include "texture.hpp"
 
-ce::texture::texture(const asset::image &image)
-	: r_texture(LoadTextureFromImage(image))
+ce::texture::texture(const chirp::image &image)
+	: r_texture(LoadTextureFromImage(*image.data()))
 {
 }
 

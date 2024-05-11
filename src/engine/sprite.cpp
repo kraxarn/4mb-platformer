@@ -6,7 +6,7 @@ ce::sprite::sprite(const ce::texture &texture)
 {
 }
 
-ce::sprite::sprite(const asset::image &image)
+ce::sprite::sprite(const chirp::image &image)
 	: ce::sprite(ce::texture(image))
 {
 }

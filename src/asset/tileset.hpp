@@ -11,7 +11,7 @@ namespace asset
 	public:
 		explicit tileset(const std::vector<unsigned char> &data);
 
-		auto at(int index) const -> asset::image;
+		auto at(int index) const -> chirp::image;
 
 		void draw(float x, float y, int index, float rotation, float scale) const;
 
@@ -23,7 +23,7 @@ namespace asset
 		/** Total size for each tile */
 		int size = 0;
 
-		asset::image image;
+		chirp::image image;
 		ce::texture texture;
 	};
 }

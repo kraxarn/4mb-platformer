@@ -1,16 +1,15 @@
 #pragma once
 
 #include "raylib.h"
-#include "asset/image.hpp"
 
-#include <cmath>
+#include <chirp/image.hpp>
 
 namespace ce
 {
 	class texture
 	{
 	public:
-		explicit texture(const asset::image &image);
+		explicit texture(const chirp::image &image);
 
 		/**
 		 * Draw entire texture at position
