@@ -2,6 +2,10 @@
 
 #include <sstream>
 
+#include "colors.hpp"
+#include "state.hpp"
+#include "engine/clock.hpp"
+
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
 #ifndef NDEBUG

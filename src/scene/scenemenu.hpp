@@ -1,21 +1,13 @@
 #pragma once
 
-#include "asset/font.hpp"
-#include "engine/scene.hpp"
-#include "engine/text.hpp"
-#include "engine/texture.hpp"
-#include "engine/clock.hpp"
-#include "engine/input.hpp"
-#include "engine/window.hpp"
 #include "engine/animatedsprite.hpp"
+#include "engine/input.hpp"
+#include "engine/scene.hpp"
 #include "engine/sprite.hpp"
-#include "colors.hpp"
 #include "enum/direction.hpp"
-#include "state.hpp"
-#include "enum/scenes.hpp"
 
-#include <cmath>
-#include <iomanip>
+#include <chirp/font.hpp>
+#include <chirp/text.hpp>
 
 class scene_menu: public ce::scene
 {
