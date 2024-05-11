@@ -26,9 +26,9 @@ auto ce::assets::sound(const std::string &path) const -> asset::sound
 	return asset::sound(open("sounds", path));
 }
 
-auto ce::assets::font(const std::string &path, int font_size) const -> asset::font
+auto ce::assets::font(const std::string &path, const int font_size) const -> chirp::font
 {
-	return asset::font(open("fonts", path), font_size);
+	return chirp::font(open("fonts", path), font_size);
 }
 
 auto ce::assets::image(const std::string &path) const -> asset::image

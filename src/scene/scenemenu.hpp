@@ -39,8 +39,8 @@ private:
 
 	ce::animated_sprite spr_demo;
 
-	asset::font fnt_menu;
-	std::vector<ce::text> texts;
+	chirp::font fnt_menu;
+	std::vector<chirp::text> texts;
 
 	ce::input input;
 

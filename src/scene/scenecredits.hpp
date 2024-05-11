@@ -1,14 +1,9 @@
 #pragma once
 
-#include "engine/scene.hpp"
 #include "engine/assets.hpp"
-#include "engine/vector2.hpp"
-#include "engine/window.hpp"
-#include "engine/map.hpp"
 #include "engine/input.hpp"
+#include "engine/scene.hpp"
 
-#include "colors.hpp"
-#include "level/levelloader.hpp"
 #include "state.hpp"
 
 class scene_credits: public ce::scene
@@ -26,12 +21,11 @@ private:
 
 	chirp::music music;
 
-	asset::font fnt_title;
-	ce::text txt_title;
+	chirp::font fnt_title;
 	chirp::text txt_title;
 
-	asset::font fnt_subtitle;
-	ce::text txt_subtitle;
+	chirp::font fnt_subtitle;
+	chirp::text txt_subtitle;
 
 	ce::input input;
 

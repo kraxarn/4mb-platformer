@@ -22,8 +22,7 @@ namespace entity
 		int timer = timer_start;
 		chirp::vector2i text_size;
 
-		asset::font font;
-		ce::text text;
+		chirp::font font;
 		chirp::text text;
 	};
 }

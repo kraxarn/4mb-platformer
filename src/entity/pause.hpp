@@ -21,8 +21,7 @@ namespace entity
 
 		bool paused = false;
 
-		asset::font fnt_title;
-		ce::text txt_title;
+		chirp::font fnt_title;
 		chirp::text txt_title;
 	};
 }

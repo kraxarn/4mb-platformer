@@ -52,9 +52,7 @@ namespace entity
 
 		entity::state state;
 
-		asset::font fnt_hud;
-		ce::text txt_gems;
-		ce::text txt_coins;
+		chirp::font fnt_hud;
 		chirp::text txt_gems;
 		chirp::text txt_coins;
 
