@@ -11,7 +11,12 @@ add_executable(4mb_platformer ${MAIN_SRC} ${SUB_SRC})
 
 target_include_directories(4mb_platformer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
-include(chirp.cmake)
+if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+	add_subdirectory(../chirp chirp)
+else ()
+	include(chirp.cmake)
+endif ()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE chirp)
 
 # Raylib
