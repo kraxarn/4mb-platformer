@@ -2,8 +2,8 @@
 
 entity::hud::hud(const ce::assets &assets)
 	: fnt_hud(assets.font("submenu", font_size)),
-	txt_gems("0/0", 0, 0, font_size, color::text),
-	txt_coins("0", 0, 0, font_size, color::text),
+	txt_gems("0/0", {0, 0}, font_size, color::text),
+	txt_coins("0", {0, 0}, font_size, color::text),
 	ts_hud(assets.tileset("items")),
 	snd_coin(assets.sound("coin")),
 	snd_gem(assets.sound("gem")),

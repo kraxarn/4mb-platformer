@@ -30,7 +30,7 @@ private:
 	chirp::music music;
 
 #ifndef NDEBUG
-	ce::text txt_debug;
+	chirp::text txt_debug;
 #endif
 
 	ce::sprite spr_arrow;

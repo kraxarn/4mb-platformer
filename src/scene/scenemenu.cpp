@@ -5,7 +5,7 @@
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
 #ifndef NDEBUG
-	txt_debug("-", 16, 16, 20, WHITE),
+	txt_debug("-", {16, 16}, 20, chirp::color::white()),
 #endif
 	music(assets.music("menu")),
 	fnt_menu(assets.font("menu", 52)),
@@ -29,7 +29,10 @@ scene_menu::scene_menu(const ce::assets &assets)
 	auto center = (GetScreenHeight() / 2) - (texts_height() / 2);
 	for (auto i = 0; i < texts.size(); i++)
 	{
-		texts.at(i).set_y(center + (i * text_spacing));
+		texts.at(i).set_position({
+			texts.at(i).get_position().x(),
+			center + i * text_spacing,
+		});
 	}
 
 	// Arrow position
@@ -135,8 +138,8 @@ auto scene_menu::texts_height() -> int
 	const auto &front = texts.front();
 	const auto &back = texts.back();
 
-	auto start = front.get_y();
-	auto end = texts.back().get_y() + static_cast<int>(fnt_menu.text_size(back).y);
+	const auto start = front.get_position().y();
+	const auto end = texts.back().get_position().y() + static_cast<int>(fnt_menu.text_size(back).y());
 	return end - start;
 }
 
@@ -153,8 +156,8 @@ void scene_menu::set_current(int value)
 	}
 
 	const auto &text = texts.at(current);
-	spr_arrow.set_y(static_cast<float>(text.get_y())
-		+ (fnt_menu.text_size(text).y / 2.F)
+	spr_arrow.set_y(static_cast<float>(text.get_position().y())
+		+ (fnt_menu.text_size(text).y() / 2.F)
 		- (static_cast<float>(spr_arrow.height()) / 2.F));
 }
 

@@ -55,6 +55,8 @@ namespace entity
 		asset::font fnt_hud;
 		ce::text txt_gems;
 		ce::text txt_coins;
+		chirp::text txt_gems;
+		chirp::text txt_coins;
 
 		asset::tileset ts_hud;
 		chirp::vector2f pos_gems;

@@ -7,8 +7,8 @@
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
-	txt_debug("", debug_hud_offset, debug_hud_offset,
-		debug_hud_size, WHITE),
+	txt_debug("", {debug_hud_offset, debug_hud_offset},
+		debug_hud_size, chirp::color::white()),
 #endif
 	entity_hud(assets),
 	entity_player(assets, entity_hud, ce::tile_scale),

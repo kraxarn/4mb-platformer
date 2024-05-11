@@ -23,5 +23,6 @@ namespace entity
 
 		asset::font fnt_title;
 		ce::text txt_title;
+		chirp::text txt_title;
 	};
 }

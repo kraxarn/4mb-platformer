@@ -41,7 +41,7 @@ private:
 	static constexpr int debug_hud_size = 20;
 	static constexpr int debug_hud_offset = 16;
 
-	ce::text txt_debug;
+	chirp::text txt_debug;
 #endif
 
 	// Level

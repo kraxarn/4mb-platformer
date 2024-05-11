@@ -4,8 +4,8 @@ scene_credits::scene_credits(const ce::assets &assets)
 	: ce::scene(assets),
 	fnt_title(assets.font("menu", size_title)),
 	fnt_subtitle(assets.font("submenu", size_title / 2)),
-	txt_title("Thanks for playing!", 0, 0, size_title, color::text),
-	txt_subtitle("", 0, 0, size_title / 2, color::text),
+	txt_title("Thanks for playing!", {0, 0}, size_title, color::text),
+	txt_subtitle("", {0, 0}, size_title / 2, color::text),
 	music(assets.music("credits"))
 {
 	music.play();
@@ -16,15 +16,19 @@ void scene_credits::render()
 	music.update();
 
 	// Title text
-	auto title_size = ce::vector2i(fnt_title.text_size(txt_title));
-	txt_title.set_x(ce::window::size().x / 2 - title_size.x / 2);
-	txt_title.set_y(ce::window::size().y / 2 - title_size.y);
+	const auto title_size = fnt_title.text_size(txt_title).to<int>();
+	txt_title.set_position({
+		ce::window::size().x() / 2 - title_size.x() / 2,
+		ce::window::size().y() / 2 - title_size.y(),
+	});
 	fnt_title.draw_text(txt_title);
 
 	// Subtitle text
-	auto subtitle_size = ce::vector2i(fnt_subtitle.text_size(txt_subtitle));
-	txt_subtitle.set_x(ce::window::size().x / 2 - subtitle_size.x / 2);
-	txt_subtitle.set_y(ce::window::size().y / 2 + subtitle_size.y);
+	const auto subtitle_size = fnt_subtitle.text_size(txt_subtitle).to<int>();
+	txt_subtitle.set_position({
+		ce::window::size().x() / 2 - subtitle_size.x() / 2,
+		ce::window::size().y() / 2 + subtitle_size.y(),
+	});
 	fnt_subtitle.draw_text(txt_subtitle);
 
 	// Go back to menu on enter

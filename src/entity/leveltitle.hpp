@@ -24,5 +24,6 @@ namespace entity
 
 		asset::font font;
 		ce::text text;
+		chirp::text text;
 	};
 }
