@@ -1,11 +1,8 @@
 #pragma once
 
 #include "engine/assets.hpp"
-#include "engine/window.hpp"
-#include "engine/format.hpp"
 #include "engine/level.hpp"
-#include "colors.hpp"
-#include "physics/tiles.hpp"
+#include "engine/window.hpp"
 #include "entity/state.hpp"
 
 namespace entity

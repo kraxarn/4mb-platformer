@@ -1,4 +1,7 @@
 #include "scenecredits.hpp"
+#include "level/levelloader.hpp"
+
+#include <chirp/format.hpp>
 
 scene_credits::scene_credits(const ce::assets &assets)
 	: ce::scene(assets),
@@ -70,6 +73,6 @@ void scene_credits::set_collected_coins(int value)
 
 	txt_subtitle.set_text(missed == 0
 		? "and you collected all coins! :)"
-		: ce::fmt::format("but you missed {} {}! :(",
+		: chirp::format("but you missed {} {}! :(",
 			missed, missed == 1 ? "coin" : "coins"));
 }

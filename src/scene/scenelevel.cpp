@@ -1,8 +1,12 @@
 #include "scenelevel.hpp"
 
 #include "state.hpp"
+#include "engine/clock.hpp"
 #include "enum/scenes.hpp"
+#include "level/levelloader.hpp"
 #include "scene/scenecredits.hpp"
+
+#include <chirp/format.hpp>
 
 scene_level::scene_level(const ce::assets &assets)
 	: scene(assets),
@@ -59,7 +63,7 @@ void scene_level::render()
 	entity_pause.update();
 
 #ifndef NDEBUG
-	txt_debug.set_text(ce::fmt::format("FPS: {}\n"
+	txt_debug.set_text(chirp::format("FPS: {}\n"
 									   "Position: {}\n"
 									   "Velocity: {}\n"
 									   "Grounded: {}\n"
@@ -80,7 +84,7 @@ void scene_level::load(int index)
 	auto *new_level = level_loader::get(assets, index);
 	if (new_level == nullptr)
 	{
-		throw std::runtime_error(ce::fmt::format("Invalid level index: {}", index));
+		throw std::runtime_error(chirp::format("Invalid level index: {}", index));
 	}
 
 	// Boss entity needs to be reloaded

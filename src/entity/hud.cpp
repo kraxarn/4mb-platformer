@@ -1,5 +1,10 @@
 #include "entity/hud.hpp"
 
+#include <chirp/format.hpp>
+
+#include "colors.hpp"
+#include "physics/tiles.hpp"
+
 entity::hud::hud(const ce::assets &assets)
 	: fnt_hud(assets.font("submenu", font_size)),
 	txt_gems("0/0", {0, 0}, font_size, color::text),
@@ -84,7 +89,7 @@ void entity::hud::draw(ce::level &level)
 
 void entity::hud::update(ce::level &level)
 {
-	txt_gems.set_text(ce::fmt::format("{}/{}",
+	txt_gems.set_text(chirp::format("{}/{}",
 		state.get_gems(), level.get_total_gem_count()));
 	txt_coins.set_text(std::to_string(state.get_coins()));
 }
