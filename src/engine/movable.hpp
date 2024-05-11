@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine/vector2.hpp"
+#include <chirp/vector2.hpp>
 
 namespace ce
 {
@@ -16,8 +16,8 @@ namespace ce
 		auto get_y() const -> float;
 		void set_y(float value);
 
-		void set_position(const ce::vector2f &new_pos);
-		auto get_position() const -> ce::vector2f;
+		void set_position(const chirp::vector2f &new_pos);
+		auto get_position() const -> chirp::vector2f;
 
 		void move(float x_offset, float y_offset);
 
@@ -25,6 +25,6 @@ namespace ce
 		movable() = default;
 
 	private:
-		ce::vector2f pos;
+		chirp::vector2f pos;
 	};
 }

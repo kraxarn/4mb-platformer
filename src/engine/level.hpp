@@ -1,13 +1,12 @@
 #pragma once
 
 #include "engine/map.hpp"
-#include "physics/tiles.hpp"
-#include "engine/vector2.hpp"
 
-#include <string>
-#include <fstream>
-#include <iostream>
+#include <chirp/vector2.hpp>
+
 #include <array>
+#include <fstream>
+#include <string>
 
 namespace ce
 {
@@ -37,13 +36,13 @@ namespace ce
 		 * Get player spawn point
 		 * @return Level tile index
 		 */
-		auto get_spawn() const -> ce::vector2i;
+		auto get_spawn() const -> chirp::vector2i;
 
 		/**
 		 * Get safe spawn point for player
 		 * @return Level absolute position
 		 */
-		auto get_safe_spawn() const -> ce::vector2f;
+		auto get_safe_spawn() const -> chirp::vector2f;
 
 	private:
 		int gem_count = -1;

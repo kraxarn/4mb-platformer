@@ -20,7 +20,7 @@ namespace entity
 
 		int speed = 0;
 		int timer = timer_start;
-		ce::vector2i text_size;
+		chirp::vector2i text_size;
 
 		asset::font font;
 		ce::text text;

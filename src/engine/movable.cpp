@@ -2,36 +2,35 @@
 
 auto ce::movable::get_x() const -> float
 {
-	return pos.x;
+	return pos.x();
 }
 
 void ce::movable::set_x(float value)
 {
-	pos.x = value;
+	pos = {value, pos.y()};
 }
 
 auto ce::movable::get_y() const -> float
 {
-	return pos.y;
+	return pos.y();
 }
 
 void ce::movable::set_y(float value)
 {
-	pos.y = value;
+	pos = {pos.x(), value};
 }
 
-void ce::movable::set_position(const ce::vector2f &new_pos)
+void ce::movable::set_position(const chirp::vector2f &new_pos)
 {
 	pos = new_pos;
 }
 
-auto ce::movable::get_position() const -> ce::vector2f
+auto ce::movable::get_position() const -> chirp::vector2f
 {
 	return pos;
 }
 
 void ce::movable::move(float x_offset, float y_offset)
 {
-	pos.x += x_offset;
-	pos.y += y_offset;
+	pos += chirp::vector2f(x_offset, y_offset);
 }

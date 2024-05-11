@@ -21,7 +21,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 	texts.reserve(text_count);
 	for (auto i = 0; i < text_count; i++)
 	{
-		texts.emplace_back(labels.at(i), 128, i * text_spacing,
+		texts.emplace_back(labels.at(i), chirp::vector2i(128, i * text_spacing),
 			fnt_menu.font_size(), color::text);
 	}
 

@@ -48,10 +48,10 @@ namespace entity
 		auto get_player_dirs() const -> direction;
 
 		/** Get distance to player, always positive */
-		auto get_player_dist() const -> ce::vector2f;
+		auto get_player_dist() const -> chirp::vector2f;
 
 		/** Get random pos some place away from player */
-		auto get_random_pos() const -> ce::vector2f;
+		auto get_random_pos() const -> chirp::vector2f;
 
 		auto get_speed() const -> float;
 

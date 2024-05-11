@@ -57,8 +57,8 @@ namespace entity
 		ce::text txt_coins;
 
 		asset::tileset ts_hud;
-		ce::vector2f pos_gems;
-		ce::vector2f pos_coins;
+		chirp::vector2f pos_gems;
+		chirp::vector2f pos_coins;
 
 		asset::sound snd_coin;
 		asset::sound snd_gem;

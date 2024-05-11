@@ -16,27 +16,35 @@ entity::hud::hud(const ce::assets &assets)
 	 * \-----------------------/
 	 */
 
-	ce::vector2f top_right{
-		ce::window::size().to<float>().x - offset,
+	const chirp::vector2f top_right{
+		ce::window::size().to<float>().x() - offset,
 		offset,
 	};
 
 	auto hud_height = static_cast<float>(ts_hud.get_size());
 	auto font_offset = (ts_hud.get_size()
-		- ce::vector2i(fnt_hud.text_size(txt_gems)).y) / 4;
+		- fnt_hud.text_size(txt_gems).to<int>().y()) / 4;
 
-	pos_gems.x = top_right.x - offset - hud_height * scale;
-	pos_gems.y = offset;
+	pos_gems = {
+		top_right.x() - offset - hud_height * scale,
+		offset,
+	};
 
-	pos_coins.x = pos_gems.x;
-	pos_coins.y = pos_gems.y + hud_height * scale + spacing;
+	pos_coins = {
+		pos_gems.x(),
+		pos_gems.y() + hud_height * scale + spacing,
+	};
 
 	// Coin
-	txt_gems.set_x(pos_gems.to<int>().x);
-	txt_gems.set_y(pos_gems.to<int>().y - font_offset);
+	txt_gems.set_position({
+		pos_gems.to<int>().x(),
+		pos_gems.to<int>().y() - font_offset,
+	});
 	// gem
-	txt_coins.set_x(pos_coins.to<int>().x);
-	txt_coins.set_y(pos_coins.to<int>().y - font_offset);
+	txt_coins.set_position({
+		pos_coins.to<int>().x(),
+		pos_coins.to<int>().y() - font_offset,
+	});
 }
 
 void entity::hud::draw(ce::level &level)
@@ -44,10 +52,15 @@ void entity::hud::draw(ce::level &level)
 	update(level);
 
 	// Text positions
-	txt_gems.set_x(pos_gems.to<int>().x
-		- ce::vector2i(fnt_hud.text_size(txt_gems)).x);
-	txt_coins.set_x(pos_coins.to<int>().x
-		- ce::vector2i(fnt_hud.text_size(txt_coins)).x);
+	txt_gems.set_position({
+		pos_gems.to<int>().x() - fnt_hud.text_size(txt_gems).to<int>().x(),
+		txt_gems.get_position().y(),
+	});
+
+	txt_coins.set_position({
+		pos_coins.to<int>().x() - fnt_hud.text_size(txt_coins).to<int>().x(),
+		txt_coins.get_position().y(),
+	});
 
 	// Text
 	if (level.get_total_gem_count() > 0)
@@ -57,13 +70,13 @@ void entity::hud::draw(ce::level &level)
 	fnt_hud.draw_text(txt_coins);
 
 	// Coin
-	ts_hud.draw(pos_coins.x, pos_coins.y,
+	ts_hud.draw(pos_coins.x(), pos_coins.y(),
 		static_cast<int>(tile::coin) % static_cast<int>(tile::spawn),
 		0.F, scale);
 	// Gem
 	if (level.get_total_gem_count() > 0)
 	{
-		ts_hud.draw(pos_gems.x, pos_gems.y,
+		ts_hud.draw(pos_gems.x(), pos_gems.y(),
 			static_cast<int>(tile::gem) % static_cast<int>(tile::spawn),
 			0.F, scale);
 	}

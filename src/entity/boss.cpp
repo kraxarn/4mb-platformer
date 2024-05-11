@@ -22,10 +22,10 @@ void entity::boss::update(bool is_paused)
 		auto dist = get_player_dist();
 		auto speed = get_speed();
 
-		auto x = dist.x < static_cast<float>(width())
+		auto x = dist.x() < static_cast<float>(width())
 			? 0.F : eq(dir, direction::left)
 				? -speed : speed;
-		auto y = lock_y || dist.y < static_cast<float>(height())
+		auto y = lock_y || dist.y() < static_cast<float>(height())
 			? 0.F : eq(dir, direction::up)
 				? -speed : speed;
 		move(x, y);
@@ -59,7 +59,7 @@ auto entity::boss::eq(const direction &dir1, const direction &dir2) -> bool
 		!= static_cast<unsigned short>(direction::none);
 }
 
-auto entity::boss::get_player_dist() const -> ce::vector2f
+auto entity::boss::get_player_dist() const -> chirp::vector2f
 {
 	return {
 		std::abs(get_x() - player.get_x()),
@@ -83,11 +83,11 @@ auto entity::boss::hurt() -> bool
 	health--;
 
 	auto is_dead = health <= 0;
-	set_position(is_dead ? ce::vector2f() : get_random_pos());
+	set_position(is_dead ? chirp::vector2f() : get_random_pos());
 	return is_dead;
 }
 
-auto entity::boss::get_random_pos() const -> ce::vector2f
+auto entity::boss::get_random_pos() const -> chirp::vector2f
 {
 	return {
 		player.get_x()

@@ -2,10 +2,11 @@
 
 #include "raylib.h"
 #include "asset/image.hpp"
-#include "engine/vector2.hpp"
 
-#include <string>
+#include <chirp/vector2.hpp>
+
 #include <iostream>
+#include <string>
 
 namespace ce
 {
@@ -25,7 +26,7 @@ namespace ce
 		static void close();
 		static void set_icon(const asset::image &image);
 
-		static auto size() -> ce::vector2i;
+		static auto size() -> chirp::vector2i;
 
 	private:
 		Camera2D camera = {0};

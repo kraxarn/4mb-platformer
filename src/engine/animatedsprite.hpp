@@ -26,7 +26,7 @@ namespace ce
 
 		auto width() const -> int;
 		auto height() const -> int;
-		auto size() const -> ce::vector2i;
+		auto size() const -> chirp::vector2i;
 
 		void set_frame(int index);
 

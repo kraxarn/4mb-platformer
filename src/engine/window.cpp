@@ -42,7 +42,7 @@ void ce::window::set_icon(const asset::image &image)
 	SetWindowIcon(image);
 }
 
-auto ce::window::size() -> ce::vector2i
+auto ce::window::size() -> chirp::vector2i
 {
 	return {
 		GetScreenWidth(),

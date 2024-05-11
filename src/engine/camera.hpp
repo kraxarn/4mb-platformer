@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-#include "engine/vector2.hpp"
+#include <chirp/vector2.hpp>
 
 namespace ce
 {
@@ -14,10 +14,10 @@ namespace ce
 		void begin() const;
 		void end() const;
 
-		void set_target(const ce::vector2f &target);
+		void set_target(const chirp::vector2f &target);
 
-		auto get_offset() const -> ce::vector2f;
-		void set_offset(const ce::vector2f &offset);
+		auto get_offset() const -> chirp::vector2f;
+		void set_offset(const chirp::vector2f &offset);
 
 		void move(float x, float y);
 

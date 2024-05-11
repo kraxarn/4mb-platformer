@@ -20,36 +20,36 @@ void entity::player::update(const ce::input &input,
 		// Right
 		if (input.is_down(ce::key::right))
 		{
-			velocity.x += move_acceleration;
-			if (velocity.x > speed_limit_x)
+			velocity += chirp::vector2f(move_acceleration, 0);
+			if (velocity.x() > speed_limit_x)
 			{
-				velocity.x = speed_limit_x;
+				velocity = {speed_limit_x, velocity.y()};
 			}
 		}
-		else if (velocity.x > 0 && is_grounded())
+		else if (velocity.x() > 0 && is_grounded())
 		{
-			velocity.x += move_deceleration;
-			if (velocity.x < 0)
+			velocity += chirp::vector2f(move_deceleration, 0);
+			if (velocity.x() < 0)
 			{
-				velocity.x = 0;
+				velocity = {0, velocity.y()};
 			}
 		}
 
 		// Left
 		if (input.is_down(ce::key::left))
 		{
-			velocity.x -= move_acceleration;
-			if (velocity.x < -speed_limit_x)
+			velocity -= chirp::vector2f(move_acceleration, 0);
+			if (velocity.x() < -speed_limit_x)
 			{
-				velocity.x = -speed_limit_x;
+				velocity = {-speed_limit_x, velocity.y()};
 			}
 		}
-		else if (velocity.x < 0 && is_grounded())
+		else if (velocity.x() < 0 && is_grounded())
 		{
-			velocity.x -= move_deceleration;
-			if (velocity.x > 0)
+			velocity -= chirp::vector2f(move_deceleration, 0);
+			if (velocity.x() > 0)
 			{
-				velocity.x = 0;
+				velocity = {0, velocity.y()};
 			}
 		}
 
@@ -59,11 +59,11 @@ void entity::player::update(const ce::input &input,
 			snd_jump.play();
 			ce::animated_sprite::pause();
 			set_frame(1);
-			velocity.y = jump_force;
+			velocity = {velocity.x(), jump_force};
 		}
 		else
 		{
-			velocity.y += gravity;
+			velocity += chirp::vector2f(0, gravity);
 		}
 	}
 
@@ -88,7 +88,7 @@ void entity::player::update(const ce::input &input,
 		}
 		set_position(get_position() + velocity);
 
-		if (velocity.x == 0)
+		if (velocity.x() == 0)
 		{
 			ce::animated_sprite::pause();
 			set_frame(0);
@@ -106,7 +106,7 @@ void entity::player::update(const ce::input &input,
 		{
 			snd_fall.play();
 		}
-		velocity = ce::vector2f();
+		velocity = chirp::vector2f();
 		set_position(level.get_safe_spawn());
 		hud.respawn();
 	}
@@ -126,21 +126,27 @@ void entity::player::update_collision(ce::level &level)
 #endif
 }
 
-auto entity::player::get_velocity() const -> const ce::vector2f &
+auto entity::player::get_velocity() const -> const chirp::vector2f &
 {
 	return velocity;
 }
 
 auto entity::player::is_grounded() const -> bool
 {
-	return velocity.y == 0;
+	return velocity.y() == 0;
 }
 
 auto entity::player::get_player_dir() const -> direction
 {
-	return velocity.x < 0
-		? direction::left
-		: velocity.x > 0
-			? direction::right
-			: get_dir();
+	if (velocity.x() < 0)
+	{
+		return direction::left;
+	}
+
+	if (velocity.x() > 0)
+	{
+		return direction::right;
+	}
+
+	return get_dir();
 }

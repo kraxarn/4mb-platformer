@@ -57,7 +57,7 @@ auto ce::animated_sprite::height() const -> int
 	return tileset.get_size();
 }
 
-auto ce::animated_sprite::size() const -> ce::vector2i
+auto ce::animated_sprite::size() const -> chirp::vector2i
 {
 	return {
 		width(),

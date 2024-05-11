@@ -24,7 +24,7 @@ namespace entity
 			bool is_paused);
 
 		/** Get current player speed */
-		auto get_velocity() const -> const ce::vector2f &;
+		auto get_velocity() const -> const chirp::vector2f &;
 		/** Is player on the ground */
 		auto is_grounded() const -> bool;
 
@@ -42,7 +42,7 @@ namespace entity
 
 		entity::hud &hud;
 
-		ce::vector2f velocity;
+		chirp::vector2f velocity;
 
 		asset::sound snd_jump;
 		asset::sound snd_fall;

@@ -15,21 +15,21 @@ void ce::camera::end() const
 	EndMode2D();
 }
 
-void ce::camera::set_target(const ce::vector2f &target)
+void ce::camera::set_target(const chirp::vector2f &target)
 {
-	r_camera.target.x = target.x;
-	r_camera.target.y = target.y;
+	r_camera.target.x = target.x();
+	r_camera.target.y = target.y();
 }
 
-auto ce::camera::get_offset() const -> ce::vector2f
+auto ce::camera::get_offset() const -> chirp::vector2f
 {
 	return {r_camera.offset.x, r_camera.offset.y};
 }
 
-void ce::camera::set_offset(const ce::vector2f &offset)
+void ce::camera::set_offset(const chirp::vector2f &offset)
 {
-	r_camera.offset.x = offset.x;
-	r_camera.offset.y = offset.y;
+	r_camera.offset.x = offset.x();
+	r_camera.offset.y = offset.y();
 }
 
 void ce::camera::move(float x, float y)

@@ -17,30 +17,30 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 }
 
 auto phys::collision::update(const Rectangle &player_rect,
-	ce::level &level, ce::vector2f &velocity, entity::hud &hud) -> tile_type
+	ce::level &level, chirp::vector2f &velocity, entity::hud &hud) -> tile_type
 {
 	auto collides = tile_type::empty;
 	const auto &map = level.map();
 	auto rect = player_rect;
-	ce::vector2f player_position(rect.x, rect.y);
+	const chirp::vector2f player_position(rect.x, rect.y);
 	auto player_tile = (player_position / ce::tile_size).to<int>();
 
 	// Reset speed modifier
 	hud.set_player_speed_modifier(1.F);
 
 	auto rect_x = rect;
-	rect_x.x += velocity.x;
+	rect_x.x += velocity.x();
 	if (will_collide(level, hud, player_tile, rect_x, velocity))
 	{
-		velocity.x = 0.F;
+		velocity = {0, velocity.y()};
 		collides = tile_type::tile;
 	}
 
 	auto rect_y = rect;
-	rect_y.y += velocity.y;
+	rect_y.y += velocity.y();
 	if (will_collide(level, hud, player_tile, rect_y, velocity))
 	{
-		velocity.y = 0.F;
+		velocity = {velocity.x(), 0};
 		collides = tile_type::tile;
 	}
 
@@ -48,8 +48,8 @@ auto phys::collision::update(const Rectangle &player_rect,
 }
 
 auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
-	const ce::vector2i &tile, const Rectangle &rect,
-	const ce::vector2f &velocity) -> bool
+	const chirp::vector2i &tile, const Rectangle &rect,
+	const chirp::vector2f &velocity) -> bool
 {
 	const auto &map = level.map();
 	tile_type tile_type;
@@ -60,14 +60,14 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 	target.width = ce::tile_size;
 	target.height = ce::tile_size;
 
-	for (x = tile.x - offset; x < tile.x + offset; x++)
+	for (x = tile.x() - offset; x < tile.x() + offset; x++)
 	{
 		if (x < 0 || x >= map.size())
 		{
 			continue;
 		}
 
-		for (y = tile.y - offset; y < tile.y + offset; y++)
+		for (y = tile.y() - offset; y < tile.y() + offset; y++)
 		{
 			if (y < 0 || y >= map.at(x).size())
 			{
@@ -98,7 +98,7 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 
 			if (tile_type == tile_type::one_way)
 			{
-				if (velocity.y > 0
+				if (velocity.y() > 0
 					&& rect.y + rect.height * 0.75F < target.y)
 				{
 					return true;

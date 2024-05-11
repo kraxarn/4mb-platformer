@@ -137,7 +137,7 @@ void scene_level::load_entities()
 		{
 			entity_boss = std::make_unique<entity::boss>(assets, entity_player,
 				entity_player.get_scale());
-			entity_boss->set_position(ce::vector2f(x, y) * ce::tile_size);
+			entity_boss->set_position(chirp::vector2f(x, y) * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level.get()));
 			return true;
 		}
@@ -161,7 +161,7 @@ void scene_level::update_entities()
 		auto is_final = entity::boss::is_final(level.get());
 
 		if (!is_final
-			|| entity_player.get_velocity().y <= 0)
+			|| entity_player.get_velocity().y() <= 0)
 		{
 			entity_hud.kill();
 			// Easiest way to reset boss
@@ -190,10 +190,10 @@ void scene_level::update_camera()
 
 	const auto &offset = camera.get_offset();
 
-	const auto offset_x_min = offset.x;
-	const auto offset_x_max = level_width - offset.x - ce::tile_size * 0.25F;
-	const auto offset_y_min = offset.y;
-	const auto offset_y_max = level_height - offset.y - ce::tile_size * 0.25F;
+	const auto offset_x_min = offset.x();
+	const auto offset_x_max = level_width - offset.x() - ce::tile_size * 0.25F;
+	const auto offset_y_min = offset.y();
+	const auto offset_y_max = level_height - offset.y() - ce::tile_size * 0.25F;
 
 	// Horizontal offset
 	if (camera.get_x() < offset_x_min)
