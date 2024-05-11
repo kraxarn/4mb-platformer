@@ -10,14 +10,19 @@ void ce::draw::end()
 	EndDrawing();
 }
 
-void ce::draw::clear(Color color)
+void ce::draw::clear(const chirp::color &color)
 {
-	ClearBackground(color);
+	ClearBackground(Color{
+		.r = color.red(),
+		.g = color.green(),
+		.b = color.blue(),
+		.a = color.alpha(),
+	});
 }
 
 void ce::draw::clear(unsigned int color)
 {
-	clear(Color{
+	clear({
 		static_cast<unsigned char>(color >> 0b10000),
 		static_cast<unsigned char>(color >> 0b01000),
 		static_cast<unsigned char>(color),

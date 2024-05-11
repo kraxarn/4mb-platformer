@@ -1,13 +1,13 @@
 #pragma once
 
-#include "raylib.h"
+#include <chirp/color.hpp>
 
 class color
 {
 public:
-	static Color background;
+	static chirp::color background;
 
-	static Color text;
+	static chirp::color text;
 
 private:
 	color() = default;
