@@ -5,15 +5,28 @@
 
 auto phys::collision::get_tile_type(char value) -> tile_type
 {
-	return value == static_cast<char>(tile::none)
-		? tile_type::empty
-		: value < static_cast<char>(tile::spawn)
-			? value < 4 ? tile_type::tile : tile_type::one_way // 0-3=tile, 4-7=one way
-			: value <= static_cast<char>(tile::spike) // Last valid tile
-				? tile_type::item
-				: value == static_cast<char>(tile::boss)
-					? tile_type::entity
-					: tile_type::invalid;
+	if (value == static_cast<char>(tile::none))
+	{
+		return tile_type::empty;
+	}
+
+	if (value < static_cast<char>(tile::spawn))
+	{
+		// 0-3=tile, 4-7=one way
+		return value < 4 ? tile_type::tile : tile_type::one_way;
+	}
+
+	if (value <= static_cast<char>(tile::spike)) // Last valid tile
+	{
+		return tile_type::item;
+	}
+
+	if (value == static_cast<char>(tile::boss))
+	{
+		return tile_type::entity;
+	}
+
+	return tile_type::invalid;
 }
 
 auto phys::collision::update(const Rectangle &player_rect,
