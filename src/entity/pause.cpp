@@ -24,7 +24,7 @@ void entity::pause::update()
 	}
 
 	const auto window_size = ce::window::size();
-	DrawRectangle(0, 0, window_size.x, window_size.y, {
+	DrawRectangle(0, 0, window_size.x(), window_size.y(), {
 		0x0, 0x0, 0x0, 0x7f,
 	});
 
