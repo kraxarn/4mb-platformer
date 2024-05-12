@@ -26,7 +26,7 @@ void entity::level_title::update()
 	});
 }
 
-void entity::level_title::set_level(const ce::level &level)
+void entity::level_title::set_level(const chirp::level &level)
 {
 	text.set_text(level.name());
 

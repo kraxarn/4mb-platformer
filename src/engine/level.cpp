@@ -1,18 +1,25 @@
 #include "engine/level.hpp"
+#include "engine/map.hpp"
 
 #include "physics/tiles.hpp"
+
+ce::level::level(const chirp::level &level)
+	: chirp::level(level)
+{
+}
 
 auto ce::level::get_total_gem_count() -> int
 {
 	if (gem_count < 0)
 	{
 		gem_count = 0;
-		iterate_map_all<char>(map(), [this](int /*x*/, int /*y*/, char tile)
+		iterate([this](const chirp::map_tile &tile) -> bool
 		{
-			if (tile == static_cast<char>(tile::gem))
+			if (tile.value == static_cast<char>(tile::gem))
 			{
 				gem_count++;
 			}
+			return true;
 		});
 	}
 
@@ -23,14 +30,14 @@ auto ce::level::get_spawn() const -> chirp::vector2i
 {
 	chirp::vector2i vec;
 
-	ce::iterate_map<char>(map(), [&vec](auto x, auto y, char value) -> bool
+	iterate([&vec](const chirp::map_tile &tile) -> bool
 	{
-		if (value == static_cast<char>(tile::spawn))
+		if (tile.value == static_cast<char>(tile::spawn))
 		{
-			vec = chirp::vector2<std::size_t>(x, y).to<int>();
-			return true;
+			vec = chirp::vector2<std::size_t>(tile.x, tile.y).to<int>();
+			return false;
 		}
-		return false;
+		return true;
 	});
 
 	return vec;

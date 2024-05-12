@@ -41,7 +41,7 @@ auto ce::assets::tileset(const std::string &path) const -> asset::tileset
 	return asset::tileset(open("tilesets", path));
 }
 
-auto ce::assets::level(const std::string &path) const -> asset::level
+auto ce::assets::level(const std::string &path) const -> chirp::level
 {
-	return asset::level(open("levels", path));
+	return chirp::level(open("levels", path));
 }

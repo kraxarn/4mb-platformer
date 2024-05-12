@@ -1,12 +1,12 @@
 #pragma once
 
-#include "asset/level.hpp"
 #include "asset/sound.hpp"
 #include "asset/tileset.hpp"
 
 #include <chirp/assets.hpp>
 #include <chirp/font.hpp>
 #include <chirp/image.hpp>
+#include <chirp/level.hpp>
 #include <chirp/music.hpp>
 
 namespace ce
@@ -29,7 +29,7 @@ namespace ce
 
 		auto tileset(const std::string &path) const -> asset::tileset;
 
-		auto level(const std::string &path) const -> asset::level;
+		auto level(const std::string &path) const -> chirp::level;
 
 	private:
 		const chirp::assets &data;

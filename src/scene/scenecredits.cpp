@@ -53,14 +53,15 @@ auto scene_credits::get_total_coins() -> int
 			break;
 		}
 
-		ce::iterate_map_all<char>(level_loader::get(assets, index++)->map(),
-			[&coins](int /*x*/, int /*y*/, char value)
+		const auto *level = level_loader::get(assets, index++);
+		level->iterate([&coins](const chirp::map_tile &tile) -> bool
+		{
+			if (tile.value == static_cast<char>(tile::coin))
 			{
-				if (value == static_cast<char>(tile::coin))
-				{
-					coins++;
-				}
-			});
+				coins++;
+			}
+			return true;
+		});
 	}
 
 	return coins;

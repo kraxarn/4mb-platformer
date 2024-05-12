@@ -22,7 +22,7 @@ namespace entity
 		void set_lock_y(bool value);
 
 		/** Is final boss */
-		static auto is_final(const ce::level *level) -> bool;
+		static auto is_final(const chirp::level *level) -> bool;
 
 	private:
 		static constexpr float min_speed = 1.F;

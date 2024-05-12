@@ -136,19 +136,19 @@ void scene_level::next_level()
 
 void scene_level::load_entities()
 {
-	ce::iterate_map<char>(level->map(), [this](float x, float y, char value) -> bool
+	level->iterate([this](const chirp::map_tile &tile) -> bool
 	{
 		// Currently, there's only one possible entity
-		if (phys::collision::get_tile_type(value) == tile_type::entity
-			&& value == static_cast<char>(tile::boss))
+		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
+			&& tile.value == static_cast<char>(tile::boss))
 		{
 			entity_boss = std::make_unique<entity::boss>(assets, entity_player,
 				entity_player.get_scale());
-			entity_boss->set_position(chirp::vector2f(x, y) * ce::tile_size);
+			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level.get()));
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	});
 }
 
@@ -225,41 +225,42 @@ void scene_level::update_camera()
 
 void scene_level::draw_map()
 {
-	ce::iterate_map_all<char>(level->map(), [this](auto x, auto y, char tile)
+	level->iterate([this](const chirp::map_tile &tile) -> bool
 	{
-		auto tile_type = phys::collision::get_tile_type(tile);
-
+		const auto tile_type = phys::collision::get_tile_type(tile.value);
 		if (tile_type == tile_type::empty)
 		{
-			return;
+			return true;
 		}
 
-		auto x_pos = static_cast<float>(x) * ce::tile_size;
-		auto y_pos = static_cast<float>(y) * ce::tile_size;
+		const auto x_pos = static_cast<float>(tile.x) * ce::tile_size;
+		const auto y_pos = static_cast<float>(tile.y) * ce::tile_size;
 
 		if (tile_type == tile_type::tile
 			|| tile_type == tile_type::one_way)
 		{
 			tiles.draw(x_pos, y_pos,
-				tile, 0.F, ce::tile_scale);
+				tile.value, 0.F, ce::tile_scale);
 		}
 		else if (tile_type == tile_type::item)
 		{
-			if (tile != static_cast<char>(tile::exit)
+			if (tile.value != static_cast<char>(tile::exit)
 				|| entity_hud.get_gem_count() == level->get_total_gem_count())
 			{
 				items.draw(x_pos, y_pos,
-					tile % static_cast<int>(tile::spawn),
+					tile.value % static_cast<int>(tile::spawn),
 					0.F, ce::tile_scale);
 			}
 		}
 
 #ifndef NDEBUG
-		DrawRectangleLines(x * ce::tile_size,
-			y * ce::tile_size,
+		DrawRectangleLines(tile.x * ce::tile_size,
+			tile.y * ce::tile_size,
 			ce::tile_size,
 			ce::tile_size,
 			GREEN);
 #endif
+
+		return true;
 	});
 }

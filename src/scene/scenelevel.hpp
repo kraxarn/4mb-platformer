@@ -26,8 +26,8 @@ public:
 	void next_level();
 
 private:
-	static constexpr int level_width = ce::level_tiles_width * ce::tile_size;
-	static constexpr int level_height = ce::level_tiles_height * ce::tile_size;
+	static constexpr int level_width = chirp::level_tiles_width * ce::tile_size;
+	static constexpr int level_height = chirp::level_tiles_height * ce::tile_size;
 
 	// General engine stuff
 	std::unique_ptr<chirp::music> music;

@@ -1,4 +1,5 @@
 #include "boss.hpp"
+#include "engine/map.hpp"
 
 entity::boss::boss(const ce::assets &assets, const ce::movable &player, float scale)
 	: ce::animated_sprite(assets.tileset("enemy")),
@@ -67,7 +68,7 @@ auto entity::boss::get_player_dist() const -> chirp::vector2f
 	};
 }
 
-auto entity::boss::is_final(const ce::level *level) -> bool
+auto entity::boss::is_final(const chirp::level *level) -> bool
 {
 	return level->type() == "final_boss";
 }

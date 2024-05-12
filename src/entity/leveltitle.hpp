@@ -12,7 +12,7 @@ namespace entity
 		explicit level_title(const ce::assets &assets);
 
 		void update();
-		void set_level(const ce::level &level);
+		void set_level(const chirp::level &level);
 
 	private:
 		static constexpr int font_size = 42;
