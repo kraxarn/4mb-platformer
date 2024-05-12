@@ -1,10 +1,11 @@
 #include "scenemenu.hpp"
 
-#include <sstream>
-
 #include "colors.hpp"
 #include "state.hpp"
 #include "engine/clock.hpp"
+
+#include <iomanip>
+#include <sstream>
 
 scene_menu::scene_menu(const ce::assets &assets)
 	: ce::scene(assets),
