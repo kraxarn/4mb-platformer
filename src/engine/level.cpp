@@ -13,14 +13,13 @@ auto ce::level::get_total_gem_count() -> int
 	if (gem_count < 0)
 	{
 		gem_count = 0;
-		iterate([this](const chirp::map_tile &tile) -> bool
+		for (const auto &tile: tiles())
 		{
 			if (tile.value == static_cast<char>(tile::gem))
 			{
 				gem_count++;
 			}
-			return true;
-		});
+		}
 	}
 
 	return gem_count;
@@ -28,19 +27,15 @@ auto ce::level::get_total_gem_count() -> int
 
 auto ce::level::get_spawn() const -> chirp::vector2i
 {
-	chirp::vector2i vec;
-
-	iterate([&vec](const chirp::map_tile &tile) -> bool
+	for (const auto &tile: tiles())
 	{
 		if (tile.value == static_cast<char>(tile::spawn))
 		{
-			vec = chirp::vector2<std::size_t>(tile.x, tile.y).to<int>();
-			return false;
+			return chirp::vector2(tile.x, tile.y).to<int>();
 		}
-		return true;
-	});
+	}
 
-	return vec;
+	return {};
 }
 
 auto ce::level::get_safe_spawn() const -> chirp::vector2f

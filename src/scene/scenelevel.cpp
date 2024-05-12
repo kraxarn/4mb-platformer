@@ -136,7 +136,7 @@ void scene_level::next_level()
 
 void scene_level::load_entities()
 {
-	level->iterate([this](const chirp::map_tile &tile) -> bool
+	for (const auto &tile: level->tiles())
 	{
 		// Currently, there's only one possible entity
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
@@ -146,10 +146,9 @@ void scene_level::load_entities()
 				entity_player.get_scale());
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level.get()));
-			return false;
+			break;
 		}
-		return true;
-	});
+	}
 }
 
 void scene_level::update_entities()
@@ -225,12 +224,12 @@ void scene_level::update_camera()
 
 void scene_level::draw_map()
 {
-	level->iterate([this](const chirp::map_tile &tile) -> bool
+	for (const auto &tile: level->tiles())
 	{
 		const auto tile_type = phys::collision::get_tile_type(tile.value);
 		if (tile_type == tile_type::empty)
 		{
-			return true;
+			continue;
 		}
 
 		const auto x_pos = static_cast<float>(tile.x) * ce::tile_size;
@@ -260,7 +259,5 @@ void scene_level::draw_map()
 			ce::tile_size,
 			GREEN);
 #endif
-
-		return true;
-	});
+	}
 }
