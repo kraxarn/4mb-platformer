@@ -25,6 +25,9 @@ scene_level::scene_level(const ce::assets &assets)
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
+
+	constexpr auto volume = 0.75F;
+	music->set_volume(volume);
 }
 
 void scene_level::render()
