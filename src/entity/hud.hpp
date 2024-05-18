@@ -57,9 +57,9 @@ namespace entity
 		chirp::vector2f pos_gems;
 		chirp::vector2f pos_coins;
 
-		asset::sound snd_coin;
-		asset::sound snd_gem;
-		asset::sound snd_fall;
+		chirp::sound snd_coin;
+		chirp::sound snd_gem;
+		chirp::sound snd_fall;
 
 		float player_speed_modifier = 1.F;
 

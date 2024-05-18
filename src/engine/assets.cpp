@@ -21,9 +21,9 @@ auto ce::assets::music_ptr(const std::string &path) const -> chirp::music *
 	return new chirp::music(open("music", path), path);
 }
 
-auto ce::assets::sound(const std::string &path) const -> asset::sound
+auto ce::assets::sound(const std::string &path) const -> chirp::sound
 {
-	return asset::sound(open("sounds", path));
+	return chirp::sound(open("sounds", path));
 }
 
 auto ce::assets::font(const std::string &path, const int font_size) const -> chirp::font

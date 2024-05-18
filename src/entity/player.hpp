@@ -44,8 +44,8 @@ namespace entity
 
 		chirp::vector2f velocity;
 
-		asset::sound snd_jump;
-		asset::sound snd_fall;
+		chirp::sound snd_jump;
+		chirp::sound snd_fall;
 
 		void update_collision(ce::level &level);
 		auto get_player_dir() const -> direction;

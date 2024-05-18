@@ -58,7 +58,7 @@ private:
 
 	// Level switching
 	int current_level_index = -1;
-	asset::sound snd_complete;
+	chirp::sound snd_complete;
 
 	void update_camera();
 	void draw_map();

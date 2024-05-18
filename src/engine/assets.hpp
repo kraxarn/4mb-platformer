@@ -1,6 +1,5 @@
 #pragma once
 
-#include "asset/sound.hpp"
 #include "asset/tileset.hpp"
 
 #include <chirp/assets.hpp>
@@ -8,6 +7,7 @@
 #include <chirp/image.hpp>
 #include <chirp/level.hpp>
 #include <chirp/music.hpp>
+#include <chirp/sound.hpp>
 
 namespace ce
 {
@@ -21,7 +21,7 @@ namespace ce
 		/** @note Don't use unless required */
 		auto music_ptr(const std::string &path) const -> chirp::music *;
 
-		auto sound(const std::string &path) const -> asset::sound;
+		auto sound(const std::string &path) const -> chirp::sound;
 
 		auto font(const std::string &path, int font_size) const -> chirp::font;
 

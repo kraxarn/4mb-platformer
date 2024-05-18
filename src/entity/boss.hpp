@@ -37,7 +37,7 @@ namespace entity
 
 		const ce::movable &player;
 
-		asset::sound snd_boss;
+		chirp::sound snd_boss;
 
 		/** Remaining hit points */
 		int health = initial_health;
