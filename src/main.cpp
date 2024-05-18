@@ -5,10 +5,13 @@
 #include "engine/window.hpp"
 #include "enum/scenes.hpp"
 
-#include "chirp/assets.hpp"
+#include <chirp/assets.hpp>
+#include <chirp/logger.hpp>
 
 auto main(int /*argc*/, char **/*argv*/) -> int
 {
+	chirp::logger::init();
+
 	ce::window window(1280, 720, "Tixel - 4MB Platformer");
 	ce::audio audio;
 
