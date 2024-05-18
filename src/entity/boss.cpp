@@ -1,7 +1,7 @@
 #include "boss.hpp"
 #include "engine/map.hpp"
 
-entity::boss::boss(const ce::assets &assets, const ce::movable &player, float scale)
+entity::boss::boss(const chirp::assets &assets, const ce::movable &player, float scale)
 	: ce::animated_sprite(assets.tileset("enemy")),
 	player(player),
 	snd_boss(assets.sound("boss"))
@@ -80,7 +80,7 @@ void entity::boss::set_lock_y(bool value)
 
 auto entity::boss::hurt() -> bool
 {
-	snd_boss.play();
+	snd_boss->play();
 	health--;
 
 	auto is_dead = health <= 0;

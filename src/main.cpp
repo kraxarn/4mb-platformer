@@ -1,10 +1,9 @@
-#include "engine/window.hpp"
-#include "engine/audio.hpp"
-#include "engine/assets.hpp"
-#include "engine/draw.hpp"
 #include "colors.hpp"
-#include "enum/scenes.hpp"
 #include "state.hpp"
+#include "engine/audio.hpp"
+#include "engine/draw.hpp"
+#include "engine/window.hpp"
+#include "enum/scenes.hpp"
 
 #include "chirp/assets.hpp"
 
@@ -13,9 +12,8 @@ auto main(int /*argc*/, char **/*argv*/) -> int
 	ce::window window(1280, 720, "Tixel - 4MB Platformer");
 	ce::audio audio;
 
-	const chirp::assets chirp_assets;
-	ce::assets assets(chirp_assets);
-	ce::window::set_icon(assets.tileset("player").at(1));
+	const chirp::assets assets;
+	ce::window::set_icon(assets.tileset("player")->at(1));
 
 #ifdef NDEBUG
 	state::set(scene::menu, assets);

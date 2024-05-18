@@ -1,15 +1,16 @@
 #pragma once
 
-#include "engine/assets.hpp"
 #include "engine/input.hpp"
 #include "engine/scene.hpp"
 
 #include "state.hpp"
 
+#include <chirp/assets.hpp>
+
 class scene_credits: public ce::scene
 {
 public:
-	explicit scene_credits(const ce::assets &assets);
+	explicit scene_credits(const chirp::assets &assets);
 
 	void render() override;
 
@@ -19,12 +20,12 @@ private:
 	static constexpr int size_title = 64;
 	static constexpr float spacing = 16;
 
-	chirp::music music;
+	chirp::asset<chirp::music> music;
 
-	chirp::font fnt_title;
+	chirp::asset<chirp::font> fnt_title;
 	chirp::text txt_title;
 
-	chirp::font fnt_subtitle;
+	chirp::asset<chirp::font> fnt_subtitle;
 	chirp::text txt_subtitle;
 
 	ce::input input;

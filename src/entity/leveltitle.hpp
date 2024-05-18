@@ -1,15 +1,15 @@
 #pragma once
 
-#include "engine/assets.hpp"
 #include "engine/window.hpp"
-#include "colors.hpp"
+
+#include <chirp/assets.hpp>
 
 namespace entity
 {
 	class level_title
 	{
 	public:
-		explicit level_title(const ce::assets &assets);
+		explicit level_title(const chirp::assets &assets);
 
 		void update();
 		void set_level(const chirp::level &level);
@@ -22,7 +22,7 @@ namespace entity
 		int timer = timer_start;
 		chirp::vector2i text_size;
 
-		chirp::font font;
+		chirp::asset<chirp::font> font;
 		chirp::text text;
 	};
 }

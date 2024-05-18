@@ -1,6 +1,7 @@
 #include "leveltitle.hpp"
+#include "colors.hpp"
 
-entity::level_title::level_title(const ce::assets &assets)
+entity::level_title::level_title(const chirp::assets &assets)
 	: font(assets.font("menu", font_size)),
 	text("Level 1", {0, 0}, font_size, color::text)
 {
@@ -13,7 +14,7 @@ void entity::level_title::update()
 		return;
 	}
 
-	font.draw_text(text);
+	font->draw_text(text);
 	if (timer > 0)
 	{
 		timer--;
@@ -30,7 +31,7 @@ void entity::level_title::set_level(const chirp::level &level)
 {
 	text.set_text(level.name());
 
-	text_size = font.text_size(text).to<int>();
+	text_size = font->text_size(text).to<int>();
 
 	text.set_position({
 		ce::window::size().x() / 2 - text_size.x() / 2,

@@ -1,16 +1,17 @@
 #pragma once
 
-#include "engine/assets.hpp"
 #include "engine/level.hpp"
 #include "engine/window.hpp"
 #include "entity/state.hpp"
+
+#include <chirp/assets.hpp>
 
 namespace entity
 {
 	class hud
 	{
 	public:
-		explicit hud(const ce::assets &assets);
+		explicit hud(const chirp::assets &assets);
 
 		void draw(ce::level &level);
 
@@ -49,17 +50,17 @@ namespace entity
 
 		entity::state state;
 
-		chirp::font fnt_hud;
+		chirp::asset<chirp::font> fnt_hud;
 		chirp::text txt_gems;
 		chirp::text txt_coins;
 
-		chirp::tileset ts_hud;
+		chirp::asset<chirp::tileset> ts_hud;
 		chirp::vector2f pos_gems;
 		chirp::vector2f pos_coins;
 
-		chirp::sound snd_coin;
-		chirp::sound snd_gem;
-		chirp::sound snd_fall;
+		chirp::asset<chirp::sound> snd_coin;
+		chirp::asset<chirp::sound> snd_gem;
+		chirp::asset<chirp::sound> snd_fall;
 
 		float player_speed_modifier = 1.F;
 

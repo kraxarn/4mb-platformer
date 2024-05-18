@@ -15,7 +15,7 @@
 class scene_level: public ce::scene
 {
 public:
-	explicit scene_level(const ce::assets &assets);
+	explicit scene_level(const chirp::assets &assets);
 
 	void render() override;
 
@@ -30,7 +30,7 @@ private:
 	static constexpr int level_height = chirp::level_tiles_height * ce::tile_size;
 
 	// General engine stuff
-	std::unique_ptr<chirp::music> music;
+	chirp::asset<chirp::music> music;
 	ce::input input;
 
 	// Camera
@@ -46,8 +46,8 @@ private:
 
 	// Level
 	std::unique_ptr<ce::level> level;
-	chirp::tileset tiles;
-	chirp::tileset items;
+	chirp::asset<chirp::tileset> tiles;
+	chirp::asset<chirp::tileset> items;
 
 	// Entities
 	entity::player entity_player;
@@ -58,7 +58,7 @@ private:
 
 	// Level switching
 	int current_level_index = -1;
-	chirp::sound snd_complete;
+	chirp::asset<chirp::sound> snd_complete;
 
 	void update_camera();
 	void draw_map();

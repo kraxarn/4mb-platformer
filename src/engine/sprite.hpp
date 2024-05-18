@@ -2,6 +2,7 @@
 
 #include "engine/movable.hpp"
 
+#include <chirp/asset.hpp>
 #include <chirp/texture.hpp>
 
 namespace ce
@@ -20,7 +21,7 @@ namespace ce
 		/**
 		 * New sprite from image
 		 */
-		explicit sprite(const chirp::image &image);
+		explicit sprite(const chirp::asset<chirp::image> &image);
 
 		void draw();
 

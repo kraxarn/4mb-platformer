@@ -1,6 +1,6 @@
 #include "animatedsprite.hpp"
 
-ce::animated_sprite::animated_sprite(const chirp::tileset &tileset)
+ce::animated_sprite::animated_sprite(const chirp::asset<chirp::tileset> &tileset)
 	: tileset(tileset)
 {
 }
@@ -14,14 +14,14 @@ void ce::animated_sprite::draw()
 		{
 			current = 0;
 			frame++;
-			if (frame >= tileset.get_size())
+			if (frame >= tileset->get_size())
 			{
 				frame = 0;
 			}
 		}
 	}
 
-	tileset.draw({get_x(), get_y()}, frame, rotation, scale);
+	tileset->draw({get_x(), get_y()}, frame, rotation, scale);
 }
 
 auto ce::animated_sprite::get_scale() const -> float
@@ -41,7 +41,7 @@ void ce::animated_sprite::rotate(float value)
 
 void ce::animated_sprite::flip()
 {
-	tileset.flip_horizontal();
+	tileset->flip_horizontal();
 	dir = dir == direction::left
 		? direction::right
 		: direction::left;
@@ -49,12 +49,12 @@ void ce::animated_sprite::flip()
 
 auto ce::animated_sprite::width() const -> int
 {
-	return tileset.get_size();
+	return tileset->get_size();
 }
 
 auto ce::animated_sprite::height() const -> int
 {
-	return tileset.get_size();
+	return tileset->get_size();
 }
 
 auto ce::animated_sprite::size() const -> chirp::vector2i

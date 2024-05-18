@@ -1,15 +1,15 @@
 #pragma once
 
-#include "engine/assets.hpp"
 #include "engine/window.hpp"
-#include "colors.hpp"
+
+#include <chirp/assets.hpp>
 
 namespace entity
 {
 	class pause
 	{
 	public:
-		explicit pause(const ce::assets &assets);
+		explicit pause(const chirp::assets &assets);
 
 		void update();
 
@@ -21,7 +21,7 @@ namespace entity
 
 		bool paused = false;
 
-		chirp::font fnt_title;
+		chirp::asset<chirp::font> fnt_title;
 		chirp::text txt_title;
 	};
 }

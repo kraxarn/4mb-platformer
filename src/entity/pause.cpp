@@ -1,6 +1,7 @@
 #include "pause.hpp"
+#include "colors.hpp"
 
-entity::pause::pause(const ce::assets &assets)
+entity::pause::pause(const chirp::assets &assets)
 	: fnt_title(assets.font("menu", title_size)),
 	txt_title("Paused", {0, 0}, title_size, color::text)
 {
@@ -28,11 +29,11 @@ void entity::pause::update()
 		0x0, 0x0, 0x0, 0x7f,
 	});
 
-	const auto text_size = fnt_title.text_size(txt_title).to<int>();
+	const auto text_size = fnt_title->text_size(txt_title).to<int>();
 	txt_title.set_position({
 		window_size.x() / 2 - text_size.x() / 2,
 		window_size.y() / 2 - text_size.y() / 2,
 	});
 
-	fnt_title.draw_text(txt_title);
+	fnt_title->draw_text(txt_title);
 }

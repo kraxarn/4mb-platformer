@@ -9,7 +9,7 @@ auto state::get() -> std::shared_ptr<ce::scene>
 	return current;
 }
 
-void state::set(scene scene, const ce::assets &assets)
+void state::set(scene scene, const chirp::assets &assets)
 {
 	ce::scene *new_scene = nullptr;
 

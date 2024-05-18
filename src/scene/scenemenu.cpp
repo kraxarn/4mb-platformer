@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <sstream>
 
-scene_menu::scene_menu(const ce::assets &assets)
+scene_menu::scene_menu(const chirp::assets &assets)
 	: ce::scene(assets),
 #ifndef NDEBUG
 	txt_debug("-", {16, 16}, 20, chirp::color::white()),
@@ -27,7 +27,7 @@ scene_menu::scene_menu(const ce::assets &assets)
 	for (auto i = 0; i < text_count; i++)
 	{
 		texts.emplace_back(labels.at(i), chirp::vector2i(128, i * text_spacing),
-			fnt_menu.font_size(), color::text);
+			fnt_menu->font_size(), color::text);
 	}
 
 	// Place texts at center
@@ -49,12 +49,12 @@ scene_menu::scene_menu(const ce::assets &assets)
 	reset_demo_position();
 	spr_demo.set_scale(3.F);
 
-	music.play();
+	music->play();
 }
 
 void scene_menu::render()
 {
-	music.update();
+	music->update();
 
 	// Sprite demo
 	spr_demo.move(-1.75F, 0);
@@ -67,7 +67,7 @@ void scene_menu::render()
 	// Draw menu alternatives
 	for (const auto &text : texts)
 	{
-		fnt_menu.draw_text(text);
+		fnt_menu->draw_text(text);
 	}
 
 	// Check input
@@ -144,7 +144,7 @@ auto scene_menu::texts_height() -> int
 	const auto &back = texts.back();
 
 	const auto start = front.get_position().y();
-	const auto end = texts.back().get_position().y() + static_cast<int>(fnt_menu.text_size(back).y());
+	const auto end = texts.back().get_position().y() + static_cast<int>(fnt_menu->text_size(back).y());
 	return end - start;
 }
 
@@ -162,7 +162,7 @@ void scene_menu::set_current(int value)
 
 	const auto &text = texts.at(current);
 	spr_arrow.set_y(static_cast<float>(text.get_position().y())
-		+ (fnt_menu.text_size(text).y() / 2.F)
+		+ (fnt_menu->text_size(text).y() / 2.F)
 		- (static_cast<float>(spr_arrow.height()) / 2.F));
 }
 

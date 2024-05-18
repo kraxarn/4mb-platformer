@@ -1,6 +1,6 @@
 #include "entity/player.hpp"
 
-entity::player::player(const ce::assets &assets, entity::hud &hud, float scale)
+entity::player::player(const chirp::assets &assets, entity::hud &hud, float scale)
 	: ce::animated_sprite(assets.tileset("player")),
 	snd_jump(assets.sound("jump")),
 	snd_fall(assets.sound("fall")),
@@ -56,7 +56,7 @@ void entity::player::update(const ce::input &input,
 		// Jump
 		if (input.is_down(ce::key::jump) && is_grounded())
 		{
-			snd_jump.play();
+			snd_jump->play();
 			ce::animated_sprite::pause();
 			set_frame(1);
 			velocity = {velocity.x(), jump_force};
@@ -104,7 +104,7 @@ void entity::player::update(const ce::input &input,
 	{
 		if (!hud.is_dead())
 		{
-			snd_fall.play();
+			snd_fall->play();
 		}
 		velocity = chirp::vector2f();
 		set_position(level.get_safe_spawn());

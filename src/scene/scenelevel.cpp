@@ -4,11 +4,12 @@
 #include "engine/clock.hpp"
 #include "enum/scenes.hpp"
 #include "level/levelloader.hpp"
+#include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
 
 #include <chirp/format.hpp>
 
-scene_level::scene_level(const ce::assets &assets)
+scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
 	txt_debug("", {debug_hud_offset, debug_hud_offset},
@@ -16,7 +17,7 @@ scene_level::scene_level(const ce::assets &assets)
 #endif
 	entity_hud(assets),
 	entity_player(assets, entity_hud, ce::tile_scale),
-	music(assets.music_ptr("level1")),
+	music(assets.music("level1")),
 	items(assets.tileset("items")),
 	tiles(assets.tileset("grass")),
 	snd_complete(assets.sound("complete")),
@@ -102,7 +103,7 @@ void scene_level::load(int index)
 	// Load level music
 	if (level->music() != music->name())
 	{
-		music.reset(assets.music_ptr(level->music()));
+		music = assets.music(level->music());
 	}
 	music->play();
 
@@ -130,7 +131,7 @@ void scene_level::next_level()
 		index = 0;
 	}
 
-	snd_complete.play();
+	snd_complete->play();
 	load(index);
 }
 
@@ -238,7 +239,7 @@ void scene_level::draw_map()
 		if (tile_type == tile_type::tile
 			|| tile_type == tile_type::one_way)
 		{
-			tiles.draw({x_pos, y_pos},
+			tiles->draw({x_pos, y_pos},
 				tile.value, 0.F, ce::tile_scale);
 		}
 		else if (tile_type == tile_type::item)
@@ -246,7 +247,7 @@ void scene_level::draw_map()
 			if (tile.value != static_cast<char>(tile::exit)
 				|| entity_hud.get_gem_count() == level->get_total_gem_count())
 			{
-				items.draw({x_pos, y_pos},
+				items->draw({x_pos, y_pos},
 					tile.value % static_cast<int>(tile::spawn),
 					0.F, ce::tile_scale);
 			}

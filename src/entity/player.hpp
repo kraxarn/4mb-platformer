@@ -1,23 +1,20 @@
 #pragma once
 
-#include "engine/assets.hpp"
 #include "engine/animatedsprite.hpp"
-#include "engine/map.hpp"
-#include "engine/movable.hpp"
 #include "engine/input.hpp"
 
-#include "physics/collision.hpp"
-#include "physics/tiles.hpp"
-#include "enum/direction.hpp"
 #include "entity/hud.hpp"
-#include "entity/pause.hpp"
+#include "enum/direction.hpp"
+#include "physics/collision.hpp"
+
+#include <chirp/assets.hpp>
 
 namespace entity
 {
 	class player: public ce::animated_sprite
 	{
 	public:
-		player(const ce::assets &assets, entity::hud &hud, float scale);
+		player(const chirp::assets &assets, entity::hud &hud, float scale);
 
 		/** Update input, position, collision, and finally draw sprite */
 		void update(const ce::input &input, ce::level &level,
@@ -44,8 +41,8 @@ namespace entity
 
 		chirp::vector2f velocity;
 
-		chirp::sound snd_jump;
-		chirp::sound snd_fall;
+		chirp::asset<chirp::sound> snd_jump;
+		chirp::asset<chirp::sound> snd_fall;
 
 		void update_collision(ce::level &level);
 		auto get_player_dir() const -> direction;

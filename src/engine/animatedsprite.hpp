@@ -3,6 +3,7 @@
 #include "engine/movable.hpp"
 #include "enum/direction.hpp"
 
+#include <chirp/asset.hpp>
 #include <chirp/tileset.hpp>
 
 #include "raylib.h"
@@ -15,7 +16,7 @@ namespace ce
 	class animated_sprite: public ce::movable
 	{
 	public:
-		explicit animated_sprite(const chirp::tileset &tileset);
+		explicit animated_sprite(const chirp::asset<chirp::tileset> &tileset);
 
 		void draw();
 
@@ -61,7 +62,7 @@ namespace ce
 		/** Animation is running */
 		bool running = true;
 
-		chirp::tileset tileset;
+		chirp::asset<chirp::tileset> tileset;
 
 		direction dir = direction::left;
 	};

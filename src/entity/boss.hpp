@@ -1,15 +1,16 @@
 #pragma once
 
 #include "engine/movable.hpp"
-#include "engine/assets.hpp"
 #include "engine/animatedsprite.hpp"
+
+#include <chirp/assets.hpp>
 
 namespace entity
 {
 	class boss: public ce::animated_sprite
 	{
 	public:
-		boss(const ce::assets &assets, const ce::movable &player, float scale);
+		boss(const chirp::assets &assets, const ce::movable &player, float scale);
 
 		void update(bool is_paused);
 
@@ -37,7 +38,7 @@ namespace entity
 
 		const ce::movable &player;
 
-		chirp::sound snd_boss;
+		chirp::asset<chirp::sound> snd_boss;
 
 		/** Remaining hit points */
 		int health = initial_health;

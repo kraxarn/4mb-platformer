@@ -1,9 +1,12 @@
 #include "scenecredits.hpp"
+
+#include "colors.hpp"
 #include "level/levelloader.hpp"
+#include "physics/tiles.hpp"
 
 #include <chirp/format.hpp>
 
-scene_credits::scene_credits(const ce::assets &assets)
+scene_credits::scene_credits(const chirp::assets &assets)
 	: ce::scene(assets),
 	fnt_title(assets.font("menu", size_title)),
 	fnt_subtitle(assets.font("submenu", size_title / 2)),
@@ -11,28 +14,28 @@ scene_credits::scene_credits(const ce::assets &assets)
 	txt_subtitle("", {0, 0}, size_title / 2, color::text),
 	music(assets.music("credits"))
 {
-	music.play();
+	music->play();
 }
 
 void scene_credits::render()
 {
-	music.update();
+	music->update();
 
 	// Title text
-	const auto title_size = fnt_title.text_size(txt_title).to<int>();
+	const auto title_size = fnt_title->text_size(txt_title).to<int>();
 	txt_title.set_position({
 		ce::window::size().x() / 2 - title_size.x() / 2,
 		ce::window::size().y() / 2 - title_size.y(),
 	});
-	fnt_title.draw_text(txt_title);
+	fnt_title->draw_text(txt_title);
 
 	// Subtitle text
-	const auto subtitle_size = fnt_subtitle.text_size(txt_subtitle).to<int>();
+	const auto subtitle_size = fnt_subtitle->text_size(txt_subtitle).to<int>();
 	txt_subtitle.set_position({
 		ce::window::size().x() / 2 - subtitle_size.x() / 2,
 		ce::window::size().y() / 2 + subtitle_size.y(),
 	});
-	fnt_subtitle.draw_text(txt_subtitle);
+	fnt_subtitle->draw_text(txt_subtitle);
 
 	// Go back to menu on enter
 	if (input.is_pressed(ce::key::enter))

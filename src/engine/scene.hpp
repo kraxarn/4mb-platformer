@@ -1,17 +1,17 @@
 #pragma once
 
-#include "engine/assets.hpp"
+#include <chirp/assets.hpp>
 
 namespace ce
 {
 	class scene
 	{
 	public:
-		explicit scene(const ce::assets &assets);
+		explicit scene(const chirp::assets &assets);
 
 		virtual void render() = 0;
 
 	protected:
-		const ce::assets &assets;
+		const chirp::assets &assets;
 	};
 }

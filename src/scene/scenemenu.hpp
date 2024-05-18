@@ -12,14 +12,14 @@
 class scene_menu: public ce::scene
 {
 public:
-	explicit scene_menu(const ce::assets &assets);
+	explicit scene_menu(const chirp::assets &assets);
 	void render() override;
 
 private:
 	static constexpr short text_count = 2;
 	static constexpr short text_spacing = 48;
 
-	chirp::music music;
+	chirp::asset<chirp::music> music;
 
 #ifndef NDEBUG
 	chirp::text txt_debug;
@@ -31,7 +31,7 @@ private:
 
 	ce::animated_sprite spr_demo;
 
-	chirp::font fnt_menu;
+	chirp::asset<chirp::font> fnt_menu;
 	std::vector<chirp::text> texts;
 
 	ce::input input;
