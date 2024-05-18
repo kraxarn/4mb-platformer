@@ -75,13 +75,13 @@ void entity::hud::draw(ce::level &level)
 	fnt_hud.draw_text(txt_coins);
 
 	// Coin
-	ts_hud.draw(pos_coins.x(), pos_coins.y(),
+	ts_hud.draw(pos_coins,
 		static_cast<int>(tile::coin) % static_cast<int>(tile::spawn),
 		0.F, scale);
 	// Gem
 	if (level.get_total_gem_count() > 0)
 	{
-		ts_hud.draw(pos_gems.x(), pos_gems.y(),
+		ts_hud.draw(pos_gems,
 			static_cast<int>(tile::gem) % static_cast<int>(tile::spawn),
 			0.F, scale);
 	}

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "asset/tileset.hpp"
 #include "engine/movable.hpp"
 #include "enum/direction.hpp"
+
+#include <chirp/tileset.hpp>
 
 #include "raylib.h"
 
@@ -14,7 +15,7 @@ namespace ce
 	class animated_sprite: public ce::movable
 	{
 	public:
-		explicit animated_sprite(const asset::tileset &tileset);
+		explicit animated_sprite(const chirp::tileset &tileset);
 
 		void draw();
 
@@ -60,7 +61,7 @@ namespace ce
 		/** Animation is running */
 		bool running = true;
 
-		asset::tileset tileset;
+		chirp::tileset tileset;
 
 		direction dir = direction::left;
 	};

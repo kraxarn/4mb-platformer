@@ -1,7 +1,8 @@
 #pragma once
 
-#include "engine/texture.hpp"
 #include "engine/movable.hpp"
+
+#include <chirp/texture.hpp>
 
 namespace ce
 {

@@ -53,7 +53,7 @@ namespace entity
 		chirp::text txt_gems;
 		chirp::text txt_coins;
 
-		asset::tileset ts_hud;
+		chirp::tileset ts_hud;
 		chirp::vector2f pos_gems;
 		chirp::vector2f pos_coins;
 

@@ -36,9 +36,9 @@ auto ce::assets::image(const std::string &path) const -> chirp::image
 	return chirp::image(open("images", path));
 }
 
-auto ce::assets::tileset(const std::string &path) const -> asset::tileset
+auto ce::assets::tileset(const std::string &path) const -> chirp::tileset
 {
-	return asset::tileset(open("tilesets", path));
+	return chirp::tileset(open("tilesets", path));
 }
 
 auto ce::assets::level(const std::string &path) const -> chirp::level

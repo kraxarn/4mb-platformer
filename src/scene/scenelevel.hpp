@@ -46,8 +46,8 @@ private:
 
 	// Level
 	std::unique_ptr<ce::level> level;
-	asset::tileset tiles;
-	asset::tileset items;
+	chirp::tileset tiles;
+	chirp::tileset items;
 
 	// Entities
 	entity::player entity_player;

@@ -238,7 +238,7 @@ void scene_level::draw_map()
 		if (tile_type == tile_type::tile
 			|| tile_type == tile_type::one_way)
 		{
-			tiles.draw(x_pos, y_pos,
+			tiles.draw({x_pos, y_pos},
 				tile.value, 0.F, ce::tile_scale);
 		}
 		else if (tile_type == tile_type::item)
@@ -246,7 +246,7 @@ void scene_level::draw_map()
 			if (tile.value != static_cast<char>(tile::exit)
 				|| entity_hud.get_gem_count() == level->get_total_gem_count())
 			{
-				items.draw(x_pos, y_pos,
+				items.draw({x_pos, y_pos},
 					tile.value % static_cast<int>(tile::spawn),
 					0.F, ce::tile_scale);
 			}

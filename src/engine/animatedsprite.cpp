@@ -1,6 +1,6 @@
 #include "animatedsprite.hpp"
 
-ce::animated_sprite::animated_sprite(const asset::tileset &tileset)
+ce::animated_sprite::animated_sprite(const chirp::tileset &tileset)
 	: tileset(tileset)
 {
 }
@@ -21,7 +21,7 @@ void ce::animated_sprite::draw()
 		}
 	}
 
-	tileset.draw(get_x(), get_y(), frame, rotation, scale);
+	tileset.draw({get_x(), get_y()}, frame, rotation, scale);
 }
 
 auto ce::animated_sprite::get_scale() const -> float
