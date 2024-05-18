@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine/texture.hpp"
+#include <chirp/texture.hpp>
 
 #include <vector>
 
@@ -24,6 +24,6 @@ namespace asset
 		int size = 0;
 
 		chirp::image image;
-		ce::texture texture;
+		chirp::texture texture;
 	};
 }

@@ -4,6 +4,8 @@
 #include "engine/movable.hpp"
 #include "enum/direction.hpp"
 
+#include "raylib.h"
+
 namespace ce
 {
 	/**

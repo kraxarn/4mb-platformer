@@ -1,10 +1,12 @@
 #include "asset/tileset.hpp"
 
+#include <raylib.h>
+
 asset::tileset::tileset(const std::vector<unsigned char> &data)
 	: image(data),
 	texture(image)
 {
-	size = texture.get_height();
+	size = texture.size().y();
 }
 
 auto asset::tileset::at(int i) const -> chirp::image
@@ -27,13 +29,13 @@ auto asset::tileset::at(int i) const -> chirp::image
 
 void asset::tileset::draw(float x, float y, int i, float rotation, float scale) const
 {
-	texture.draw(x, y, size, size * i, rotation, scale);
+	texture.draw({x, y}, {size, size}, size * i, rotation, scale);
 }
 
 void asset::tileset::flip_horizontal()
 {
 	image.flip_horizontal();
-	texture = ce::texture(image);
+	texture = chirp::texture(image);
 }
 
 auto asset::tileset::get_size() const -> int
