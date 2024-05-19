@@ -71,15 +71,15 @@ void scene_menu::render()
 	}
 
 	// Check input
-	if (input.is_pressed(ce::key::up))
+	if (keymap.is_pressed("up"))
 	{
 		set_current(current - 1);
 	}
-	else if (input.is_pressed(ce::key::down))
+	else if (keymap.is_pressed("down"))
 	{
 		set_current(current + 1);
 	}
-	else if (input.is_pressed(ce::key::enter))
+	else if (keymap.is_pressed("enter"))
 	{
 		// Start game :)
 		if (current == 0)

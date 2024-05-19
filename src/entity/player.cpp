@@ -10,7 +10,7 @@ entity::player::player(const chirp::assets &assets, entity::hud &hud, float scal
 	set_scale(scale);
 }
 
-void entity::player::update(const ce::input &input,
+void entity::player::update(const keymap &keymap,
 	ce::level &level, bool is_paused)
 {
 	if (!is_paused)
@@ -18,7 +18,7 @@ void entity::player::update(const ce::input &input,
 		auto speed_limit_x = speed_limit * hud.get_player_speed_modifier();
 
 		// Right
-		if (input.is_down(ce::key::right))
+		if (keymap.is_down("right"))
 		{
 			velocity += chirp::vector2f(move_acceleration, 0);
 			if (velocity.x() > speed_limit_x)
@@ -36,7 +36,7 @@ void entity::player::update(const ce::input &input,
 		}
 
 		// Left
-		if (input.is_down(ce::key::left))
+		if (keymap.is_down("left"))
 		{
 			velocity -= chirp::vector2f(move_acceleration, 0);
 			if (velocity.x() < -speed_limit_x)
@@ -54,7 +54,7 @@ void entity::player::update(const ce::input &input,
 		}
 
 		// Jump
-		if (input.is_down(ce::key::jump) && is_grounded())
+		if (keymap.is_down("jump") && is_grounded())
 		{
 			snd_jump->play();
 			ce::animated_sprite::pause();

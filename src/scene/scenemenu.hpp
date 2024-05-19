@@ -1,7 +1,7 @@
 #pragma once
 
+#include "keymap.hpp"
 #include "engine/animatedsprite.hpp"
-#include "engine/input.hpp"
 #include "engine/scene.hpp"
 #include "engine/sprite.hpp"
 #include "enum/direction.hpp"
@@ -34,7 +34,7 @@ private:
 	chirp::asset<chirp::font> fnt_menu;
 	std::vector<chirp::text> texts;
 
-	ce::input input;
+	keymap keymap;
 
 	auto texts_height() -> int;
 

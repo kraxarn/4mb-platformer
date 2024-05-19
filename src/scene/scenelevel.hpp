@@ -1,7 +1,7 @@
 #pragma once
 
+#include "keymap.hpp"
 #include "engine/camera.hpp"
-#include "engine/input.hpp"
 #include "engine/level.hpp"
 #include "engine/map.hpp"
 #include "engine/scene.hpp"
@@ -31,7 +31,7 @@ private:
 
 	// General engine stuff
 	chirp::asset<chirp::music> music;
-	ce::input input;
+	keymap keymap;
 
 	// Camera
 	ce::camera camera;

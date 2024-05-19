@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine/input.hpp"
+#include "keymap.hpp"
 #include "engine/scene.hpp"
 
 #include "state.hpp"
@@ -28,7 +28,7 @@ private:
 	chirp::asset<chirp::font> fnt_subtitle;
 	chirp::text txt_subtitle;
 
-	ce::input input;
+	keymap keymap;
 
 	auto get_total_coins() -> int;
 };

@@ -42,7 +42,7 @@ void scene_level::render()
 		{
 			update_camera();
 		}
-		entity_player.update(input, *level, entity_pause.get_paused());
+		entity_player.update(keymap, *level, entity_pause.get_paused());
 
 		// Update boss
 		if (entity_boss)
@@ -55,7 +55,7 @@ void scene_level::render()
 		draw_map();
 
 		// Update pause
-		if (input.is_pressed(ce::key::pause))
+		if (keymap.is_pressed("pause"))
 		{
 			entity_pause.set_paused(!entity_pause.get_paused());
 		}

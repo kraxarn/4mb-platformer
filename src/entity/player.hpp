@@ -1,7 +1,7 @@
 #pragma once
 
+#include "keymap.hpp"
 #include "engine/animatedsprite.hpp"
-#include "engine/input.hpp"
 
 #include "entity/hud.hpp"
 #include "enum/direction.hpp"
@@ -17,7 +17,7 @@ namespace entity
 		player(const chirp::assets &assets, entity::hud &hud, float scale);
 
 		/** Update input, position, collision, and finally draw sprite */
-		void update(const ce::input &input, ce::level &level,
+		void update(const keymap &keymap, ce::level &level,
 			bool is_paused);
 
 		/** Get current player speed */

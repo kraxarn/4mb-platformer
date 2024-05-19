@@ -38,7 +38,7 @@ void scene_credits::render()
 	fnt_subtitle->draw_text(txt_subtitle);
 
 	// Go back to menu on enter
-	if (input.is_pressed(ce::key::enter))
+	if (keymap.is_pressed("enter"))
 	{
 		state::set(::scene::menu, assets);
 	}
