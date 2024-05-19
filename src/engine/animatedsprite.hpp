@@ -1,9 +1,9 @@
 #pragma once
 
 #include "engine/movable.hpp"
-#include "enum/direction.hpp"
 
 #include <chirp/asset.hpp>
+#include <chirp/direction.hpp>
 #include <chirp/tileset.hpp>
 
 #include "raylib.h"
@@ -26,7 +26,7 @@ namespace ce
 		void rotate(float value);
 
 		void flip();
-		auto get_dir() const -> direction;
+		auto get_dir() const -> chirp::direction;
 
 		auto width() const -> int;
 		auto height() const -> int;
@@ -64,6 +64,6 @@ namespace ce
 
 		chirp::asset<chirp::tileset> tileset;
 
-		direction dir = direction::left;
+		chirp::direction dir = chirp::direction::left;
 	};
 }

@@ -42,9 +42,10 @@ void ce::animated_sprite::rotate(float value)
 void ce::animated_sprite::flip()
 {
 	tileset->flip_horizontal();
-	dir = dir == direction::left
-		? direction::right
-		: direction::left;
+
+	dir = dir == chirp::direction::left
+		? chirp::direction::right
+		: chirp::direction::left;
 }
 
 auto ce::animated_sprite::width() const -> int
@@ -80,7 +81,7 @@ void ce::animated_sprite::resume()
 	running = true;
 }
 
-auto ce::animated_sprite::get_dir() const -> direction
+auto ce::animated_sprite::get_dir() const -> chirp::direction
 {
 	return dir;
 }

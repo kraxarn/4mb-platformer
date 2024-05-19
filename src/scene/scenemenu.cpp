@@ -43,7 +43,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	// Arrow position
 	spr_arrow.set_x(76);
 	set_current(0);
-	arrow_dir = direction::right;
+	arrow_dir = chirp::direction::right;
 
 	// Menu sprite
 	reset_demo_position();
@@ -103,7 +103,7 @@ void scene_menu::render()
 	// Update arrow position
 	auto arrow_offset = std::abs(static_cast<float>(spr_arrow.get_x()) - 82.F);
 
-	if (arrow_dir == direction::left)
+	if (arrow_dir == chirp::direction::left)
 	{
 		spr_arrow.move(-0.5F - (arrow_offset / 10.F), 0);
 	}
@@ -114,11 +114,11 @@ void scene_menu::render()
 
 	if (spr_arrow.get_x() <= 64)
 	{
-		arrow_dir = direction::right;
+		arrow_dir = chirp::direction::right;
 	}
 	else if (spr_arrow.get_x() >= 82)
 	{
-		arrow_dir = direction::left;
+		arrow_dir = chirp::direction::left;
 	}
 
 	// Draw arrow

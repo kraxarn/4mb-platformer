@@ -24,16 +24,16 @@ void entity::boss::update(bool is_paused)
 		auto speed = get_speed();
 
 		auto x = dist.x() < static_cast<float>(width())
-			? 0.F : eq(dir, direction::left)
+			? 0.F : eq(dir, chirp::direction::left)
 				? -speed : speed;
 		auto y = lock_y || dist.y() < static_cast<float>(height())
-			? 0.F : eq(dir, direction::up)
+			? 0.F : eq(dir, chirp::direction::up)
 				? -speed : speed;
 		move(x, y);
 
 		// Flip if needed
-		if (x < 0 && get_dir() == direction::right
-			|| x > 0 && get_dir() == direction::left)
+		if (x < 0 && get_dir() == chirp::direction::right
+			|| x > 0 && get_dir() == chirp::direction::left)
 		{
 			flip();
 		}
@@ -46,18 +46,18 @@ void entity::boss::update(bool is_paused)
 #endif
 }
 
-auto entity::boss::get_player_dirs() const -> direction
+auto entity::boss::get_player_dirs() const -> chirp::direction
 {
-	return static_cast<direction>(static_cast<unsigned short>(player.get_x() > get_x()
-		? direction::right : direction::left)
+	return static_cast<chirp::direction>(static_cast<unsigned short>(player.get_x() > get_x()
+		? chirp::direction::right : chirp::direction::left)
 		| static_cast<unsigned char>(player.get_y() > get_y()
-			? direction::down : direction::up));
+			? chirp::direction::down : chirp::direction::up));
 }
 
-auto entity::boss::eq(const direction &dir1, const direction &dir2) -> bool
+auto entity::boss::eq(const chirp::direction &dir1, const chirp::direction &dir2) -> bool
 {
 	return (static_cast<unsigned short>(dir1) & static_cast<unsigned short>(dir2))
-		!= static_cast<unsigned short>(direction::none);
+		!= static_cast<unsigned short>(chirp::direction::none);
 }
 
 auto entity::boss::get_player_dist() const -> chirp::vector2f

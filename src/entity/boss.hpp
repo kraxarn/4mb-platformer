@@ -46,7 +46,7 @@ namespace entity
 		bool lock_y = false;
 
 		/** Get in what directions player is */
-		auto get_player_dirs() const -> direction;
+		auto get_player_dirs() const -> chirp::direction;
 
 		/** Get distance to player, always positive */
 		auto get_player_dist() const -> chirp::vector2f;
@@ -56,6 +56,6 @@ namespace entity
 
 		auto get_speed() const -> float;
 
-		static auto eq(const direction &dir1, const direction &dir2) -> bool;
+		static auto eq(const chirp::direction &dir1, const chirp::direction &dir2) -> bool;
 	};
 }

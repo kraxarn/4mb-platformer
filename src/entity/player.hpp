@@ -4,10 +4,10 @@
 #include "engine/animatedsprite.hpp"
 
 #include "entity/hud.hpp"
-#include "enum/direction.hpp"
 #include "physics/collision.hpp"
 
 #include <chirp/assets.hpp>
+#include <chirp/direction.hpp>
 
 namespace entity
 {
@@ -45,6 +45,6 @@ namespace entity
 		chirp::asset<chirp::sound> snd_fall;
 
 		void update_collision(ce::level &level);
-		auto get_player_dir() const -> direction;
+		auto get_player_dir() const -> chirp::direction;
 	};
 }

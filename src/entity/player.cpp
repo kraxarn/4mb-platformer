@@ -136,16 +136,16 @@ auto entity::player::is_grounded() const -> bool
 	return velocity.y() == 0;
 }
 
-auto entity::player::get_player_dir() const -> direction
+auto entity::player::get_player_dir() const -> chirp::direction
 {
 	if (velocity.x() < 0)
 	{
-		return direction::left;
+		return chirp::direction::left;
 	}
 
 	if (velocity.x() > 0)
 	{
-		return direction::right;
+		return chirp::direction::right;
 	}
 
 	return get_dir();

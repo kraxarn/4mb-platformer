@@ -4,8 +4,8 @@
 #include "engine/animatedsprite.hpp"
 #include "engine/scene.hpp"
 #include "engine/sprite.hpp"
-#include "enum/direction.hpp"
 
+#include <chirp/direction.hpp>
 #include <chirp/font.hpp>
 #include <chirp/text.hpp>
 
@@ -26,7 +26,7 @@ private:
 #endif
 
 	ce::sprite spr_arrow;
-	direction arrow_dir;
+	chirp::direction arrow_dir;
 	int current = 0;
 
 	ce::animated_sprite spr_demo;
