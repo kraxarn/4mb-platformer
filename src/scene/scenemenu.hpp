@@ -2,11 +2,11 @@
 
 #include "keymap.hpp"
 #include "engine/scene.hpp"
-#include "engine/sprite.hpp"
 
 #include <chirp/animatedsprite.hpp>
 #include <chirp/direction.hpp>
 #include <chirp/font.hpp>
+#include <chirp/sprite.hpp>
 #include <chirp/text.hpp>
 
 class scene_menu: public ce::scene
@@ -25,7 +25,7 @@ private:
 	chirp::text txt_debug;
 #endif
 
-	ce::sprite spr_arrow;
+	chirp::sprite spr_arrow;
 	chirp::direction arrow_dir;
 	int current = 0;
 

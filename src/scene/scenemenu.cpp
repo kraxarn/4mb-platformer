@@ -43,7 +43,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	}
 
 	// Arrow position
-	spr_arrow.set_x(76);
+	spr_arrow.set_position({76, spr_arrow.get_position().y()});
 	set_current(0);
 	arrow_dir = chirp::direction::right;
 
@@ -105,22 +105,28 @@ void scene_menu::render()
 	}
 
 	// Update arrow position
-	auto arrow_offset = std::abs(static_cast<float>(spr_arrow.get_x()) - 82.F);
+	const auto arrow_offset = std::abs(spr_arrow.get_position().x() - 82.F);
 
 	if (arrow_dir == chirp::direction::left)
 	{
-		spr_arrow.move(-0.5F - (arrow_offset / 10.F), 0);
+		spr_arrow.set_position({
+			spr_arrow.get_position().x() - 0.5F - arrow_offset / 10.F,
+			spr_arrow.get_position().y(),
+		});
 	}
 	else
 	{
-		spr_arrow.move(0.5F + (arrow_offset / 10.F), 0);
+		spr_arrow.set_position({
+			spr_arrow.get_position().x() + 0.5F + arrow_offset / 10.F,
+			spr_arrow.get_position().y(),
+		});
 	}
 
-	if (spr_arrow.get_x() <= 64)
+	if (spr_arrow.get_position().x() <= 64)
 	{
 		arrow_dir = chirp::direction::right;
 	}
-	else if (spr_arrow.get_x() >= 82)
+	else if (spr_arrow.get_position().x() >= 82)
 	{
 		arrow_dir = chirp::direction::left;
 	}
@@ -165,9 +171,13 @@ void scene_menu::set_current(int value)
 	}
 
 	const auto &text = texts.at(current);
-	spr_arrow.set_y(static_cast<float>(text.get_position().y())
-		+ (fnt_menu->text_size(text).y() / 2.F)
-		- (static_cast<float>(spr_arrow.height()) / 2.F));
+
+	spr_arrow.set_position({
+		spr_arrow.get_position().x(),
+		static_cast<float>(text.get_position().y())
+		+ fnt_menu->text_size(text).y() / 2.F
+		- static_cast<float>(spr_arrow.get_size().y()) / 2.F
+	});
 }
 
 void scene_menu::reset_demo_position()
