@@ -101,10 +101,10 @@ auto entity::boss::hurt() -> bool
 auto entity::boss::get_random_pos() const -> chirp::vector2f
 {
 	return {
-		player.get_x()
-			+ static_cast<float>(GetRandomValue(min_random_move, max_random_move))
-				* (GetRandomValue(0, 1) == 0 ? -1.F : 1.F),
-		get_y(),
+		player_pos.x()
+			+ static_cast<float>(chirp::random::get(min_random_move, max_random_move))
+			* (chirp::random::get(0, 1) == 0 ? -1.F : 1.F),
+		get_position().y(),
 	};
 }
 
