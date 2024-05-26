@@ -7,13 +7,14 @@
 #include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
 
+#include <chirp/colors.hpp>
 #include <chirp/format.hpp>
 
 scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
 #ifndef NDEBUG
 	txt_debug("", {debug_hud_offset, debug_hud_offset},
-		debug_hud_size, chirp::color::white()),
+		debug_hud_size, chirp::colors::white()),
 #endif
 	entity_hud(assets),
 	entity_player(assets, entity_hud, ce::tile_scale),
