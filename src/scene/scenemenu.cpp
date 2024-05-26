@@ -4,13 +4,15 @@
 #include "state.hpp"
 #include "engine/clock.hpp"
 
+#include <chirp/colors.hpp>
+
 #include <iomanip>
 #include <sstream>
 
 scene_menu::scene_menu(const chirp::assets &assets)
 	: ce::scene(assets),
 #ifndef NDEBUG
-	txt_debug("-", {16, 16}, 20, chirp::color::white()),
+	txt_debug("-", {16, 16}, 20, chirp::colors::white()),
 #endif
 	music(assets.music("menu")),
 	fnt_menu(assets.font("menu", 52)),
