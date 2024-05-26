@@ -16,7 +16,7 @@ namespace ce
 		/**
 		 * New sprite from texture
 		 */
-		explicit sprite(const chirp::texture &texture);
+		explicit sprite(const chirp::asset<chirp::texture> &texture);
 
 		/**
 		 * New sprite from image
@@ -29,6 +29,6 @@ namespace ce
 		auto height() const -> int;
 
 	private:
-		chirp::texture texture;
+		chirp::asset<chirp::texture> texture;
 	};
 }

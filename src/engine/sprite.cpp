@@ -1,27 +1,27 @@
 #include "sprite.hpp"
 
-ce::sprite::sprite(const chirp::texture &texture)
+ce::sprite::sprite(const chirp::asset<chirp::texture> &texture)
 	: texture(texture),
 	movable()
 {
 }
 
 ce::sprite::sprite(const chirp::asset<chirp::image> &image)
-	: ce::sprite(chirp::texture(image))
+	: ce::sprite(std::make_shared<chirp::texture>(image))
 {
 }
 
 void ce::sprite::draw()
 {
-	texture.draw({get_x(), get_y()});
+	texture->draw({get_x(), get_y()});
 }
 
 auto ce::sprite::width() const -> int
 {
-	return texture.size().x();
+	return texture->size().x();
 }
 
 auto ce::sprite::height() const -> int
 {
-	return texture.size().y();
+	return texture->size().y();
 }
