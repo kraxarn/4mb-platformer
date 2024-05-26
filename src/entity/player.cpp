@@ -1,5 +1,7 @@
 #include "entity/player.hpp"
 
+#include <chirp/colors.hpp>
+
 entity::player::player(const chirp::assets &assets, entity::hud &hud, float scale)
 	: animated_sprite(assets.tileset("player")),
 	snd_jump(assets.sound("jump")),
@@ -124,7 +126,7 @@ void entity::player::update_collision(ce::level &level)
 	auto colliding = phys::collision::update(get_shape(), level, velocity, hud);
 
 #ifndef NDEBUG
-	debug_draw(colliding == tile_type::tile ? GREEN : RED);
+	debug_draw(colliding == tile_type::tile ? chirp::colors::green() : chirp::colors::red());
 #endif
 }
 
