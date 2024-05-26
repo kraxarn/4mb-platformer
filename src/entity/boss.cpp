@@ -4,6 +4,9 @@
 entity::boss::boss(const chirp::assets &assets, const ce::movable &player, float scale)
 	: ce::animated_sprite(assets.tileset("enemy")),
 	player(player),
+entity::boss::boss(const chirp::assets &assets, const chirp::vector2f &player_pos, const float scale)
+	: animated_sprite(assets.tileset("enemy")),
+	player_pos(player_pos),
 	snd_boss(assets.sound("boss"))
 {
 	set_scale(scale);
@@ -22,20 +25,22 @@ void entity::boss::update(bool is_paused)
 		auto dir = get_player_dirs();
 		auto dist = get_player_dist();
 		auto speed = get_speed();
+		const auto shape = get_shape();
 
-		auto x = dist.x() < static_cast<float>(width())
+		auto x = dist.x() < shape.width()
 			? 0.F : eq(dir, chirp::direction::left)
 				? -speed : speed;
-		auto y = lock_y || dist.y() < static_cast<float>(height())
+		auto y = lock_y || dist.y() < shape.height()
 			? 0.F : eq(dir, chirp::direction::up)
 				? -speed : speed;
-		move(x, y);
+
+		set_position(get_position() + chirp::vector2f(x, y));
 
 		// Flip if needed
-		if (x < 0 && get_dir() == chirp::direction::right
-			|| x > 0 && get_dir() == chirp::direction::left)
+		if (x < 0 && get_direction() == chirp::direction::right
+			|| x > 0 && get_direction() == chirp::direction::left)
 		{
-			flip();
+			flip_horizontal();
 		}
 	}
 
@@ -48,9 +53,11 @@ void entity::boss::update(bool is_paused)
 
 auto entity::boss::get_player_dirs() const -> chirp::direction
 {
-	return static_cast<chirp::direction>(static_cast<unsigned short>(player.get_x() > get_x()
+	const auto &pos = get_position();
+
+	return static_cast<chirp::direction>(static_cast<unsigned short>(player_pos.x() > pos.x()
 		? chirp::direction::right : chirp::direction::left)
-		| static_cast<unsigned char>(player.get_y() > get_y()
+		| static_cast<unsigned char>(player_pos.y() > pos.y()
 			? chirp::direction::down : chirp::direction::up));
 }
 
@@ -62,9 +69,11 @@ auto entity::boss::eq(const chirp::direction &dir1, const chirp::direction &dir2
 
 auto entity::boss::get_player_dist() const -> chirp::vector2f
 {
+	const auto &pos = get_position();
+
 	return {
-		std::abs(get_x() - player.get_x()),
-		std::abs(get_y() + player.get_y()),
+		std::abs(pos.x() - player_pos.x()),
+		std::abs(pos.y() + player_pos.y()),
 	};
 }
 
@@ -104,7 +113,7 @@ auto entity::boss::get_speed() const -> float
 	auto step = diff / static_cast<float>(initial_health);
 	auto speed = max_speed - static_cast<float>(health) * step;
 
-	return lock_y && player.get_y() + ce::tile_size < get_y()
+	return lock_y && player_pos.y() + ce::tile_size < get_position().y()
 		? -speed / 2.F
 		: speed;
 }

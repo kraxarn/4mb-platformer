@@ -1,16 +1,14 @@
 #pragma once
 
-#include "engine/movable.hpp"
-#include "engine/animatedsprite.hpp"
-
+#include <chirp/animatedsprite.hpp>
 #include <chirp/assets.hpp>
 
 namespace entity
 {
-	class boss: public ce::animated_sprite
+	class boss: public chirp::animated_sprite
 	{
 	public:
-		boss(const chirp::assets &assets, const ce::movable &player, float scale);
+		boss(const chirp::assets &assets, const chirp::vector2f &player_pos, float scale);
 
 		void update(bool is_paused);
 
@@ -36,7 +34,7 @@ namespace entity
 		/** Maximum distance to move after getting hit */
 		static constexpr int max_random_move = 600;
 
-		const ce::movable &player;
+		const chirp::vector2f &player_pos;
 
 		chirp::asset<chirp::sound> snd_boss;
 
