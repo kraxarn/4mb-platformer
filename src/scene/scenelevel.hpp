@@ -1,7 +1,6 @@
 #pragma once
 
 #include "keymap.hpp"
-#include "engine/camera.hpp"
 #include "engine/level.hpp"
 #include "engine/map.hpp"
 #include "engine/scene.hpp"
@@ -11,6 +10,8 @@
 #include "entity/leveltitle.hpp"
 #include "entity/pause.hpp"
 #include "entity/player.hpp"
+
+#include <chirp/camera.hpp>
 
 class scene_level: public ce::scene
 {
@@ -34,7 +35,7 @@ private:
 	keymap keymap;
 
 	// Camera
-	ce::camera camera;
+	chirp::camera camera;
 
 	// Debug
 #ifndef NDEBUG

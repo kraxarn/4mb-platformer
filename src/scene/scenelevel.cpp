@@ -74,14 +74,14 @@ void scene_level::render()
 		"Position: {}\n"
 		"Velocity: {}\n"
 		"Grounded: {}\n"
-		"Camera: X={} Y={}\n"
+		"Camera: {}\n"
 		"Paused: {}",
 		ce::clock::fps(),
 		static_cast<int>(ce::clock::frame_time() * 1000.F),
 		entity_player.get_position(),
 		entity_player.get_velocity(),
 		entity_player.is_grounded(),
-		camera.get_x(), camera.get_y(),
+		camera.get_target(),
 		entity_pause.get_paused()));
 
 	txt_debug.draw();
@@ -207,25 +207,29 @@ void scene_level::update_camera()
 	const auto offset_y_min = offset.y();
 	const auto offset_y_max = level_height - offset.y() - ce::tile_size * 0.25F;
 
+	auto camera_target = camera.get_target();
+
 	// Horizontal offset
-	if (camera.get_x() < offset_x_min)
+	if (camera_target.x() < offset_x_min)
 	{
-		camera.set_x(offset_x_min);
+		camera_target = chirp::vector2f(offset_x_min, camera_target.y());
 	}
-	else if (camera.get_x() > offset_x_max)
+	else if (camera_target.x() > offset_x_max)
 	{
-		camera.set_x(offset_x_max);
+		camera_target = chirp::vector2f(offset_x_max, camera_target.y());
 	}
 
 	// Vertical offset
-	if (camera.get_y() > offset_y_max)
+	if (camera_target.y() > offset_y_max)
 	{
-		camera.set_y(offset_y_max);
+		camera_target = chirp::vector2f(camera_target.x(), offset_y_max);
 	}
-	if (camera.get_y() < offset_y_min)
+	else if (camera_target.y() < offset_y_min)
 	{
-		camera.set_y(offset_y_min);
+		camera_target = chirp::vector2f(camera_target.x(), offset_y_min);
 	}
+
+	camera.set_target(camera_target);
 }
 
 void scene_level::draw_map()
