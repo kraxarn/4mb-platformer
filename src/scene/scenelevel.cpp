@@ -7,6 +7,7 @@
 #include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
 
+#include <chirp/collision.hpp>
 #include <chirp/colors.hpp>
 #include <chirp/format.hpp>
 
@@ -43,7 +44,7 @@ void scene_level::render()
 		{
 			update_camera();
 		}
-		entity_player.update(keymap, *level, entity_pause.get_paused());
+		entity_player.update(keymap, *level, entity_pause.get_paused(), ce::clock::frame_time());
 
 		// Update boss
 		if (entity_boss)
