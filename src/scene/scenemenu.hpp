@@ -1,10 +1,10 @@
 #pragma once
 
 #include "keymap.hpp"
-#include "engine/animatedsprite.hpp"
 #include "engine/scene.hpp"
 #include "engine/sprite.hpp"
 
+#include <chirp/animatedsprite.hpp>
 #include <chirp/direction.hpp>
 #include <chirp/font.hpp>
 #include <chirp/text.hpp>
@@ -29,7 +29,7 @@ private:
 	chirp::direction arrow_dir;
 	int current = 0;
 
-	ce::animated_sprite spr_demo;
+	chirp::animated_sprite spr_demo;
 
 	chirp::asset<chirp::font> fnt_menu;
 	std::vector<chirp::text> texts;
