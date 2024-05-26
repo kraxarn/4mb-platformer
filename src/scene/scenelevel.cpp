@@ -70,12 +70,15 @@ void scene_level::render()
 
 #ifndef NDEBUG
 	txt_debug.set_text(chirp::format("FPS: {}\n"
-									   "Position: {}\n"
-									   "Velocity: {}\n"
-									   "Grounded: {}\n"
-									   "Camera: X={} Y={}\n"
-									   "Paused: {}",
-		ce::clock::fps(), entity_player.get_position(),
+		"Delta: {} ms\n"
+		"Position: {}\n"
+		"Velocity: {}\n"
+		"Grounded: {}\n"
+		"Camera: X={} Y={}\n"
+		"Paused: {}",
+		ce::clock::fps(),
+		static_cast<int>(ce::clock::frame_time() * 1000.F),
+		entity_player.get_position(),
 		entity_player.get_velocity(),
 		entity_player.is_grounded(),
 		camera.get_x(), camera.get_y(),
