@@ -4,6 +4,7 @@
 #include "entity/hud.hpp"
 #include "enum/tiletype.hpp"
 
+#include <chirp/rectangle.hpp>
 #include <chirp/vector2.hpp>
 
 namespace phys
@@ -18,7 +19,7 @@ namespace phys
 		 * Player is going to collide,
 		 * @note Velocity is modified so player doesn't collide
 		 * */
-		static auto update(const Rectangle &player_rect, ce::level &level,
+		static auto update(const chirp::rectangle<float> &player_rect, ce::level &level,
 			chirp::vector2f &velocity, entity::hud &hud) -> tile_type;
 
 	private:
@@ -29,7 +30,7 @@ namespace phys
 
 		/** Check if tile in rect collide in level */
 		static auto will_collide(ce::level &level, entity::hud &hud,
-			const chirp::vector2i &tile, const Rectangle &rect,
+			const chirp::vector2i &tile, const chirp::rectangle<float> &rect,
 			const chirp::vector2f &velocity) -> bool;
 
 		static auto collect_item(ce::level &level,

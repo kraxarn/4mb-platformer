@@ -4,6 +4,8 @@
 #include "physics/tiles.hpp"
 #include "scene/scenelevel.hpp"
 
+#include <chirp/collision.hpp>
+
 auto phys::collision::get_tile_type(char value) -> tile_type
 {
 	if (value == static_cast<char>(tile::none))
@@ -30,28 +32,38 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 	return tile_type::invalid;
 }
 
-auto phys::collision::update(const Rectangle &player_rect,
+auto phys::collision::update(const chirp::rectangle<float> &player_rect,
 	ce::level &level, chirp::vector2f &velocity, entity::hud &hud) -> tile_type
 {
 	auto collides = tile_type::empty;
 	const auto &map = level.map();
 	auto rect = player_rect;
-	const chirp::vector2f player_position(rect.x, rect.y);
+	const chirp::vector2f player_position(rect.x(), rect.y());
 	auto player_tile = (player_position / ce::tile_size).to<int>();
 
 	// Reset speed modifier
 	hud.set_player_speed_modifier(1.F);
 
-	auto rect_x = rect;
-	rect_x.x += velocity.x();
+	const chirp::rectangle rect_x{
+		rect.x() + velocity.x(),
+		rect.y(),
+		rect.width(),
+		rect.height(),
+	};
+
 	if (will_collide(level, hud, player_tile, rect_x, velocity))
 	{
 		velocity = {0, velocity.y()};
 		collides = tile_type::tile;
 	}
 
-	auto rect_y = rect;
-	rect_y.y += velocity.y();
+	const chirp::rectangle rect_y{
+		rect.x(),
+		rect.y() + velocity.y(),
+		rect.width(),
+		rect.height(),
+	};
+
 	if (will_collide(level, hud, player_tile, rect_y, velocity))
 	{
 		velocity = {velocity.x(), 0};
@@ -62,7 +74,7 @@ auto phys::collision::update(const Rectangle &player_rect,
 }
 
 auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
-	const chirp::vector2i &tile, const Rectangle &rect,
+	const chirp::vector2i &tile, const chirp::rectangle<float> &rect,
 	const chirp::vector2f &velocity) -> bool
 {
 	const auto &map = level.map();
@@ -70,9 +82,7 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 	int x;
 	int y;
 
-	Rectangle target{};
-	target.width = ce::tile_size;
-	target.height = ce::tile_size;
+	chirp::rectangle<float> target(0, 0, ce::tile_size, ce::tile_size);
 
 	for (x = tile.x() - offset; x < tile.x() + offset; x++)
 	{
@@ -89,10 +99,15 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 			}
 
 			tile_type = get_tile_type(map.at(x).at(y));
-			target.x = static_cast<float>(x) * ce::tile_size;
-			target.y = static_cast<float>(y) * ce::tile_size;
 
-			if (!CheckCollisionRecs(rect, target))
+			target = chirp::rectangle{
+				static_cast<float>(x) * ce::tile_size,
+				static_cast<float>(y) * ce::tile_size,
+				target.width(),
+				target.height(),
+			};
+
+			if (!chirp::collision::check(rect, target))
 			{
 				continue;
 			}
@@ -100,11 +115,15 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 			if (tile_type == tile_type::tile)
 			{
 				constexpr float tile_size = ce::tile_size * 0.9F;
-				auto tile_rect = rect;
-				tile_rect.y += tile_rect.height - tile_size;
-				tile_rect.height = tile_size;
 
-				if (CheckCollisionRecs(tile_rect, target))
+				const chirp::rectangle tile_rect{
+					rect.x(),
+					rect.y() + rect.height() - tile_size,
+					rect.width(),
+					tile_size,
+				};
+
+				if (chirp::collision::check(tile_rect, target))
 				{
 					return true;
 				}
@@ -113,7 +132,7 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 			if (tile_type == tile_type::one_way)
 			{
 				if (velocity.y() > 0
-					&& rect.y + rect.height * 0.75F < target.y)
+					&& rect.y() + rect.height() * 0.75F < target.y())
 				{
 					return true;
 				}
