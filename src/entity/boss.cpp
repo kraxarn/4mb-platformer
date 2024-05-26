@@ -1,9 +1,10 @@
 #include "boss.hpp"
+
 #include "engine/map.hpp"
 
-entity::boss::boss(const chirp::assets &assets, const ce::movable &player, float scale)
-	: ce::animated_sprite(assets.tileset("enemy")),
-	player(player),
+#include <chirp/colors.hpp>
+#include <chirp/random.hpp>
+
 entity::boss::boss(const chirp::assets &assets, const chirp::vector2f &player_pos, const float scale)
 	: animated_sprite(assets.tileset("enemy")),
 	player_pos(player_pos),
