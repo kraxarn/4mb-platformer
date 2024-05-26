@@ -64,6 +64,8 @@ void scene_menu::render()
 	{
 		reset_demo_position();
 	}
+
+	spr_demo.update(ce::clock::frame_time());
 	spr_demo.draw();
 
 	// Draw menu alternatives
