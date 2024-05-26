@@ -48,7 +48,7 @@ void entity::boss::update(bool is_paused)
 	// Draw sprite
 	draw();
 #ifndef NDEBUG
-	debug_draw(BLUE);
+	debug_draw(chirp::colors::blue());
 #endif
 }
 
