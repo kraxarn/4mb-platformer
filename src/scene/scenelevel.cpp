@@ -1,12 +1,12 @@
 #include "scenelevel.hpp"
 
 #include "state.hpp"
-#include "engine/clock.hpp"
 #include "enum/scenes.hpp"
 #include "level/levelloader.hpp"
 #include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
 
+#include <chirp/clock.hpp>
 #include <chirp/collision.hpp>
 #include <chirp/colors.hpp>
 #include <chirp/format.hpp>
@@ -44,7 +44,7 @@ void scene_level::render()
 		{
 			update_camera();
 		}
-		entity_player.update(keymap, *level, entity_pause.get_paused(), ce::clock::frame_time());
+		entity_player.update(keymap, *level, entity_pause.get_paused(), chirp::clock::delta());
 
 		// Update boss
 		if (entity_boss)
@@ -76,8 +76,8 @@ void scene_level::render()
 		"Grounded: {}\n"
 		"Camera: {}\n"
 		"Paused: {}",
-		ce::clock::fps(),
-		static_cast<int>(ce::clock::frame_time() * 1000.F),
+		chirp::clock::fps(),
+		static_cast<int>(chirp::clock::delta() * 1000.F),
 		entity_player.get_position(),
 		entity_player.get_velocity(),
 		entity_player.is_grounded(),

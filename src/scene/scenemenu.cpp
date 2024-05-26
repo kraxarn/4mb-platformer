@@ -2,8 +2,8 @@
 
 #include "colors.hpp"
 #include "state.hpp"
-#include "engine/clock.hpp"
 
+#include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
 
 #include <iomanip>
@@ -65,7 +65,7 @@ void scene_menu::render()
 		reset_demo_position();
 	}
 
-	spr_demo.update(ce::clock::frame_time());
+	spr_demo.update(chirp::clock::delta());
 	spr_demo.draw();
 
 	// Draw menu alternatives
@@ -133,9 +133,9 @@ void scene_menu::render()
 	std::stringstream stream;
 	stream << "Debug Mode" << '\n'
 		<< "Current: " << current << '\n'
-		<< "FPS: " << ce::clock::fps() << '\n'
-		<< "FrameTime: " << std::fixed << std::setprecision(2)
-		<< (ce::clock::frame_time() * 1000.F);
+		<< "FPS: " << chirp::clock::fps() << '\n'
+		<< "Delta: " << std::fixed << std::setprecision(2)
+		<< (chirp::clock::delta() * 1000.F);
 
 	txt_debug.set_text(stream.str());
 	txt_debug.draw();
