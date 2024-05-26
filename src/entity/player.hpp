@@ -1,24 +1,24 @@
 #pragma once
 
 #include "keymap.hpp"
-#include "engine/animatedsprite.hpp"
 
 #include "entity/hud.hpp"
 #include "physics/collision.hpp"
 
+#include <chirp/animatedsprite.hpp>
 #include <chirp/assets.hpp>
 #include <chirp/direction.hpp>
 
 namespace entity
 {
-	class player: public ce::animated_sprite
+	class player: public chirp::animated_sprite
 	{
 	public:
 		player(const chirp::assets &assets, entity::hud &hud, float scale);
 
 		/** Update input, position, collision, and finally draw sprite */
 		void update(const keymap &keymap, ce::level &level,
-			bool is_paused);
+			bool is_paused, float delta);
 
 		/** Get current player speed */
 		auto get_velocity() const -> const chirp::vector2f &;

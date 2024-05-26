@@ -1,7 +1,7 @@
 #include "entity/player.hpp"
 
 entity::player::player(const chirp::assets &assets, entity::hud &hud, float scale)
-	: ce::animated_sprite(assets.tileset("player")),
+	: animated_sprite(assets.tileset("player")),
 	snd_jump(assets.sound("jump")),
 	snd_fall(assets.sound("fall")),
 	hud(hud)
@@ -11,8 +11,10 @@ entity::player::player(const chirp::assets &assets, entity::hud &hud, float scal
 }
 
 void entity::player::update(const keymap &keymap,
-	ce::level &level, bool is_paused)
+	ce::level &level, bool const is_paused, const float delta)
 {
+	animated_sprite::update(delta);
+
 	if (!is_paused)
 	{
 		auto speed_limit_x = speed_limit * hud.get_player_speed_modifier();
@@ -57,7 +59,7 @@ void entity::player::update(const keymap &keymap,
 		if (keymap.is_down("jump") && is_grounded())
 		{
 			snd_jump->play();
-			ce::animated_sprite::pause();
+			pause();
 			set_frame(1);
 			velocity = {velocity.x(), jump_force};
 		}
@@ -69,9 +71,9 @@ void entity::player::update(const keymap &keymap,
 
 	// Flip image if needed
 	const auto new_dir = get_player_dir();
-	if (get_dir() != new_dir)
+	if (get_direction() != new_dir)
 	{
-		ce::animated_sprite::flip();
+		flip_horizontal();
 	}
 
 #ifndef NDEBUG
@@ -90,17 +92,17 @@ void entity::player::update(const keymap &keymap,
 
 		if (velocity.x() == 0)
 		{
-			ce::animated_sprite::pause();
+			pause();
 			set_frame(0);
 		}
 		else if (is_grounded())
 		{
-			ce::animated_sprite::resume();
+			play();
 		}
 	}
 
 	// Player died or fell out of the stage
-	if (get_y() > kill_limit)
+	if (get_position().y() > kill_limit)
 	{
 		if (!hud.is_dead())
 		{
@@ -119,7 +121,7 @@ void entity::player::update(const keymap &keymap,
 
 void entity::player::update_collision(ce::level &level)
 {
-	auto colliding = phys::collision::update(rect(), level, velocity, hud);
+	auto colliding = phys::collision::update(get_shape(), level, velocity, hud);
 
 #ifndef NDEBUG
 	debug_draw(colliding == tile_type::tile ? GREEN : RED);
@@ -148,5 +150,5 @@ auto entity::player::get_player_dir() const -> chirp::direction
 		return chirp::direction::right;
 	}
 
-	return get_dir();
+	return get_direction();
 }
