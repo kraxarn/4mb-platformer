@@ -148,7 +148,7 @@ void scene_level::load_entities()
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
 			&& tile.value == static_cast<char>(tile::boss))
 		{
-			entity_boss = std::make_unique<entity::boss>(assets, entity_player,
+			entity_boss = std::make_unique<entity::boss>(assets, entity_player.get_position(),
 				entity_player.get_scale());
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level.get()));
