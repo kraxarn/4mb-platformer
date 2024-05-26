@@ -166,7 +166,7 @@ void scene_level::update_entities()
 
 	if (entity_boss
 		&& !entity_hud.is_dead()
-		&& CheckCollisionRecs(entity_player.rect(), entity_boss->rect()))
+		&& chirp::collision::check(entity_player.get_shape(), entity_boss->get_shape()))
 	{
 		// Normal boss: Player always dies when touching
 		// Final boss: Boss takes damage if hit from above, otherwise, kill player
