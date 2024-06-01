@@ -114,15 +114,17 @@ void entity::player::draw()
 	}
 
 	animated_sprite::draw();
+
+#ifndef NDEBUG
+	debug_draw(colliding_tile_type == tile_type::tile
+		? chirp::colors::green()
+		: chirp::colors::red());
+#endif
 }
 
 void entity::player::update_collision(ce::level &level)
 {
-	auto colliding = phys::collision::update(get_shape(), level, velocity, hud);
-
-#ifndef NDEBUG
-	debug_draw(colliding == tile_type::tile ? chirp::colors::green() : chirp::colors::red());
-#endif
+	colliding_tile_type = phys::collision::update(get_shape(), level, velocity, hud);
 }
 
 auto entity::player::get_velocity() const -> const chirp::vector2f &

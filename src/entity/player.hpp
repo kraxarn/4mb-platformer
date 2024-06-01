@@ -43,6 +43,8 @@ namespace entity
 		/** Y position to kill the player at */
 		static constexpr float kill_limit = 2'000.F;
 
+		tile_type colliding_tile_type;
+
 		entity::hud &hud;
 
 		chirp::vector2f velocity;
