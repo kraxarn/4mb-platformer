@@ -12,6 +12,8 @@ namespace entity
 
 		void update(bool is_paused, float delta);
 
+		void draw() const;
+
 		/**
 		 * Damage boss
 		 * @return Boss died
