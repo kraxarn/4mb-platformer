@@ -9,12 +9,11 @@ entity::level_title::level_title(const chirp::assets &assets)
 
 void entity::level_title::update(const float delta)
 {
-	if (text.get_position().y() < -text_size.y())
+	if (!is_visible())
 	{
 		return;
 	}
 
-	font->draw_text(text);
 	if (timer > 0)
 	{
 		timer -= delta;
@@ -27,6 +26,21 @@ void entity::level_title::update(const float delta)
 		text.get_position().x(),
 		text.get_position().y() - static_cast<int>(speed),
 	});
+}
+
+void entity::level_title::draw() const
+{
+	if (!is_visible())
+	{
+		return;
+	}
+
+	font->draw_text(text);
+}
+
+auto entity::level_title::is_visible() const -> bool
+{
+	return text.get_position().y() > -text_size.y();
 }
 
 void entity::level_title::set_level(const chirp::level &level)

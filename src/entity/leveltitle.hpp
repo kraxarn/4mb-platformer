@@ -12,6 +12,9 @@ namespace entity
 		explicit level_title(const chirp::assets &assets);
 
 		void update(float delta);
+
+		void draw() const;
+
 		void set_level(const chirp::level &level);
 
 	private:
@@ -24,5 +27,7 @@ namespace entity
 
 		chirp::asset<chirp::font> font;
 		chirp::text text;
+
+		auto is_visible() const -> bool;
 	};
 }
