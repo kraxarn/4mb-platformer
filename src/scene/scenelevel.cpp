@@ -56,6 +56,24 @@ void scene_level::update(const float delta)
 
 	entity_level_title.update(delta);
 	entity_pause.update();
+
+	if (chirp::os::is_debug())
+	{
+		txt_debug.set_text(chirp::format("FPS: {}\n"
+			"Delta: {} ms\n"
+			"Position: {}\n"
+			"Velocity: {}\n"
+			"Grounded: {}\n"
+			"Camera: {}\n"
+			"Paused: {}",
+			chirp::clock::fps(),
+			static_cast<int>(delta * 1000.F),
+			entity_player.get_position(),
+			entity_player.get_velocity(),
+			entity_player.is_grounded(),
+			camera.get_target(),
+			entity_pause.get_paused()));
+	}
 }
 
 void scene_level::draw()
@@ -81,21 +99,6 @@ void scene_level::draw()
 
 	if (chirp::os::is_debug())
 	{
-		txt_debug.set_text(chirp::format("FPS: {}\n"
-			"Delta: {} ms\n"
-			"Position: {}\n"
-			"Velocity: {}\n"
-			"Grounded: {}\n"
-			"Camera: {}\n"
-			"Paused: {}",
-			chirp::clock::fps(),
-			static_cast<int>(chirp::clock::delta() * 1000.F),
-			entity_player.get_position(),
-			entity_player.get_velocity(),
-			entity_player.is_grounded(),
-			camera.get_target(),
-			entity_pause.get_paused()));
-
 		txt_debug.draw();
 	}
 }
