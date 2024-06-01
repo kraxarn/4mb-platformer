@@ -71,18 +71,6 @@ void entity::player::update(const keymap &keymap,
 		}
 	}
 
-	// Flip image if needed
-	const auto new_dir = get_player_dir();
-	if (get_direction() != new_dir)
-	{
-		flip_horizontal();
-	}
-
-#ifndef NDEBUG
-	// update_collision draws some stuff in debug
-	draw();
-#endif
-
 	// Update position
 	if (!is_paused)
 	{
@@ -114,11 +102,18 @@ void entity::player::update(const keymap &keymap,
 		set_position(level.get_safe_spawn());
 		hud.respawn();
 	}
+}
 
-#ifdef NDEBUG
-	// Draw sprite
-	draw();
-#endif
+void entity::player::draw()
+{
+	// Flip image if needed
+	const auto new_dir = get_player_dir();
+	if (get_direction() != new_dir)
+	{
+		flip_horizontal();
+	}
+
+	animated_sprite::draw();
 }
 
 void entity::player::update_collision(ce::level &level)

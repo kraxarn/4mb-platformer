@@ -50,6 +50,7 @@ void scene_level::draw()
 			update_camera();
 		}
 		entity_player.update(keymap, *level, entity_pause.get_paused(), chirp::clock::delta());
+		entity_player.draw();
 
 		// Update boss
 		if (entity_boss)

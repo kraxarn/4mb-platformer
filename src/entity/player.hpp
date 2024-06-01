@@ -16,9 +16,15 @@ namespace entity
 	public:
 		player(const chirp::assets &assets, entity::hud &hud, float scale);
 
-		/** Update input, position, collision, and finally draw sprite */
-		void update(const keymap &keymap, ce::level &level,
-			bool is_paused, float delta);
+		/**
+		 * Update input, position and collision
+		 */
+		void update(const keymap &keymap, ce::level &level, bool is_paused, float delta);
+
+		/**
+		 * Draw the player sprite
+		 */
+		void draw();
 
 		/** Get current player speed */
 		auto get_velocity() const -> const chirp::vector2f &;
