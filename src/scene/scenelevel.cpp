@@ -36,6 +36,12 @@ scene_level::scene_level(const chirp::assets &assets)
 
 void scene_level::update(float delta)
 {
+	if (!entity_hud.is_dead())
+	{
+		update_camera();
+	}
+
+	entity_player.update(keymap, *level, entity_pause.get_paused(), delta);
 }
 
 void scene_level::draw()
@@ -44,12 +50,6 @@ void scene_level::draw()
 
 	camera.begin();
 	{
-		// Update player
-		if (!entity_hud.is_dead())
-		{
-			update_camera();
-		}
-		entity_player.update(keymap, *level, entity_pause.get_paused(), chirp::clock::delta());
 		entity_player.draw();
 
 		// Update boss
