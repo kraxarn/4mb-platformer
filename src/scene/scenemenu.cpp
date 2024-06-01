@@ -6,6 +6,7 @@
 
 #include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
+#include <chirp/os.hpp>
 
 #include <iomanip>
 #include <sstream>
@@ -14,9 +15,7 @@
 
 scene_menu::scene_menu(const chirp::assets &assets)
 	: scene(assets),
-#ifndef NDEBUG
 	txt_debug("-", {16, 16}, 20, chirp::colors::white()),
-#endif
 	music(assets.music("menu")),
 	fnt_menu(assets.font("menu", 52)),
 	spr_arrow(assets.image("arrow")),
@@ -143,17 +142,19 @@ void scene_menu::draw()
 	spr_arrow.draw();
 
 	// Debug stuff
-#ifndef NDEBUG
-	std::stringstream stream;
-	stream << "Debug Mode" << '\n'
-		<< "Current: " << current << '\n'
-		<< "FPS: " << chirp::clock::fps() << '\n'
-		<< "Delta: " << std::fixed << std::setprecision(2)
-		<< (chirp::clock::delta() * 1000.F);
+	if (chirp::os::is_debug())
+	{
+		std::stringstream stream;
 
-	txt_debug.set_text(stream.str());
-	txt_debug.draw();
-#endif
+		stream << "Debug Mode" << '\n'
+			<< "Current: " << current << '\n'
+			<< "FPS: " << chirp::clock::fps() << '\n'
+			<< "Delta: " << std::fixed << std::setprecision(2)
+			<< (chirp::clock::delta() * 1000.F);
+
+		txt_debug.set_text(stream.str());
+		txt_debug.draw();
+	}
 }
 
 auto scene_menu::texts_height() -> int

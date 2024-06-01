@@ -10,13 +10,12 @@
 #include <chirp/collision.hpp>
 #include <chirp/colors.hpp>
 #include <chirp/format.hpp>
+#include <chirp/os.hpp>
 
 scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
-#ifndef NDEBUG
 	txt_debug("", {debug_hud_offset, debug_hud_offset},
 		debug_hud_size, chirp::colors::white()),
-#endif
 	entity_hud(assets),
 	entity_player(assets, entity_hud, ce::tile_scale),
 	music(assets.music("level1")),
@@ -74,24 +73,25 @@ void scene_level::draw()
 	entity_level_title.update();
 	entity_pause.update();
 
-#ifndef NDEBUG
-	txt_debug.set_text(chirp::format("FPS: {}\n"
-		"Delta: {} ms\n"
-		"Position: {}\n"
-		"Velocity: {}\n"
-		"Grounded: {}\n"
-		"Camera: {}\n"
-		"Paused: {}",
-		chirp::clock::fps(),
-		static_cast<int>(chirp::clock::delta() * 1000.F),
-		entity_player.get_position(),
-		entity_player.get_velocity(),
-		entity_player.is_grounded(),
-		camera.get_target(),
-		entity_pause.get_paused()));
+	if (chirp::os::is_debug())
+	{
+		txt_debug.set_text(chirp::format("FPS: {}\n"
+			"Delta: {} ms\n"
+			"Position: {}\n"
+			"Velocity: {}\n"
+			"Grounded: {}\n"
+			"Camera: {}\n"
+			"Paused: {}",
+			chirp::clock::fps(),
+			static_cast<int>(chirp::clock::delta() * 1000.F),
+			entity_player.get_position(),
+			entity_player.get_velocity(),
+			entity_player.is_grounded(),
+			camera.get_target(),
+			entity_pause.get_paused()));
 
-	txt_debug.draw();
-#endif
+		txt_debug.draw();
+	}
 }
 
 void scene_level::load(int index)
@@ -268,12 +268,13 @@ void scene_level::draw_map()
 			}
 		}
 
-#ifndef NDEBUG
-		DrawRectangleLines(tile.x * ce::tile_size,
-			tile.y * ce::tile_size,
-			ce::tile_size,
-			ce::tile_size,
-			GREEN);
-#endif
+		if (chirp::os::is_debug())
+		{
+			DrawRectangleLines(tile.x * ce::tile_size,
+				tile.y * ce::tile_size,
+				ce::tile_size,
+				ce::tile_size,
+				GREEN);
+		}
 	}
 }

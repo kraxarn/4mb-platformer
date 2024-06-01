@@ -1,6 +1,7 @@
 #include "entity/player.hpp"
 
 #include <chirp/colors.hpp>
+#include <chirp/os.hpp>
 
 entity::player::player(const chirp::assets &assets, entity::hud &hud, float scale)
 	: animated_sprite(assets.tileset("player")),
@@ -115,11 +116,12 @@ void entity::player::draw()
 
 	animated_sprite::draw();
 
-#ifndef NDEBUG
-	debug_draw(colliding_tile_type == tile_type::tile
-		? chirp::colors::green()
-		: chirp::colors::red());
-#endif
+	if (chirp::os::is_debug())
+	{
+		debug_draw(colliding_tile_type == tile_type::tile
+			? chirp::colors::green()
+			: chirp::colors::red());
+	}
 }
 
 void entity::player::update_collision(ce::level &level)

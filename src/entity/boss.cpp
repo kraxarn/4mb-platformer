@@ -3,6 +3,7 @@
 #include "engine/map.hpp"
 
 #include <chirp/colors.hpp>
+#include <chirp/os.hpp>
 #include <chirp/random.hpp>
 
 entity::boss::boss(const chirp::assets &assets, const chirp::vector2f &player_pos, const float scale)
@@ -46,12 +47,16 @@ void entity::boss::update(const bool is_paused, const float delta)
 			flip_horizontal();
 		}
 	}
+}
 
-	// Draw sprite
-	draw();
-#ifndef NDEBUG
-	debug_draw(chirp::colors::blue());
-#endif
+void entity::boss::draw() const
+{
+	animated_sprite::draw();
+
+	if (chirp::os::is_debug())
+	{
+		debug_draw(chirp::colors::blue());
+	}
 }
 
 auto entity::boss::get_player_dirs() const -> chirp::direction

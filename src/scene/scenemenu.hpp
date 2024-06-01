@@ -24,10 +24,7 @@ private:
 
 	chirp::asset<chirp::music> music;
 
-#ifndef NDEBUG
 	chirp::text txt_debug;
-#endif
-
 	chirp::sprite spr_arrow;
 	chirp::direction arrow_dir;
 	int current = 0;

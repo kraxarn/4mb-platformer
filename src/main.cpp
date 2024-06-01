@@ -9,6 +9,7 @@
 #include <chirp/audio.hpp>
 #include <chirp/clock.hpp>
 #include <chirp/logger.hpp>
+#include <chirp/os.hpp>
 
 auto main(int /*argc*/, char **/*argv*/) -> int
 {
@@ -20,12 +21,15 @@ auto main(int /*argc*/, char **/*argv*/) -> int
 	const chirp::assets assets;
 	ce::window::set_icon(assets.tileset("player")->at(1));
 
-#ifdef NDEBUG
-	state::set(scene::menu, assets);
-#else
-	state::set(scene::level, assets);
-	dynamic_cast<scene_level *>(state::get().get())->load(0);
-#endif
+	if (!chirp::os::is_debug())
+	{
+		state::set(scene::menu, assets);
+	}
+	else
+	{
+		state::set(scene::level, assets);
+		dynamic_cast<scene_level *>(state::get().get())->load(0);
+	}
 
 	while (!ce::window::should_close())
 	{

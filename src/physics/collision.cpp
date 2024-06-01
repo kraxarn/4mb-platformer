@@ -5,6 +5,7 @@
 #include "scene/scenelevel.hpp"
 
 #include <chirp/collision.hpp>
+#include <chirp/os.hpp>
 
 auto phys::collision::get_tile_type(char value) -> tile_type
 {
@@ -157,9 +158,8 @@ auto phys::collision::collect_item(ce::level &level,
 
 	if (item == tile::exit)
 	{
-#ifdef NDEBUG
-		if (hud.get_gem_count() == level.get_total_gem_count())
-#endif
+		if (chirp::os::is_debug()
+			|| hud.get_gem_count() == level.get_total_gem_count())
 		{
 			auto *scene = dynamic_cast<scene_level *>(state::get().get());
 			if (scene == nullptr)

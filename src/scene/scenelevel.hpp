@@ -41,12 +41,9 @@ private:
 	chirp::camera camera;
 
 	// Debug
-#ifndef NDEBUG
 	static constexpr int debug_hud_size = 20;
 	static constexpr int debug_hud_offset = 16;
-
 	chirp::text txt_debug;
-#endif
 
 	// Level
 	std::unique_ptr<ce::level> level;
