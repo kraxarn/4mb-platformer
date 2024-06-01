@@ -18,7 +18,7 @@ namespace entity
 		static constexpr int font_size = 42;
 		static constexpr float timer_start = 2.F;
 
-		int speed = 0;
+		float speed = 0;
 		float timer = timer_start;
 		chirp::vector2i text_size;
 

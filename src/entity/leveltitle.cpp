@@ -21,9 +21,11 @@ void entity::level_title::update(const float delta)
 		return;
 	}
 
+	speed += delta * (60.F / 1.F);
+
 	text.set_position({
 		text.get_position().x(),
-		text.get_position().y() - speed++,
+		text.get_position().y() - static_cast<int>(speed),
 	});
 }
 
