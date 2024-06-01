@@ -33,7 +33,7 @@ scene_level::scene_level(const chirp::assets &assets)
 	music->set_volume(volume);
 }
 
-void scene_level::update(float delta)
+void scene_level::update(const float delta)
 {
 	if (!entity_hud.is_dead())
 	{
@@ -41,6 +41,13 @@ void scene_level::update(float delta)
 	}
 
 	entity_player.update(keymap, *level, entity_pause.get_paused(), delta);
+
+	if (entity_boss)
+	{
+		entity_boss->update(entity_pause.get_paused(), delta);
+	}
+
+	update_entities();
 }
 
 void scene_level::draw()
@@ -51,12 +58,10 @@ void scene_level::draw()
 	{
 		entity_player.draw();
 
-		// Update boss
 		if (entity_boss)
 		{
-			entity_boss->update(entity_pause.get_paused(), chirp::clock::delta());
+			entity_boss->draw();
 		}
-		update_entities();
 
 		// Update map
 		draw_map();
