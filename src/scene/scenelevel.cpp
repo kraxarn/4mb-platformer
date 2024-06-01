@@ -24,7 +24,8 @@ scene_level::scene_level(const chirp::assets &assets)
 	tiles(assets.tileset("grass")),
 	snd_complete(assets.sound("complete")),
 	entity_pause(assets),
-	entity_level_title(assets)
+	entity_level_title(assets),
+	assets(assets)
 {
 	constexpr float half = 2.F;
 	camera.set_offset(ce::window::size().to<float>() / half);
@@ -33,7 +34,11 @@ scene_level::scene_level(const chirp::assets &assets)
 	music->set_volume(volume);
 }
 
-void scene_level::render()
+void scene_level::update(float delta)
+{
+}
+
+void scene_level::draw()
 {
 	music->update();
 

@@ -3,9 +3,11 @@
 #include "engine/draw.hpp"
 #include "engine/window.hpp"
 #include "enum/scenes.hpp"
+#include "scene/scenelevel.hpp"
 
 #include <chirp/assets.hpp>
 #include <chirp/audio.hpp>
+#include <chirp/clock.hpp>
 #include <chirp/logger.hpp>
 
 auto main(int /*argc*/, char **/*argv*/) -> int
@@ -27,10 +29,12 @@ auto main(int /*argc*/, char **/*argv*/) -> int
 
 	while (!ce::window::should_close())
 	{
+		state::get()->update(chirp::clock::delta());
+
 		window.begin();
 		ce::draw::clear(color::background);
 		{
-			state::get()->render();
+			state::get()->draw();
 		}
 		window.end();
 	}

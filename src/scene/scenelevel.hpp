@@ -3,7 +3,6 @@
 #include "keymap.hpp"
 #include "engine/level.hpp"
 #include "engine/map.hpp"
-#include "engine/scene.hpp"
 
 #include "entity/boss.hpp"
 #include "entity/hud.hpp"
@@ -12,13 +11,16 @@
 #include "entity/player.hpp"
 
 #include <chirp/camera.hpp>
+#include <chirp/scene.hpp>
 
-class scene_level: public ce::scene
+class scene_level: public chirp::scene
 {
 public:
 	explicit scene_level(const chirp::assets &assets);
 
-	void render() override;
+	void update(float delta) override;
+
+	void draw() override;
 
 	/** Load specific level */
 	void load(int index);
@@ -33,6 +35,7 @@ private:
 	// General engine stuff
 	chirp::asset<chirp::music> music;
 	keymap keymap;
+	const chirp::assets &assets;
 
 	// Camera
 	chirp::camera camera;

@@ -1,19 +1,22 @@
 #pragma once
 
 #include "keymap.hpp"
-#include "engine/scene.hpp"
 
 #include <chirp/animatedsprite.hpp>
 #include <chirp/direction.hpp>
 #include <chirp/font.hpp>
+#include <chirp/scene.hpp>
 #include <chirp/sprite.hpp>
 #include <chirp/text.hpp>
 
-class scene_menu: public ce::scene
+class scene_menu: public chirp::scene
 {
 public:
 	explicit scene_menu(const chirp::assets &assets);
-	void render() override;
+
+	void update(float delta) override;
+
+	void draw() override;
 
 private:
 	static constexpr short text_count = 2;
@@ -35,6 +38,7 @@ private:
 	std::vector<chirp::text> texts;
 
 	keymap keymap;
+	const chirp::assets &assets;
 
 	auto texts_height() -> int;
 

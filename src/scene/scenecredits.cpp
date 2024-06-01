@@ -1,23 +1,30 @@
 #include "scenecredits.hpp"
 
 #include "colors.hpp"
+#include "state.hpp"
+#include "engine/window.hpp"
 #include "level/levelloader.hpp"
 #include "physics/tiles.hpp"
 
 #include <chirp/format.hpp>
 
 scene_credits::scene_credits(const chirp::assets &assets)
-	: ce::scene(assets),
+	: scene(assets),
 	fnt_title(assets.font("menu", size_title)),
 	fnt_subtitle(assets.font("submenu", size_title / 2)),
 	txt_title("Thanks for playing!", {0, 0}, size_title, color::text),
 	txt_subtitle("", {0, 0}, size_title / 2, color::text),
-	music(assets.music("credits"))
+	music(assets.music("credits")),
+	assets(assets)
 {
 	music->play();
 }
 
-void scene_credits::render()
+void scene_credits::update(float delta)
+{
+}
+
+void scene_credits::draw()
 {
 	music->update();
 

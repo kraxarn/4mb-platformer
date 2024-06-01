@@ -2,6 +2,7 @@
 
 #include "colors.hpp"
 #include "state.hpp"
+#include "scene/scenelevel.hpp"
 
 #include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
@@ -9,15 +10,18 @@
 #include <iomanip>
 #include <sstream>
 
+#include "raylib.h"
+
 scene_menu::scene_menu(const chirp::assets &assets)
-	: ce::scene(assets),
+	: scene(assets),
 #ifndef NDEBUG
 	txt_debug("-", {16, 16}, 20, chirp::colors::white()),
 #endif
 	music(assets.music("menu")),
 	fnt_menu(assets.font("menu", 52)),
 	spr_arrow(assets.image("arrow")),
-	spr_demo(assets.tileset("player"))
+	spr_demo(assets.tileset("player")),
+	assets(assets)
 {
 	std::array<std::string, text_count> labels = {
 		"Start game",
@@ -54,7 +58,11 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	music->play();
 }
 
-void scene_menu::render()
+void scene_menu::update(float delta)
+{
+}
+
+void scene_menu::draw()
 {
 	music->update();
 

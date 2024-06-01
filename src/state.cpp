@@ -1,17 +1,19 @@
 #include "state.hpp"
 
 #include "scene/scenecredits.hpp"
+#include "scene/scenelevel.hpp"
+#include "scene/scenemenu.hpp"
 
-std::shared_ptr<ce::scene> state::current = std::shared_ptr<ce::scene>();
+std::shared_ptr<chirp::scene> state::current = std::shared_ptr<chirp::scene>();
 
-auto state::get() -> std::shared_ptr<ce::scene>
+auto state::get() -> std::shared_ptr<chirp::scene>
 {
 	return current;
 }
 
 void state::set(scene scene, const chirp::assets &assets)
 {
-	ce::scene *new_scene = nullptr;
+	chirp::scene *new_scene = nullptr;
 
 	switch (scene)
 	{
