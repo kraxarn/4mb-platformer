@@ -55,6 +55,7 @@ void scene_level::update(const float delta)
 	}
 
 	entity_level_title.update(delta);
+	entity_pause.update();
 }
 
 void scene_level::draw()
@@ -76,7 +77,7 @@ void scene_level::draw()
 
 	entity_hud.draw(*level);
 	entity_level_title.draw();
-	entity_pause.update();
+	entity_pause.draw();
 
 	if (chirp::os::is_debug())
 	{

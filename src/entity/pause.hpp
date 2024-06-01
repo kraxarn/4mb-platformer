@@ -13,6 +13,8 @@ namespace entity
 
 		void update();
 
+		void draw() const;
+
 		auto get_paused() const -> bool;
 		void set_paused(bool value);
 
