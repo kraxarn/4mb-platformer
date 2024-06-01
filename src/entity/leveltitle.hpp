@@ -11,15 +11,15 @@ namespace entity
 	public:
 		explicit level_title(const chirp::assets &assets);
 
-		void update();
+		void update(float delta);
 		void set_level(const chirp::level &level);
 
 	private:
 		static constexpr int font_size = 42;
-		static constexpr int timer_start = 60 * 2;
+		static constexpr float timer_start = 2.F;
 
 		int speed = 0;
-		int timer = timer_start;
+		float timer = timer_start;
 		chirp::vector2i text_size;
 
 		chirp::asset<chirp::font> font;

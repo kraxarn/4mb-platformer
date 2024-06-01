@@ -73,7 +73,7 @@ void scene_level::draw()
 	camera.end();
 
 	entity_hud.draw(*level);
-	entity_level_title.update();
+	entity_level_title.update(chirp::clock::delta());
 	entity_pause.update();
 
 	if (chirp::os::is_debug())
