@@ -48,6 +48,11 @@ void scene_level::update(const float delta)
 	}
 
 	update_entities();
+
+	if (keymap.is_pressed("pause"))
+	{
+		entity_pause.set_paused(!entity_pause.get_paused());
+	}
 }
 
 void scene_level::draw()
@@ -63,14 +68,7 @@ void scene_level::draw()
 			entity_boss->draw();
 		}
 
-		// Update map
 		draw_map();
-
-		// Update pause
-		if (keymap.is_pressed("pause"))
-		{
-			entity_pause.set_paused(!entity_pause.get_paused());
-		}
 	}
 	camera.end();
 
