@@ -49,7 +49,7 @@ void scene_level::render()
 		// Update boss
 		if (entity_boss)
 		{
-			entity_boss->update(entity_pause.get_paused());
+			entity_boss->update(entity_pause.get_paused(), chirp::clock::delta());
 		}
 		update_entities();
 

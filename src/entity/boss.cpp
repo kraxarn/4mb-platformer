@@ -13,7 +13,7 @@ entity::boss::boss(const chirp::assets &assets, const chirp::vector2f &player_po
 	set_scale(scale);
 }
 
-void entity::boss::update(bool is_paused)
+void entity::boss::update(const bool is_paused, const float delta)
 {
 	if (health <= 0)
 	{
@@ -22,6 +22,8 @@ void entity::boss::update(bool is_paused)
 
 	if (!is_paused)
 	{
+		animated_sprite::update(delta);
+
 		// Movement
 		auto dir = get_player_dirs();
 		auto dist = get_player_dist();

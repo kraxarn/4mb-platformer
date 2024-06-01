@@ -10,7 +10,7 @@ namespace entity
 	public:
 		boss(const chirp::assets &assets, const chirp::vector2f &player_pos, float scale);
 
-		void update(bool is_paused);
+		void update(bool is_paused, float delta);
 
 		/**
 		 * Damage boss
