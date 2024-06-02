@@ -28,7 +28,7 @@ private:
 	chirp::asset<chirp::font> fnt_subtitle;
 	chirp::text txt_subtitle;
 
-	keymap keymap;
+	chirp::keymap keymap;
 	const chirp::assets &assets;
 
 	auto get_total_coins() -> int;
