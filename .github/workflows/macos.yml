@@ -4,7 +4,7 @@ on: [push]
 
 env:
   BUILD_TYPE: MinSizeRel
-  MACOSX_DEPLOYMENT_TARGET: 10.9
+  MACOSX_DEPLOYMENT_TARGET: 10.13
 
 jobs:
   build:
