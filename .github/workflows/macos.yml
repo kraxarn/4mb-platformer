@@ -16,9 +16,6 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
 
-    - name: Install Dependencies
-      run: brew install upx
-
     - name: Configure CMake
       shell: bash
       working-directory: ${{runner.workspace}}/build
@@ -34,7 +31,6 @@ jobs:
       shell: bash
       run: |
         strip ${{runner.workspace}}/build/4mb_platformer
-        upx --best ${{runner.workspace}}/build/4mb_platformer
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
