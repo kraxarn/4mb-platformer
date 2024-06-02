@@ -5,7 +5,7 @@
 #include "colors.hpp"
 #include "physics/tiles.hpp"
 
-entity::hud::hud(const chirp::assets &assets)
+entity::hud::hud(const chirp::assets &assets, const chirp::window &window)
 	: fnt_hud(assets.font("submenu", font_size)),
 	txt_gems("0/0", {0, 0}, font_size, color::text),
 	txt_coins("0", {0, 0}, font_size, color::text),
@@ -22,7 +22,7 @@ entity::hud::hud(const chirp::assets &assets)
 	 */
 
 	const chirp::vector2f top_right{
-		ce::window::size().to<float>().x() - offset,
+		window.get_size().to<float>().x() - offset,
 		offset,
 	};
 

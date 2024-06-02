@@ -10,8 +10,8 @@ class game final: public chirp::game
 public:
 	game()
 	{
-		set_window_title("Tixel - 4MB Platformer");
-		set_window_size({1280, 720});
+		window().set_title("Tixel - 4MB Platformer");
+		window().set_size({1280, 720});
 		set_target_fps(60);
 		set_clear_color(color::background);
 

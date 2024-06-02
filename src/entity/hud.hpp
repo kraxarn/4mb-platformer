@@ -1,17 +1,17 @@
 #pragma once
 
 #include "engine/level.hpp"
-#include "engine/window.hpp"
 #include "entity/state.hpp"
 
 #include <chirp/assets.hpp>
+#include <chirp/window.hpp>
 
 namespace entity
 {
 	class hud
 	{
 	public:
-		explicit hud(const chirp::assets &assets);
+		explicit hud(const chirp::assets &assets, const chirp::window &window);
 
 		void draw(ce::level &level);
 

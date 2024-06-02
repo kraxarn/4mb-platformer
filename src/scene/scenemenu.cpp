@@ -105,8 +105,7 @@ void scene_menu::draw()
 		// Exit game :(
 		if (current == 1)
 		{
-			ce::window::close();
-			exit(0);
+			scenes().pop();
 		}
 	}
 

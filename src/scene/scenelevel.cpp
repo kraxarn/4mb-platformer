@@ -10,21 +10,23 @@
 #include <chirp/format.hpp>
 #include <chirp/os.hpp>
 
+#include "raylib.h"
+
 scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
 	txt_debug("", {debug_hud_offset, debug_hud_offset},
 		debug_hud_size, chirp::colors::white()),
-	entity_hud(assets),
+	entity_hud(assets, window()),
 	music(assets.music("level1")),
 	items(assets.tileset("items")),
 	tiles(assets.tileset("grass")),
 	snd_complete(assets.sound("complete")),
-	entity_pause(assets),
-	entity_level_title(assets),
+	entity_pause(assets, window()),
+	entity_level_title(assets, window()),
 	assets(assets)
 {
 	constexpr float half = 2.F;
-	camera.set_offset(ce::window::size().to<float>() / half);
+	camera.set_offset(window().get_size().to<float>() / half);
 
 	constexpr auto volume = 0.75F;
 	music->set_volume(volume);

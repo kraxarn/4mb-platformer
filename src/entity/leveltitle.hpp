@@ -1,15 +1,14 @@
 #pragma once
 
-#include "engine/window.hpp"
-
 #include <chirp/assets.hpp>
+#include <chirp/window.hpp>
 
 namespace entity
 {
 	class level_title
 	{
 	public:
-		explicit level_title(const chirp::assets &assets);
+		explicit level_title(const chirp::assets &assets, const chirp::window &window);
 
 		void update(float delta);
 
@@ -27,6 +26,7 @@ namespace entity
 
 		chirp::asset<chirp::font> font;
 		chirp::text text;
+		const chirp::window &window;
 
 		auto is_visible() const -> bool;
 	};
