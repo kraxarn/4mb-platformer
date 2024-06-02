@@ -1,12 +1,12 @@
 #include "scenemenu.hpp"
 
 #include "colors.hpp"
-#include "state.hpp"
 #include "scene/scenelevel.hpp"
 
 #include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
 #include <chirp/os.hpp>
+#include <chirp/scenemanager.hpp>
 
 #include <iomanip>
 #include <sstream>
@@ -95,9 +95,8 @@ void scene_menu::draw()
 		// Start game :)
 		if (current == 0)
 		{
-			state::set(::scene::level, assets);
-			auto *scene = dynamic_cast<scene_level *>(state::get().get());
-			if (scene != nullptr)
+			scenes().push<scene_level>();
+			if (const auto scene = std::dynamic_pointer_cast<scene_level>(scenes().peek()))
 			{
 				scene->load(0);
 			}

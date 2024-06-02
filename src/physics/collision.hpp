@@ -5,6 +5,7 @@
 #include "enum/tiletype.hpp"
 
 #include <chirp/rectangle.hpp>
+#include <chirp/scenemanager.hpp>
 #include <chirp/vector2.hpp>
 
 namespace phys
@@ -20,7 +21,7 @@ namespace phys
 		 * @note Velocity is modified so player doesn't collide
 		 * */
 		static auto update(const chirp::rectangle<float> &player_rect, ce::level &level,
-			chirp::vector2f &velocity, entity::hud &hud) -> tile_type;
+			const chirp::scene_manager &scenes, chirp::vector2f &velocity, entity::hud &hud) -> tile_type;
 
 	private:
 		collision() = default;
@@ -29,11 +30,11 @@ namespace phys
 		static constexpr int offset = 4;
 
 		/** Check if tile in rect collide in level */
-		static auto will_collide(ce::level &level, entity::hud &hud,
+		static auto will_collide(ce::level &level, const chirp::scene_manager &scenes, entity::hud &hud,
 			const chirp::vector2i &tile, const chirp::rectangle<float> &rect,
 			const chirp::vector2f &velocity) -> bool;
 
-		static auto collect_item(ce::level &level,
+		static auto collect_item(ce::level &level, const chirp::scene_manager &scenes,
 			entity::hud &hud, int x, int y) -> bool;
 	};
 }

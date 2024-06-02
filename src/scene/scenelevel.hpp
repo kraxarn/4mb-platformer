@@ -11,12 +11,15 @@
 #include "entity/player.hpp"
 
 #include <chirp/camera.hpp>
+#include <chirp/entity.hpp>
 #include <chirp/scene.hpp>
 
 class scene_level: public chirp::scene
 {
 public:
 	explicit scene_level(const chirp::assets &assets);
+
+	void load() override;
 
 	void update(float delta) override;
 
@@ -51,7 +54,7 @@ private:
 	chirp::asset<chirp::tileset> items;
 
 	// Entities
-	entity::player entity_player;
+	chirp::entity<entity::player> entity_player;
 	entity::hud entity_hud;
 	entity::pause entity_pause;
 	entity::level_title entity_level_title;

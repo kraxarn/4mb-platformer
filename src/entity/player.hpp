@@ -8,13 +8,15 @@
 #include <chirp/animatedsprite.hpp>
 #include <chirp/assets.hpp>
 #include <chirp/direction.hpp>
+#include <chirp/scenemanager.hpp>
 
 namespace entity
 {
 	class player: public chirp::animated_sprite
 	{
 	public:
-		player(const chirp::assets &assets, entity::hud &hud, float scale);
+		player(const chirp::assets &assets, const chirp::scene_manager &scenes,
+			entity::hud &hud, float scale);
 
 		/**
 		 * Update input, position and collision
@@ -46,6 +48,7 @@ namespace entity
 		tile_type colliding_tile_type;
 
 		entity::hud &hud;
+		const chirp::scene_manager &scenes;
 
 		chirp::vector2f velocity;
 

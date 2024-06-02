@@ -1,7 +1,5 @@
 #include "scenelevel.hpp"
 
-#include "state.hpp"
-#include "enum/scenes.hpp"
 #include "level/levelloader.hpp"
 #include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
@@ -17,7 +15,6 @@ scene_level::scene_level(const chirp::assets &assets)
 	txt_debug("", {debug_hud_offset, debug_hud_offset},
 		debug_hud_size, chirp::colors::white()),
 	entity_hud(assets),
-	entity_player(assets, entity_hud, ce::tile_scale),
 	music(assets.music("level1")),
 	items(assets.tileset("items")),
 	tiles(assets.tileset("grass")),
@@ -33,6 +30,11 @@ scene_level::scene_level(const chirp::assets &assets)
 	music->set_volume(volume);
 }
 
+void scene_level::load()
+{
+	entity_player = std::make_unique<entity::player>(assets, scenes(), entity_hud, ce::tile_scale);
+}
+
 void scene_level::update(const float delta)
 {
 	if (!entity_hud.is_dead())
@@ -40,7 +42,7 @@ void scene_level::update(const float delta)
 		update_camera();
 	}
 
-	entity_player.update(keymap, *level, entity_pause.get_paused(), delta);
+	entity_player->update(keymap, *level, entity_pause.get_paused(), delta);
 
 	if (entity_boss)
 	{
@@ -68,9 +70,9 @@ void scene_level::update(const float delta)
 			"Paused: {}",
 			chirp::clock::fps(),
 			static_cast<int>(delta * 1000.F),
-			entity_player.get_position(),
-			entity_player.get_velocity(),
-			entity_player.is_grounded(),
+			entity_player->get_position(),
+			entity_player->get_velocity(),
+			entity_player->is_grounded(),
 			camera.get_target(),
 			entity_pause.get_paused()));
 	}
@@ -82,7 +84,7 @@ void scene_level::draw()
 
 	camera.begin();
 	{
-		entity_player.draw();
+		entity_player->draw();
 
 		if (entity_boss)
 		{
@@ -133,7 +135,7 @@ void scene_level::load(int index)
 	// Load level spawn
 	auto spawn = level->get_spawn();
 	camera.set_target(spawn.to<float>() * ce::tile_size);
-	entity_player.set_position(level->get_safe_spawn());
+	entity_player->set_position(level->get_safe_spawn());
 
 	// Reset HUD
 	entity_hud.reset();
@@ -163,8 +165,8 @@ void scene_level::load_entities()
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
 			&& tile.value == static_cast<char>(tile::boss))
 		{
-			entity_boss = std::make_unique<entity::boss>(assets, entity_player.get_position(),
-				entity_player.get_scale());
+			entity_boss = std::make_unique<entity::boss>(assets, entity_player->get_position(),
+				entity_player->get_scale());
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level.get()));
 			break;
@@ -181,14 +183,14 @@ void scene_level::update_entities()
 
 	if (entity_boss
 		&& !entity_hud.is_dead()
-		&& chirp::collision::check(entity_player.get_shape(), entity_boss->get_shape()))
+		&& chirp::collision::check(entity_player->get_shape(), entity_boss->get_shape()))
 	{
 		// Normal boss: Player always dies when touching
 		// Final boss: Boss takes damage if hit from above, otherwise, kill player
 		auto is_final = entity::boss::is_final(level.get());
 
 		if (!is_final
-			|| entity_player.get_velocity().y() <= 0)
+			|| entity_player->get_velocity().y() <= 0)
 		{
 			entity_hud.kill();
 			// Easiest way to reset boss
@@ -199,9 +201,8 @@ void scene_level::update_entities()
 		{
 			if (entity_boss->hurt())
 			{
-				state::set(::scene::credits, assets);
-				auto *credits = dynamic_cast<scene_credits *>(state::get().get());
-				if (credits != nullptr)
+				scenes().push<scene_credits>();
+				if (const auto credits = std::dynamic_pointer_cast<scene_credits>(scenes().peek()))
 				{
 					credits->set_collected_coins(entity_hud.get_coin_count());
 				}
@@ -213,7 +214,7 @@ void scene_level::update_entities()
 
 void scene_level::update_camera()
 {
-	camera.set_target(entity_player.get_position());
+	camera.set_target(entity_player->get_position());
 
 	const auto &offset = camera.get_offset();
 

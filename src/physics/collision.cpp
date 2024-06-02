@@ -1,6 +1,5 @@
 #include "physics/collision.hpp"
 
-#include "state.hpp"
 #include "physics/tiles.hpp"
 #include "scene/scenelevel.hpp"
 
@@ -33,8 +32,8 @@ auto phys::collision::get_tile_type(char value) -> tile_type
 	return tile_type::invalid;
 }
 
-auto phys::collision::update(const chirp::rectangle<float> &player_rect,
-	ce::level &level, chirp::vector2f &velocity, entity::hud &hud) -> tile_type
+auto phys::collision::update(const chirp::rectangle<float> &player_rect, ce::level &level,
+	const chirp::scene_manager &scenes, chirp::vector2f &velocity, entity::hud &hud) -> tile_type
 {
 	auto collides = tile_type::empty;
 	const auto &map = level.map();
@@ -52,7 +51,7 @@ auto phys::collision::update(const chirp::rectangle<float> &player_rect,
 		rect.height(),
 	};
 
-	if (will_collide(level, hud, player_tile, rect_x, velocity))
+	if (will_collide(level, scenes, hud, player_tile, rect_x, velocity))
 	{
 		velocity = {0, velocity.y()};
 		collides = tile_type::tile;
@@ -65,7 +64,7 @@ auto phys::collision::update(const chirp::rectangle<float> &player_rect,
 		rect.height(),
 	};
 
-	if (will_collide(level, hud, player_tile, rect_y, velocity))
+	if (will_collide(level, scenes, hud, player_tile, rect_y, velocity))
 	{
 		velocity = {velocity.x(), 0};
 		collides = tile_type::tile;
@@ -74,7 +73,7 @@ auto phys::collision::update(const chirp::rectangle<float> &player_rect,
 	return collides;
 }
 
-auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
+auto phys::collision::will_collide(ce::level &level, const chirp::scene_manager &scenes, entity::hud &hud,
 	const chirp::vector2i &tile, const chirp::rectangle<float> &rect,
 	const chirp::vector2f &velocity) -> bool
 {
@@ -141,7 +140,7 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 
 			if (tile_type == tile_type::item)
 			{
-				collect_item(level, hud, x, y);
+				collect_item(level, scenes, hud, x, y);
 			}
 		}
 	}
@@ -149,7 +148,7 @@ auto phys::collision::will_collide(ce::level &level, entity::hud &hud,
 	return false;
 }
 
-auto phys::collision::collect_item(ce::level &level,
+auto phys::collision::collect_item(ce::level &level, const chirp::scene_manager &scenes,
 	entity::hud &hud, int x, int y) -> bool
 {
 	const auto &map = level.map();
@@ -161,8 +160,8 @@ auto phys::collision::collect_item(ce::level &level,
 		if (chirp::os::is_debug()
 			|| hud.get_gem_count() == level.get_total_gem_count())
 		{
-			auto *scene = dynamic_cast<scene_level *>(state::get().get());
-			if (scene == nullptr)
+			auto scene = std::dynamic_pointer_cast<scene_level>(scenes.peek());
+			if (!scene)
 			{
 				throw std::runtime_error("Reached exit without being in a level");
 			}

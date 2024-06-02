@@ -3,11 +3,13 @@
 #include <chirp/colors.hpp>
 #include <chirp/os.hpp>
 
-entity::player::player(const chirp::assets &assets, entity::hud &hud, float scale)
+entity::player::player(const chirp::assets &assets, const chirp::scene_manager &scenes,
+	entity::hud &hud, float scale)
 	: animated_sprite(assets.tileset("player")),
 	snd_jump(assets.sound("jump")),
 	snd_fall(assets.sound("fall")),
-	hud(hud)
+	hud(hud),
+	scenes(scenes)
 {
 	// Sprite
 	set_scale(scale);
@@ -126,7 +128,7 @@ void entity::player::draw()
 
 void entity::player::update_collision(ce::level &level)
 {
-	colliding_tile_type = phys::collision::update(get_shape(), level, velocity, hud);
+	colliding_tile_type = phys::collision::update(get_shape(), level, scenes, velocity, hud);
 }
 
 auto entity::player::get_velocity() const -> const chirp::vector2f &

@@ -1,12 +1,12 @@
 #include "scenecredits.hpp"
 
 #include "colors.hpp"
-#include "state.hpp"
 #include "engine/window.hpp"
 #include "level/levelloader.hpp"
 #include "physics/tiles.hpp"
 
 #include <chirp/format.hpp>
+#include <chirp/scenemanager.hpp>
 
 scene_credits::scene_credits(const chirp::assets &assets)
 	: scene(assets),
@@ -47,7 +47,7 @@ void scene_credits::draw()
 	// Go back to menu on enter
 	if (keymap.is_pressed("enter"))
 	{
-		state::set(::scene::menu, assets);
+		scenes().pop();
 	}
 }
 
