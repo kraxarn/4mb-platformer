@@ -15,7 +15,7 @@ entity::player::player(const chirp::assets &assets, const chirp::scene_manager &
 	set_scale(scale);
 }
 
-void entity::player::update(const keymap &keymap,
+void entity::player::update(const chirp::keymap &keymap,
 	ce::level &level, bool const is_paused, const float delta)
 {
 	animated_sprite::update(delta);

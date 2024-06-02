@@ -21,7 +21,7 @@ namespace entity
 		/**
 		 * Update input, position and collision
 		 */
-		void update(const keymap &keymap, ce::level &level, bool is_paused, float delta);
+		void update(const chirp::keymap &keymap, ce::level &level, bool is_paused, float delta);
 
 		/**
 		 * Draw the player sprite
