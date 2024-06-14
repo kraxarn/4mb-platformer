@@ -6,6 +6,7 @@
 #include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
 #include <chirp/os.hpp>
+#include <chirp/random.hpp>
 #include <chirp/scenemanager.hpp>
 
 #include <iomanip>
@@ -198,6 +199,6 @@ void scene_menu::reset_demo_position()
 
 	spr_demo.set_position(chirp::vector2f{
 		screen_width + sprite_width,
-		static_cast<float>(GetRandomValue(min, max)),
+		static_cast<float>(chirp::random::get(min, max)),
 	});
 }
