@@ -188,10 +188,11 @@ void scene_menu::set_current(int value)
 
 void scene_menu::reset_demo_position()
 {
-	auto screen_width = static_cast<float>(GetScreenWidth());
+	const auto window_size = window().get_size();
+	const auto screen_width = static_cast<float>(window_size.x());
 	auto sprite_width = spr_demo.get_shape().width() * spr_demo.get_scale();
 
-	auto height = static_cast<float>(GetScreenHeight());
+	const auto height = static_cast<float>(window_size.y());
 	auto min = static_cast<int>(height * 0.05F);
 	auto max = static_cast<int>(height * 0.95F);
 
