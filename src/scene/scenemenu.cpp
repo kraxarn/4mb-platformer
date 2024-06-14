@@ -11,8 +11,6 @@
 #include <iomanip>
 #include <sstream>
 
-#include "raylib.h"
-
 scene_menu::scene_menu(const chirp::assets &assets)
 	: scene(assets),
 	txt_debug("-", {16, 16}, 20, chirp::colors::white()),
@@ -36,7 +34,8 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	}
 
 	// Place texts at center
-	auto center = (GetScreenHeight() / 2) - (texts_height() / 2);
+	const auto window_size = window().get_size();
+	const auto center = (window_size.y() / 2) - (texts_height() / 2);
 	for (auto i = 0; i < texts.size(); i++)
 	{
 		texts.at(i).set_position({
