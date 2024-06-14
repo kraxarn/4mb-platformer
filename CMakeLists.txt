@@ -18,8 +18,3 @@ else ()
 endif ()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE chirp)
-
-# Raylib
-# (built together with chirp, but we still need the headers for now)
-target_include_directories(${PROJECT_NAME} PRIVATE
-	"${raylib_SOURCE_DIR}")
