@@ -9,8 +9,7 @@
 #include <chirp/colors.hpp>
 #include <chirp/format.hpp>
 #include <chirp/os.hpp>
-
-#include "raylib.h"
+#include <chirp/rectangle.hpp>
 
 scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
@@ -282,11 +281,14 @@ void scene_level::draw_map()
 
 		if (chirp::os::is_debug())
 		{
-			DrawRectangleLines(tile.x * ce::tile_size,
+			const chirp::rectangle<float> outline{
+				tile.x * ce::tile_size,
 				tile.y * ce::tile_size,
 				ce::tile_size,
 				ce::tile_size,
-				GREEN);
+			};
+
+			chirp::draw_outline(outline.to<int>(), chirp::colors::green());
 		}
 	}
 }

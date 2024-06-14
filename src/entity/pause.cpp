@@ -1,9 +1,8 @@
 #include "pause.hpp"
 #include "colors.hpp"
 
+#include <chirp/rectangle.hpp>
 #include <chirp/window.hpp>
-
-#include "raylib.h"
 
 entity::pause::pause(const chirp::assets &assets, const chirp::window &window)
 	: fnt_title(assets.font("menu", title_size)),
@@ -46,9 +45,12 @@ void entity::pause::draw() const
 	}
 
 	const auto window_size = window.get_size();
-	DrawRectangle(0, 0, window_size.x(), window_size.y(), {
-		0x0, 0x0, 0x0, 0x7f,
-	});
+	const chirp::rectangle<int> background{
+		0, 0,
+		window_size.x(), window_size.y(),
+	};
+
+	chirp::draw_filled(background, {0x0, 0x0, 0x0, 0x7f});
 
 	fnt_title->draw_text(txt_title);
 }
