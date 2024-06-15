@@ -28,7 +28,7 @@ entity::hud::hud(const chirp::assets &assets, const chirp::window &window)
 
 	const auto hud_height = static_cast<float>(ts_hud->get_size());
 	const auto font_offset = (ts_hud->get_size()
-		- fnt_hud->text_size(txt_gems).to<int>().y()) / 4;
+		- txt_gems.measure().to<int>().y()) / 4;
 
 	pos_gems = {
 		top_right.x() - offset - hud_height * scale,
@@ -58,12 +58,12 @@ void entity::hud::draw(ce::level &level)
 
 	// Text positions
 	txt_gems.set_position({
-		pos_gems.to<int>().x() - fnt_hud->text_size(txt_gems).to<int>().x(),
+		pos_gems.to<int>().x() - txt_gems.measure().to<int>().x(),
 		txt_gems.get_position().y(),
 	});
 
 	txt_coins.set_position({
-		pos_coins.to<int>().x() - fnt_hud->text_size(txt_coins).to<int>().x(),
+		pos_coins.to<int>().x() - txt_coins.measure().to<int>().x(),
 		txt_coins.get_position().y(),
 	});
 

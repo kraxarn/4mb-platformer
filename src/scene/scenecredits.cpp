@@ -28,7 +28,7 @@ void scene_credits::draw()
 	music->update(*this, 0.F);
 
 	// Title text
-	const auto title_size = fnt_title->text_size(txt_title).to<int>();
+	const auto title_size = txt_title.measure().to<int>();
 	txt_title.set_position({
 		window().get_size().x() / 2 - title_size.x() / 2,
 		window().get_size().y() / 2 - title_size.y(),
@@ -37,7 +37,7 @@ void scene_credits::draw()
 	txt_title.draw();
 
 	// Subtitle text
-	const auto subtitle_size = fnt_subtitle->text_size(txt_subtitle).to<int>();
+	const auto subtitle_size = txt_subtitle.measure().to<int>();
 	txt_subtitle.set_position({
 		window().get_size().x() / 2 - subtitle_size.x() / 2,
 		window().get_size().y() / 2 + subtitle_size.y(),

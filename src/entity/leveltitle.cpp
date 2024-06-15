@@ -48,7 +48,7 @@ void entity::level_title::set_level(const chirp::level &level)
 {
 	text.set_text(level.name());
 
-	text_size = font->text_size(text).to<int>();
+	text_size = text.measure().to<int>();
 
 	text.set_position({
 		window.get_size().x() / 2 - text_size.x() / 2,

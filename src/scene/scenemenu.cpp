@@ -172,7 +172,7 @@ auto scene_menu::texts_height() -> int
 	const auto &back = texts.back();
 
 	const auto start = front.get_position().y();
-	const auto end = texts.back().get_position().y() + static_cast<int>(fnt_menu->text_size(back).y());
+	const auto end = texts.back().get_position().y() + static_cast<int>(back.measure().y());
 	return end - start;
 }
 
@@ -193,7 +193,7 @@ void scene_menu::set_current(int value)
 	spr_arrow.set_position({
 		spr_arrow.get_position().x(),
 		static_cast<float>(text.get_position().y())
-		+ fnt_menu->text_size(text).y() / 2.F
+		+ text.measure().y() / 2.F
 		- static_cast<float>(spr_arrow.get_size().y()) / 2.F
 	});
 }

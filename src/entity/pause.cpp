@@ -30,7 +30,7 @@ void entity::pause::update()
 
 	const auto window_size = window.get_size();
 
-	const auto text_size = fnt_title->text_size(txt_title).to<int>();
+	const auto text_size = txt_title.measure().to<int>();
 	txt_title.set_position({
 		window_size.x() / 2 - text_size.x() / 2,
 		window_size.y() / 2 - text_size.y() / 2,
