@@ -37,7 +37,7 @@ private:
 
 	// General engine stuff
 	chirp::asset<chirp::music> music;
-	chirp::keymap keymap;
+	::keymap keymap;
 	const chirp::assets &assets;
 
 	// Camera

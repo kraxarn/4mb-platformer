@@ -34,7 +34,7 @@ private:
 	chirp::asset<chirp::font> fnt_menu;
 	std::vector<chirp::text> texts;
 
-	chirp::keymap keymap;
+	::keymap keymap;
 	const chirp::assets &assets;
 
 	auto texts_height() -> int;
