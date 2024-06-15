@@ -57,29 +57,17 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	music->play();
 }
 
-void scene_menu::update(float delta)
-{
-}
-
-void scene_menu::draw()
+void scene_menu::update(const float delta)
 {
 	music->update();
 
-	// Sprite demo
 	spr_demo.set_position(spr_demo.get_position() + chirp::vector2f(-1.75F, 0.F));
 	if (spr_demo.get_position().x() < -spr_demo.get_shape().width() * spr_demo.get_scale())
 	{
 		reset_demo_position();
 	}
 
-	spr_demo.update(chirp::clock::delta());
-	spr_demo.draw();
-
-	// Draw menu alternatives
-	for (const auto &text : texts)
-	{
-		fnt_menu->draw_text(text);
-	}
+	spr_demo.update(delta);
 
 	// Check input
 	if (keymap.is_pressed("up"))
@@ -136,9 +124,6 @@ void scene_menu::draw()
 		arrow_dir = chirp::direction::left;
 	}
 
-	// Draw arrow
-	spr_arrow.draw();
-
 	// Debug stuff
 	if (chirp::os::is_debug())
 	{
@@ -147,10 +132,28 @@ void scene_menu::draw()
 		stream << "Debug Mode" << '\n'
 			<< "Current: " << current << '\n'
 			<< "FPS: " << chirp::clock::fps() << '\n'
-			<< "Delta: " << std::fixed << std::setprecision(2)
-			<< (chirp::clock::delta() * 1000.F);
+			<< "Delta: " << std::fixed << std::setprecision(2) << delta * 1000.F;
 
 		txt_debug.set_text(stream.str());
+	}
+}
+
+void scene_menu::draw()
+{
+	spr_demo.draw();
+
+	// Draw menu alternatives
+	for (const auto &text : texts)
+	{
+		fnt_menu->draw_text(text);
+	}
+
+	// Draw arrow
+	spr_arrow.draw();
+
+	// Debug stuff
+	if (chirp::os::is_debug())
+	{
 		txt_debug.draw();
 	}
 }
