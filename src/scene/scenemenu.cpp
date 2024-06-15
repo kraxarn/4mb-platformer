@@ -16,7 +16,6 @@
 
 scene_menu::scene_menu(const chirp::assets &assets)
 	: scene(assets),
-	fnt_menu(assets.font("menu", 52)),
 	spr_arrow(assets.image("arrow")),
 	spr_demo(assets.tileset("player")),
 	assets(assets)
@@ -40,14 +39,16 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		entitites().insert("txt_debug", txt_debug);
 	}
 
+	const auto font = assets.font("menu", 52);
+
 	// Temporary text placement to measure size
 	texts.reserve(text_count);
 	for (auto i = 0; i < text_count; i++)
 	{
 		const auto name = chirp::format("txt_menu_{}", i);
 
-		const chirp::text text(fnt_menu, labels.at(i), {128, i * text_spacing},
-			fnt_menu->font_size(), color::text);
+		const chirp::text text(font, labels.at(i), {128, i * text_spacing},
+			font->font_size(), color::text);
 
 		entitites().insert(name, text);
 		texts.push_back(entitites().at<chirp::text>(name));

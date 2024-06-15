@@ -28,7 +28,6 @@ private:
 
 	chirp::animated_sprite spr_demo;
 
-	chirp::asset<chirp::font> fnt_menu;
 	std::vector<chirp::asset<chirp::text>> texts;
 
 	::keymap keymap;
