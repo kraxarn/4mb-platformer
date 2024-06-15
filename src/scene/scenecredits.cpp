@@ -25,7 +25,7 @@ void scene_credits::update(float delta)
 
 void scene_credits::draw()
 {
-	music->update();
+	music->update(*this, 0.F);
 
 	// Title text
 	const auto title_size = fnt_title->text_size(txt_title).to<int>();

@@ -81,7 +81,7 @@ void scene_level::update(const float delta)
 
 void scene_level::draw()
 {
-	music->update();
+	music->update(*this, 0);
 
 	camera.begin();
 	{
