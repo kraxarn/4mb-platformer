@@ -27,7 +27,11 @@ scene_menu::scene_menu(const chirp::assets &assets)
 
 	const auto music = assets.music("menu");
 	entitites().insert("mus_main", music);
-	music->play();
+
+	if (!chirp::os::is_debug())
+	{
+		music->play();
+	}
 
 	if (chirp::os::is_debug())
 	{
