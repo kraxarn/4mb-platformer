@@ -59,6 +59,8 @@ scene_menu::scene_menu(const chirp::assets &assets)
 
 void scene_menu::update(const float delta)
 {
+	scene::update(delta);
+
 	music->update();
 
 	spr_demo.set_position(spr_demo.get_position() + chirp::vector2f(-1.75F, 0.F));
@@ -140,6 +142,8 @@ void scene_menu::update(const float delta)
 
 void scene_menu::draw()
 {
+	scene::draw();
+
 	spr_demo.draw();
 
 	// Draw menu alternatives
