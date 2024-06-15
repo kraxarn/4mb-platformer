@@ -5,6 +5,7 @@
 
 #include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
+#include <chirp/entitycontainer.hpp>
 #include <chirp/os.hpp>
 #include <chirp/random.hpp>
 #include <chirp/scenemanager.hpp>
@@ -14,7 +15,6 @@
 
 scene_menu::scene_menu(const chirp::assets &assets)
 	: scene(assets),
-	txt_debug("-", {16, 16}, 20, chirp::colors::white()),
 	music(assets.music("menu")),
 	fnt_menu(assets.font("menu", 52)),
 	spr_arrow(assets.image("arrow")),
@@ -25,6 +25,12 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		"Start game",
 		"Exit game",
 	};
+
+	if (chirp::os::is_debug())
+	{
+		const chirp::text txt_debug("...", {16, 16}, 20, chirp::colors::white());
+		entitites().insert("txt_debug", txt_debug);
+	}
 
 	// Temporary text placement to measure size
 	texts.reserve(text_count);
@@ -136,7 +142,8 @@ void scene_menu::update(const float delta)
 			<< "FPS: " << chirp::clock::fps() << '\n'
 			<< "Delta: " << std::fixed << std::setprecision(2) << delta * 1000.F;
 
-		txt_debug.set_text(stream.str());
+		const auto &txt_debug = entitites().at<chirp::text>("txt_debug");
+		txt_debug->set_text(stream.str());
 	}
 }
 
@@ -154,12 +161,6 @@ void scene_menu::draw()
 
 	// Draw arrow
 	spr_arrow.draw();
-
-	// Debug stuff
-	if (chirp::os::is_debug())
-	{
-		txt_debug.draw();
-	}
 }
 
 auto scene_menu::texts_height() -> int

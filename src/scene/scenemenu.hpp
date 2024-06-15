@@ -24,7 +24,6 @@ private:
 
 	chirp::asset<chirp::music> music;
 
-	chirp::text txt_debug;
 	chirp::sprite spr_arrow;
 	chirp::direction arrow_dir;
 	int current = 0;
