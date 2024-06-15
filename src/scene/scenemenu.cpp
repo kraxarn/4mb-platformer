@@ -6,6 +6,7 @@
 #include <chirp/clock.hpp>
 #include <chirp/colors.hpp>
 #include <chirp/entitycontainer.hpp>
+#include <chirp/format.hpp>
 #include <chirp/os.hpp>
 #include <chirp/random.hpp>
 #include <chirp/scenemanager.hpp>
@@ -43,8 +44,13 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	texts.reserve(text_count);
 	for (auto i = 0; i < text_count; i++)
 	{
-		texts.emplace_back(fnt_menu, labels.at(i), chirp::vector2i(128, i * text_spacing),
+		const auto name = chirp::format("txt_menu_{}", i);
+
+		const chirp::text text(fnt_menu, labels.at(i), {128, i * text_spacing},
 			fnt_menu->font_size(), color::text);
+
+		entitites().insert(name, text);
+		texts.push_back(entitites().at<chirp::text>(name));
 	}
 
 	// Place texts at center
@@ -52,8 +58,8 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	const auto center = (window_size.y() / 2) - (texts_height() / 2);
 	for (auto i = 0; i < texts.size(); i++)
 	{
-		texts.at(i).set_position({
-			texts.at(i).get_position().x(),
+		texts.at(i)->set_position({
+			texts.at(i)->get_position().x(),
 			center + i * text_spacing,
 		});
 	}
@@ -155,13 +161,6 @@ void scene_menu::draw()
 	scene::draw();
 
 	spr_demo.draw();
-
-	// Draw menu alternatives
-	for (const auto &text: texts)
-	{
-		text.draw();
-	}
-
 	// Draw arrow
 	spr_arrow.draw();
 }
@@ -171,8 +170,8 @@ auto scene_menu::texts_height() -> int
 	const auto &front = texts.front();
 	const auto &back = texts.back();
 
-	const auto start = front.get_position().y();
-	const auto end = texts.back().get_position().y() + static_cast<int>(back.measure().y());
+	const auto start = front->get_position().y();
+	const auto end = back->get_position().y() + static_cast<int>(back->measure().y());
 	return end - start;
 }
 
@@ -192,8 +191,8 @@ void scene_menu::set_current(int value)
 
 	spr_arrow.set_position({
 		spr_arrow.get_position().x(),
-		static_cast<float>(text.get_position().y())
-		+ text.measure().y() / 2.F
+		static_cast<float>(text->get_position().y())
+		+ text->measure().y() / 2.F
 		- static_cast<float>(spr_arrow.get_size().y()) / 2.F
 	});
 }
