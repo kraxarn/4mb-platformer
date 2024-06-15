@@ -15,7 +15,6 @@
 
 scene_menu::scene_menu(const chirp::assets &assets)
 	: scene(assets),
-	music(assets.music("menu")),
 	fnt_menu(assets.font("menu", 52)),
 	spr_arrow(assets.image("arrow")),
 	spr_demo(assets.tileset("player")),
@@ -25,6 +24,10 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		"Start game",
 		"Exit game",
 	};
+
+	const auto music = assets.music("menu");
+	entitites().insert("mus_main", music);
+	music->play();
 
 	if (chirp::os::is_debug())
 	{
@@ -59,15 +62,11 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	// Menu sprite
 	reset_demo_position();
 	spr_demo.set_scale(3.F);
-
-	music->play();
 }
 
 void scene_menu::update(const float delta)
 {
 	scene::update(delta);
-
-	music->update();
 
 	spr_demo.set_position(spr_demo.get_position() + chirp::vector2f(-1.75F, 0.F));
 	if (spr_demo.get_position().x() < -spr_demo.get_shape().width() * spr_demo.get_scale())
