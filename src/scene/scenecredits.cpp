@@ -11,8 +11,8 @@ scene_credits::scene_credits(const chirp::assets &assets)
 	: scene(assets),
 	fnt_title(assets.font("menu", size_title)),
 	fnt_subtitle(assets.font("submenu", size_title / 2)),
-	txt_title("Thanks for playing!", {0, 0}, size_title, color::text),
-	txt_subtitle("", {0, 0}, size_title / 2, color::text),
+	txt_title(fnt_title, "Thanks for playing!", {0, 0}, size_title, color::text),
+	txt_subtitle(fnt_subtitle, "", {0, 0}, size_title / 2, color::text),
 	music(assets.music("credits")),
 	assets(assets)
 {
@@ -33,7 +33,8 @@ void scene_credits::draw()
 		window().get_size().x() / 2 - title_size.x() / 2,
 		window().get_size().y() / 2 - title_size.y(),
 	});
-	fnt_title->draw_text(txt_title);
+
+	txt_title.draw();
 
 	// Subtitle text
 	const auto subtitle_size = fnt_subtitle->text_size(txt_subtitle).to<int>();
@@ -41,7 +42,8 @@ void scene_credits::draw()
 		window().get_size().x() / 2 - subtitle_size.x() / 2,
 		window().get_size().y() / 2 + subtitle_size.y(),
 	});
-	fnt_subtitle->draw_text(txt_subtitle);
+
+	txt_subtitle.draw();
 
 	// Go back to menu on enter
 	if (keymap.is_pressed("enter"))

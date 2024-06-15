@@ -6,7 +6,7 @@
 
 entity::pause::pause(const chirp::assets &assets, const chirp::window &window)
 	: fnt_title(assets.font("menu", title_size)),
-	txt_title("Paused", {0, 0}, title_size, color::text),
+	txt_title(fnt_title, "Paused", {0, 0}, title_size, color::text),
 	window(window)
 {
 }
@@ -52,5 +52,5 @@ void entity::pause::draw() const
 
 	chirp::draw_filled(background, {0x0, 0x0, 0x0, 0x7f});
 
-	fnt_title->draw_text(txt_title);
+	txt_title.draw();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chirp/assets.hpp>
+#include <chirp/text.hpp>
 #include <chirp/window.hpp>
 
 namespace entity

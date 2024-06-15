@@ -7,8 +7,8 @@
 
 entity::hud::hud(const chirp::assets &assets, const chirp::window &window)
 	: fnt_hud(assets.font("submenu", font_size)),
-	txt_gems("0/0", {0, 0}, font_size, color::text),
-	txt_coins("0", {0, 0}, font_size, color::text),
+	txt_gems(fnt_hud, "0/0", {0, 0}, font_size, color::text),
+	txt_coins(fnt_hud, "0", {0, 0}, font_size, color::text),
 	ts_hud(assets.tileset("items")),
 	snd_coin(assets.sound("coin")),
 	snd_gem(assets.sound("gem")),
@@ -70,9 +70,10 @@ void entity::hud::draw(ce::level &level)
 	// Text
 	if (level.get_total_gem_count() > 0)
 	{
-		fnt_hud->draw_text(txt_gems);
+		txt_gems.draw();
 	}
-	fnt_hud->draw_text(txt_coins);
+
+	txt_coins.draw();
 
 	// Coin
 	ts_hud->draw(pos_coins,

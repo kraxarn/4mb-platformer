@@ -4,6 +4,7 @@
 
 #include <chirp/assets.hpp>
 #include <chirp/scene.hpp>
+#include <chirp/text.hpp>
 
 class scene_credits: public chirp::scene
 {

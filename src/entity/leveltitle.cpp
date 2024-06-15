@@ -3,7 +3,7 @@
 
 entity::level_title::level_title(const chirp::assets &assets, const chirp::window &window)
 	: font(assets.font("menu", font_size)),
-	text("Level 1", {0, 0}, font_size, color::text),
+	text(font, "Level 1", {0, 0}, font_size, color::text),
 	window(window)
 {
 }
@@ -36,7 +36,7 @@ void entity::level_title::draw() const
 		return;
 	}
 
-	font->draw_text(text);
+	text.draw();
 }
 
 auto entity::level_title::is_visible() const -> bool
