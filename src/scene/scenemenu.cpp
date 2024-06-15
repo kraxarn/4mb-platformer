@@ -157,7 +157,7 @@ void scene_menu::draw()
 	spr_demo.draw();
 
 	// Draw menu alternatives
-	for (const auto &text : texts)
+	for (const auto &text: texts)
 	{
 		fnt_menu->draw_text(text);
 	}
