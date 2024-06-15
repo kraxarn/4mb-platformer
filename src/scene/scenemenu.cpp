@@ -16,7 +16,6 @@
 
 scene_menu::scene_menu(const chirp::assets &assets)
 	: scene(assets),
-	spr_arrow(assets.image("arrow")),
 	spr_demo(assets.tileset("player")),
 	assets(assets)
 {
@@ -65,8 +64,11 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		});
 	}
 
+	entitites().insert("spr_arrow", chirp::sprite(assets.image("arrow")));
+	const auto spr_arrow = entitites().at<chirp::sprite>("spr_arrow");
+
 	// Arrow position
-	spr_arrow.set_position({76, spr_arrow.get_position().y()});
+	spr_arrow->set_position({76, spr_arrow->get_position().y()});
 	set_current(0);
 	arrow_dir = chirp::direction::right;
 
@@ -116,28 +118,29 @@ void scene_menu::update(const float delta)
 	}
 
 	// Update arrow position
-	const auto arrow_offset = std::abs(spr_arrow.get_position().x() - 82.F);
+	const auto spr_arrow = entitites().at<chirp::sprite>("spr_arrow");
+	const auto arrow_offset = std::abs(spr_arrow->get_position().x() - 82.F);
 
 	if (arrow_dir == chirp::direction::left)
 	{
-		spr_arrow.set_position({
-			spr_arrow.get_position().x() - 0.5F - arrow_offset / 10.F,
-			spr_arrow.get_position().y(),
+		spr_arrow->set_position({
+			spr_arrow->get_position().x() - 0.5F - arrow_offset / 10.F,
+			spr_arrow->get_position().y(),
 		});
 	}
 	else
 	{
-		spr_arrow.set_position({
-			spr_arrow.get_position().x() + 0.5F + arrow_offset / 10.F,
-			spr_arrow.get_position().y(),
+		spr_arrow->set_position({
+			spr_arrow->get_position().x() + 0.5F + arrow_offset / 10.F,
+			spr_arrow->get_position().y(),
 		});
 	}
 
-	if (spr_arrow.get_position().x() <= 64)
+	if (spr_arrow->get_position().x() <= 64)
 	{
 		arrow_dir = chirp::direction::right;
 	}
-	else if (spr_arrow.get_position().x() >= 82)
+	else if (spr_arrow->get_position().x() >= 82)
 	{
 		arrow_dir = chirp::direction::left;
 	}
@@ -160,10 +163,7 @@ void scene_menu::update(const float delta)
 void scene_menu::draw()
 {
 	scene::draw();
-
 	spr_demo.draw();
-	// Draw arrow
-	spr_arrow.draw();
 }
 
 auto scene_menu::texts_height() -> int
@@ -189,12 +189,13 @@ void scene_menu::set_current(int value)
 	}
 
 	const auto &text = texts.at(current);
+	const auto spr_arrow = entitites().at<chirp::sprite>("spr_arrow");
 
-	spr_arrow.set_position({
-		spr_arrow.get_position().x(),
+	spr_arrow->set_position({
+		spr_arrow->get_position().x(),
 		static_cast<float>(text->get_position().y())
 		+ text->measure().y() / 2.F
-		- static_cast<float>(spr_arrow.get_size().y()) / 2.F
+		- static_cast<float>(spr_arrow->get_size().y()) / 2.F
 	});
 }
 

@@ -22,7 +22,6 @@ private:
 	static constexpr short text_count = 2;
 	static constexpr short text_spacing = 48;
 
-	chirp::sprite spr_arrow;
 	chirp::direction arrow_dir;
 	int current = 0;
 
