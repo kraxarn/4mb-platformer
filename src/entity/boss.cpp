@@ -1,8 +1,10 @@
 #include "boss.hpp"
 
 #include "engine/map.hpp"
+#include "scene/scenelevel.hpp"
 
 #include <chirp/colors.hpp>
+#include <chirp/log.hpp>
 #include <chirp/os.hpp>
 #include <chirp/random.hpp>
 
@@ -14,16 +16,23 @@ entity::boss::boss(const chirp::assets &assets, const chirp::vector2f &player_po
 	set_scale(scale);
 }
 
-void entity::boss::update(const bool is_paused, const float delta)
+void entity::boss::update(const chirp::scene &scene, const float delta)
 {
 	if (health <= 0)
 	{
 		return;
 	}
 
-	if (!is_paused)
+	const auto *level = dynamic_cast<const scene_level *>(&scene);
+	if (level == nullptr)
 	{
-		animated_sprite::update(delta);
+		chirp::log::fatal("Boss can only exist within a level");
+		return;
+	}
+
+	if (!level->is_paused())
+	{
+		animated_sprite::update(scene, delta);
 
 		// Movement
 		auto dir = get_player_dirs();
