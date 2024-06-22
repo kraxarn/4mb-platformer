@@ -2,7 +2,6 @@
 
 #include "keymap.hpp"
 
-#include <chirp/animatedsprite.hpp>
 #include <chirp/direction.hpp>
 #include <chirp/font.hpp>
 #include <chirp/scene.hpp>
@@ -16,16 +15,12 @@ public:
 
 	void update(float delta) override;
 
-	void draw() override;
-
 private:
 	static constexpr short text_count = 2;
 	static constexpr short text_spacing = 48;
 
 	chirp::direction arrow_dir;
 	int current = 0;
-
-	chirp::animated_sprite spr_demo;
 
 	std::vector<chirp::asset<chirp::text>> texts;
 
