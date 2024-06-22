@@ -1,20 +1,21 @@
 #pragma once
 
-#include "engine/level.hpp"
 #include "entity/state.hpp"
 
 #include <chirp/assets.hpp>
+#include <chirp/entity.hpp>
 #include <chirp/text.hpp>
 #include <chirp/window.hpp>
 
 namespace entity
 {
-	class hud
+	class hud: public chirp::entity
 	{
 	public:
 		explicit hud(const chirp::assets &assets, const chirp::window &window);
 
-		void draw(ce::level &level);
+		void update(const chirp::scene &scene, float delta) override;
+		void draw() const override;
 
 		auto get_gem_count() const -> int;
 		auto get_coin_count() const -> int;
@@ -49,7 +50,7 @@ namespace entity
 		/** Scale of all images in HUD */
 		static constexpr float scale = 2.F;
 
-		entity::state state;
+		::entity::state state;
 
 		chirp::asset<chirp::font> fnt_hud;
 		chirp::text txt_gems;
@@ -64,7 +65,6 @@ namespace entity
 		chirp::asset<chirp::sound> snd_fall;
 
 		float player_speed_modifier = 1.F;
-
-		void update(ce::level &level);
+		int total_gem_count = 0;
 	};
 }

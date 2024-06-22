@@ -1,4 +1,5 @@
 #include "entity/hud.hpp"
+#include "scene/scenelevel.hpp"
 
 #include <chirp/format.hpp>
 
@@ -52,9 +53,41 @@ entity::hud::hud(const chirp::assets &assets, const chirp::window &window)
 	});
 }
 
-void entity::hud::draw(ce::level &level)
+void entity::hud::draw() const
 {
-	update(level);
+	// Text
+	if (total_gem_count > 0)
+	{
+		txt_gems.draw();
+	}
+
+	txt_coins.draw();
+
+	// Coin
+	ts_hud->draw(pos_coins,
+		static_cast<int>(tile::coin) % static_cast<int>(tile::spawn),
+		0.F, scale);
+
+	// Gem
+	if (total_gem_count > 0)
+	{
+		ts_hud->draw(pos_gems,
+			static_cast<int>(tile::gem) % static_cast<int>(tile::spawn),
+			0.F, scale);
+	}
+}
+
+void entity::hud::update(const chirp::scene &scene, const float /*delta*/)
+{
+	auto *scene_level = dynamic_cast<::scene_level *>(&const_cast<chirp::scene &>(scene));
+	if (scene_level == nullptr)
+	{
+		chirp::log::fatal("HUD can only exist within a level");
+		return;
+	}
+
+	auto *level = scene_level->get_level();
+	total_gem_count = level->get_total_gem_count();
 
 	// Text positions
 	txt_gems.set_position({
@@ -67,31 +100,9 @@ void entity::hud::draw(ce::level &level)
 		txt_coins.get_position().y(),
 	});
 
-	// Text
-	if (level.get_total_gem_count() > 0)
-	{
-		txt_gems.draw();
-	}
-
-	txt_coins.draw();
-
-	// Coin
-	ts_hud->draw(pos_coins,
-		static_cast<int>(tile::coin) % static_cast<int>(tile::spawn),
-		0.F, scale);
-	// Gem
-	if (level.get_total_gem_count() > 0)
-	{
-		ts_hud->draw(pos_gems,
-			static_cast<int>(tile::gem) % static_cast<int>(tile::spawn),
-			0.F, scale);
-	}
-}
-
-void entity::hud::update(ce::level &level)
-{
 	txt_gems.set_text(chirp::format("{}/{}",
-		state.get_gems(), level.get_total_gem_count()));
+		state.get_gems(), total_gem_count));
+
 	txt_coins.set_text(std::to_string(state.get_coins()));
 }
 
