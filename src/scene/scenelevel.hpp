@@ -10,6 +10,7 @@
 #include "entity/player.hpp"
 
 #include <chirp/camera.hpp>
+#include <chirp/handle.hpp>
 #include <chirp/scene.hpp>
 
 class scene_level: public chirp::scene
@@ -54,6 +55,14 @@ private:
 	entity::pause entity_pause;
 	entity::level_title entity_level_title;
 
+	// Entity handles
+	chirp::handle<::entity::player> entity_player;
+	chirp::handle<::entity::map> entity_map;
+	chirp::handle<::entity::hud> entity_hud;
+	chirp::handle<chirp::camera> camera_main;
+	chirp::handle<chirp::text> text_debug;
+	chirp::handle<chirp::music> music_main;
+
 	// Level switching
 	int current_level_index = -1;
 	chirp::asset<chirp::sound> snd_complete;
@@ -61,13 +70,4 @@ private:
 	void update_camera();
 	void load_entities();
 	void update_entities();
-
-	[[nodiscard]]
-	auto get_player() const -> chirp::asset<::entity::player>;
-
-	[[nodiscard]]
-	auto get_map() const -> chirp::asset<::entity::map>;
-
-	[[nodiscard]]
-	auto get_camera() const -> chirp::asset<chirp::camera>;
 };

@@ -21,37 +21,33 @@ scene_level::scene_level(const chirp::assets &assets)
 	entity_level_title(assets, window()),
 	assets(assets)
 {
-	const auto camera = std::make_shared<chirp::camera>();
-	entities().insert("cam_main", camera);
-	camera->set_offset(window().get_size().to<float>() / 2.F);
+	camera_main = std::make_shared<chirp::camera>();
+	entities().insert("cam_main", camera_main);
+	camera_main->set_offset(window().get_size().to<float>() / 2.F);
 
-	const auto txt_debug = std::make_shared<chirp::text>("", chirp::vector2i(debug_hud_offset, debug_hud_offset),
+	text_debug = std::make_shared<chirp::text>("", chirp::vector2i(debug_hud_offset, debug_hud_offset),
 		debug_hud_size, chirp::colors::white());
 
-	entities().insert("txt_debug", txt_debug);
+	entities().insert("txt_debug", text_debug);
 
-	const auto ent_hud = std::make_shared<entity::hud>(assets, window());
-	entities().insert("ent_hud", ent_hud);
+	entity_hud = std::make_shared<entity::hud>(assets, window());
+	entities().insert("ent_hud", entity_hud);
 }
 
 void scene_level::load()
 {
-	const auto camera = get_camera();
+	entity_player = std::make_shared<entity::player>(assets, scenes(), *entity_hud, ce::tile_scale);
+	camera_main->entities().insert("spr_player", entity_player);
 
-	const auto ent_hud = entities().at<entity::hud>("ent_hud");
-	const auto player = std::make_shared<entity::player>(assets, scenes(), *ent_hud, ce::tile_scale);
-	camera->entities().insert("spr_player", player);
-
-	const auto map = std::make_shared<entity::map>();
-	camera->entities().insert("map_main", map);
+	entity_map = std::make_shared<entity::map>();
+	camera_main->entities().insert("map_main", entity_map);
 }
 
 void scene_level::update(const float delta)
 {
 	scene::update(delta);
 
-	const auto &ent_hud = entities().at<entity::hud>("ent_hud");
-	if (!ent_hud->is_dead())
+	if (!entity_hud->is_dead())
 	{
 		update_camera();
 	}
@@ -68,18 +64,15 @@ void scene_level::update(const float delta)
 
 	if (chirp::os::is_debug())
 	{
-		const auto player = get_player();
-		const auto txt_debug = entities().at<chirp::text>("txt_debug");
-
 		std::stringstream stream;
 
 		stream << "Debug Mode\n"
 			<< "FPS:      " << chirp::clock::fps() << '\n'
 			<< "Delta:    " << static_cast<int>(delta * 1000.F) << '\n'
-			<< "Position: " << chirp::format("{}\n", player->get_position())
-			<< "Velocity: " << chirp::format("{}\n", player->get_velocity())
-			<< "Grounded: " << chirp::format("{}\n", player->is_grounded())
-			<< "Camera:   " << chirp::format("{}\n", get_camera()->get_target())
+			<< "Position: " << chirp::format("{}\n", entity_player->get_position())
+			<< "Velocity: " << chirp::format("{}\n", entity_player->get_velocity())
+			<< "Grounded: " << chirp::format("{}\n", entity_player->is_grounded())
+			<< "Camera:   " << chirp::format("{}\n", camera_main->get_target())
 			<< "Paused:   " << chirp::format("{}\n\n", entity_pause.get_paused())
 			<< "Entities  (" << entities().items().size() << "):";
 
@@ -88,7 +81,7 @@ void scene_level::update(const float delta)
 			stream << '\n' << name;
 		}
 
-		txt_debug->set_text(stream.str());
+		text_debug->set_text(stream.str());
 	}
 }
 
@@ -109,23 +102,23 @@ void scene_level::load(int index)
 	}
 
 	// Boss entity needs to be reloaded
-	get_camera()->entities().erase("spr_boss");
+	camera_main->entities().erase("spr_boss");
 
-	get_map()->set_level(assets, level);
+	entity_map->set_level(assets, level);
 	current_level_index = index;
 
 	// Load boss if any
 	load_entities();
 
 	// Load level music
-	if (!entities().contains("mus_main")
-		|| level->music() != entities().at<chirp::music>("mus_main")->name())
+	if (!music_main || level->music() != music_main->name())
 	{
 		constexpr auto volume = 0.75F;
 
 		const auto music = assets.music(level->music());
 		entities().erase("mus_main");
 		entities().insert("mus_main", music);
+		music_main = music;
 
 		music->set_volume(volume);
 
@@ -137,12 +130,11 @@ void scene_level::load(int index)
 
 	// Load level spawn
 	auto spawn = level->get_spawn();
-	get_camera()->set_target(spawn.to<float>() * ce::tile_size);
-	get_player()->set_position(level->get_safe_spawn());
+	camera_main->set_target(spawn.to<float>() * ce::tile_size);
+	entity_player->set_position(level->get_safe_spawn());
 
 	// Reset HUD
-	const auto &ent_hud = entities().at<entity::hud>("ent_hud");
-	ent_hud->reset();
+	entity_hud->reset();
 
 	// Show title
 	entity_level_title.set_level(*level);
@@ -173,29 +165,12 @@ auto scene_level::get_keymap() const -> const ::keymap &
 
 auto scene_level::get_level() const -> ce::level *
 {
-	return get_map()->get_level();
-}
-
-auto scene_level::get_player() const -> chirp::asset<entity::player>
-{
-	auto camera_entities = get_camera()->entities();
-	return camera_entities.at<::entity::player>("spr_player");
-}
-
-auto scene_level::get_map() const -> chirp::asset<entity::map>
-{
-	auto camera_entities = get_camera()->entities();
-	return camera_entities.at<::entity::map>("map_main");
-}
-
-auto scene_level::get_camera() const -> chirp::asset<chirp::camera>
-{
-	return entities().at<chirp::camera>("cam_main");
+	return entity_map->get_level();
 }
 
 void scene_level::load_entities()
 {
-	const auto *level = get_map()->get_level();
+	const auto *level = entity_map->get_level();
 
 	for (const auto &tile: level->tiles())
 	{
@@ -203,15 +178,13 @@ void scene_level::load_entities()
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
 			&& tile.value == static_cast<char>(tile::boss))
 		{
-			const auto entity_player = get_player();
-
 			const auto entity_boss = std::make_shared<entity::boss>(assets,
 				entity_player->get_position(), entity_player->get_scale());
 
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level));
 
-			get_camera()->entities().insert("spr_boss", entity_boss);
+			camera_main->entities().insert("spr_boss", entity_boss);
 			break;
 		}
 	}
@@ -225,14 +198,13 @@ void scene_level::update_entities()
 	}
 
 	const auto &ent_hud = entities().at<entity::hud>("ent_hud");
-	auto &camera_entities = get_camera()->entities();
+	auto &camera_entities = camera_main->entities();
 
 	if (!camera_entities.contains("spr_boss") || ent_hud->is_dead())
 	{
 		return;
 	}
 
-	const auto entity_player = get_player();
 	const auto entity_boss = camera_entities.at<::entity::boss>("spr_boss");
 
 	if (!chirp::collision::check(entity_player->get_shape(), entity_boss->get_shape()))
@@ -242,7 +214,7 @@ void scene_level::update_entities()
 
 	// Normal boss: Player always dies when touching
 	// Final boss: Boss takes damage if hit from above, otherwise, kill player
-	const auto is_final = entity::boss::is_final(get_map()->get_level());
+	const auto is_final = entity::boss::is_final(entity_map->get_level());
 
 	if (!is_final || entity_player->get_velocity().y() <= 0)
 	{
@@ -267,17 +239,16 @@ void scene_level::update_entities()
 
 void scene_level::update_camera()
 {
-	const auto camera = get_camera();
-	camera->set_target(get_player()->get_position());
+	camera_main->set_target(entity_player->get_position());
 
-	const auto &offset = camera->get_offset();
+	const auto &offset = camera_main->get_offset();
 
 	const auto offset_x_min = offset.x();
 	const auto offset_x_max = level_width - offset.x() - ce::tile_size * 0.25F;
 	const auto offset_y_min = offset.y();
 	const auto offset_y_max = level_height - offset.y() - ce::tile_size * 0.25F;
 
-	auto camera_target = camera->get_target();
+	auto camera_target = camera_main->get_target();
 
 	// Horizontal offset
 	if (camera_target.x() < offset_x_min)
@@ -299,5 +270,5 @@ void scene_level::update_camera()
 		camera_target = chirp::vector2f(camera_target.x(), offset_y_min);
 	}
 
-	camera->set_target(camera_target);
+	camera_main->set_target(camera_target);
 }
