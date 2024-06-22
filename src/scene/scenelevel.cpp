@@ -246,49 +246,5 @@ void scene_level::update_camera()
 		camera_target = chirp::vector2f(camera_target.x(), offset_y_min);
 	}
 
-	camera.set_target(camera_target);
-}
-
-void scene_level::draw_map()
-{
-	for (const auto &tile: level->tiles())
-	{
-		const auto tile_type = phys::collision::get_tile_type(tile.value);
-		if (tile_type == tile_type::empty)
-		{
-			continue;
-		}
-
-		const auto x_pos = static_cast<float>(tile.x) * ce::tile_size;
-		const auto y_pos = static_cast<float>(tile.y) * ce::tile_size;
-
-		if (tile_type == tile_type::tile
-			|| tile_type == tile_type::one_way)
-		{
-			tiles->draw({x_pos, y_pos},
-				tile.value, 0.F, ce::tile_scale);
-		}
-		else if (tile_type == tile_type::item)
-		{
-			if (tile.value != static_cast<char>(tile::exit)
-				|| entity_hud.get_gem_count() == level->get_total_gem_count())
-			{
-				items->draw({x_pos, y_pos},
-					tile.value % static_cast<int>(tile::spawn),
-					0.F, ce::tile_scale);
-			}
-		}
-
-		if (chirp::os::is_debug())
-		{
-			const chirp::rectangle<float> outline{
-				tile.x * ce::tile_size,
-				tile.y * ce::tile_size,
-				ce::tile_size,
-				ce::tile_size,
-			};
-
-			chirp::draw_outline(outline.to<int>(), chirp::colors::green());
-		}
-	}
+	camera->set_target(camera_target);
 }

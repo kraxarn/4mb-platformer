@@ -65,7 +65,6 @@ private:
 	chirp::asset<chirp::sound> snd_complete;
 
 	void update_camera();
-	void draw_map();
 	void load_entities();
 	void update_entities();
 };
