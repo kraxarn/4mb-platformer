@@ -1,9 +1,7 @@
 #pragma once
 
-#include "keymap.hpp"
-
 #include "entity/hud.hpp"
-#include "physics/collision.hpp"
+#include "enum/tiletype.hpp"
 
 #include <chirp/animatedsprite.hpp>
 #include <chirp/assets.hpp>
@@ -16,17 +14,10 @@ namespace entity
 	{
 	public:
 		player(const chirp::assets &assets, const chirp::scene_manager &scenes,
-			entity::hud &hud, float scale);
+			::entity::hud &hud, float scale);
 
-		/**
-		 * Update input, position and collision
-		 */
-		void update(const chirp::keymap &keymap, ce::level &level, bool is_paused, float delta);
-
-		/**
-		 * Draw the player sprite
-		 */
-		void draw();
+		void update(const chirp::scene &scene, float delta) override;
+		void draw() const override;
 
 		/** Get current player speed */
 		auto get_velocity() const -> const chirp::vector2f &;
@@ -47,7 +38,7 @@ namespace entity
 
 		tile_type colliding_tile_type;
 
-		entity::hud &hud;
+		::entity::hud &hud;
 		const chirp::scene_manager &scenes;
 
 		chirp::vector2f velocity;

@@ -1,10 +1,12 @@
 #include "entity/player.hpp"
+#include "scene/scenelevel.hpp"
 
 #include <chirp/colors.hpp>
+#include <chirp/log.hpp>
 #include <chirp/os.hpp>
 
 entity::player::player(const chirp::assets &assets, const chirp::scene_manager &scenes,
-	entity::hud &hud, float scale)
+	::entity::hud &hud, float scale)
 	: animated_sprite(assets.tileset("player")),
 	snd_jump(assets.sound("jump")),
 	snd_fall(assets.sound("fall")),
@@ -15,12 +17,20 @@ entity::player::player(const chirp::assets &assets, const chirp::scene_manager &
 	set_scale(scale);
 }
 
-void entity::player::update(const chirp::keymap &keymap,
-	ce::level &level, bool const is_paused, const float delta)
+void entity::player::update(const chirp::scene &scene, const float delta)
 {
-	animated_sprite::update(delta);
+	animated_sprite::update(scene, delta);
 
-	if (!is_paused)
+	auto *level = dynamic_cast<scene_level *>(&const_cast<chirp::scene &>(scene));
+	if (level == nullptr)
+	{
+		chirp::log::fatal("Player can only exist within a level");
+		return;
+	}
+
+	const auto &keymap = level->get_keymap();
+
+	if (!level->is_paused())
 	{
 		auto speed_limit_x = speed_limit * hud.get_player_speed_modifier();
 
@@ -75,11 +85,11 @@ void entity::player::update(const chirp::keymap &keymap,
 	}
 
 	// Update position
-	if (!is_paused)
+	if (!level->is_paused())
 	{
 		if (!hud.is_dead())
 		{
-			update_collision(level);
+			update_collision(*level->get_level());
 		}
 		set_position(get_position() + velocity);
 
@@ -102,20 +112,19 @@ void entity::player::update(const chirp::keymap &keymap,
 			snd_fall->play();
 		}
 		velocity = chirp::vector2f();
-		set_position(level.get_safe_spawn());
+		set_position(level->get_level()->get_safe_spawn());
 		hud.respawn();
 	}
-}
 
-void entity::player::draw()
-{
 	// Flip image if needed
-	const auto new_dir = get_player_dir();
-	if (get_direction() != new_dir)
+	if (get_direction() != get_player_dir())
 	{
 		flip_horizontal();
 	}
+}
 
+void entity::player::draw() const
+{
 	animated_sprite::draw();
 
 	if (chirp::os::is_debug())
