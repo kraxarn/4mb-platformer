@@ -1,6 +1,7 @@
 #include "scenelevel.hpp"
 
 #include "level/levelloader.hpp"
+#include "physics/collision.hpp"
 #include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
 

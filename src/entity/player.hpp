@@ -1,5 +1,6 @@
 #pragma once
 
+#include "engine/level.hpp"
 #include "entity/hud.hpp"
 #include "enum/tiletype.hpp"
 
