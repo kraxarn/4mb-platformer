@@ -15,7 +15,7 @@ public:
 		set_target_fps(60);
 		set_clear_color(color::background);
 
-		if (!chirp::os::is_debug())
+		if (chirp::os::is_debug())
 		{
 			scenes().push<scene_level>();
 
