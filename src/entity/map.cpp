@@ -22,7 +22,7 @@ void entity::map::update(const chirp::scene &scene, const float /*delta*/)
 		return;
 	}
 
-	const auto &ent_hud = scene.entities().at<::entity::hud>("ent_hud");
+	const auto &ent_hud = scene.entities().find<::entity::hud>("ent_hud");
 	gem_count = ent_hud->get_gem_count();
 }
 
