@@ -105,7 +105,7 @@ void scene_level::load(int index)
 	}
 
 	// Boss entity needs to be reloaded
-	camera_main->remove("spr_boss");
+	camera_main->queue_remove("spr_boss");
 	entity_boss.reset();
 
 	entity_map->set_level(assets, level);
@@ -176,7 +176,7 @@ void scene_level::load_entities()
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
 			&& tile.value == static_cast<char>(tile::boss))
 		{
-			entity_boss = camera_main->append("spr_boss",
+			entity_boss = camera_main->queue_append("spr_boss",
 				new entity::boss(assets, entity_player->get_position(), entity_player->get_scale()));
 
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
@@ -213,7 +213,7 @@ void scene_level::update_entities()
 		entity_hud->kill();
 
 		// Easiest way to reset boss
-		camera_main->remove("spr_boss");
+		camera_main->queue_remove("spr_boss");
 		load_entities();
 		return;
 	}
