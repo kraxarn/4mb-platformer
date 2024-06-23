@@ -13,7 +13,7 @@
 class scene_menu: public chirp::scene
 {
 public:
-	explicit scene_menu(const chirp::assets &assets);
+	void load() override;
 
 	void update(float delta) override;
 
@@ -33,7 +33,6 @@ private:
 	chirp::handle<chirp::sprite> spr_arrow;
 
 	::keymap keymap;
-	const chirp::assets &assets;
 
 	auto texts_height() -> int;
 

@@ -14,9 +14,7 @@
 #include <iomanip>
 #include <sstream>
 
-scene_menu::scene_menu(const chirp::assets &assets)
-	: scene(assets),
-	assets(assets)
+void scene_menu::load()
 {
 	std::array<std::string, text_count> labels = {
 		"Start game",
@@ -24,7 +22,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	};
 
 	jbx_music = append("jbx_music", new chirp::jukebox());
-	const auto music = assets.music("menu");
+	const auto music = assets().music("menu");
 	jbx_music->insert(music);
 
 	if (!chirp::os::is_debug())
@@ -33,7 +31,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	}
 
 	spr_demo = append("spr_demo",
-		new chirp::animated_sprite(assets.tileset("player")));
+		new chirp::animated_sprite(assets().tileset("player")));
 
 	if (chirp::os::is_debug())
 	{
@@ -41,7 +39,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 			chirp::vector2i(16, 16), 20, chirp::colors::white()));
 	}
 
-	const auto font = assets.font("menu", 52);
+	const auto font = assets().font("menu", 52);
 
 	// Temporary text placement to measure size
 	texts.reserve(text_count);
@@ -66,7 +64,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	}
 
 	spr_arrow = append("spr_arrow",
-		new chirp::sprite(assets.image("arrow")));
+		new chirp::sprite(assets().image("arrow")));
 
 	// Arrow position
 	spr_arrow->set_position({76, spr_arrow->get_position().y()});

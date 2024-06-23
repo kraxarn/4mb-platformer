@@ -19,8 +19,6 @@
 class scene_level: public chirp::scene
 {
 public:
-	explicit scene_level(const chirp::assets &assets);
-
 	void load() override;
 
 	void update(float delta) override;
@@ -46,7 +44,6 @@ private:
 
 	// General engine stuff
 	::keymap keymap;
-	const chirp::assets &assets;
 
 	// Debug
 	static constexpr int debug_hud_size = 24;

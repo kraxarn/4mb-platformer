@@ -7,35 +7,32 @@
 #include "physics/tiles.hpp"
 #include "scene/scenecredits.hpp"
 
+#include <chirp/assets.hpp>
 #include <chirp/camera.hpp>
 #include <chirp/clock.hpp>
 #include <chirp/collision.hpp>
 #include <chirp/colors.hpp>
-#include <chirp/entitycontainer.hpp>
 #include <chirp/format.hpp>
 #include <chirp/os.hpp>
+#include <chirp/scene.hpp>
 #include <chirp/text.hpp>
 
 #include <sstream>
 
-scene_level::scene_level(const chirp::assets &assets)
-	: scene(assets),
-	snd_complete(assets.sound("complete")),
-	assets(assets)
+void scene_level::load()
 {
+	snd_complete = assets().sound("complete");
+
 	camera_main = append("cam_main", new chirp::camera());
 	camera_main->set_offset(window().get_size().to<float>() / 2.F);
 
 	text_debug = append("txt_debug", new chirp::text({},
 		{debug_hud_offset, debug_hud_offset}, debug_hud_size, chirp::colors::white()));
 
-	entity_hud = append("ent_hud", new entity::hud(assets, window()));
-}
+	entity_hud = append("ent_hud", new entity::hud(assets(), window()));
 
-void scene_level::load()
-{
 	entity_player = append("cam_main/spr_player",
-		new entity::player(assets, scenes(), *entity_hud, ce::tile_scale));
+		new entity::player(assets(), scenes(), *entity_hud, ce::tile_scale));
 
 	entity_map = append("cam_main/map_main", new entity::map());
 
@@ -43,9 +40,9 @@ void scene_level::load()
 	jbx_music = append("jbx_music", new chirp::jukebox());
 	jbx_music->set_volume(volume);
 
-	entity_level_title = append("ent_lvl_title", new entity::level_title(assets, window()));
+	entity_level_title = append("ent_lvl_title", new entity::level_title(assets(), window()));
 
-	entity_pause = append("ent_pause", new entity::pause(assets, window()));
+	entity_pause = append("ent_pause", new entity::pause(assets(), window()));
 }
 
 void scene_level::update(const float delta)
@@ -89,7 +86,7 @@ void scene_level::update(const float delta)
 
 void scene_level::load(int index)
 {
-	auto *level = level_loader::get(assets, index);
+	auto *level = level_loader::get(assets(), index);
 	if (level == nullptr)
 	{
 		throw std::runtime_error(chirp::format("Invalid level index: {}", index));
@@ -99,7 +96,7 @@ void scene_level::load(int index)
 	queue_remove("cam_main/spr_boss");
 	entity_boss.reset();
 
-	entity_map->set_level(assets, level);
+	entity_map->set_level(assets(), level);
 	current_level_index = index;
 
 	// Load boss if any
@@ -108,7 +105,7 @@ void scene_level::load(int index)
 	// Load level music
 	if (jbx_music->empty() || level->music() != jbx_music->name())
 	{
-		const auto music = assets.music(level->music());
+		const auto music = assets().music(level->music());
 		jbx_music->insert(music);
 
 		if (!chirp::os::is_debug())
@@ -168,7 +165,7 @@ void scene_level::load_entities()
 			&& tile.value == static_cast<char>(tile::boss))
 		{
 			entity_boss = queue_append("cam_main/spr_boss",
-				new entity::boss(assets, entity_player->get_position(), entity_player->get_scale()));
+				new entity::boss(assets(), entity_player->get_position(), entity_player->get_scale()));
 
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
 			entity_boss->set_lock_y(entity::boss::is_final(level));

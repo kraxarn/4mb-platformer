@@ -5,18 +5,13 @@
 #include "physics/tiles.hpp"
 
 #include <chirp/format.hpp>
+#include <chirp/jukebox.hpp>
 #include <chirp/scenemanager.hpp>
-
-scene_credits::scene_credits(const chirp::assets &assets)
-	: scene(assets),
-	assets(assets)
-{
-}
 
 void scene_credits::load()
 {
-	fnt_title = assets.font("menu", size_title);
-	fnt_subtitle = assets.font("submenu", size_title / 2);
+	fnt_title = assets().font("menu", size_title);
+	fnt_subtitle = assets().font("submenu", size_title / 2);
 
 	txt_title = append("txt_title",
 		new chirp::text(fnt_title, "Thanks for playing!", {0, 0}, size_title, color::text));
@@ -24,7 +19,7 @@ void scene_credits::load()
 	txt_subtitle = append("txt_subtitle",
 		new chirp::text(fnt_subtitle, "", {0, 0}, size_title / 2, color::text));
 
-	const auto music = assets.music("credits");
+	const auto music = assets().music("credits");
 
 	const auto jukebox = append("jbx_main", new chirp::jukebox());
 	jukebox->insert(music);
@@ -68,7 +63,7 @@ auto scene_credits::get_total_coins() -> int
 			break;
 		}
 
-		const auto *level = level_loader::get(assets, index++);
+		const auto *level = level_loader::get(assets(), index++);
 		for (const auto &tile: level->tiles())
 		{
 			if (tile.value == static_cast<char>(tile::coin))

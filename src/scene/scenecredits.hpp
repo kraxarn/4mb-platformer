@@ -12,8 +12,6 @@
 class scene_credits: public chirp::scene
 {
 public:
-	explicit scene_credits(const chirp::assets &assets);
-
 	void load() override;
 
 	void update(float delta) override;
@@ -31,7 +29,6 @@ private:
 	chirp::handle<chirp::text> txt_subtitle;
 
 	::keymap keymap;
-	const chirp::assets &assets;
 
 	auto get_total_coins() -> int;
 };
