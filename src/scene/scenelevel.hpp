@@ -25,8 +25,6 @@ public:
 
 	void update(float delta) override;
 
-	void draw() override;
-
 	/** Load specific level */
 	void load(int index);
 
@@ -56,7 +54,7 @@ private:
 
 	// Entities
 	chirp::handle<entity::pause> entity_pause;
-	entity::level_title entity_level_title;
+	chirp::handle<entity::level_title> entity_level_title;
 
 	// Entity handles
 	chirp::handle<::entity::player> entity_player;

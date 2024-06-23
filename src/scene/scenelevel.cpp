@@ -21,7 +21,6 @@
 scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
 	snd_complete(assets.sound("complete")),
-	entity_level_title(assets, window()),
 	assets(assets)
 {
 	camera_main = append("cam_main", new chirp::camera());
@@ -44,6 +43,8 @@ void scene_level::load()
 	jbx_music = append("jbx_music", new chirp::jukebox());
 	jbx_music->set_volume(volume);
 
+	entity_level_title = append("ent_lvl_title", new entity::level_title(assets, window()));
+
 	entity_pause = append("ent_pause", new entity::pause(assets, window()));
 }
 
@@ -62,8 +63,6 @@ void scene_level::update(const float delta)
 	{
 		entity_pause->set_paused(!entity_pause->get_paused());
 	}
-
-	entity_level_title.update(delta);
 
 	if (chirp::os::is_debug())
 	{
@@ -86,13 +85,6 @@ void scene_level::update(const float delta)
 
 		text_debug->set_text(stream.str());
 	}
-}
-
-void scene_level::draw()
-{
-	scene::draw();
-
-	entity_level_title.draw();
 }
 
 void scene_level::load(int index)
@@ -134,7 +126,7 @@ void scene_level::load(int index)
 	entity_hud->reset();
 
 	// Show title
-	entity_level_title.set_level(*level);
+	entity_level_title->set_level(*level);
 }
 
 void scene_level::next_level()

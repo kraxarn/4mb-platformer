@@ -8,7 +8,7 @@ entity::level_title::level_title(const chirp::assets &assets, const chirp::windo
 {
 }
 
-void entity::level_title::update(const float delta)
+void entity::level_title::update(const chirp::scene &/*scene*/, const float delta)
 {
 	if (!is_visible())
 	{
