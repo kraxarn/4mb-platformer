@@ -55,7 +55,7 @@ private:
 	static constexpr int debug_hud_offset = 16;
 
 	// Entities
-	entity::pause entity_pause;
+	chirp::handle<entity::pause> entity_pause;
 	entity::level_title entity_level_title;
 
 	// Entity handles

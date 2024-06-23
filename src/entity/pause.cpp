@@ -21,7 +21,7 @@ void entity::pause::set_paused(bool value)
 	paused = value;
 }
 
-void entity::pause::update()
+void entity::pause::update(const chirp::scene &/*scene*/, const float /*delta*/)
 {
 	if (!paused)
 	{

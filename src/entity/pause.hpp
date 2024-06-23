@@ -1,19 +1,19 @@
 #pragma once
 
 #include <chirp/assets.hpp>
+#include <chirp/entity.hpp>
 #include <chirp/text.hpp>
 #include <chirp/window.hpp>
 
 namespace entity
 {
-	class pause
+	class pause: public chirp::entity
 	{
 	public:
 		explicit pause(const chirp::assets &assets, const chirp::window &window);
 
-		void update();
-
-		void draw() const;
+		void update(const chirp::scene &scene, float delta) override;
+		void draw() const override;
 
 		auto get_paused() const -> bool;
 		void set_paused(bool value);

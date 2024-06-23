@@ -21,7 +21,6 @@
 scene_level::scene_level(const chirp::assets &assets)
 	: scene(assets),
 	snd_complete(assets.sound("complete")),
-	entity_pause(assets, window()),
 	entity_level_title(assets, window()),
 	assets(assets)
 {
@@ -44,6 +43,8 @@ void scene_level::load()
 	constexpr auto volume = 0.75F;
 	jbx_music = append("jbx_music", new chirp::jukebox());
 	jbx_music->set_volume(volume);
+
+	entity_pause = append("ent_pause", new entity::pause(assets, window()));
 }
 
 void scene_level::update(const float delta)
@@ -59,11 +60,10 @@ void scene_level::update(const float delta)
 
 	if (keymap.is_pressed("pause"))
 	{
-		entity_pause.set_paused(!entity_pause.get_paused());
+		entity_pause->set_paused(!entity_pause->get_paused());
 	}
 
 	entity_level_title.update(delta);
-	entity_pause.update();
 
 	if (chirp::os::is_debug())
 	{
@@ -76,7 +76,7 @@ void scene_level::update(const float delta)
 			<< "Velocity: " << chirp::format("{}\n", entity_player->get_velocity())
 			<< "Grounded: " << chirp::format("{}\n", entity_player->is_grounded())
 			<< "Camera:   " << chirp::format("{}\n", camera_main->get_target())
-			<< "Paused:   " << chirp::format("{}\n\n", entity_pause.get_paused())
+			<< "Paused:   " << chirp::format("{}\n\n", entity_pause->get_paused())
 			<< "Entities  (" << entities().size() << "):";
 
 		for (const auto &name: entity_keys())
@@ -93,7 +93,6 @@ void scene_level::draw()
 	scene::draw();
 
 	entity_level_title.draw();
-	entity_pause.draw();
 }
 
 void scene_level::load(int index)
@@ -153,7 +152,7 @@ void scene_level::next_level()
 
 auto scene_level::is_paused() const -> bool
 {
-	return entity_pause.get_paused();
+	return entity_pause->get_paused();
 }
 
 auto scene_level::get_keymap() const -> const ::keymap &
@@ -189,7 +188,7 @@ void scene_level::load_entities()
 
 void scene_level::update_entities()
 {
-	if (entity_pause.get_paused())
+	if (entity_pause->get_paused())
 	{
 		return;
 	}
