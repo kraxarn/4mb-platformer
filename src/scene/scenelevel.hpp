@@ -11,7 +11,10 @@
 
 #include <chirp/camera.hpp>
 #include <chirp/handle.hpp>
+#include <chirp/jukebox.hpp>
 #include <chirp/scene.hpp>
+
+#include "entity/boss.hpp"
 
 class scene_level: public chirp::scene
 {
@@ -59,9 +62,10 @@ private:
 	chirp::handle<::entity::player> entity_player;
 	chirp::handle<::entity::map> entity_map;
 	chirp::handle<::entity::hud> entity_hud;
+	chirp::handle<::entity::boss> entity_boss;
 	chirp::handle<chirp::camera> camera_main;
 	chirp::handle<chirp::text> text_debug;
-	chirp::handle<chirp::music> music_main;
+	chirp::handle<chirp::jukebox> jbx_music;
 
 	// Level switching
 	int current_level_index = -1;

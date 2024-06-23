@@ -23,23 +23,22 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		"Exit game",
 	};
 
+	jbx_music = entities().insert("jbx_music", new chirp::jukebox());
 	const auto music = assets.music("menu");
-	entities().insert("mus_main", music);
+	jbx_music->insert(music);
 
 	if (!chirp::os::is_debug())
 	{
-		music->play();
+		jbx_music->play();
 	}
 
-	const auto spr_demo = std::make_shared<chirp::animated_sprite>(assets.tileset("player"));
-	entities().insert("spr_demo", spr_demo);
+	spr_demo = entities().insert("spr_demo",
+		new chirp::animated_sprite(assets.tileset("player")));
 
 	if (chirp::os::is_debug())
 	{
-		const auto txt_debug = std::make_shared<chirp::text>("...",
-			chirp::vector2i(16, 16), 20, chirp::colors::white());
-
-		entities().insert("txt_debug", txt_debug);
+		txt_debug = entities().insert("txt_debug", new chirp::text("...",
+			chirp::vector2i(16, 16), 20, chirp::colors::white()));
 	}
 
 	const auto font = assets.font("menu", 52);
@@ -48,10 +47,10 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	texts.reserve(text_count);
 	for (auto i = 0; i < text_count; i++)
 	{
-		const auto text = std::make_shared<chirp::text>(font, labels.at(i),
-			chirp::vector2i(128, i * text_spacing), font->font_size(), color::text);
+		const auto text = entities().insert(chirp::format("txt_menu_{}", i),
+			new chirp::text(font, labels.at(i), chirp::vector2i(128, i * text_spacing),
+				font->font_size(), color::text));
 
-		entities().insert(chirp::format("txt_menu_{}", i), text);
 		texts.push_back(text);
 	}
 
@@ -66,8 +65,8 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		});
 	}
 
-	const auto spr_arrow = std::make_shared<chirp::sprite>(assets.image("arrow"));
-	entities().insert("spr_arrow", spr_arrow);
+	spr_arrow = entities().insert("spr_arrow",
+		new chirp::sprite(assets.image("arrow")));
 
 	// Arrow position
 	spr_arrow->set_position({76, spr_arrow->get_position().y()});
@@ -82,8 +81,6 @@ scene_menu::scene_menu(const chirp::assets &assets)
 void scene_menu::update(const float delta)
 {
 	scene::update(delta);
-
-	const auto spr_demo = entities().at<chirp::animated_sprite>("spr_demo");
 
 	spr_demo->set_position(spr_demo->get_position() + chirp::vector2f(-1.75F, 0.F));
 	if (spr_demo->get_position().x() < -spr_demo->get_shape().width() * spr_demo->get_scale())
@@ -120,7 +117,6 @@ void scene_menu::update(const float delta)
 	}
 
 	// Update arrow position
-	const auto spr_arrow = entities().at<chirp::sprite>("spr_arrow");
 	const auto arrow_offset = std::abs(spr_arrow->get_position().x() - 82.F);
 
 	if (arrow_dir == chirp::direction::left)
@@ -157,7 +153,6 @@ void scene_menu::update(const float delta)
 			<< "FPS: " << chirp::clock::fps() << '\n'
 			<< "Delta: " << std::fixed << std::setprecision(2) << delta * 1000.F;
 
-		const auto &txt_debug = entities().at<chirp::text>("txt_debug");
 		txt_debug->set_text(stream.str());
 	}
 }
@@ -185,7 +180,6 @@ void scene_menu::set_current(int value)
 	}
 
 	const auto &text = texts.at(current);
-	const auto spr_arrow = entities().at<chirp::sprite>("spr_arrow");
 
 	spr_arrow->set_position({
 		spr_arrow->get_position().x(),
@@ -199,7 +193,6 @@ void scene_menu::reset_demo_position()
 {
 	const auto window_size = window().get_size();
 	const auto screen_width = static_cast<float>(window_size.x());
-	const auto spr_demo = entities().at<chirp::animated_sprite>("spr_demo");
 	auto sprite_width = spr_demo->get_shape().width() * spr_demo->get_scale();
 
 	const auto height = static_cast<float>(window_size.y());
