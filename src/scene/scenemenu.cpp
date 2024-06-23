@@ -23,7 +23,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		"Exit game",
 	};
 
-	jbx_music = entities().append_entity("jbx_music", new chirp::jukebox());
+	jbx_music = append_entity("jbx_music", new chirp::jukebox());
 	const auto music = assets.music("menu");
 	jbx_music->insert(music);
 
@@ -32,12 +32,12 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		jbx_music->play();
 	}
 
-	spr_demo = entities().append_entity("spr_demo",
+	spr_demo = append_entity("spr_demo",
 		new chirp::animated_sprite(assets.tileset("player")));
 
 	if (chirp::os::is_debug())
 	{
-		txt_debug = entities().append_entity("txt_debug", new chirp::text("...",
+		txt_debug = append_entity("txt_debug", new chirp::text("...",
 			chirp::vector2i(16, 16), 20, chirp::colors::white()));
 	}
 
@@ -47,7 +47,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 	texts.reserve(text_count);
 	for (auto i = 0; i < text_count; i++)
 	{
-		const auto text = entities().append_entity(chirp::format("txt_menu_{}", i),
+		const auto text = append_entity(chirp::format("txt_menu_{}", i),
 			new chirp::text(font, labels.at(i), chirp::vector2i(128, i * text_spacing),
 				font->font_size(), color::text));
 
@@ -65,7 +65,7 @@ scene_menu::scene_menu(const chirp::assets &assets)
 		});
 	}
 
-	spr_arrow = entities().append_entity("spr_arrow",
+	spr_arrow = append_entity("spr_arrow",
 		new chirp::sprite(assets.image("arrow")));
 
 	// Arrow position
