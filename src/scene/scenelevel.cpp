@@ -25,24 +25,24 @@ scene_level::scene_level(const chirp::assets &assets)
 	entity_level_title(assets, window()),
 	assets(assets)
 {
-	camera_main = entities().insert("cam_main", new chirp::camera());
+	camera_main = entities().append_entity("cam_main", new chirp::camera());
 	camera_main->set_offset(window().get_size().to<float>() / 2.F);
 
-	text_debug = entities().insert("txt_debug", new chirp::text({},
+	text_debug = entities().append_entity("txt_debug", new chirp::text({},
 		{debug_hud_offset, debug_hud_offset}, debug_hud_size, chirp::colors::white()));
 
-	entity_hud = entities().insert("ent_hud", new entity::hud(assets, window()));
+	entity_hud = entities().append_entity("ent_hud", new entity::hud(assets, window()));
 }
 
 void scene_level::load()
 {
-	entity_player = camera_main->entities().insert("spr_player",
+	entity_player = camera_main->entities().append_entity("spr_player",
 		new entity::player(assets, scenes(), *entity_hud, ce::tile_scale));
 
-	entity_map = camera_main->entities().insert("map_main", new entity::map());
+	entity_map = camera_main->entities().append_entity("map_main", new entity::map());
 
 	constexpr auto volume = 0.75F;
-	jbx_music = entities().insert("jbx_music", new chirp::jukebox());
+	jbx_music = entities().append_entity("jbx_music", new chirp::jukebox());
 	jbx_music->set_volume(volume);
 }
 
@@ -77,9 +77,9 @@ void scene_level::update(const float delta)
 			<< "Grounded: " << chirp::format("{}\n", entity_player->is_grounded())
 			<< "Camera:   " << chirp::format("{}\n", camera_main->get_target())
 			<< "Paused:   " << chirp::format("{}\n\n", entity_pause.get_paused())
-			<< "Entities  (" << entities().items().size() << "):";
+			<< "Entities  (" << entities().entities().size() << "):";
 
-		for (const auto &name: entities().names())
+		for (const auto &name: entities().entity_keys())
 		{
 			stream << '\n' << name;
 		}
@@ -105,7 +105,7 @@ void scene_level::load(int index)
 	}
 
 	// Boss entity needs to be reloaded
-	camera_main->entities().erase("spr_boss");
+	camera_main->entities().remove("spr_boss");
 	entity_boss.reset();
 
 	entity_map->set_level(assets, level);
@@ -176,7 +176,7 @@ void scene_level::load_entities()
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
 			&& tile.value == static_cast<char>(tile::boss))
 		{
-			entity_boss = camera_main->entities().insert("spr_boss",
+			entity_boss = camera_main->entities().append_entity("spr_boss",
 				new entity::boss(assets, entity_player->get_position(), entity_player->get_scale()));
 
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
@@ -214,7 +214,7 @@ void scene_level::update_entities()
 
 		// Easiest way to reset boss
 		auto &camera_entities = camera_main->entities();
-		camera_entities.erase("spr_boss");
+		camera_entities.remove("spr_boss");
 		load_entities();
 		return;
 	}
