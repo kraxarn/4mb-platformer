@@ -52,18 +52,16 @@ private:
 	static constexpr int debug_hud_size = 24;
 	static constexpr int debug_hud_offset = 16;
 
-	// Entities
-	chirp::handle<entity::pause> entity_pause;
-	chirp::handle<entity::level_title> entity_level_title;
-
 	// Entity handles
-	chirp::handle<::entity::player> entity_player;
-	chirp::handle<::entity::map> entity_map;
-	chirp::handle<::entity::hud> entity_hud;
-	chirp::handle<::entity::boss> entity_boss;
 	chirp::handle<chirp::camera> camera_main;
-	chirp::handle<chirp::text> text_debug;
 	chirp::handle<chirp::jukebox> jbx_music;
+	chirp::handle<chirp::text> text_debug;
+	chirp::handle<entity::boss> entity_boss;
+	chirp::handle<entity::hud> entity_hud;
+	chirp::handle<entity::level_title> entity_level_title;
+	chirp::handle<entity::map> entity_map;
+	chirp::handle<entity::pause> entity_pause;
+	chirp::handle<entity::player> entity_player;
 
 	// Level switching
 	int current_level_index = -1;
