@@ -17,7 +17,7 @@ public:
 
 		if (chirp::os::is_debug())
 		{
-			scenes().push<scene_level>();
+			scenes().push(new scene_level());
 
 			const auto scene = scenes().peek();
 			auto *level = dynamic_cast<scene_level *>(scene.get());
@@ -25,7 +25,7 @@ public:
 		}
 		else
 		{
-			scenes().push<scene_menu>();
+			scenes().push(new scene_menu());
 		}
 	}
 };

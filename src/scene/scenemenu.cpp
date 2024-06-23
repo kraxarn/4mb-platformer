@@ -100,7 +100,7 @@ void scene_menu::update(const float delta)
 		// Start game :)
 		if (current == 0)
 		{
-			scenes().push<scene_level>();
+			scenes().push(new scene_level());
 			if (const auto scene = std::dynamic_pointer_cast<scene_level>(scenes().peek()))
 			{
 				scene->load(0);
