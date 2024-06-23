@@ -36,10 +36,10 @@ scene_level::scene_level(const chirp::assets &assets)
 
 void scene_level::load()
 {
-	entity_player = camera_main->append("spr_player",
+	entity_player = append("cam_main/spr_player",
 		new entity::player(assets, scenes(), *entity_hud, ce::tile_scale));
 
-	entity_map = camera_main->append("map_main", new entity::map());
+	entity_map = append("cam_main/map_main", new entity::map());
 
 	constexpr auto volume = 0.75F;
 	jbx_music = append("jbx_music", new chirp::jukebox());
@@ -105,7 +105,7 @@ void scene_level::load(int index)
 	}
 
 	// Boss entity needs to be reloaded
-	camera_main->queue_remove("spr_boss");
+	queue_remove("cam_main/spr_boss");
 	entity_boss.reset();
 
 	entity_map->set_level(assets, level);
@@ -176,7 +176,7 @@ void scene_level::load_entities()
 		if (phys::collision::get_tile_type(tile.value) == tile_type::entity
 			&& tile.value == static_cast<char>(tile::boss))
 		{
-			entity_boss = camera_main->queue_append("spr_boss",
+			entity_boss = queue_append("cam_main/spr_boss",
 				new entity::boss(assets, entity_player->get_position(), entity_player->get_scale()));
 
 			entity_boss->set_position(chirp::vector2<size_t>(tile.x, tile.y).to<float>() * ce::tile_size);
@@ -213,7 +213,7 @@ void scene_level::update_entities()
 		entity_hud->kill();
 
 		// Easiest way to reset boss
-		camera_main->queue_remove("spr_boss");
+		queue_remove("cam_main/spr_boss");
 		load_entities();
 		return;
 	}
