@@ -151,7 +151,13 @@ void scene_menu::update(const float delta)
 		stream << "Debug Mode" << '\n'
 			<< "Current: " << current << '\n'
 			<< "FPS: " << chirp::clock::fps() << '\n'
-			<< "Delta: " << std::fixed << std::setprecision(2) << delta * 1000.F;
+			<< "Delta: " << std::fixed << std::setprecision(2) << delta * 1000.F << "\n\n"
+			<< "Entities  (" << entities().size() << "):";
+
+		for (const auto &name: entity_keys())
+		{
+			stream << '\n' << name;
+		}
 
 		txt_debug->set_text(stream.str());
 	}
