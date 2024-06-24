@@ -72,7 +72,7 @@ void entity::player::update(const chirp::scene &scene, const float delta)
 		}
 
 		// Jump
-		if (keymap.is_down("jump") && is_grounded())
+		if (keymap.is_down("jump") && is_grounded() && !snd_jump->is_playing())
 		{
 			snd_jump->play();
 			pause();
