@@ -49,6 +49,11 @@ void scene_level::update(const float delta)
 {
 	scene::update(delta);
 
+	if (window().is_resized())
+	{
+		update_camera_zoom();
+	}
+
 	if (!entity_hud->is_dead())
 	{
 		update_camera();
@@ -72,6 +77,7 @@ void scene_level::update(const float delta)
 			<< "Velocity: " << chirp::format("{}\n", entity_player->get_velocity())
 			<< "Grounded: " << chirp::format("{}\n", entity_player->is_grounded())
 			<< "Camera:   " << chirp::format("{}\n", camera_main->get_target())
+			<< "Zoom:     " << camera_main->get_zoom() << '\n'
 			<< "Paused:   " << chirp::format("{}\n\n", entity_pause->get_paused())
 			<< "Entities  (" << entities().size() << "):";
 
@@ -249,4 +255,14 @@ void scene_level::update_camera()
 	}
 
 	camera_main->set_target(camera_target);
+}
+
+void scene_level::update_camera_zoom() const
+{
+	const auto window_size = window().get_size().to<float>();
+
+	const auto zoom_x = window_size.x() / 1280.F;
+	const auto zoom_y = window_size.y() / 720.F;
+
+	camera_main->set_zoom(std::min(zoom_x, zoom_y));
 }

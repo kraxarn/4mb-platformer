@@ -65,6 +65,7 @@ private:
 	chirp::asset<chirp::sound> snd_complete;
 
 	void update_camera();
+	void update_camera_zoom() const;
 	void load_entities();
 	void update_entities();
 };
