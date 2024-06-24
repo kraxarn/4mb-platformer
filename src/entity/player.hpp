@@ -20,8 +20,11 @@ namespace entity
 		void update(const chirp::scene &scene, float delta) override;
 		void draw() const override;
 
-		/** Get current player speed */
+		[[nodiscard]]
 		auto get_velocity() const -> const chirp::vector2f &;
+
+		void set_velocity(const chirp::vector2f &value);
+
 		/** Is player on the ground */
 		auto is_grounded() const -> bool;
 

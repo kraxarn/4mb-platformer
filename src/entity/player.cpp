@@ -146,6 +146,11 @@ auto entity::player::get_velocity() const -> const chirp::vector2f &
 	return velocity;
 }
 
+void entity::player::set_velocity(const chirp::vector2f &value)
+{
+	velocity = value;
+}
+
 auto entity::player::is_grounded() const -> bool
 {
 	return velocity.y() == 0;
