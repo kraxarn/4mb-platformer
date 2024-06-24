@@ -110,7 +110,7 @@ void scene_menu::update(const float delta)
 		// Exit game :(
 		if (current == 1)
 		{
-			scenes().pop();
+			scenes().queue_pop();
 		}
 	}
 
