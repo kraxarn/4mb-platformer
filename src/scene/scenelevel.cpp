@@ -225,7 +225,7 @@ void scene_level::update_camera()
 {
 	camera_main->set_target(entity_player->get_position());
 
-	const auto &offset = camera_main->get_offset();
+	const auto offset = camera_main->get_offset() / camera_main->get_zoom();
 
 	const auto offset_x_min = offset.x();
 	const auto offset_x_max = level_width - offset.x() - ce::tile_size * 0.25F;
