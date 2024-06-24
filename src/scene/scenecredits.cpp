@@ -47,7 +47,7 @@ void scene_credits::update(const float delta)
 	// Go back to menu on enter
 	if (keymap.is_pressed("enter"))
 	{
-		scenes().pop();
+		scenes().queue_pop();
 	}
 }
 
