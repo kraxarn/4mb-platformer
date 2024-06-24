@@ -208,12 +208,10 @@ void scene_level::update_entities()
 
 	if (entity_boss->hurt())
 	{
-		scenes().push(new scene_credits());
-		if (const auto credits = std::dynamic_pointer_cast<scene_credits>(scenes().peek()))
-		{
-			credits->set_collected_coins(entity_hud->get_coin_count());
-		}
-		return;
+		scenes().queue_pop();
+
+		const auto coin_count = entity_hud->get_coin_count();
+		scenes().queue_push(new scene_credits(coin_count));
 	}
 }
 

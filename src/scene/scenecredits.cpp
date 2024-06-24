@@ -1,12 +1,18 @@
 #include "scenecredits.hpp"
 
 #include "colors.hpp"
+#include "entity/hud.hpp"
 #include "level/levelloader.hpp"
 #include "physics/tiles.hpp"
 
 #include <chirp/format.hpp>
 #include <chirp/jukebox.hpp>
 #include <chirp/scenemanager.hpp>
+
+scene_credits::scene_credits(const int collected_coint_count)
+	: collected_count_count(collected_coint_count)
+{
+}
 
 void scene_credits::load()
 {
@@ -24,6 +30,8 @@ void scene_credits::load()
 	const auto jukebox = append("jbx_main", new chirp::jukebox());
 	jukebox->insert(music);
 	jukebox->play();
+
+	set_collected_coins(collected_count_count);
 }
 
 void scene_credits::update(const float delta)
